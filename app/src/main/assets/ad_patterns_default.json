@@ -1,0 +1,20 @@
+{
+  "sdk_packages": [],
+  "class_keywords": [],
+  "method_patterns": [],
+  "url_patterns": [],
+  "ad_view_names": [],
+  "ad_activities": [],
+  "ad_services": [],
+  "ad_receivers": [],
+  "force_true_methods": [],
+  "force_false_methods": [],
+  "ad_asset_paths": [],
+  "lib_file_keywords": [],
+  "asset_keywords": [],
+  "method_neutralize_keywords": [],
+  "ad_permissions": [],
+  "root_file_keywords": [],
+  "res_layout_keywords": [],
+  "flutter_string_patterns": []
+}

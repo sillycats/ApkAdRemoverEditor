@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 对话框主按钮（深色模式）：粉紫渐变圆角 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="0"
+                android:startColor="#C25A80"
+                android:centerColor="#D06A8E"
+                android:endColor="#7E63B8" />
+            <corners android:radius="22dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="0"
+                android:startColor="#E07A9E"
+                android:centerColor="#E88AA8"
+                android:endColor="#9A7BD6" />
+            <corners android:radius="22dp" />
+        </shape>
+    </item>
+</selector>

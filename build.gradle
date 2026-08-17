@@ -1,0 +1,21 @@
+// Top-level build file
+buildscript {
+    ext.kotlin_version = '1.9.0'
+    repositories {
+        // 国内镜像源（腾讯云最快，阿里云覆盖最全）
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
+        maven { url 'https://maven.aliyun.com/repository/central/' }
+        maven { url 'https://jitpack.io' }
+        // 官方仓库（备用）
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}

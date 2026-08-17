@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_page">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_gradient_header"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="下载中心"
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- 页面加载进度条 -->
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/webProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:indeterminate="false"
+        android:visibility="gone"
+        app:indicatorColor="@color/white"
+        app:trackColor="#33FFFFFF"
+        app:trackCornerRadius="4dp"
+        app:trackThickness="4dp" />
+
+    <!-- 顶部拦截说明条 -->
+    <LinearLayout
+        android:id="@+id/llTip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/accent_light"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="6dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="在页面内点击下载按钮，本应用会自动拦截 APK 下载地址并使用应用内下载。"
+            android:textColor="@color/accent"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

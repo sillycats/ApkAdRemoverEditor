@@ -1,0 +1,37 @@
+# ===== Gradle 构建产物 =====
+build/
+.gradle/
+**/build/
+!.gradle/caches
+
+# ===== Android =====
+local.properties
+*.apk
+*.aab
+*.keystore
+*.jks
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ===== IDE =====
+.idea/
+*.iml
+.vscode/
+*.code-workspace
+
+# ===== 系统 =====
+.DS_Store
+Thumbs.db
+
+# ===== 日志与临时文件 =====
+*.log
+tmp/
+*.tmp
+
+# ===== 忽略源码包与产物（避免重复提交）=====
+ApkEditor_v2.9.apk
+*.zipplatform.pk8
+platform.x509.pem
+*.pk8
+*.x509.pem

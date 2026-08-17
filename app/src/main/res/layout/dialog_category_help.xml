@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- 头部 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_help_header"
+        android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/ivHelpIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:contentDescription="说明"
+                android:src="@drawable/ic_help"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/tvHelpTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="功能说明" />
+
+            <TextView
+                android:id="@+id/tvHelpSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/primary_light"
+                android:textSize="12sp"
+                android:text="添加方式 · 作用范围 · 修改内容" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="420dp"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:id="@+id/llHelpBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp" />
+    </ScrollView>
+</LinearLayout>

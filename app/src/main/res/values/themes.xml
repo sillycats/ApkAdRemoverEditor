@@ -1,0 +1,80 @@
+<resources>
+    <!-- 女生风格 · 粉紫主题 -->
+    <style name="Theme.ApkEditor" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent_dark</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:windowBackground">@color/bg_page</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:navigationBarColor">@color/bg_page</item>
+        <item name="android:colorAccent">@color/primary</item>
+
+        <!-- 全局优雅字体：霞鹜文楷 -->
+        <item name="fontFamily">@font/lxgw_wenkai</item>
+        <item name="android:fontFamily">@font/lxgw_wenkai</item>
+        <item name="android:windowTitleStyle">@style/TextAppearance.App.Title</item>
+
+        <!-- 所有 AlertDialog 统一使用圆角样式 -->
+        <item name="alertDialogTheme">@style/RoundedAlertDialog</item>
+    </style>
+
+    <!-- 标题文字样式 -->
+    <style name="TextAppearance.App.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:fontFamily">@font/lxgw_wenkai</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- 圆角对话框样式：所有 AlertDialog 自动应用 -->
+    <style name="RoundedAlertDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_dialog_rounded</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:windowTitleStyle">@style/TextAppearance.App.DialogTitle</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/TextAppearance.App.DialogTitle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/TextAppearance.App.DialogBody</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.DialogButton.Positive</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.DialogButton.Negative</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.App.DialogButton.Negative</item>
+    </style>
+
+    <!-- 对话框标题样式 -->
+    <style name="TextAppearance.App.DialogTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:fontFamily">@font/lxgw_wenkai</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- 对话框正文样式 -->
+    <style name="TextAppearance.App.DialogBody" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/lxgw_wenkai</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <!-- 对话框主按钮：粉紫渐变圆角 -->
+    <style name="Widget.App.DialogButton.Positive" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/bg_dialog_btn_positive</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="android:paddingStart">22dp</item>
+        <item name="android:paddingEnd">22dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+
+    <!-- 对话框次按钮：描边圆角 -->
+    <style name="Widget.App.DialogButton.Negative" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:background">@drawable/bg_dialog_btn_negative</item>
+        <item name="android:textColor">@color/accent_dark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="android:paddingStart">22dp</item>
+        <item name="android:paddingEnd">22dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+</resources>

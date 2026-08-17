@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== 女生风格 · 优雅粉紫配色 ===== -->
+    <!-- 品牌主色：柔美玫瑰粉 -->
+    <color name="primary">#FF7BA9</color>
+    <color name="primary_dark">#E64E87</color>
+    <color name="primary_light">#FFE3EC</color>
+    <!-- 强调色：柔和薰衣草紫 -->
+    <color name="accent">#B388FF</color>
+    <color name="accent_dark">#9A6FE0</color>
+    <color name="accent_light">#EFE9FF</color>
+    <!-- 辅助色：奶油杏粉 -->
+    <color name="blush">#FFB3C6</color>
+    <color name="blush_light">#FFE8F0</color>
+
+    <!-- 文本色（暖灰调，柔和护眼） -->
+    <color name="text_primary">#3A2E35</color>
+    <color name="text_secondary">#8A7B82</color>
+    <color name="text_hint">#B8AAB0</color>
+
+    <!-- 背景（暖粉白） -->
+    <color name="bg_page">#FFF6F9</color>
+    <color name="bg_card">#FFFFFF</color>
+
+    <!-- 状态栏（白天模式，与顶栏亮色一致） -->
+    <color name="status_bar">@color/primary_dark</color>
+
+    <!-- 主色背景上的次级文字（80% 白色，用于渐变头部副标题等） -->
+    <color name="text_on_primary_80">#CCFFFFFF</color>
+
+    <!-- 日志着色（与主色系协调） -->
+    <color name="log_error">#E64E87</color>
+    <color name="log_warning">#F2994A</color>
+    <color name="log_success">#7BC96F</color>
+    <color name="log_info">#B388FF</color>
+    <color name="log_step">#FF7BA9</color>
+    <color name="log_time">#C9A0B2</color>
+
+    <!-- 兼容旧引用 -->
+    <color name="purple_500">@color/primary</color>
+    <color name="purple_700">@color/primary_dark</color>
+    <color name="teal_200">@color/accent</color>
+    <color name="teal_700">@color/accent_dark</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

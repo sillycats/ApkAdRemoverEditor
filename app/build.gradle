@@ -1,0 +1,81 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.shinegirls.apkadremovereditor'
+    compileSdk 34
+    buildToolsVersion "34.0.0"
+
+    defaultConfig {
+        applicationId "com.shinegirls.apkadremovereditor"
+        minSdk 24
+        targetSdk 34
+        versionCode 29
+        versionName "2.9"
+    }
+
+    buildTypes {
+        release {
+            // 说明：项目依赖 smali/dexlib2/BouncyCastle/Guava 等重反射库，
+            // 开启 R8 混淆在此沙箱环境下会因内存受限导致构建中断。
+            // 为保障交付稳定，此处保持不混淆；代码/资源层优化已通过其他方式完成。
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // 使用 debug 证书签名，保证 release APK 可直接安装
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    // bcprov / bcpkix 均为签名 jar，包含同名 META-INF/*.SF/*.DSA 文件，
+    // 需在打包时排除，否则报 "More than one file was found with OS independent path" 错误。
+    packagingOptions {
+        resources {
+            excludes += [
+                    'META-INF/*.SF',
+                    'META-INF/*.DSA',
+                    'META-INF/*.RSA',
+                    'META-INF/INDEX.LIST',
+                    'META-INF/DEPENDENCIES',
+                    'META-INF/io.netty.versions.properties',
+                    'META-INF/LICENSE',
+                    'META-INF/LICENSE.txt',
+                    'META-INF/NOTICE',
+                    'META-INF/NOTICE.txt'
+            ]
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+
+    // smali 反编译/回编译
+    implementation 'org.smali:baksmali:2.5.2'
+    implementation 'org.smali:smali:2.5.2'
+    implementation 'org.smali:dexlib2:2.5.2'
+    // dexlib2 的 Immutable 类返回 Guava 集合类型，需显式引入
+    implementation 'com.google.guava:guava:27.1-android'
+
+    // APK 签名
+    implementation 'com.android.tools.build:apksig:8.1.0'
+
+    // 证书生成 (BouncyCastle 新 API)
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+    implementation 'org.bouncycastle:bcpkix-jdk15on:1.70'
+}

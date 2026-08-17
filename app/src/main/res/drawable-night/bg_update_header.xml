@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 夜间模式 · 深色粉紫更新弹窗头部渐变 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="0"
+        android:startColor="#4A2438"
+        android:centerColor="#3E1F31"
+        android:endColor="#321A28" />
+</shape>

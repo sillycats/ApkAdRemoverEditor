@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardBackgroundColor="?attr/colorSurface"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/blush_light"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- 分类图标 -->
+            <ImageView
+                android:id="@+id/ivCategoryIcon"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@drawable/bg_icon_round"
+                android:contentDescription="分类图标"
+                android:padding="9dp"
+                app:tint="@color/primary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvCategoryName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:text="分类名称" />
+
+                <TextView
+                    android:id="@+id/tvCategoryCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/accent"
+                    android:text="0 条" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btnCategoryHelp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="查看说明"
+                android:src="@drawable/ic_help"
+                android:tint="@color/accent" />
+
+            <!-- 分类启停开关：关闭后处理 APK 时跳过该分类的去广告 -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swCategoryEnabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="4dp"
+                android:checked="true"
+                android:contentDescription="启用该分类"
+                app:thumbTint="@color/primary"
+                app:trackTint="@color/primary_light" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnManage"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="管理"
+                android:textSize="13sp"
+                android:textColor="@color/primary_dark" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

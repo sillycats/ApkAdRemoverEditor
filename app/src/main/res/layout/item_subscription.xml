@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardSubscription"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/blush_light"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="14dp">
+
+        <!-- 第一行：图标 + 名称/类型 + 开关 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ivSubIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_icon_round"
+                android:contentDescription="订阅源"
+                android:padding="9dp"
+                android:src="@drawable/ic_subscribe"
+                app:tint="@color/primary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSubName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="订阅源名称" />
+
+                <!-- 类型标签 -->
+                <TextView
+                    android:id="@+id/tvSubType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_dark"
+                    android:background="@drawable/bg_type_badge_accent"
+                    android:text="URL 订阅源" />
+            </LinearLayout>
+
+            <!-- 开启/关闭开关：开启即应用该订阅配置 -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchSubEnabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="开启/关闭订阅" />
+        </LinearLayout>
+
+        <!-- 分割线 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_divider_sub" />
+
+        <!-- 第二行：操作按钮区 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_action_row"
+            android:padding="2dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubShare"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="分享"
+                android:textSize="12sp"
+                android:textColor="@color/primary"
+                app:icon="@android:drawable/ic_menu_share"
+                app:iconSize="16dp"
+                app:iconTint="@color/primary" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:background="@drawable/bg_divider_sub" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubEdit"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="编辑"
+                android:textSize="12sp"
+                android:textColor="@color/accent"
+                app:icon="@android:drawable/ic_menu_edit"
+                app:iconSize="16dp"
+                app:iconTint="@color/accent" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:background="@drawable/bg_divider_sub" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubDelete"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="删除"
+                android:textSize="12sp"
+                android:textColor="@color/log_error"
+                app:icon="@drawable/ic_close"
+                app:iconSize="16dp"
+                app:iconTint="@color/log_error" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

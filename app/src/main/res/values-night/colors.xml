@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== 女生风格 · 优雅粉紫配色（深色模式） ===== -->
+    <!-- 品牌主色：柔美玫瑰粉（深色下降低饱和度与亮度，避免刺眼） -->
+    <color name="primary">#E07A9E</color>
+    <color name="primary_dark">#8A3D5C</color>
+    <color name="primary_light">#4A3040</color>
+    <!-- 强调色：柔和薰衣草紫（深色下适当压暗） -->
+    <color name="accent">#9A7BD6</color>
+    <color name="accent_dark">#6E559E</color>
+    <!-- 辅助色 -->
+    <color name="blush">#6A4856</color>
+    <color name="blush_light">#3A2A34</color>
+
+    <!-- 文本色（深色模式） -->
+    <color name="text_primary">#E8DCE2</color>
+    <color name="text_secondary">#A99AA2</color>
+    <color name="text_hint">#6E6168</color>
+
+    <!-- 背景（深色模式，整体压暗） -->
+    <color name="bg_page">#181014</color>
+    <color name="bg_card">#221A1F</color>
+
+    <!-- 状态栏（夜间专用深色，与顶栏渐变顶端协调） -->
+    <color name="status_bar">#4A2438</color>
+
+    <!-- 主色背景上的次级文字（80% 白色，用于渐变头部副标题等） -->
+    <color name="text_on_primary_80">#CCFFFFFF</color>
+
+    <!-- 兼容旧引用 -->
+    <color name="purple_500">@color/primary</color>
+    <color name="purple_700">@color/primary_dark</color>
+    <color name="teal_200">@color/accent</color>
+    <color name="teal_700">@color/accent_dark</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- 顶部渐变头部 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_sub_header"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_icon_round"
+                android:contentDescription="订阅源"
+                android:padding="9dp"
+                android:src="@drawable/ic_subscribe"
+                app:tint="@color/white" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="14dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订阅源管理"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="添加口令或分享配置，开启即应用"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_on_primary_80" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 操作按钮区 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddSubscription"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="添加订阅"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_dark"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="22dp"
+                app:icon="@android:drawable/ic_input_add"
+                app:iconSize="18dp"
+                app:iconTint="@color/primary_dark" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShareConfig"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="分享配置"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                app:cornerRadius="22dp"
+                app:icon="@android:drawable/ic_menu_share"
+                app:iconSize="18dp"
+                app:iconTint="@color/white"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1.5dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 列表区域 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSubscriptions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+        <!-- 空状态提示 -->
+        <LinearLayout
+            android:id="@+id/tvSubEmptyHint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:alpha="0.3"
+                android:contentDescription="空状态"
+                android:src="@drawable/ic_subscribe"
+                app:tint="@color/text_hint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="暂无订阅源"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="点击「添加订阅」输入口令\n或「分享配置」生成口令"
+                android:textSize="12sp"
+                android:textColor="@color/text_hint"
+                android:lineSpacingExtra="2dp" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>
