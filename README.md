@@ -57,10 +57,18 @@
 
 ## 📸 界面预览
 
-> 请在 `screenshots/` 目录放入应用截图，并在下方引用：
-
-![主界面](screenshots/main.png)
-![功能特性](screenshots/features.png)
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <b>主界面 · 一键处理</b><br>
+      <img src="screenshots/main.jpg" alt="主界面" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>关于 · 版本信息</b><br>
+      <img src="screenshots/features.jpg" alt="关于页面" width="320">
+    </td>
+  </tr>
+</table>
 
 ## 🚀 快速上手
 
