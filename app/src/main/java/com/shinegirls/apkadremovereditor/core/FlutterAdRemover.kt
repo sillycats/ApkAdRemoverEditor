@@ -184,7 +184,7 @@ object FlutterAdRemover {
             val strings = blobs.flatMap { DartSnapshot.extractStrings(data, it) }.distinct()
             val sb = StringBuilder()
             sb.appendLine("# libapp.so Dart 快照字符串导出")
-            sb.appendLine("# 工具: ApkEditor · Flutter 解包")
+            sb.appendLine("# 工具: ApkAdRemoverEditor · Flutter 解包")
             sb.appendLine("# 快照数: ${blobs.size}")
             sb.appendLine("# 字符串总数(去重): ${strings.size}")
             sb.appendLine()

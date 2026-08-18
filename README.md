@@ -1,6 +1,6 @@
 <div align="center">
 
-# APK去广告编辑器（ApkEditor）
+# APK去广告编辑器（ApkAdRemoverEditor）
 
 **一款面向逆向爱好者的专业级 APK 去广告工具**
 

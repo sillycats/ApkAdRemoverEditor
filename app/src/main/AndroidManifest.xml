@@ -13,7 +13,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.ApkEditor"
+        android:theme="@style/Theme.ApkAdRemoverEditor"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
         android:largeHeap="true">

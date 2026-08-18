@@ -1,4 +1,4 @@
-# ProGuard rules for ApkEditor v2.2
+# ProGuard rules for ApkAdRemoverEditor v2.2
 
 # ===== Kotlin =====
 -keepclassmembers class * {
