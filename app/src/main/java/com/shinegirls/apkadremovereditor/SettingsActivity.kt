@@ -1728,6 +1728,17 @@ private val CATEGORY_HELP: Map<AdPatternConfig.Category, HelpInfo> = mapOf(
         relatedWith = "常与\"广告 SDK 包名\"\"广告 View 类名\"\"广告类名关键词\"配合：这些分类的关键词也会被一起用于布局元素匹配，命中即隐藏。",
         tip = "此关键词用于匹配布局元素类名，覆盖面广，请避免使用过于通用的词（如 ad）以防隐藏正常控件；建议使用 .ad.、具体 SDK 名或完整类名。"
     ),
+    AdPatternConfig.Category.STRING_PATTERNS to HelpInfo(
+        title = "DEX 字符串广告特征",
+        subtitle = "置空 DEX 中命中的广告字符串",
+        description = "用户自定义的 DEX 字符串广告特征（如广告位 ID、SDK 特征串、统计上报关键字等）。处理时会扫描所有方法体内的 const-string / const-string/jumbo 指令，字符串值（小写化后）命中任一特征即被置空为空字符串，从而破坏广告 SDK 对相关字符串的引用，阻断广告逻辑。",
+        addHow = "点击\"管理\"→ 输入广告字符串特征（可只写片段）→ 点\"添加\"。运行时会按子串匹配（不区分大小写）。",
+        examples = "ad_unit_id\nplacementid\nrewarded_video_id\nbanner_pos_id",
+        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"string_patterns\" 字段。\n" +
+            "运行时由 core/DexPatcher.kt 扫描 const-string 指令并置空匹配的广告字符串。",
+        relatedWith = "与\"广告 URL / 域名\"\"广告方法名\"配合：本分类置空任意命中的字符串，覆盖面更广。",
+        tip = "请填写和广告 SDK 强相关的唯一字符串（如广告位 ID、SDK 特征串），避免过于通用导致误伤正常功能字符串。"
+    ),
     AdPatternConfig.Category.FLUTTER_PATTERNS to HelpInfo(
         title = "Flutter 字符串特征",
         subtitle = "自定义 libapp.so 中去广告的字符串",
