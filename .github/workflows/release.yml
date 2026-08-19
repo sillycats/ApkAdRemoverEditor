@@ -31,6 +31,11 @@ jobs:
       - name: 授权 Gradle 可执行
         run: chmod +x gradlew
 
+      - name: 替换 Gradle 下载源为官方地址（CI 环境无法访问国内镜像）
+        run: |
+          sed -i 's#distributionUrl=.*#distributionUrl=https\\://services.gradle.org/distributions/gradle-8.5-bin.zip#' gradle/wrapper/gradle-wrapper.properties
+          cat gradle/wrapper/gradle-wrapper.properties | grep distributionUrl
+
       - name: 构建 Release APK
         run: ./gradlew assembleRelease --no-daemon
 
