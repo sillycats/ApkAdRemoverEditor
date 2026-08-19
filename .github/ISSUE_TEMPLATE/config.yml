@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 项目讨论区
+    url: https://github.com/sillycats/ApkAdRemoverEditor/discussions
+    about: 提问、讨论功能与使用心得请前往 Discussions

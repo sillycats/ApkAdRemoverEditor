@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 新增
+- 配置 GitHub Actions 自动构建：push / PR 自动编译 Debug 与 Release 包，打 `v*` 标签自动发布 Release
+- 补全开源文档：贡献指南、行为准则、安全政策、第三方许可声明、Issue / PR 模板
+- 修正开源声明许可证信息，与 MIT License 保持一致并补全版权声明
+
 ### 计划中
 - 待补充：更多广告特征订阅源、批量处理、命令行模式
 

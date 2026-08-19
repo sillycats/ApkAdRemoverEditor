@@ -12,8 +12,22 @@
 ![Language](https://img.shields.io/badge/Language-Kotlin%2BJava-7F52FF?style=flat-square&logo=kotlin)
 ![Version](https://img.shields.io/badge/Version-3.0-FF6D00?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
+![CI](https://img.shields.io/github/actions/workflow/status/sillycats/ApkAdRemoverEditor/build.yml?style=flat-square&label=CI)
+![Release](https://img.shields.io/github/v/release/sillycats/ApkAdRemoverEditor?style=flat-square&label=Release)
+![Stars](https://img.shields.io/github/stars/sillycats/ApkAdRemoverEditor?style=flat-square&label=Stars)
 
 </div>
+
+---
+
+## 📥 下载安装
+
+前往 [Releases](https://github.com/sillycats/ApkAdRemoverEditor/releases) 页面下载最新 APK，或从下方任一渠道获取：
+
+- **GitHub Releases**：https://github.com/sillycats/ApkAdRemoverEditor/releases
+- **自动构建**：每次代码提交由 GitHub Actions 自动编译，产物可在 CI 构建记录中下载
+
+> 安装时如提示"未知来源"，请在系统设置中允许安装来自此来源的应用。
 
 ---
 
@@ -81,6 +95,8 @@
 
 产物位于 `app/build/outputs/apk/release/`，可直接安装使用。
 
+> 本项目已配置 [GitHub Actions](.github/workflows/build.yml) 自动构建：每次 push / PR 自动编译 Debug 与 Release 包；打 `v*` 标签时自动发布 Release 并附带 APK 产物。
+
 ### 使用
 
 1. 选择需要处理的 APK 文件（支持重命名后的 APK）
@@ -113,10 +129,21 @@
 | [Material Components](https://github.com/material-components/material-components-android) | Google | Material 组件 | Apache 2.0 |
 | [DTL-X](https://github.com/Gameye98/DTL-X) | Gameye98 | 广告特征规则参考 | 仅供学习 |
 
-详细的开源项目与参考代码出处，请参阅 [`开源声明.md`](开源声明.md)。
+详细的开源项目与参考代码出处，请参阅 [`开源声明.md`](开源声明.md)；完整的第三方许可信息，请参阅 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。
+
+## 🤝 参与贡献
+
+欢迎任何形式的贡献！无论是报告 Bug、提出建议还是提交代码：
+
+- **报告问题 / 提建议**：使用 [Issue 模板](.github/ISSUE_TEMPLATE/bug_report.md) 提交
+- **提交代码**：Fork 后提交 [Pull Request](.github/PULL_REQUEST_TEMPLATE.md)，请先阅读 [贡献指南](CONTRIBUTING.md)
+- **社区交流**：前往 [Discussions](https://github.com/sillycats/ApkAdRemoverEditor/discussions) 讨论
+- **安全漏洞**：请通过 [安全政策](SECURITY.md) 描述的私有渠道报告
+
+参与本项目即表示你同意遵守 [行为准则](CODE_OF_CONDUCT.md)。
 
 ## 📄 许可证
 
-本项目基于 [MIT License](LICENSE) 开源。
+本项目基于 [MIT License](LICENSE) 开源，版权归 sillycat 所有。所使用第三方库的许可信息详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 > ⚠️ 本工具仅供学习、研究与个人合法用途使用。请勿对您不拥有版权、未获授权或受法律保护的应用进行修改与分发，由此产生的法律责任由使用者自担。
