@@ -25,6 +25,60 @@ version-resolver:
       - 'perf'
   default: patch
 
+# 自动打标签：根据 PR 标题 / 分支 / 改动文件自动添加标签，无需手动维护
+autolabeler:
+  - label: 'feature'
+    title:
+      - '/feat/i'
+      - '/feature/i'
+      - '/新增/i'
+      - '/支持/i'
+      - '/优化/i'
+    branch:
+      - '/feat/i'
+      - '/feature/i'
+  - label: 'signature'
+    title:
+      - '/过签/i'
+      - '/签名/i'
+      - '/signature/i'
+      - '/bypass/i'
+    branch:
+      - '/signature/i'
+      - '/bypass/i'
+  - label: 'bug'
+    title:
+      - '/fix/i'
+      - '/bug/i'
+      - '/修复/i'
+      - '/hotfix/i'
+    branch:
+      - '/fix/i'
+      - '/bug/i'
+      - '/hotfix/i'
+  - label: 'docs'
+    files:
+      - '*.md'
+      - 'docs/**'
+      - 'README*'
+      - 'CHANGELOG*'
+  - label: 'ci'
+    files:
+      - '.github/**'
+      - '*.yml'
+      - '*.yaml'
+      - 'gradle*'
+      - 'build.gradle*'
+  - label: 'refactor'
+    title:
+      - '/重构/i'
+      - '/refactor/i'
+      - '/perf/i'
+      - '/性能/i'
+    branch:
+      - '/refactor/i'
+      - '/perf/i'
+
 categories:
   - title: '🚀 新功能'
     labels:

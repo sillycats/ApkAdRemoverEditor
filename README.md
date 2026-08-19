@@ -105,7 +105,7 @@
 
 > 本项目已配置 [GitHub Actions](.github/workflows/build.yml) 自动构建：每次 push / PR 自动编译 Debug 与 Release 包；打 `v*` 标签时自动发布 Release 并附带 APK 产物。
 >
-> 发布说明由 [release-drafter](.github/release-drafter.yml) 自动生成：为 PR 打上 `feature` / `bug` / `docs` / `ci` 等标签，发布时会自动按分类汇总为结构化更新日志。
+> 发布说明由 [release-drafter](.github/release-drafter.yml) 自动生成：会根据 PR 标题 / 分支 / 改动文件**自动打标签**（`feature` / `bug` / `docs` / `ci` 等），发布时自动按分类汇总为结构化更新日志，无需手动维护。
 
 ### 使用
 
@@ -151,12 +151,15 @@
 - **报告问题 / 提建议**：使用 [Issue 模板](.github/ISSUE_TEMPLATE/bug_report.md) 提交
 - **提交代码**：Fork 后提交 [Pull Request](.github/PULL_REQUEST_TEMPLATE.md)，请先阅读 [贡献指南](CONTRIBUTING.md)
 - **社区交流**：前往 [Discussions](https://github.com/sillycats/ApkAdRemoverEditor/discussions) 讨论，可按分类发布：
-  - **Announcements**：项目公告与版本发布通知
-  - **General**：一般性讨论与闲聊
-  - **Ideas**：新功能点子与改进建议
-  - **Q&A**：使用问题与解答
-  - **Show and tell**：分享你的使用成果
-  - **Polls**：社区投票
+
+  | 分类 | 用途 | 适合发布的内容 |
+  |------|------|----------------|
+  | **Announcements** | 项目公告 | 版本发布、重要通知（仅维护者发布） |
+  | **General** | 一般讨论 | 闲聊、使用心得、开放讨论 |
+  | **Ideas** | 新功能建议 | 功能点子、改进建议、路线图讨论 |
+  | **Q&A** | 问题解答 | 使用问题、报错求助（提问前请先搜索是否已有答案） |
+  | **Show and tell** | 成果分享 | 展示你的去广告/过签成果与经验 |
+  | **Polls** | 社区投票 | 发起投票收集社区意见 |
 - **安全漏洞**：请通过 [安全政策](SECURITY.md) 描述的私有渠道报告
 
 参与本项目即表示你同意遵守 [行为准则](CODE_OF_CONDUCT.md)。

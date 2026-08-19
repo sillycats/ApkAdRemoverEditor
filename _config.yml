@@ -10,5 +10,17 @@ plugins:
 title: ApkAdRemoverEditor
 description: 基于 dexlib2 的本地 APK 去广告 + 过签工具，字节码直接修补，支持数据复用优化
 
+# 页头按钮（显示在主页顶部）
+show_downloads: true
+github:
+  is_project_page: true
+  repository_url: https://github.com/sillycats/ApkAdRemoverEditor
+  zip_url: https://github.com/sillycats/ApkAdRemoverEditor/releases
+  tar_url: https://github.com/sillycats/ApkAdRemoverEditor/discussions
+
 # 编码
 encoding: UTF-8
+
+# 语言与作者
+lang: zh-CN
+author: sillycat
