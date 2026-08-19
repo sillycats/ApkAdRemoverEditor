@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+### 计划中
+- 待补充：更多广告特征订阅源、批量处理、命令行模式
+
+## [3.1] - 2026-08-19
+
+### 修复
+- 修复设置页"DEX字符串广告特征"问号按钮点击无反应的问题（补充缺失的帮助信息条目）
+
 ### 新增
 - 启用 GitHub Discussions 讨论区，社区交流更便捷
 - 配置 GitHub Pages 项目主页：https://sillycats.github.io/ApkAdRemoverEditor/
@@ -11,9 +19,6 @@
 - 配置 GitHub Actions 自动构建：push / PR 自动编译 Debug 与 Release 包，打 `v*` 标签自动发布 Release
 - 补全开源文档：贡献指南、行为准则、安全政策、第三方许可声明、Issue / PR 模板
 - 修正开源声明许可证信息，与 MIT License 保持一致并补全版权声明
-
-### 计划中
-- 待补充：更多广告特征订阅源、批量处理、命令行模式
 
 ## [3.0] - 2026-08-19
 

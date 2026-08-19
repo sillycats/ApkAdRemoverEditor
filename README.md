@@ -10,7 +10,7 @@
 
 [![CI](https://github.com/sillycats/ApkAdRemoverEditor/actions/workflows/build.yml/badge.svg)](https://github.com/sillycats/ApkAdRemoverEditor/actions/workflows/build.yml)
 
-**Android 7.0+ · Kotlin + Java · v3.0 · MIT License**
+**Android 7.0+ · Kotlin + Java · v3.1 · MIT License**
 
 </div>
 
