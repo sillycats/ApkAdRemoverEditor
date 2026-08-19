@@ -25,16 +25,14 @@ jobs:
       - name: 设置 Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: 授权 Gradle 可执行
-        run: chmod +x gradlew
-
-      - name: 替换 Gradle 下载源为官方地址（CI 环境无法访问国内镜像）
+      - name: 下载并安装 Gradle 8.5（绕过 wrapper 下载问题）
         run: |
-          sed -i 's#distributionUrl=.*#distributionUrl=https\\://services.gradle.org/distributions/gradle-8.5-bin.zip#' gradle/wrapper/gradle-wrapper.properties
-          cat gradle/wrapper/gradle-wrapper.properties | grep distributionUrl
+          curl -fL --retry 3 -o /tmp/gradle-8.5-bin.zip https://services.gradle.org/distributions/gradle-8.5-bin.zip
+          unzip -q /tmp/gradle-8.5-bin.zip -d /opt
+          /opt/gradle-8.5/bin/gradle --version
 
       - name: 构建 Release APK
-        run: ./gradlew assembleRelease --no-daemon
+        run: /opt/gradle-8.5/bin/gradle assembleRelease --no-daemon
 
       - name: 重命名 APK（附带版本号）
         run: |

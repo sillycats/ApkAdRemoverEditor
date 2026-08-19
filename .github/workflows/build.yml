@@ -27,27 +27,17 @@ jobs:
       - name: 设置 Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: 授权 Gradle 可执行
-        run: chmod +x gradlew
-
-      - name: 替换 Gradle 下载源为官方地址（CI 环境无法访问国内镜像）
+      - name: 下载并安装 Gradle 8.5（绕过 wrapper 下载问题）
         run: |
-          sed -i 's#distributionUrl=.*#distributionUrl=https\\://services.gradle.org/distributions/gradle-8.5-bin.zip#' gradle/wrapper/gradle-wrapper.properties
-          cat gradle/wrapper/gradle-wrapper.properties | grep distributionUrl
-
-      - name: 网络诊断（排查 Gradle 下载失败）
-        run: |
-          echo "--- curl services.gradle.org ---"
-          curl -sI --max-time 20 https://services.gradle.org/distributions/gradle-8.5-bin.zip | head -5 || echo "curl 失败"
-          echo "--- 预装 Gradle 版本 ---"
-          ls /usr/local/gradle* 2>/dev/null || echo "无预装 gradle"
-          which gradle && gradle --version 2>/dev/null | head -5 || echo "gradle 不在 PATH"
+          curl -fL --retry 3 -o /tmp/gradle-8.5-bin.zip https://services.gradle.org/distributions/gradle-8.5-bin.zip
+          unzip -q /tmp/gradle-8.5-bin.zip -d /opt
+          /opt/gradle-8.5/bin/gradle --version
 
       - name: 构建 Debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: /opt/gradle-8.5/bin/gradle assembleDebug --no-daemon
 
       - name: 构建 Release APK
-        run: ./gradlew assembleRelease --no-daemon
+        run: /opt/gradle-8.5/bin/gradle assembleRelease --no-daemon
 
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
