@@ -2,9 +2,9 @@
 
 # APK去广告编辑器（ApkAdRemoverEditor）
 
-**一款面向逆向爱好者的专业级 APK 去广告工具**
+**一款面向逆向爱好者的专业级 APK 去广告 + 过签工具**
 
-基于 dexlib2 构建 · 字节码直接修补 · 数据复用优化 · 全自动流水线
+基于 dexlib2 构建 · 字节码直接修补 · MT 式过签 · 数据复用优化 · 全自动流水线
 
 <br>
 
@@ -33,11 +33,21 @@
 
 ## 📖 项目简介
 
-一键完成 **解包 → 去广告 → 体积优化 → 打包 → 签名** 全流程，全程本地离线处理，无需网络。
+一键完成 **解包 → 去广告 → 过签 → 体积优化 → 打包 → 签名** 全流程，全程本地离线处理，无需网络。
 
 摒弃传统 smali 反汇编-回汇编流程，采用**字节码直接修补**方案，在保证处理精度的同时将处理速度提升数倍。
 
 ## ✨ 功能特性
+
+### 🛡 过签能力（v3.0 新增）
+
+- **MT 管理器式 KillerApplication 注入过签**：注入含 12 个内部类的钩子类为独立 DEX，改写目标应用 Application 父类，运行时反射替换 `PackageInfo.CREATOR` 回填原包签名，覆盖绝大多数 Java 层签名校验
+- **双模式过签**：普通去除（仅注入钩子覆盖 Java 层校验）/ 原包去除（增强，额外嵌入 `origin.apk` + 原生库，覆盖磁盘 APK 重新读取签名的原生层校验）
+- **SO 智能注入**：自动识别目标 APK 的 ABI 架构，仅写入已存在的目录（arm64-v8a / armeabi-v7a 等）；无 lib 目录则全架构写入（含 x86 / x86_64）
+- **钩子类名可自定义**：KillerApplication 名称自由修改，内置 12 个内部类基于 dexlib2 自动同步重命名，避免特征被检测
+- **注入参数全面可自定义**：原包路径 / 解压路径 / So库名 / 钩子类名 / 签名信息 / 入口名称，留空自动读取真实值
+- **不触碰业务方法**：相比"置空校验方法"方案，不依赖脆弱的关键词/指纹臆测，不产生字节码置空导致的启动卡死，过签强度与 MT 管理器一致
+- **崩溃防护**：钩子 DEX 注入与 Application 父类改写均采用备份 + 原子写回 + 异常自动恢复
 
 ### 🛡 去广告核心
 
@@ -108,6 +118,7 @@
 | 模块 | 技术方案 | 核心说明 |
 |------|----------|----------|
 | DEX 修补引擎 | dexlib2 2.5.2 | 直接修改字节码，无需反汇编/回汇编 |
+| 签名效验去除 | KillerApplication 注入 | MT 式钩子注入 + Application 父类改写 + 反射回填原包签名 |
 | AXML 处理器 | 自研解析器 | 解析 AXML chunk 结构，移除广告组件与权限 |
 | 数据复用优化 | ApkDataMultiplexing | 中央目录偏移复用原包数据段 |
 | 签名模块 | apksig + V2V3SchemeSigner | v1/v2 双签名，优化后专用签名 |
@@ -128,6 +139,7 @@
 | [AndroidX](https://developer.android.com/jetpack) | AOSP | Jetpack 支持库 | Apache 2.0 |
 | [Material Components](https://github.com/material-components/material-components-android) | Google | Material 组件 | Apache 2.0 |
 | [DTL-X](https://github.com/Gameye98/DTL-X) | Gameye98 | 广告特征规则参考 | 仅供学习 |
+| [LSPatch](https://github.com/LSPosed/LSPatch) | LSPosed 团队 | 过签包结构思路参考 | 仅供学习 |
 
 详细的开源项目与参考代码出处，请参阅 [`开源声明.md`](开源声明.md)；完整的第三方许可信息，请参阅 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。
 
