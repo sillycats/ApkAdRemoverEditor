@@ -139,6 +139,7 @@
 | [AndroidX](https://developer.android.com/jetpack) | AOSP | Jetpack 支持库 | Apache 2.0 |
 | [Material Components](https://github.com/material-components/material-components-android) | Google | Material 组件 | Apache 2.0 |
 | [DTL-X](https://github.com/Gameye98/DTL-X) | Gameye98 | 广告特征规则参考 | 仅供学习 |
+| [ApkSignatureKillerEx](https://github.com/L-JINBIN/ApkSignatureKillerEx) | L-JINBIN | 过签核心参考：KillerApplication 钩子类与 libSignatureKiIIer.so 原生库来源 | 仅供学习 |
 | [LSPatch](https://github.com/LSPosed/LSPatch) | LSPosed 团队 | 过签包结构思路参考 | 仅供学习 |
 
 详细的开源项目与参考代码出处，请参阅 [`开源声明.md`](开源声明.md)；完整的第三方许可信息，请参阅 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。

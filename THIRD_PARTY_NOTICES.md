@@ -119,16 +119,16 @@
 | 用途 | 广告类名 / 方法名 / URL 特征规则参考来源，仅供特征参考与学习，未修改其二进制 |
 | 协议 | 原项目未标注许可证，仅供学习参考 |
 
-### 12. MT 管理器 ApkSignatureKillerEx 样本
+### 12. ApkSignatureKillerEx
 
 | 项目 | 说明 |
 |------|------|
-| 主页 | https://mt2.cn/ |
-| 作者 | 风痕 (MT 管理器) |
-| 用途 | 过签核心参考：`bin.mt.signature.KillerApplication` 钩子类（含 12 个内部类）与 `libSignatureKiIIer.so` 原生库的注入过签实现思路 |
-| 协议 | 仅供技术学习参考，未分发其二进制产物 |
+| 主页 | https://github.com/L-JINBIN/ApkSignatureKillerEx |
+| 作者 | L-JINBIN（林锦斌） |
+| 用途 | 过签核心参考：`bin.mt.signature.KillerApplication` 钩子类（含 12 个内部类）与 `libSignatureKiIIer.so` 原生库的来源项目，演示 MT 去除签名校验原理及其对抗方式 |
+| 协议 | 原项目未标注许可证，仅供学习参考 |
 
-> 说明：本项目参考其 KillerApplication 注入过签原理（反射替换 `PackageInfo.CREATOR` 回填原包签名），最终实现均为本项目基于 dexlib2 自研，未包含 MT 管理器任何闭源二进制。
+> 说明：本项目过签能力直接参考其 KillerApplication 注入过签实现（反射替换 `PackageInfo.CREATOR` 回填原包签名），最终实现均为本项目基于 dexlib2 自研，未直接复制其二进制产物。如原作者认为存在侵权，请联系我们处理。
 
 ### 13. LSPatch / LSP 技术团队
 
