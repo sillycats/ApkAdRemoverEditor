@@ -1,0 +1,65 @@
+# release-drafter 配置：根据 PR 标签自动分类生成发布说明
+# 参考: https://github.com/release-drafter/release-drafter
+
+name-template: 'v$RESOLVED_VERSION 🌈'
+tag-template: 'v$RESOLVED_VERSION'
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+      - 'feature'
+      - 'enhancement'
+  patch:
+    labels:
+      - 'patch'
+      - 'bug'
+      - 'fix'
+      - 'docs'
+      - 'documentation'
+      - 'build'
+      - 'ci'
+      - 'refactor'
+      - 'perf'
+  default: patch
+
+categories:
+  - title: '🚀 新功能'
+    labels:
+      - 'feature'
+      - 'enhancement'
+      - 'feat'
+  - title: '🐛 修复'
+    labels:
+      - 'bug'
+      - 'fix'
+      - 'hotfix'
+  - title: '📚 文档'
+    labels:
+      - 'docs'
+      - 'documentation'
+  - title: '⚙️ 构建与 CI'
+    labels:
+      - 'build'
+      - 'ci'
+      - 'workflow'
+  - title: '♻️ 重构与优化'
+    labels:
+      - 'refactor'
+      - 'perf'
+      - 'optimize'
+
+change-template: '- $TITLE (#$NUMBER) @$AUTHOR'
+change-title-escapes: '\<*_&'
+
+template: |
+  ## 变更内容
+
+  $CHANGES
+
+  **完整变更记录**: $COMPARE_URL
+
+  > 本发布说明由 [release-drafter](https://github.com/release-drafter/release-drafter) 根据 PR 标签自动生成。
+  > 发布前请人工核对并补充重要说明。

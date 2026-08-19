@@ -15,6 +15,7 @@
 ![CI](https://img.shields.io/github/actions/workflow/status/sillycats/ApkAdRemoverEditor/build.yml?style=flat-square&label=CI)
 ![Release](https://img.shields.io/github/v/release/sillycats/ApkAdRemoverEditor?style=flat-square&label=Release)
 ![Stars](https://img.shields.io/github/stars/sillycats/ApkAdRemoverEditor?style=flat-square&label=Stars)
+![Discussions](https://img.shields.io/github/discussions/sillycats/ApkAdRemoverEditor?style=flat-square&label=Discussions)
 
 </div>
 
@@ -24,8 +25,10 @@
 
 前往 [Releases](https://github.com/sillycats/ApkAdRemoverEditor/releases) 页面下载最新 APK，或从下方任一渠道获取：
 
+- **项目主页**：https://sillycats.github.io/ApkAdRemoverEditor/
 - **GitHub Releases**：https://github.com/sillycats/ApkAdRemoverEditor/releases
 - **自动构建**：每次代码提交由 GitHub Actions 自动编译，产物可在 CI 构建记录中下载
+- **社区讨论**：https://github.com/sillycats/ApkAdRemoverEditor/discussions
 
 > 安装时如提示"未知来源"，请在系统设置中允许安装来自此来源的应用。
 
@@ -106,6 +109,8 @@
 产物位于 `app/build/outputs/apk/release/`，可直接安装使用。
 
 > 本项目已配置 [GitHub Actions](.github/workflows/build.yml) 自动构建：每次 push / PR 自动编译 Debug 与 Release 包；打 `v*` 标签时自动发布 Release 并附带 APK 产物。
+>
+> 发布说明由 [release-drafter](.github/release-drafter.yml) 自动生成：为 PR 打上 `feature` / `bug` / `docs` / `ci` 等标签，发布时会自动按分类汇总为结构化更新日志。
 
 ### 使用
 

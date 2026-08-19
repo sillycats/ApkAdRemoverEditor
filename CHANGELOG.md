@@ -5,6 +5,9 @@
 ## [Unreleased]
 
 ### 新增
+- 启用 GitHub Discussions 讨论区，社区交流更便捷
+- 配置 GitHub Pages 项目主页：https://sillycats.github.io/ApkAdRemoverEditor/
+- 新增 release-drafter 自动生成更新日志：按 PR 标签分类生成结构化发布说明，发布时自动使用
 - 配置 GitHub Actions 自动构建：push / PR 自动编译 Debug 与 Release 包，打 `v*` 标签自动发布 Release
 - 补全开源文档：贡献指南、行为准则、安全政策、第三方许可声明、Issue / PR 模板
 - 修正开源声明许可证信息，与 MIT License 保持一致并补全版权声明

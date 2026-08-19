@@ -45,9 +45,22 @@ jobs:
           cp app/build/outputs/apk/release/app-release.apk \
              "app/build/outputs/apk/release/ApkAdRemoverEditor-v${VERSION}.apk"
 
+      - name: 获取 release-drafter 草稿说明
+        id: draft
+        run: |
+          BODY=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases?per_page=5" | \
+            python3 -c "import json,sys; d=json.load(sys.stdin); print(next((r.get('body','') for r in d if r.get('draft')), ''))")
+          if [ -z "$BODY" ]; then
+            BODY=$'## 变更内容\n\n本版本由 GitHub Actions 自动构建发布。'
+          fi
+          echo "body<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$BODY" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
       - name: 创建 GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: app/build/outputs/apk/release/ApkAdRemoverEditor-v*.apk
-          generate_release_notes: true
+          body: ${{ steps.draft.outputs.body }}
           fail_on_unmatched_files: true
