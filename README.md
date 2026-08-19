@@ -8,14 +8,9 @@
 
 <br>
 
-![Android](https://img.shields.io/badge/Android-7.0%2B-3DDC84?style=flat-square&logo=android)
-![Language](https://img.shields.io/badge/Language-Kotlin%2BJava-7F52FF?style=flat-square&logo=kotlin)
-![Version](https://img.shields.io/badge/Version-3.0-FF6D00?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
-![CI](https://img.shields.io/github/actions/workflow/status/sillycats/ApkAdRemoverEditor/build.yml?style=flat-square&label=CI)
-![Release](https://img.shields.io/github/v/release/sillycats/ApkAdRemoverEditor?style=flat-square&label=Release)
-![Stars](https://img.shields.io/github/stars/sillycats/ApkAdRemoverEditor?style=flat-square&label=Stars)
-![Discussions](https://img.shields.io/github/discussions/sillycats/ApkAdRemoverEditor?style=flat-square&label=Discussions)
+[![CI](https://github.com/sillycats/ApkAdRemoverEditor/actions/workflows/build.yml/badge.svg)](https://github.com/sillycats/ApkAdRemoverEditor/actions/workflows/build.yml)
+
+**Android 7.0+ · Kotlin + Java · v3.0 · MIT License**
 
 </div>
 
