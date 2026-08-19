@@ -1,0 +1,14 @@
+# GitHub Pages 站点配置
+# 主页: https://sillycats.github.io/ApkAdRemoverEditor/
+
+# 使用 cayman 主题（干净、现代的技术文档风格）
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme
+
+# 站点信息
+title: ApkAdRemoverEditor
+description: 基于 dexlib2 的本地 APK 去广告 + 过签工具，字节码直接修补，支持数据复用优化
+
+# 编码
+encoding: UTF-8

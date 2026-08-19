@@ -150,7 +150,13 @@
 
 - **报告问题 / 提建议**：使用 [Issue 模板](.github/ISSUE_TEMPLATE/bug_report.md) 提交
 - **提交代码**：Fork 后提交 [Pull Request](.github/PULL_REQUEST_TEMPLATE.md)，请先阅读 [贡献指南](CONTRIBUTING.md)
-- **社区交流**：前往 [Discussions](https://github.com/sillycats/ApkAdRemoverEditor/discussions) 讨论
+- **社区交流**：前往 [Discussions](https://github.com/sillycats/ApkAdRemoverEditor/discussions) 讨论，可按分类发布：
+  - **Announcements**：项目公告与版本发布通知
+  - **General**：一般性讨论与闲聊
+  - **Ideas**：新功能点子与改进建议
+  - **Q&A**：使用问题与解答
+  - **Show and tell**：分享你的使用成果
+  - **Polls**：社区投票
 - **安全漏洞**：请通过 [安全政策](SECURITY.md) 描述的私有渠道报告
 
 参与本项目即表示你同意遵守 [行为准则](CODE_OF_CONDUCT.md)。

@@ -31,6 +31,11 @@ categories:
       - 'feature'
       - 'enhancement'
       - 'feat'
+  - title: '🛡 过签能力'
+    labels:
+      - 'signature'
+      - 'bypass'
+      - '过签'
   - title: '🐛 修复'
     labels:
       - 'bug'
@@ -55,9 +60,19 @@ change-template: '- $TITLE (#$NUMBER) @$AUTHOR'
 change-title-escapes: '\<*_&'
 
 template: |
-  ## 变更内容
+  ## 📥 下载
+
+  - **APK 安装包**：见下方 Assets 附件（`ApkAdRemoverEditor-v$RESOLVED_VERSION.apk`）
+  - **项目主页**：https://sillycats.github.io/ApkAdRemoverEditor/
+  - **社区讨论**：https://github.com/sillycats/ApkAdRemoverEditor/discussions
+
+  ---
+
+  ## ✨ 变更内容
 
   $CHANGES
+
+  ---
 
   **完整变更记录**: $COMPARE_URL
 
