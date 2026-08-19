@@ -19,7 +19,6 @@ import android.text.style.StyleSpan
 import android.text.method.ScrollingMovementMethod
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.graphics.Typeface
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -41,6 +40,7 @@ import com.shinegirls.apkadremovereditor.core.ProcessingReport
 import com.shinegirls.apkadremovereditor.core.ReportGenerator
 import com.shinegirls.apkadremovereditor.core.ScreenKeeper
 import com.shinegirls.apkadremovereditor.core.Signer
+import com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover
 
 import com.shinegirls.apkadremovereditor.core.ThemeManager
 import com.shinegirls.apkadremovereditor.core.UpdateChecker
@@ -48,7 +48,6 @@ import com.shinegirls.apkadremovereditor.utils.Format
 import com.shinegirls.apkadremovereditor.utils.PathPreferences
 import com.shinegirls.apkadremovereditor.utils.UiUtils
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlinx.coroutines.Dispatchers
@@ -131,7 +130,7 @@ class MainActivity : AppCompatActivity() {
         // 清空日志
         btnClearLog.setOnClickListener {
             logView.text = ""
-            log("━━━ 日志已清空 ━━━")
+            log("▶ 日志已清空")
         }
 
         // 复制日志到剪贴板
@@ -148,6 +147,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkPermissions()
+
+        // 版本升级后重置签名效验为默认关闭（避免旧版本开启状态残留）
+        PathPreferences.resetSignRemovalOnUpgrade(this)
 
         // 启动时自动检测强制更新：仅当远程声明强制更新且当前版本低于最新版本时，
         // 弹出不可关闭、不可取消的强制更新弹窗；否则静默处理。
@@ -240,9 +242,6 @@ class MainActivity : AppCompatActivity() {
 
                 trimmed.startsWith("⏱") ->
                     sb.setSpan(ForegroundColorSpan(colorTime), start, start + len, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-                trimmed.startsWith("━━━") ->
-                    sb.setSpan(StyleSpan(Typeface.BOLD), start, start + len, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
         }
         return sb
@@ -333,7 +332,7 @@ class MainActivity : AppCompatActivity() {
         isProcessing = true
         logView.text = ""
         showProgress(true)
-        log("━━━ 开始处理 APK ━━━")
+        log("▶ 开始处理 APK")
 
         // 处理期间保持屏幕常亮，防止处理中突然黑屏锁屏导致处理失败
         ScreenKeeper.setKeepScreenOn(this, true)
@@ -348,35 +347,30 @@ class MainActivity : AppCompatActivity() {
 
                 // 1. 读取 APK
                 val step1Start = System.currentTimeMillis()
-                log("━━━ 步骤 1: 读取 APK 文件 ━━━")
+                log("▶ 步骤 1/5 读取 APK")
                 val sourceApk = File(workDir, "source.apk")
                 contentResolver.openInputStream(uri)?.use { input ->
                     sourceApk.outputStream().use { output -> input.copyTo(output) }
                 } ?: throw IllegalStateException("无法读取所选文件")
 
                 val originalApkSize = sourceApk.length()
-                log("  ✓ APK 已读取: ${sourceApk.name} (${formatSize(originalApkSize)})")
-                logStepTime("读取APK", step1Start)
-
                 // 获取APK基本信息
                 val apkInfo = apkProcessor.getApkInfo(sourceApk)
-                log("  · APK 信息: DEX=${apkInfo["dex_count"]}, 资源=${apkInfo["res_count"]}, 库=${apkInfo["lib_count"]}")
+                log("  ✓ ${sourceApk.name} | ${formatSize(originalApkSize)} | DEX=${apkInfo["dex_count"]} 资源=${apkInfo["res_count"]} 库=${apkInfo["lib_count"]} | ${elapsedMs(step1Start)}")
 
                 // 2. 解包
                 val step2Start = System.currentTimeMillis()
-                log("━━━ 步骤 2: 解包 APK ━━━")
+                log("▶ 步骤 2/5 解包")
                 val extractDir = File(workDir, "extracted")
                 extractDir.mkdirs()
                 apkProcessor.extractApk(sourceApk, extractDir)
 
                 val dexCount = extractDir.listFiles { f -> f.name.endsWith(".dex") }?.size ?: 0
                 val totalFiles = extractDir.walkTopDown().filter { it.isFile }.count()
-                log("  ✓ 解包完成: $totalFiles 个文件, $dexCount 个DEX")
-                logStepTime("解包", step2Start)
+                log("  ✓ $totalFiles 文件 | $dexCount DEX | ${elapsedMs(step2Start)}")
 
                 // 3. 直接修补DEX去广告
-                val step3Start = System.currentTimeMillis()
-                log("━━━ 步骤 3: 直接修补 DEX 去广告 ━━━")
+                log("▶ 步骤 3/5 去广告")
                 var processingReport: ProcessingReport? = null
                 try {
                     processingReport = AdRemover.removeAds(
@@ -392,12 +386,46 @@ class MainActivity : AppCompatActivity() {
                     log("  ✗ 去广告处理异常: ${e.message}")
                     log("  · 堆栈: ${e.stackTraceToString().take(200)}")
                 }
-                logStepTime("去广告处理", step3Start)
+
+                // 3.4 去签名效验（开启后自动跟随去广告流程执行）
+                val signStart = System.currentTimeMillis()
+                val signMode = PathPreferences.getSignRemovalMode(this@MainActivity)
+                if (signMode != SignatureVerificationRemover.MODE_OFF) {
+                    log("▶ 步骤 3.4/5 去签名效验")
+                    val signModeName = if (signMode == SignatureVerificationRemover.MODE_ORIGINAL) {
+                        "原包去除签名效验"
+                    } else {
+                        "普通去除签名效验"
+                    }
+                    log("  · 模式: $signModeName")
+                    // 读取用户自定义的注入参数（原包路径 / 解压路径 / So库名 / 钩子类名 / 签名信息 / 入口名称）
+                    val signOriginPath = PathPreferences.getSignOriginPath(this@MainActivity)
+                    val signExtractPath = PathPreferences.getSignExtractPath(this@MainActivity)
+                    val signSoName = PathPreferences.getSignSoName(this@MainActivity)
+                    val signHookClass = PathPreferences.getSignHookClass(this@MainActivity)
+                    val signInfo = PathPreferences.getSignInfo(this@MainActivity)
+                    val signEntry = PathPreferences.getSignEntry(this@MainActivity)
+                    if (signMode == SignatureVerificationRemover.MODE_ORIGINAL) {
+                        log("  · 注入参数: 原包=$signOriginPath, 解压=$signExtractPath, So=$signSoName")
+                    }
+                    val signReport = SignatureVerificationRemover.removeSignatures(
+                        this@MainActivity, extractDir, sourceApk, signMode, ::log,
+                        signOriginPath, signExtractPath, signSoName, signHookClass,
+                        signInfo, signEntry
+                    )
+                    processingReport?.signRemovalMode = signMode
+                    processingReport?.originalSignerFingerprint = signReport.originalSignerFingerprint
+                    processingReport?.signDexStats?.clear()
+                    processingReport?.signDexStats?.addAll(signReport.dexStats)
+                    log("  ✓ 注入 ${signReport.totalPatchedMethods} 个签名钩子 | ${signReport.totalPatchedDex} DEX | ${elapsedMs(signStart)}")
+                } else {
+                    log("  · 去签名效验未开启（可在设置中开启）")
+                }
 
                 // 3.5 Flutter libapp.so 解包 / 去广告 / 回编译
                 val flutterStart = System.currentTimeMillis()
                 if (PathPreferences.isFlutterLibappEnabled(this@MainActivity)) {
-                    log("━━━ 步骤 3.5: Flutter libapp.so 处理 ━━━")
+                    log("▶ 步骤 3.5/5 Flutter 处理")
                     val flutterConfig = AdPatternConfig.loadConfig(this@MainActivity)
                     val flutterResult = FlutterAdRemover.process(
                         extractDir, flutterConfig,
@@ -408,36 +436,32 @@ class MainActivity : AppCompatActivity() {
                     processingReport?.flutterStats = flutterResult.stats
                     if (flutterResult.detected) {
                         val totalRep = flutterResult.stats.sumOf { it.replacedCount }
-                        log("  · Flutter 汇总: ${flutterResult.stats.size} 个 libapp.so, " +
-                            "替换 $totalRep 处广告特征")
+                        log("  ✓ ${flutterResult.stats.size} 个 libapp.so | 替换 $totalRep 处 | ${elapsedMs(flutterStart)}")
                     }
                 } else {
-                    log("  · Flutter libapp.so 处理已关闭（可在设置中开启）")
+                    log("  · Flutter 处理已关闭（可在设置中开启）")
                 }
-                logStepTime("Flutter 处理", flutterStart)
 
                 // 4. 打包并签名
                 val step4Start = System.currentTimeMillis()
-                log("━━━ 步骤 4: 打包并签名 APK ━━━")
+                log("▶ 步骤 4/5 打包签名")
                 val unsignedApk = File(workDir, "unsigned.apk")
-                log("  · 正在打包 ...")
                 apkProcessor.buildApk(extractDir, unsignedApk, logger = { msg ->
                     log(msg)
                 })
                 val unsignedSize = unsignedApk.length()
-                log("  ✓ 打包完成: ${formatSize(unsignedSize)}")
+                log("  ✓ 打包 | ${formatSize(unsignedSize)}")
 
-                log("  · 正在签名 ...")
                 // 检测嵌套 ZIP 子包，尝试数据复用优化（过签包场景，如 LSPatch 产物）
                 val embeddedPaths = apkProcessor.lastEmbeddedApkPaths
                 val bestHost = DataMultiplexingHelper.findBestHost(unsignedApk, embeddedPaths)
                 val tempSigned: File
                 if (bestHost != null) {
-                    log("  ℹ 检测到过签包结构，启用数据复用优化（原包 host: $bestHost）")
+                    log("  ℹ 过签包结构，启用数据复用优化 (host: $bestHost)")
                     // 1. V1 签名：必须在优化前完成（优化不改变文件内容，V1 保持有效）
                     val v1Signed = File(workDir, "v1_signed.apk")
                     Signer.signApkV1(this@MainActivity, unsignedApk, v1Signed)
-                    log("  ✓ V1 签名完成: ${formatSize(v1Signed.length())}")
+                    log("  ✓ V1 签名 | ${formatSize(v1Signed.length())}")
                     // 2. 数据复用优化：让过签包中与原包相同的文件复用原包数据段
                     val optimized = File(workDir, "optimized.apk")
                     val optimizedSize = DataMultiplexingHelper.optimize(
@@ -446,27 +470,26 @@ class MainActivity : AppCompatActivity() {
                     if (optimizedSize != null) {
                         // 3. V2 签名：优化后必须用 V2V3SchemeSigner（apksig 会破坏复用优化）
                         Signer.signV2V3(this@MainActivity, optimized)
-                        log("  ✓ V2 签名完成: ${formatSize(optimized.length())}")
+                        log("  ✓ V2 签名 | ${formatSize(optimized.length())}")
                         tempSigned = optimized
                     } else {
                         // 优化失败回退：直接用 apksig 常规 v1+v2 签名
-                        log("  · 优化失败，回退到常规 v1+v2 签名")
+                        log("  · 优化失败，回退常规 v1+v2 签名")
                         val fallback = File(workDir, "temp_signed.apk")
                         Signer.signApk(this@MainActivity, unsignedApk, fallback)
                         tempSigned = fallback
                     }
                 } else {
-                    log("  · 未检测到可复用的过签包结构，使用常规 v1+v2 签名")
+                    log("  · 常规 v1+v2 签名")
                     val fallback = File(workDir, "temp_signed.apk")
                     Signer.signApk(this@MainActivity, unsignedApk, fallback)
                     tempSigned = fallback
                 }
                 val signedSize = tempSigned.length()
-                log("  ✓ 签名完成: ${formatSize(signedSize)}")
-                logStepTime("打包签名", step4Start)
+                log("  ✓ 签名 | ${formatSize(signedSize)} | ${elapsedMs(step4Start)}")
 
                 // 导出：优先保存到所选 APK 所在目录，失败时回退到默认导出目录
-                log("  · 正在导出 ...")
+                log("▶ 步骤 5/5 导出")
 
                 // 生成输出文件名：原文件名_时间戳_clean.apk（clean 表示去广告处理后的产物）
                 val displayName = queryDisplayName(uri) ?: "output"
@@ -490,7 +513,7 @@ class MainActivity : AppCompatActivity() {
                         finalSize = exportFile.length()
                         exportDesc = exportFile.absolutePath
                         exportedToSourceDir = true
-                        log("  ✓ 已导出到原包目录: $exportDesc")
+                        log("  ✓ 已导出: $exportDesc")
                     }
                 }
 
@@ -515,7 +538,7 @@ class MainActivity : AppCompatActivity() {
                         finalSize = tempSigned.length()
                         exportDesc = docUriToReadablePath(uri, fileName)
                         exportedToSourceDir = true
-                        log("  ✓ 已导出到原包目录: $exportDesc")
+                        log("  ✓ 已导出: $exportDesc")
                     }
                 }
 
@@ -527,7 +550,7 @@ class MainActivity : AppCompatActivity() {
                     tempSigned.copyTo(exportFile, overwrite = true)
                     finalSize = exportFile.length()
                     exportDesc = exportFile.absolutePath
-                    log("  ✓ 已导出到输出目录: $exportDesc")
+                    log("  ✓ 已导出: $exportDesc")
                 }
 
                 // 生成 Markdown 处理报告（与处理后 APK 同目录保存）
@@ -545,7 +568,7 @@ class MainActivity : AppCompatActivity() {
                                 Charsets.UTF_8
                             )
                             reportPath = reportFile.absolutePath
-                            log("  ✓ 处理报告已生成: ${reportFile.absolutePath}")
+                            log("  ✓ 报告: ${reportFile.absolutePath}")
                         }
                     } catch (e: Exception) {
                         log("  ⚠ 处理报告生成失败: ${e.message}")
@@ -556,13 +579,13 @@ class MainActivity : AppCompatActivity() {
                 val totalTime = System.currentTimeMillis() - totalStartTime
 
                 // 汇总日志：路径在导出/报告生成时已打印过，这里只做精简汇总，避免重复
-                log("━━━ 处理完成! ━━━")
-                log("  · 原始大小: ${formatSize(originalApkSize)}")
-                log("  · 处理后大小: ${formatSize(finalSize)}")
-                if (savedBytes > 0) {
-                    log("  · 节省空间: ${formatSize(savedBytes)}")
+                log("▶ 处理完成")
+                val sizeDesc = if (savedBytes > 0) {
+                    "${formatSize(originalApkSize)} → ${formatSize(finalSize)} (节省 ${formatSize(savedBytes)})"
+                } else {
+                    "${formatSize(originalApkSize)} → ${formatSize(finalSize)}"
                 }
-                log("  ⏱ 总耗时: ${totalTime}ms (${String.format(Locale.US, "%.1f", totalTime / 1000.0)}秒)")
+                log("  ✓ $sizeDesc | 总耗时 ${String.format(Locale.US, "%.1f", totalTime / 1000.0)}s")
 
                 withContext(Dispatchers.Main) {
                     showProgress(false)
@@ -576,8 +599,8 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
             } catch (e: OutOfMemoryError) {
-                log("━━━ 处理失败: 内存不足 ━━━")
-                log("  ✗ 错误: ${e.message}")
+                log("▶ 处理失败: 内存不足")
+                log("  ✗ ${e.message}")
                 log("  · 建议: 该APK可能过大，请尝试关闭其他应用后重试")
                 System.gc()
                 withContext(Dispatchers.Main) {
@@ -585,15 +608,15 @@ class MainActivity : AppCompatActivity() {
                     UiUtils.error(this@MainActivity, "内存不足，处理失败")
                 }
             } catch (e: StackOverflowError) {
-                log("━━━ 处理失败: 嵌套过深(StackOverflow) ━━━")
-                log("  ✗ 错误: ${e.message}")
+                log("▶ 处理失败: 嵌套过深")
+                log("  ✗ ${e.message}")
                 withContext(Dispatchers.Main) {
                     showProgress(false)
                     UiUtils.error(this@MainActivity, "处理失败: 文件结构异常")
                 }
             } catch (e: Exception) {
-                log("━━━ 处理失败 ━━━")
-                log("  ✗ 错误: ${e.message}")
+                log("▶ 处理失败")
+                log("  ✗ ${e.message}")
                 log("  · 堆栈: ${e.stackTraceToString().take(300)}")
                 withContext(Dispatchers.Main) {
                     showProgress(false)
@@ -696,10 +719,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun logStepTime(stepName: String, startTime: Long) {
-        val elapsed = System.currentTimeMillis() - startTime
-        log("  ⏱ $stepName 耗时: ${elapsed}ms")
-    }
+    private fun elapsedMs(startTime: Long): String = "${System.currentTimeMillis() - startTime}ms"
 
     private fun formatSize(bytes: Long): String = Format.formatSize(bytes)
 
@@ -744,6 +764,8 @@ class MainActivity : AppCompatActivity() {
             android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT)
         )
         dialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(dialog)
 
         dialogView.findViewById<MaterialButton>(R.id.btnDoneOk).setOnClickListener {
             dialog.dismiss()
@@ -757,10 +779,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_theme -> {
-                showThemeDialog()
-                true
-            }
             R.id.action_settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
                 true
@@ -771,71 +789,6 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    /**
-     * 主题切换对话框：跟随系统 / 白天 / 夜间。
-     * 使用自定义卡片式布局，三种模式配图标与说明，选中项高亮。
-     * 选中后持久化并重启 Activity 以应用新主题。
-     */
-    private fun showThemeDialog() {
-        val current = ThemeManager.getMode(this)
-        val dialogView = layoutInflater.inflate(R.layout.dialog_theme_choice, null)
-
-        val optionSystem = dialogView.findViewById<MaterialCardView>(R.id.optionSystem)
-        val optionLight = dialogView.findViewById<MaterialCardView>(R.id.optionLight)
-        val optionDark = dialogView.findViewById<MaterialCardView>(R.id.optionDark)
-
-        val checkSystem = dialogView.findViewById<View>(R.id.ivSystemCheck)
-        val checkLight = dialogView.findViewById<View>(R.id.ivLightCheck)
-        val checkDark = dialogView.findViewById<View>(R.id.ivDarkCheck)
-
-        // 高亮当前选中项
-        fun resetSelection() {
-            fun unselect(card: MaterialCardView, check: View) {
-                card.strokeWidth = 1
-                card.strokeColor = ContextCompat.getColor(this, R.color.primary_light)
-                check.visibility = View.INVISIBLE
-            }
-            unselect(optionSystem, checkSystem)
-            unselect(optionLight, checkLight)
-            unselect(optionDark, checkDark)
-        }
-
-        fun select(card: MaterialCardView, check: View) {
-            card.strokeWidth = 2
-            card.strokeColor = ContextCompat.getColor(this, R.color.accent)
-            check.visibility = View.VISIBLE
-        }
-
-        fun applySelection(mode: Int) {
-            resetSelection()
-            when (mode) {
-                ThemeManager.MODE_LIGHT -> select(optionLight, checkLight)
-                ThemeManager.MODE_DARK -> select(optionDark, checkDark)
-                else -> select(optionSystem, checkSystem)
-            }
-        }
-
-        applySelection(current)
-
-        fun choose(mode: Int) {
-            if (mode != current) {
-                ThemeManager.setMode(this, mode)
-                recreate()
-            } else {
-                applySelection(mode)
-            }
-        }
-
-        optionSystem.setOnClickListener { choose(ThemeManager.MODE_SYSTEM) }
-        optionLight.setOnClickListener { choose(ThemeManager.MODE_LIGHT) }
-        optionDark.setOnClickListener { choose(ThemeManager.MODE_DARK) }
-
-        AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setPositiveButton("取消", null)
-            .show()
     }
 
     /**

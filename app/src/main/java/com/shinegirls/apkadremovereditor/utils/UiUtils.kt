@@ -3,10 +3,13 @@ package com.shinegirls.apkadremovereditor.utils
 import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AlertDialog
 import com.shinegirls.apkadremovereditor.R
 
 /**
@@ -90,4 +93,48 @@ object UiUtils {
     /** 便捷方法：错误提示。 */
     fun error(context: Context, message: String) =
         toast(context, message, ToastType.ERROR, Toast.LENGTH_LONG)
+
+    /**
+     * 让弹窗自适应屏幕大小，避免内容过多时溢出屏幕导致无法查看或点击。
+     *
+     * 在 [dialog.show] 之后调用：
+     * - 宽度限制为屏幕宽度的 [widthRatio]（默认 90%）
+     * - 测量内容高度，若超过屏幕高度的 [maxHeightRatio]（默认 85%）则压缩到该高度，
+     *   配合布局中的 ScrollView 即可滚动查看全部内容；未超过则保持 wrap_content。
+     *
+     * @param dialog 已 show 的 AlertDialog
+     * @param maxHeightRatio 最大高度占屏幕高度的比例
+     * @param widthRatio 宽度占屏幕宽度的比例
+     */
+    fun fitDialogToScreen(
+        dialog: AlertDialog,
+        maxHeightRatio: Float = 0.85f,
+        widthRatio: Float = 0.9f
+    ) {
+        try {
+            val win = dialog.window ?: return
+            val dm = dialog.context.resources.displayMetrics
+            val maxHeight = (dm.heightPixels * maxHeightRatio).toInt()
+            val width = (dm.widthPixels * widthRatio).toInt()
+
+            val lp = win.attributes
+            lp.width = width
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+            win.attributes = lp
+
+            // 测量内容真实高度，超出则压缩窗口高度（配合 ScrollView 滚动）
+            val root = win.decorView
+            root.measure(
+                View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            )
+            val contentHeight = root.measuredHeight
+            if (contentHeight > maxHeight) {
+                lp.height = maxHeight
+                win.attributes = lp
+            }
+        } catch (_: Exception) {
+            // 极端情况下保持系统默认行为，不影响弹窗展示
+        }
+    }
 }

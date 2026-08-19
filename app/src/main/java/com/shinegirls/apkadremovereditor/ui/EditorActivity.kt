@@ -110,7 +110,7 @@ class EditorActivity : AppCompatActivity() {
         val findEdit = dialogView.findViewById<EditText>(R.id.editFind)
         val replaceEdit = dialogView.findViewById<EditText>(R.id.editReplace)
 
-        AlertDialog.Builder(this)
+        val frDialog = AlertDialog.Builder(this)
             .setTitle("查找替换")
             .setView(dialogView)
             .setPositiveButton("替换全部") { _, _ ->
@@ -126,7 +126,10 @@ class EditorActivity : AppCompatActivity() {
                 }
             }
             .setNegativeButton("取消", null)
-            .show()
+            .create()
+        frDialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(frDialog)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

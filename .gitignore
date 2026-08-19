@@ -30,8 +30,6 @@ tmp/
 *.tmp
 
 # ===== 忽略源码包与产物（避免重复提交）=====
-ApkAdRemoverEditor_v2.9.apk
-*.zipplatform.pk8
-platform.x509.pem
+*.zip
 *.pk8
 *.x509.pem

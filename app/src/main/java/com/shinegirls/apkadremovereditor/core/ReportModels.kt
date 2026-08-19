@@ -21,6 +21,7 @@ data class DexProcessingStats(
     val patchedClasses: Int = 0,
     val neutralizedMethods: Int = 0,
     val neutralizedUrls: Int = 0,
+    val neutralizedStrings: Int = 0,
     val forcedTrueMethods: Int = 0,
     val forcedFalseMethods: Int = 0,
     val failed: Boolean = false,
@@ -30,7 +31,7 @@ data class DexProcessingStats(
     /** 是否发生了任何实际修改（用于统计口径修正） */
     val changed: Boolean
         get() = patchedClasses > 0 || neutralizedMethods > 0 || neutralizedUrls > 0 ||
-            forcedTrueMethods > 0 || forcedFalseMethods > 0
+            neutralizedStrings > 0 || forcedTrueMethods > 0 || forcedFalseMethods > 0
 }
 
 /**
@@ -105,12 +106,17 @@ data class ProcessingReport(
     var hiddenLayoutViews: Int = 0,
     val checkpoints: MutableList<CheckpointRecord> = mutableListOf(),
     var flutterDetected: Boolean = false,
-    var flutterStats: MutableList<FlutterLibappStats> = mutableListOf()
+    var flutterStats: MutableList<FlutterLibappStats> = mutableListOf(),
+    // ===== 签名效验去除 =====
+    var signRemovalMode: Int = SignatureVerificationRemover.MODE_OFF,
+    var originalSignerFingerprint: String = "",
+    val signDexStats: MutableList<SignRemovalStats> = mutableListOf()
 ) {
     // ===== 汇总口径（统计修正：仅统计实际发生的修改） =====
     val totalPatchedClasses: Int get() = dexStats.sumOf { it.patchedClasses }
     val totalNeutralizedMethods: Int get() = dexStats.sumOf { it.neutralizedMethods }
     val totalNeutralizedUrls: Int get() = dexStats.sumOf { it.neutralizedUrls }
+    val totalNeutralizedStrings: Int get() = dexStats.sumOf { it.neutralizedStrings }
     val totalForcedTrueMethods: Int get() = dexStats.sumOf { it.forcedTrueMethods }
     val totalForcedFalseMethods: Int get() = dexStats.sumOf { it.forcedFalseMethods }
     val totalSkippedDex: Int get() = dexStats.count { it.skippedNoAd || it.skippedNoChange }
@@ -119,4 +125,8 @@ data class ProcessingReport(
     val totalFlutterLibapps: Int get() = flutterStats.size
     val totalFlutterReplaced: Int get() = flutterStats.sumOf { it.replacedCount }
     val totalFlutterFailed: Int get() = flutterStats.count { it.failed }
+    // ===== 签名效验去除汇总口径 =====
+    val totalSignPatchedMethods: Int get() = signDexStats.sumOf { it.patchedMethods }
+    val totalSignPatchedDex: Int get() = signDexStats.count { it.patchedMethods > 0 }
+    val signRemovalEnabled: Boolean get() = signRemovalMode != SignatureVerificationRemover.MODE_OFF
 }

@@ -769,4 +769,183 @@ object AxmlAdRemover {
         writeU32(newData, chunkStart + 4, chunkSize + delta)
         return newData
     }
+
+    // ========== MT 式去签名效验：清单 application 注入支持 ==========
+
+    /** 清单基础信息：包名与已有 application 名（可能为 null）。 */
+    data class ManifestInfo(val packageName: String?, val applicationName: String?)
+
+    /**
+     * 读取解包后 AndroidManifest.xml 的包名与已有 application 类名。
+     * 供去签名效验引擎解析"原包是否自定义 Application"及解析相对类名（.X 前缀）使用。
+     */
+    fun readManifestInfo(manifestFile: File): ManifestInfo? {
+        if (!manifestFile.exists()) return null
+        val data = try { manifestFile.readBytes() } catch (_: Exception) { return null }
+        if (data.size < 8 || readU16(data, 0) != 0x0003) return null
+        val fileSize = readU32(data, 4).toInt().coerceAtMost(data.size)
+        val pool = StringPool(data, 8)
+        var packageName: String? = null
+        var appName: String? = null
+        var offset = 8
+        while (offset + 8 <= fileSize) {
+            val type = readU16(data, offset)
+            val chunkSize = readU32(data, offset + 4).toInt()
+            if (chunkSize < 8 || offset + chunkSize > fileSize) break
+            if (type == CHUNK_START_ELEMENT) {
+                val elem = pool[readU32(data, offset + 20)]?.lowercase()
+                when (elem) {
+                    "manifest" -> if (packageName == null) {
+                        readAllAttrs(data, offset, pool)["package"]?.let { packageName = it }
+                    }
+                    "application" -> if (appName == null) {
+                        readAllAttrs(data, offset, pool)["name"]?.let { appName = it }
+                    }
+                }
+            }
+            offset += chunkSize
+        }
+        return ManifestInfo(packageName, appName)
+    }
+
+    /**
+     * MT 式去签名效验：把 <application> 元素的 android:name 改写为注入的钩子 Application 类名。
+     *
+     * 步骤：
+     * 1. 复用字符串池重建逻辑追加目标类名字符串（与必要的 "name" / android 命名空间 URI）；
+     * 2. 定位 <application> start element；
+     * 3. 若已存在 android:name 属性则改写其字符串索引，否则在属性数组末尾插入该属性；
+     * 4. 原子写回清单文件。
+     *
+     * @param manifestFile 解包后的 AndroidManifest.xml
+     * @param className 钩子 Application 的完整类名（点分，如 com.shinegirls.pmshook.PmsHookApplication）
+     * @return 是否改写成功
+     */
+    fun setApplicationName(manifestFile: File, className: String): Boolean {
+        if (!manifestFile.exists()) return false
+        var data = try { manifestFile.readBytes() } catch (_: Exception) { return false }
+        if (data.size < 8 || readU16(data, 0) != 0x0003) return false
+        // rebuildPoolAppendStrings 仅适用于 styleCount==0 的字符串池。
+        // AndroidManifest.xml 实际几乎恒为 0；命中非 0（极罕见）时安全跳过。
+        if (readU32(data, 8 + 12).toInt() > 0) return false
+
+        val (poolData, idxMap) =
+            rebuildPoolAppendStrings(data, 8, listOf(ANDROID_NS_URI, "name", className))
+        data = poolData
+        val appIdx = idxMap[className] ?: return false
+        val nameIdx = idxMap["name"] ?: return false
+        val nsIdx = idxMap[ANDROID_NS_URI] ?: return false
+        writeU32(data, 4, data.size)
+
+        val pool = StringPool(data, 8)
+        val fileSize = readU32(data, 4).toInt().coerceAtMost(data.size)
+        var appOffset = -1
+        var offset = 8
+        while (offset + 8 <= fileSize) {
+            val type = readU16(data, offset)
+            val chunkSize = readU32(data, offset + 4).toInt()
+            if (chunkSize < 8 || offset + chunkSize > fileSize) break
+            if (type == CHUNK_START_ELEMENT &&
+                pool[readU32(data, offset + 20)]?.lowercase() == "application"
+            ) {
+                appOffset = offset
+                break
+            }
+            offset += chunkSize
+        }
+        if (appOffset < 0) return false
+
+        data = patchApplicationNameAttribute(data, appOffset, appIdx, nameIdx, nsIdx, pool)
+            ?: return false
+        try {
+            manifestFile.writeBytes(data)
+        } catch (_: Exception) {
+            return false
+        }
+        return true
+    }
+
+    /**
+     * 改写 / 插入 application 属性的 android:name。返回布局调整后的新字节数组。
+     */
+    private fun patchApplicationNameAttribute(
+        data: ByteArray,
+        chunkStart: Int,
+        appIdx: Int,
+        nameIdx: Int,
+        nsIdx: Int,
+        pool: StringPool
+    ): ByteArray? {
+        val attributeStart = readU16(data, chunkStart + 24)
+        val attributeCount = readU16(data, chunkStart + 28)
+        val attributeSize = readU16(data, chunkStart + 26)
+        if (attributeSize < 20) return null
+        val attrBase = chunkStart + 16 + attributeStart
+
+        // 若已存在android:name则改写，否则在末尾插入
+        var existing = -1
+        for (i in 0 until attributeCount) {
+            val p = attrBase + i * attributeSize
+            if (pool[readU32(data, p + 4).toInt()]?.lowercase() == "name") {
+                existing = p
+                break
+            }
+        }
+        if (existing >= 0) {
+            writeU32(data, existing + 8, appIdx)      // rawValue
+            setStringTypedValue(data, existing + 12, appIdx)
+            return data
+        }
+
+        val insertPos = attrBase + attributeCount * attributeSize
+        val delta = 20
+        val newData = ByteArray(data.size + delta)
+        System.arraycopy(data, 0, newData, 0, insertPos)
+        writeU32(newData, insertPos, nsIdx)             // ns=android 命名空间
+        writeU32(newData, insertPos + 4, nameIdx)       // name
+        writeU32(newData, insertPos + 8, appIdx)        // rawValue
+        setStringTypedValue(newData, insertPos + 12, appIdx)
+        System.arraycopy(data, insertPos, newData, insertPos + delta, data.size - insertPos)
+        writeU16(newData, chunkStart + 28, attributeCount + 1)
+        writeU32(newData, chunkStart + 4, readU32(newData, chunkStart + 4).toInt() + delta)
+        return newData
+    }
+
+    /**
+     * 将 typedValue 写为 TYPE_STRING 且 data 指向字符串池索引。
+     * 布局：[size:2][res0:1][dataType:1][data:4]
+     */
+    private fun setStringTypedValue(data: ByteArray, typedPos: Int, stringIdx: Int) {
+        writeU16(data, typedPos, 8)
+        data[typedPos + 2] = 0
+        data[typedPos + 3] = 0x03          // TYPE_STRING
+        writeU32(data, typedPos + 4, stringIdx)
+    }
+
+    /**
+     * 读取某 start element 的所有字符串属性（用于解析 manifest/application 的信息）。
+     * 仅收集 rawValue 以字符串类型存储的属性，资源引用天然跳过。
+     */
+    private fun readAllAttrs(data: ByteArray, chunkStart: Int, pool: StringPool): Map<String, String> {
+        val result = LinkedHashMap<String, String>()
+        val attributeStart = readU16(data, chunkStart + 24)
+        val attributeCount = readU16(data, chunkStart + 28)
+        val attributeSize = readU16(data, chunkStart + 26)
+        if (attributeCount <= 0 || attributeSize < 20) return result
+        var attrOff = chunkStart + 16 + attributeStart
+        for (i in 0 until attributeCount) {
+            if (attrOff + 20 > data.size) break
+            val value = if (readU32(data, attrOff + 8).toInt() >= 0) {
+                pool[readU32(data, attrOff + 8).toInt()]
+            } else {
+                null
+            }
+            if (value != null && value.isNotBlank()) {
+                val name = pool[readU32(data, attrOff + 4).toInt()].orEmpty()
+                result[name] = value
+            }
+            attrOff += attributeSize
+        }
+        return result
+    }
 }

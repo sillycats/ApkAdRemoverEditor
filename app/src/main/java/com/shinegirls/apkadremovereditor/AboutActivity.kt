@@ -154,7 +154,12 @@ class AboutActivity : AppCompatActivity() {
             true to "自动生成 Markdown 处理报告，记录各阶段处理明细与体积对比",
             true to "广告特征支持订阅导入与分享，快速同步更多去广告规则",
             true to "内置专业更新弹窗，含进度条、百分比、版本号与文件大小",
-            true to "明暗双主题，支持跟随系统、白天、夜间三种模式自由切换"
+            true to "明暗双主题，支持跟随系统、白天、夜间三种模式自由切换",
+            true to "签名效验去除：普通模式 + 原包模式，重打包后自动去除签名校验，避免换签后拒绝运行",
+            true to "过签 SO 按 ABI 智能注入：仅写入目标 APK 已存在的架构目录，无 lib 目录则全架构写入",
+            true to "钩子类名 / 签名信息 / 入口名称 / 注入参数全部可自定义，内置 DEX 类名自动重命名",
+            true to "内置签名效验钩子（KillerApplication）基于 dexlib2 DexRewriter 重命名，含 12 个内部类",
+            true to "所有弹窗自适应屏幕大小，内容过多时自动滚动，不溢出屏幕"
         )
 
         private const val OPEN_SOURCE_TEXT = "本应用基于以下开源项目构建并调用，在此向各位作者表示诚挚感谢与敬意：\n\n" +
@@ -200,6 +205,14 @@ class AboutActivity : AppCompatActivity() {
             "    Android 资源编译与打包工具，用于 AXML / 资源处理\n" +
             "    - 主页: https://developer.android.com/tools/aapt2\n" +
             "    - 协议: Apache License 2.0\n\n" +
+            "11. MT 管理器 ApkSignatureKillerEx 样本 (Bin.MT)\n" +
+            "    签名效验去除钩子类（bin.mt.signature.KillerApplication）与原生库思路来源\n" +
+            "    - 主页: https://mt2.cn/\n" +
+            "    - 仅供学习参考，钩子类与原生库为样本内置资源，未修改其二进制\n\n" +
+            "12. dexlib2 DexRewriter (JesusFreke)\n" +
+            "    基于 RewriterModule / TypeRewriter 的 DEX 类重命名方案，用于自定义钩子类名\n" +
+            "    - 主页: https://github.com/JesusFreke/smali\n" +
+            "    - 协议: BSD 3-Clause\n\n" +
             "以上项目的完整版权与许可文本，请访问对应主页查看。"
 
         private const val REFERENCE_TEXT = "本应用的实现过程中参考了以下公开的技术文档、开源教程与社区逆向资料，在此一并致谢，并说明出处：\n\n" +
@@ -233,6 +246,16 @@ class AboutActivity : AppCompatActivity() {
             "   基于 Material Design 规范与 Material Components 组件库示例编写\n" +
             "   - 规范: https://m3.material.io/\n" +
             "   - 组件: https://github.com/material-components/material-components-android\n\n" +
+            "8. 签名效验去除（过签）\n" +
+            "   参考 MT 管理器 ApkSignatureKillerEx 的钩子注入思路：\n" +
+            "   - 注入 KillerApplication 钩子类并改写 manifest 的 Application 指向\n" +
+            "   - 钩子 <clinit> 中通过 PackageManager 读取签名并缓存，覆盖 getPackageInfo / 原生校验\n" +
+            "   - 原包模式：嵌入原始 APK 与过签 SO，读取原始签名参与匹配，覆盖更广\n" +
+            "   - 出处: https://mt2.cn/ （仅供学习参考）\n\n" +
+            "9. DEX 类重命名（自定义钩子类名）\n" +
+            "   参考 dexlib2 官方 RewriterModule / TypeRewriter 示例，实现类定义与全部引用的一并改写\n" +
+            "   - 出处: https://github.com/JesusFreke/smali\n" +
+            "   - 依据类型描述符前缀匹配重写，兼容点号 / 斜杠 / L...; 三种输入写法\n\n" +
             "以上内容仅作技术学习参考，最终实现均为本项目自研；涉及版权归原作者与作者所属机构所有。"
 
         private const val PRIVACY_TEXT = "本应用遵守最小化收集原则，高度重视并保护您的个人隐私：\n\n" +

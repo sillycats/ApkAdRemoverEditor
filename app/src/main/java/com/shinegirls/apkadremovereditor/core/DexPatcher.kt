@@ -97,7 +97,15 @@ object DexPatcher {
         /**
          * 长度 < 2 的置空关键词（无 2 字符前缀，需单独直接匹配）。
          */
-        val shortNeutralizeKeywords: Set<String>
+        val shortNeutralizeKeywords: Set<String>,
+        /**
+         * 广告字符串特征（小写）。
+         * 用户自定义的 DEX 字符串广告特征（如广告位 ID、SDK 特征串等）。
+         * 处理时会扫描所有方法体内的 const-string / const-string/jumbo 指令，
+         * 字符串值(小写化后)命中任一特征即被置空为空字符串，从而破坏广告 SDK
+         * 对相关字符串的引用（如广告位 ID、统计上报关键字），阻断广告逻辑。
+         */
+        val stringPatternLowercase: Set<String>
     )
 
     /**
@@ -109,7 +117,8 @@ object DexPatcher {
         urlPatterns: List<String>,
         forceTrueMethodNames: List<String> = emptyList(),
         forceFalseMethodNames: List<String> = emptyList(),
-        neutralizeMethodKeywords: List<String> = emptyList()
+        neutralizeMethodKeywords: List<String> = emptyList(),
+        stringPatterns: List<String> = emptyList()
     ): CompiledPatterns {
         // 合并配置中的方法名 + 内置广告方法关键词，用于广告类方法置空筛选
         // 避免过度置空非广告方法（如构造方法、生命周期方法等）导致崩溃
@@ -207,7 +216,11 @@ object DexPatcher {
             shortNeutralizeKeywords = shortKeywords,
             urlPatternLowercase = urlPatterns.map { it.lowercase() }.toHashSet(),
             forceTrueMethodNamesLowercase = forceTrueMethodNames.map { it.lowercase() }.toHashSet(),
-            forceFalseMethodNamesLowercase = forceFalseMethodNames.map { it.lowercase() }.toHashSet()
+            forceFalseMethodNamesLowercase = forceFalseMethodNames.map { it.lowercase() }.toHashSet(),
+            stringPatternLowercase = stringPatterns
+                .map { it.trim().lowercase() }
+                .filter { it.isNotEmpty() }
+                .toHashSet()
         )
     }
 
@@ -259,6 +272,7 @@ object DexPatcher {
         forceTrueMethodNames: List<String> = emptyList(),
         forceFalseMethodNames: List<String> = emptyList(),
         neutralizeMethodKeywords: List<String> = emptyList(),
+        stringPatterns: List<String> = emptyList(),
         stripDebugInfo: Boolean = false,
         logger: Logger? = null
     ): DexPatchOutcome {
@@ -280,7 +294,7 @@ object DexPatcher {
         // 预编译广告模式（一次编译，阶段1/2复用，杜绝重复扫描）
         val patterns = compilePatterns(
             adPatterns, adMethodNames, urlPatterns, forceTrueMethodNames, forceFalseMethodNames,
-            neutralizeMethodKeywords
+            neutralizeMethodKeywords, stringPatterns
         )
 
         // ===== 阶段1: 快速识别广告内容（低内存，不构建对象） =====
@@ -300,6 +314,7 @@ object DexPatcher {
         var neutralizedUrlStrings = 0
         var forcedTrueMethods = 0
         var forcedFalseMethods = 0
+        var neutralizedStrings = 0
         var failedClasses = 0
 
         for (classDef in dex.classes) {
@@ -313,6 +328,7 @@ object DexPatcher {
                     neutralizedUrlStrings += result.urls
                     forcedTrueMethods += result.forcedTrue
                     forcedFalseMethods += result.forcedFalse
+                    neutralizedStrings += result.strings
                 } catch (_: Exception) {
                     // 单类处理失败不影响整体：回退为原类，累计失败数
                     newClasses.add(ImmutableClassDef.of(classDef))
@@ -343,7 +359,8 @@ object DexPatcher {
         val urlSuffix = if (neutralizedUrlStrings > 0) ", 链接置空=$neutralizedUrlStrings" else ""
         val forcedSuffix = if (forcedTrueMethods > 0) ", 强制true=$forcedTrueMethods" else ""
         val forcedFalseSuffix = if (forcedFalseMethods > 0) ", 强制false=$forcedFalseMethods" else ""
-        log("  ✓ ${dexFile.name} 完成: 广告类=$patchedClasses, 方法置空=$neutralizedMethods$urlSuffix$forcedSuffix$forcedFalseSuffix (${elapsed}ms, ${formatSize(originalSize)}→${formatSize(dexFile.length())})")
+        val stringSuffix = if (neutralizedStrings > 0) ", 字符串置空=$neutralizedStrings" else ""
+        log("  ✓ ${dexFile.name} 完成: 广告类=$patchedClasses, 方法置空=$neutralizedMethods$urlSuffix$forcedSuffix$forcedFalseSuffix$stringSuffix (${elapsed}ms, ${formatSize(originalSize)}→${formatSize(dexFile.length())})")
         if (failedClasses > 0) {
             log("  ⚠ $failedClasses 个类处理失败已跳过")
         }
@@ -356,6 +373,7 @@ object DexPatcher {
             neutralizedUrlStrings = neutralizedUrlStrings,
             forcedTrueMethods = forcedTrueMethods,
             forcedFalseMethods = forcedFalseMethods,
+            neutralizedStrings = neutralizedStrings,
             elapsedMs = elapsed
         )
     }
@@ -372,6 +390,7 @@ object DexPatcher {
         val adClassNames = HashSet<String>()
         val hasForceTrue = patterns.forceTrueMethodNamesLowercase.isNotEmpty()
         val hasForceFalse = patterns.forceFalseMethodNamesLowercase.isNotEmpty()
+        val hasStringPattern = patterns.stringPatternLowercase.isNotEmpty()
         for (classDef in dex.classes) {
             val className = classDef.type
             if (fastMatchAdClass(className, patterns) != null) {
@@ -384,9 +403,48 @@ object DexPatcher {
                     classDef.methods.any { it.name.lowercase() in patterns.forceFalseMethodNamesLowercase })
             ) {
                 adClassNames.add(className)
+                continue
+            }
+            // 广告字符串特征：扫描该类所有方法体中的 const-string，命中即标记为需修补类。
+            // 仅在配置了字符串特征时才遍历方法体，避免无谓开销。
+            if (hasStringPattern && classContainsAdString(classDef, patterns)) {
+                adClassNames.add(className)
             }
         }
         return adClassNames
+    }
+
+    /**
+     * 检测一个类中是否含有命中"广告字符串特征"的 const-string 常量。
+     *
+     * 低开销：仅遍历指令的 opcode 与字符串值，不构建任何不可变对象。
+     * [patterns.stringPatternLowercase] 非空时才会被调用。
+     */
+    private fun classContainsAdString(classDef: ClassDef, patterns: CompiledPatterns): Boolean {
+        for (method in classDef.methods) {
+            val impl = method.implementation ?: continue
+            for (ins in impl.instructions) {
+                val opcode = ins.opcode
+                if (opcode == Opcode.CONST_STRING || opcode == Opcode.CONST_STRING_JUMBO) {
+                    val str = extractConstString(ins) ?: continue
+                    if (matchesStringPattern(str, patterns)) return true
+                }
+            }
+        }
+        return false
+    }
+
+    /**
+     * 判断字符串值（const-string 常量）是否命中任一广告字符串特征。
+     * 子串匹配（大小写不敏感）。
+     */
+    private fun matchesStringPattern(value: String, patterns: CompiledPatterns): Boolean {
+        if (patterns.stringPatternLowercase.isEmpty()) return false
+        val lower = value.lowercase()
+        for (pattern in patterns.stringPatternLowercase) {
+            if (lower.contains(pattern)) return true
+        }
+        return false
     }
 
     /**
@@ -509,7 +567,8 @@ object DexPatcher {
         val neutralized: Int,
         val urls: Int,
         val forcedTrue: Int,
-        val forcedFalse: Int
+        val forcedFalse: Int,
+        val strings: Int
     )
 
     /**
@@ -528,8 +587,11 @@ object DexPatcher {
         log: Logger
     ): SingleClassPatch {
         val needUrl = patterns.urlPatternLowercase.isNotEmpty()
+        val needString = patterns.stringPatternLowercase.isNotEmpty()
+        val needConstString = needUrl || needString
         var neutralizedCount = 0
         var urlCount = 0
+        var stringCount = 0
         var forcedTrueCount = 0
         var forcedFalseCount = 0
         var skippedCount = 0
@@ -608,14 +670,16 @@ object DexPatcher {
 
                 // 1) 置空广告方法（方法名命中广告关键词）
                 val isAdMethod = fastMatchNeutralizeMethod(methodName, patterns)
-                // 2) 置空广告URL字符串：惰性处理，仅当方法体内确实命中广告URL时才构建新指令，
+                // 2) 置空广告链接字符串 + 广告字符串特征：惰性处理，仅当方法体内确实命中时才构建新指令，
                 //    绝大多数方法无命中，返回 null 直接复用原始方法，零对象创建。
-                var urlInstructions: List<ImmutableInstruction>? = null
+                var constInstructions: List<ImmutableInstruction>? = null
                 var urlCountInMethod = 0
-                if (needUrl && !isAdMethod) {
-                    val result = neutralizeUrlInMethod(impl, patterns)
-                    urlInstructions = result.first
+                var stringCountInMethod = 0
+                if (needConstString && !isAdMethod) {
+                    val result = neutralizeConstStringsInMethod(impl, patterns)
+                    constInstructions = result.first
                     urlCountInMethod = result.second
+                    stringCountInMethod = result.third
                 }
 
                 if (isAdMethod) {
@@ -636,12 +700,13 @@ object DexPatcher {
                         )
                     )
                     neutralizedCount++
-                } else if (needUrl && urlCountInMethod > 0 && urlInstructions != null) {
-                    // 非广告方法但含广告URL字符串：重建方法体，其余不变
+                } else if (needConstString && (urlCountInMethod > 0 || stringCountInMethod > 0) && constInstructions != null) {
+                    // 非广告方法但含广告链接/广告字符串：重建方法体，其余不变
                     urlCount += urlCountInMethod
+                    stringCount += stringCountInMethod
                     val newImpl = ImmutableMethodImplementation(
                         impl.registerCount.coerceAtLeast(1),
-                        urlInstructions,
+                        constInstructions,
                         emptyList(),
                         emptyList()
                     )
@@ -670,10 +735,11 @@ object DexPatcher {
         if (forcedFalseCount > 0) {
             log("    -> $className: 强制返回 false $forcedFalseCount 个方法")
         }
+        val stringSuffix2 = if (stringCount > 0) ", 字符串置空 $stringCount 处" else ""
         if (neutralizedCount > 0) {
-            log("    -> $className: 置空 $neutralizedCount 个广告方法, 跳过 $skippedCount 个非广告方法${if (urlCount > 0) ", 置空 $urlCount 处广告链接" else ""}")
-        } else if (urlCount > 0) {
-            log("    -> $className: 置空 $urlCount 处广告链接")
+            log("    -> $className: 置空 $neutralizedCount 个广告方法, 跳过 $skippedCount 个非广告方法${if (urlCount > 0) ", 链接置空 $urlCount 处" else ""}$stringSuffix2")
+        } else if (urlCount > 0 || stringCount > 0) {
+            log("    -> $className: 链接置空 $urlCount 处$stringSuffix2")
         }
 
         val newClass = ImmutableClassDef(
@@ -681,39 +747,44 @@ object DexPatcher {
             classDef.interfaces.toList(), classDef.sourceFile,
             classDef.annotations.toSet(), classDef.fields.toList(), newMethods
         )
-        return SingleClassPatch(newClass, neutralizedCount, urlCount, forcedTrueCount, forcedFalseCount)
+        return SingleClassPatch(newClass, neutralizedCount, urlCount, forcedTrueCount, forcedFalseCount, stringCount)
     }
 
     /**
-     * 置空单个方法体内引用广告URL/域名的 const-string / const-string/jumbo 指令。
+     * 置空单个方法体内引用广告URL/域名或命中"广告字符串特征"的 const-string / const-string/jumbo 指令。
      *
      * 惰性两遍策略（性能关键）：
      * - 第一遍只读扫描：仅遍历指令，检查 opcode 与字符串值，不创建任何对象。
-     *   绝大多数方法体内没有广告URL，此时直接返回 (null, 0)，零开销。
+     *   绝大多数方法体内没有广告内容，此时直接返回 (null, 0, 0)，零开销。
      * - 第二遍仅在第一遍命中时执行：才真正构建新的指令列表并替换命中项。
      *   这样避免旧实现"无条件为每个方法复制全部指令"导致的 CPU/内存峰值。
      *
-     * @return Pair(新指令列表，被置空的字符串数量)；无命中时 first 为 null。
+     * @return Triple(新指令列表, 被置空的广告URL数量, 被置空的广告字符串数量)；
+     *         无命中时 first 为 null。
      */
-    private fun neutralizeUrlInMethod(
+    private fun neutralizeConstStringsInMethod(
         impl: MethodImplementation,
         patterns: CompiledPatterns
-    ): Pair<List<ImmutableInstruction>?, Int> {
-        // 第一遍：只读检测是否有命中的广告URL字符串
+    ): Triple<List<ImmutableInstruction>?, Int, Int> {
+        // 第一遍：只读检测是否有命中的广告链接/广告字符串
         var hit = false
-        var changed = 0
+        var urlChanged = 0
+        var stringChanged = 0
         for (ins in impl.instructions) {
             val opcode = ins.opcode
             if (opcode == Opcode.CONST_STRING || opcode == Opcode.CONST_STRING_JUMBO) {
-                val str = extractConstString(ins)
-                if (str != null && isAdUrlString(str, patterns)) {
+                val str = extractConstString(ins) ?: continue
+                if (isAdUrlString(str, patterns)) {
                     hit = true
-                    changed++
+                    urlChanged++
+                } else if (matchesStringPattern(str, patterns)) {
+                    hit = true
+                    stringChanged++
                 }
             }
         }
         // 无命中：零对象创建，直接返回 null
-        if (!hit) return Pair(null, 0)
+        if (!hit) return Triple(null, 0, 0)
 
         // 第二遍：命中才构建新指令列表
         val newInstructions = mutableListOf<ImmutableInstruction>()
@@ -721,7 +792,7 @@ object DexPatcher {
             val opcode = ins.opcode
             if (opcode == Opcode.CONST_STRING || opcode == Opcode.CONST_STRING_JUMBO) {
                 val str = extractConstString(ins)
-                if (str != null && isAdUrlString(str, patterns)) {
+                if (str != null && (isAdUrlString(str, patterns) || matchesStringPattern(str, patterns))) {
                     newInstructions.add(
                         ImmutableInstruction21c(
                             Opcode.CONST_STRING, extractRegister(ins), ImmutableStringReference("")
@@ -732,7 +803,7 @@ object DexPatcher {
             }
             newInstructions.add(ImmutableInstruction.of(ins))
         }
-        return Pair(newInstructions, changed)
+        return Triple(newInstructions, urlChanged, stringChanged)
     }
 
     /** 从 const-string / const-string/jumbo 指令提取字符串值（非字符串指令返回 null）。 */
@@ -920,6 +991,7 @@ data class DexPatchOutcome(
     val neutralizedUrlStrings: Int = 0,
     val forcedTrueMethods: Int = 0,
     val forcedFalseMethods: Int = 0,
+    val neutralizedStrings: Int = 0,
     val failed: Boolean = false,
     val error: String? = null,
     val elapsedMs: Long = 0

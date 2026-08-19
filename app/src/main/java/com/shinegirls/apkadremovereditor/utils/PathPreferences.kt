@@ -22,6 +22,22 @@ object PathPreferences {
     private const val KEY_ENABLE_DEX_OPTIMIZE = "enable_dex_optimize"
     /** 广告特征分类开关的前缀，完整 key = 前缀 + 分类名。 */
     private const val KEY_ENABLE_CATEGORY_PREFIX = "enable_category_"
+   /** 签名效验去除模式：0=关闭 1=普通去除 2=原包去除 */
+    private const val KEY_SIGN_REMOVAL_MODE = "sign_removal_mode"
+    /** 签名效验去除：原包在安装包内的 assets 路径（用户可自定义） */
+    private const val KEY_SIGN_ORIGIN_PATH = "sign_origin_path"
+    /** 签名效验去除：原包解压目标路径（用户可自定义） */
+    private const val KEY_SIGN_EXTRACT_PATH = "sign_extract_path"
+    /** 签名效验去除：原生库名（用户可自定义） */
+    private const val KEY_SIGN_SO_NAME = "sign_so_name"
+    /** 签名效验去除：钩子类名（用户可自定义，默认 android.app.AppIication） */
+    private const val KEY_SIGN_HOOK_CLASS = "sign_hook_class"
+    /** 签名效验去除：签名信息（Base64 证书，用户可自定义；留空则从原包读取） */
+    private const val KEY_SIGN_INFO = "sign_info"
+    /** 签名效验去除：入口名称（包名，用户可自定义；留空则从 manifest 读取） */
+    private const val KEY_SIGN_ENTRY = "sign_entry"
+    /** 上次记录的版本号（用于升级后重置签名效验为默认关闭） */
+    private const val KEY_LAST_VERSION_CODE = "last_version_code"
 
     /** 默认配置文件完整路径。 */
     val DEFAULT_CONFIG_PATH: String = "${Format.EXPORT_DIR}/ad_patterns.json"
@@ -173,5 +189,154 @@ object PathPreferences {
      */
     fun setCategoryEnabled(context: Context, categoryName: String, enabled: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_ENABLE_CATEGORY_PREFIX + categoryName, enabled).apply()
+    }
+
+    /**
+     * 获取签名效验去除模式。
+     * 0=关闭；1=普通去除；2=原包去除。默认关闭。
+     */
+    fun getSignRemovalMode(context: Context): Int {
+        return getPrefs(context).getInt(KEY_SIGN_REMOVAL_MODE, 0)
+    }
+
+    /**
+     * 设置签名效验去除模式。
+     */
+    fun setSignRemovalMode(context: Context, mode: Int) {
+        getPrefs(context).edit().putInt(KEY_SIGN_REMOVAL_MODE, mode).apply()
+    }
+
+    /**
+     * 签名效验去除是否开启。
+     */
+    fun isSignRemovalEnabled(context: Context): Boolean {
+        return getSignRemovalMode(context) != 0
+    }
+
+    /**
+     * 版本升级后重置签名效验为默认关闭。
+     *
+     * 签名效验去除默认应为关闭状态。若用户从旧版本升级安装（SharedPreferences 数据保留），
+     * 之前开启过的签名效验会残留为开启，此处检测到版本号升级时自动重置为关闭，
+     * 保证新版本首次运行即处于默认关闭状态。
+     *
+     * 应在应用启动时（MainActivity.onCreate）调用。
+     */
+    fun resetSignRemovalOnUpgrade(context: Context) {
+        try {
+            val prefs = getPrefs(context)
+            val lastCode = prefs.getLong(KEY_LAST_VERSION_CODE, 0L)
+            val currentCode = context.packageManager
+                .getPackageInfo(context.packageName, 0).versionCode.toLong()
+            // 首次安装（lastCode==0）或版本升级（currentCode > lastCode）时重置为关闭
+            if (currentCode > lastCode) {
+                prefs.edit().putInt(KEY_SIGN_REMOVAL_MODE, 0).apply()
+                prefs.edit().putLong(KEY_LAST_VERSION_CODE, currentCode).apply()
+            }
+        } catch (_: Exception) {
+            // 极端情况下忽略，不影响启动
+        }
+    }
+
+    /**
+     * 获取原包在安装包内的 assets 路径（用户可自定义）。
+     * 默认：assets/SignatureKiIIer/origin.apk
+     */
+    fun getSignOriginPath(context: Context): String {
+        return getPrefs(context).getString(KEY_SIGN_ORIGIN_PATH,
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_ORIGIN_ASSET_PATH)
+            ?: com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_ORIGIN_ASSET_PATH
+    }
+
+    /**
+     * 设置原包在安装包内的 assets 路径。
+     */
+    fun setSignOriginPath(context: Context, path: String) {
+        getPrefs(context).edit().putString(KEY_SIGN_ORIGIN_PATH, path).apply()
+    }
+
+    /**
+     * 获取原包解压目标路径（用户可自定义）。
+     * 默认：files/SignatureKiIIer/base.apk
+     */
+    fun getSignExtractPath(context: Context): String {
+        return getPrefs(context).getString(KEY_SIGN_EXTRACT_PATH,
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_EXTRACT_PATH)
+            ?: com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_EXTRACT_PATH
+    }
+
+    /**
+     * 设置原包解压目标路径。
+     */
+    fun setSignExtractPath(context: Context, path: String) {
+        getPrefs(context).edit().putString(KEY_SIGN_EXTRACT_PATH, path).apply()
+    }
+
+    /**
+     * 获取原生库名（用户可自定义）。
+     * 默认：SignatureKiIIer（对应 lib/<abi>/libSignatureKiIIer.so）
+     */
+    fun getSignSoName(context: Context): String {
+        return getPrefs(context).getString(KEY_SIGN_SO_NAME,
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_SO_NAME)
+            ?: com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_SO_NAME
+    }
+
+    /**
+     * 设置原生库名。
+     */
+    fun setSignSoName(context: Context, name: String) {
+        getPrefs(context).edit().putString(KEY_SIGN_SO_NAME, name).apply()
+    }
+
+    /**
+     * 获取钩子类名（点号形式，用户可自定义）。
+     * 默认：android.app.AppIication
+     */
+    fun getSignHookClass(context: Context): String {
+        return getPrefs(context).getString(KEY_SIGN_HOOK_CLASS,
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_HOOK_CLASS)
+            ?: com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_HOOK_CLASS
+    }
+
+    /**
+     * 设置钩子类名。
+     */
+    fun setSignHookClass(context: Context, name: String) {
+        getPrefs(context).edit().putString(KEY_SIGN_HOOK_CLASS, name).apply()
+    }
+
+    /**
+     * 获取签名信息（Base64 证书，用户可自定义）。
+     * 默认留空，运行时从原包读取真实签名。
+     */
+    fun getSignInfo(context: Context): String {
+        return getPrefs(context).getString(KEY_SIGN_INFO,
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_SIGN_INFO)
+            ?: com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_SIGN_INFO
+    }
+
+    /**
+     * 设置签名信息（Base64 证书）。
+     */
+    fun setSignInfo(context: Context, info: String) {
+        getPrefs(context).edit().putString(KEY_SIGN_INFO, info).apply()
+    }
+
+    /**
+     * 获取入口名称（包名，用户可自定义）。
+     * 默认留空，运行时从 manifest 读取真实包名。
+     */
+    fun getSignEntry(context: Context): String {
+        return getPrefs(context).getString(KEY_SIGN_ENTRY,
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_ENTRY_NAME)
+            ?: com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_ENTRY_NAME
+    }
+
+    /**
+     * 设置入口名称（包名）。
+     */
+    fun setSignEntry(context: Context, entry: String) {
+        getPrefs(context).edit().putString(KEY_SIGN_ENTRY, entry).apply()
     }
 }

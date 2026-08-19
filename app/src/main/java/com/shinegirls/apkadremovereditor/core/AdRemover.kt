@@ -49,7 +49,6 @@ object AdRemover {
         report.startedAt = formatTimestamp(totalStartTime)
 
         // ========== 从配置文件加载广告特征 ==========
-        log("━━━ 加载广告特征配置 ━━━")
         val config = AdPatternConfig.loadConfig(context)
         val configFile = AdPatternConfig.getConfigFile(context)
 
@@ -68,11 +67,7 @@ object AdRemover {
         report.config = config
         report.configFile = configFile.absolutePath
 
-        log("  · 配置文件: ${configFile.absolutePath}")
-        log("  · 广告SDK包名: ${config.sdkPackages.size} 条")
-        log("  · 广告类名关键词: ${config.classKeywords.size} 条")
-        log("  · 广告方法名: ${config.methodPatterns.size} 条")
-        log("  · 特征总计: ${config.totalCount()} 条")
+        log("  · 特征配置: SDK=${config.sdkPackages.size} 类=${config.classKeywords.size} 方法=${config.methodPatterns.size} 总计=${config.totalCount()} 条")
 
         if (config.totalCount() == 0) {
             log("  ⚠ 广告特征配置为空，跳过去广告处理")
@@ -87,21 +82,16 @@ object AdRemover {
         val forceTrueMethods = config.forceTrueMethodNames
         // 强制返回 false 的方法名（广告是否已加载/展示/有广告等判定方法）
         val forceFalseMethods = config.forceFalseMethodNames
-
-        if (forceTrueMethods.isNotEmpty()) {
-            log("  · 强制返回true方法名: ${forceTrueMethods.size} 条")
-        }
-        if (forceFalseMethods.isNotEmpty()) {
-            log("  · 强制返回false方法名: ${forceFalseMethods.size} 条")
-        }
+        // DEX 字符串广告特征：扫描 const-string 并置空命中字符串
+        val adStringPatterns = config.stringPatterns
 
         // ---------- 阶段1: 直接修补DEX文件 ----------
         val phase1Start = System.currentTimeMillis()
-        log("━━━ 阶段 1: DEX 直接修补 ━━━")
+        log("▶ 阶段 1 DEX 修补")
 
         val dexOptimizeEnabled = PathPreferences.isDexOptimizeEnabled(context)
         if (dexOptimizeEnabled) {
-            log("  ℹ DEX 体积优化已开启：将移除调试信息（行号/局部变量表），进一步减小 APK 体积")
+            log("  ℹ DEX 体积优化已开启：移除调试信息，进一步减小 APK 体积")
         }
 
         val dexFiles = extractDir.listFiles { f ->
@@ -124,6 +114,7 @@ object AdRemover {
                     forceTrueMethods,
                     forceFalseMethods,
                     config.methodNeutralizeKeywords,
+                    adStringPatterns,
                     context,
                     log
                 )
@@ -139,7 +130,7 @@ object AdRemover {
 
         // ---------- 阶段2: AXML 广告清单移除 ----------
         val axmlStart = System.currentTimeMillis()
-        log("━━━ 阶段 2: AXML 广告清单移除 ━━━")
+        log("▶ 阶段 2 AXML 清单移除")
 
         val manifestFile = File(extractDir, "AndroidManifest.xml")
         val axmlResult = try {
@@ -172,7 +163,7 @@ object AdRemover {
 
         // ---------- AXML 广告权限移除 ----------
         val permStart = System.currentTimeMillis()
-        log("━━━ 阶段 2.5: AXML 广告权限移除 ━━━")
+        log("▶ 阶段 2.5 AXML 权限移除")
 
         val permResult = try {
             AxmlAdRemover.removeAdPermissions(manifestFile, config.adPermissions)
@@ -219,20 +210,25 @@ object AdRemover {
         // ---------- 汇总报告 ----------
         report.totalTimeMs = System.currentTimeMillis() - totalStartTime
 
-        log("━━━ 处理汇总 ━━━")
-        log("  · 广告SDK类置空: ${report.totalPatchedClasses}")
-        log("  · 广告方法置空: ${report.totalNeutralizedMethods}")
-        log("  · 广告链接置空: ${report.totalNeutralizedUrls}")
-        log("  · 强制返回true: ${report.totalForcedTrueMethods}")
-        log("  · 强制返回false: ${report.totalForcedFalseMethods}")
-        log("  · AXML广告组件移除: ${report.axmlRemovedComponents}")
-        log("  · AXML广告权限移除: ${report.axmlRemovedPermissions}")
-        log("  · 广告SDK库文件清理: ${report.cleanedSdkLibs}")
-        log("  · assets广告文件清理: ${report.cleanedSdkAssets}")
-        log("  · 根目录广告文件清理: ${report.cleanedRootFiles}")
-        log("  · Res广告布局隐藏: ${report.hiddenLayoutViews}")
-        log("  ⏱ 总耗时: ${report.totalTimeMs}ms")
-        log("━━━ 去广告处理完成 ━━━")
+        val parts = buildList {
+            if (report.totalPatchedClasses > 0) add("类置空 ${report.totalPatchedClasses}")
+            if (report.totalNeutralizedMethods > 0) add("方法置空 ${report.totalNeutralizedMethods}")
+            if (report.totalNeutralizedUrls > 0) add("链接置空 ${report.totalNeutralizedUrls}")
+            if (report.totalNeutralizedStrings > 0) add("字符串置空 ${report.totalNeutralizedStrings}")
+            if (report.totalForcedTrueMethods > 0) add("强制true ${report.totalForcedTrueMethods}")
+            if (report.totalForcedFalseMethods > 0) add("强制false ${report.totalForcedFalseMethods}")
+            if (report.axmlRemovedComponents > 0) add("AXML组件 ${report.axmlRemovedComponents}")
+            if (report.axmlRemovedPermissions > 0) add("AXML权限 ${report.axmlRemovedPermissions}")
+            if (report.cleanedSdkLibs > 0) add("SDK库 ${report.cleanedSdkLibs}")
+            if (report.cleanedSdkAssets > 0) add("assets ${report.cleanedSdkAssets}")
+            if (report.cleanedRootFiles > 0) add("根文件 ${report.cleanedRootFiles}")
+            if (report.hiddenLayoutViews > 0) add("布局隐藏 ${report.hiddenLayoutViews}")
+        }
+        if (parts.isEmpty()) {
+            log("  · 未命中广告特征，无需修改")
+        } else {
+            log("  ✓ ${parts.joinToString(" | ")} | ${report.totalTimeMs}ms")
+        }
 
         return report
     }
@@ -249,6 +245,7 @@ object AdRemover {
         forceTrueMethods: List<String>,
         forceFalseMethods: List<String>,
         methodNeutralizeKeywords: List<String>,
+        adStringPatterns: List<String>,
         context: Context,
         log: Logger
     ): DexProcessingStats {
@@ -269,6 +266,7 @@ object AdRemover {
                 forceTrueMethodNames = forceTrueMethods,
                 forceFalseMethodNames = forceFalseMethods,
                 neutralizeMethodKeywords = methodNeutralizeKeywords,
+                stringPatterns = adStringPatterns,
                 stripDebugInfo = PathPreferences.isDexOptimizeEnabled(context),
                 logger = { msg -> log(msg) }
             )
@@ -283,6 +281,7 @@ object AdRemover {
                 neutralizedUrls = result.neutralizedUrlStrings,
                 forcedTrueMethods = result.forcedTrueMethods,
                 forcedFalseMethods = result.forcedFalseMethods,
+                neutralizedStrings = result.neutralizedStrings,
                 failed = result.failed,
                 error = result.error,
                 elapsedMs = result.elapsedMs
@@ -346,7 +345,7 @@ object AdRemover {
         libFileKeywords: List<String>,
         log: Logger
     ): Int {
-        log("━━━ 阶段 3: 清理广告SDK原生库文件 ━━━")
+        log("▶ 阶段 3 SDK 库清理")
 
         val libDir = File(extractDir, "lib")
         if (!libDir.exists() || !libDir.isDirectory) {
@@ -363,7 +362,7 @@ object AdRemover {
             log("  · 无广告SDK库名关键词，跳过")
             return 0
         }
-        log("  · 已配置/推导 ${libKeywords.size} 个原生库关键词")
+        log("  · 关键词 ${libKeywords.size} 个")
 
         val startTime = System.currentTimeMillis()
         var cleaned = 0
@@ -383,7 +382,7 @@ object AdRemover {
         }
         val elapsed = System.currentTimeMillis() - startTime
 
-        log("  ✓ 广告SDK原生库清理完成: $cleaned 个文件, 耗时 ${elapsed}ms")
+        log("  ✓ 清理 $cleaned 个 SDK 库 | ${elapsed}ms")
         return cleaned
     }
 
@@ -469,7 +468,7 @@ object AdRemover {
         assetKeywords: List<String>,
         log: Logger
     ): Int {
-        log("━━━ 阶段 4: 清理 assets 广告文件 ━━━")
+        log("▶ 阶段 4 assets 清理")
 
         val assetsDir = File(extractDir, "assets")
         if (!assetsDir.exists() || !assetsDir.isDirectory) {
@@ -486,7 +485,7 @@ object AdRemover {
             log("  · 未配置 assets 广告文件路径，跳过")
             return 0
         }
-        log("  · 已配置 ${knownAdAssetPaths.size} 个 assets 广告路径")
+        log("  · 路径 ${knownAdAssetPaths.size} 个")
 
         // 广告关键词：覆盖自定义列表之外的同类广告资产（可在设置中自定义）
         val adKeywords = assetKeywords
@@ -529,7 +528,7 @@ object AdRemover {
         if (protectedCount > 0) {
             log("  ℹ 已跳过 $protectedCount 个 assets 内置 APK 文件（如 base.apk），如需删除请在\"assets 广告文件路径\"中精确指定")
         }
-        log("  ✓ assets 广告文件清理完成: $cleaned 个条目, 耗时 ${elapsed}ms")
+        log("  ✓ 清理 $cleaned 个 assets 条目 | ${elapsed}ms")
         return cleaned
     }
 
@@ -553,7 +552,7 @@ object AdRemover {
         rootFileKeywords: List<String>,
         log: Logger
     ): Int {
-        log("━━━ 阶段 5: 删除 APK 根目录广告文件 ━━━")
+        log("▶ 阶段 5 根目录清理")
 
         val keywords = rootFileKeywords
             .map { it.trim().lowercase() }
@@ -563,7 +562,7 @@ object AdRemover {
             log("  · 未配置根目录文件关键词，跳过")
             return 0
         }
-        log("  · 已配置 ${keywords.size} 个根目录文件关键词")
+        log("  · 关键词 ${keywords.size} 个")
 
         // 仅遍历 APK 根目录一层（与 classes.dex 同目录），不递归
         val rootFiles = extractDir.listFiles { f ->
@@ -584,7 +583,7 @@ object AdRemover {
         }
         val elapsed = System.currentTimeMillis() - startTime
 
-        log("  ✓ 根目录广告文件清理完成: $cleaned 个文件, 耗时 ${elapsed}ms")
+        log("  ✓ 清理 $cleaned 个根目录文件 | ${elapsed}ms")
         return cleaned
     }
 
@@ -607,7 +606,7 @@ object AdRemover {
         layoutKeywords: List<String>,
         log: Logger
     ): Int {
-        log("━━━ 阶段 6: 隐藏 Res 布局广告 View ━━━")
+        log("▶ 阶段 6 布局隐藏")
 
         val keywords = layoutKeywords
             .map { it.trim().lowercase() }
@@ -617,7 +616,7 @@ object AdRemover {
             log("  · 未配置 Res 布局关键词，跳过")
             return 0
         }
-        log("  · 已配置 ${keywords.size} 个 Res 布局关键词")
+        log("  · 关键词 ${keywords.size} 个")
 
         val resDir = File(extractDir, "res")
         if (!resDir.exists() || !resDir.isDirectory) {

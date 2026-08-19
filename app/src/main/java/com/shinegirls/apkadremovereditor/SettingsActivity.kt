@@ -56,6 +56,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private lateinit var tvConfigPath: TextView
     private lateinit var tvConfigStats: TextView
+    private lateinit var tvThemeMode: TextView
     private lateinit var btnSave: MaterialButton
     private lateinit var tvSubscriptionStats: TextView
     private lateinit var btnManageSubscriptions: MaterialButton
@@ -91,9 +92,16 @@ class SettingsActivity : AppCompatActivity() {
             btnSave = findViewById(R.id.btnSave)
             tvSubscriptionStats = findViewById(R.id.tvSubscriptionStats)
             btnManageSubscriptions = findViewById(R.id.btnManageSubscriptions)
+            tvThemeMode = findViewById(R.id.tvThemeMode)
 
             // 加载配置
             loadAndDisplayConfig()
+
+            // 主题切换（外观设置）
+            updateThemeDisplay()
+            findViewById<MaterialButton>(R.id.btnChangeTheme).setOnClickListener {
+                showThemeDialog()
+            }
 
             // 订阅源管理按钮
             btnManageSubscriptions.setOnClickListener {
@@ -154,6 +162,81 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     /**
+     * 更新外观卡片中当前主题模式的显示。
+     */
+    private fun updateThemeDisplay() {
+        tvThemeMode.text = ThemeManager.modeDisplayName(ThemeManager.getMode(this))
+    }
+
+    /**
+     * 主题切换对话框：跟随系统 / 白天 / 夜间。
+     * 使用自定义卡片式布局，三种模式配图标与说明，选中项高亮。
+     * 选中后持久化并重启 Activity 以应用新主题。
+     */
+    private fun showThemeDialog() {
+        val current = ThemeManager.getMode(this)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_theme_choice, null)
+
+        val optionSystem = dialogView.findViewById<com.google.android.material.card.MaterialCardView>(R.id.optionSystem)
+        val optionLight = dialogView.findViewById<com.google.android.material.card.MaterialCardView>(R.id.optionLight)
+        val optionDark = dialogView.findViewById<com.google.android.material.card.MaterialCardView>(R.id.optionDark)
+
+        val checkSystem = dialogView.findViewById<View>(R.id.ivSystemCheck)
+        val checkLight = dialogView.findViewById<View>(R.id.ivLightCheck)
+        val checkDark = dialogView.findViewById<View>(R.id.ivDarkCheck)
+
+        // 高亮当前选中项
+        fun resetSelection() {
+            fun unselect(card: com.google.android.material.card.MaterialCardView, check: View) {
+                card.strokeWidth = 1
+                card.strokeColor = ContextCompat.getColor(this, R.color.primary_light)
+                check.visibility = View.INVISIBLE
+            }
+            unselect(optionSystem, checkSystem)
+            unselect(optionLight, checkLight)
+            unselect(optionDark, checkDark)
+        }
+
+        fun select(card: com.google.android.material.card.MaterialCardView, check: View) {
+            card.strokeWidth = 2
+            card.strokeColor = ContextCompat.getColor(this, R.color.accent)
+            check.visibility = View.VISIBLE
+        }
+
+        fun applySelection(mode: Int) {
+            resetSelection()
+            when (mode) {
+                ThemeManager.MODE_LIGHT -> select(optionLight, checkLight)
+                ThemeManager.MODE_DARK -> select(optionDark, checkDark)
+                else -> select(optionSystem, checkSystem)
+            }
+        }
+
+        applySelection(current)
+
+        fun choose(mode: Int) {
+            if (mode != current) {
+                ThemeManager.setMode(this, mode)
+                recreate()
+            } else {
+                applySelection(mode)
+            }
+        }
+
+        optionSystem.setOnClickListener { choose(ThemeManager.MODE_SYSTEM) }
+        optionLight.setOnClickListener { choose(ThemeManager.MODE_LIGHT) }
+        optionDark.setOnClickListener { choose(ThemeManager.MODE_DARK) }
+
+        val themeDialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setPositiveButton("取消", null)
+            .create()
+        themeDialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(themeDialog)
+    }
+
+    /**
      * 加载配置并显示。
      */
     private fun loadAndDisplayConfig() {
@@ -193,6 +276,7 @@ class SettingsActivity : AppCompatActivity() {
         bindCategoryCard(R.id.cardLibFileKeywords, Category.LIB_FILE_KEYWORDS)
         bindCategoryCard(R.id.cardAssetKeywords, Category.ASSET_KEYWORDS)
         bindCategoryCard(R.id.cardMethodNeutralizeKeywords, Category.METHOD_NEUTRALIZE_KEYWORDS)
+        bindCategoryCard(R.id.cardStringPatterns, Category.STRING_PATTERNS)
         bindCategoryCard(R.id.cardAdPermissions, Category.AD_PERMISSIONS)
         bindCategoryCard(R.id.cardRootFileKeywords, Category.ROOT_FILE_KEYWORDS)
         bindCategoryCard(R.id.cardResLayoutKeywords, Category.RES_LAYOUT_KEYWORDS)
@@ -226,6 +310,156 @@ class SettingsActivity : AppCompatActivity() {
                 UiUtils.info(this@SettingsActivity,
                     if (isChecked) "DEX 体积优化已启用" else "DEX 体积优化已关闭")
             }
+        }
+
+        // 签名效验去除开关：开启后处理 APK 时自动去签名效验
+        findViewById<SwitchCompat>(R.id.swSignRemovalEnabled)?.apply {
+            isChecked = PathPreferences.isSignRemovalEnabled(this@SettingsActivity)
+            setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    // 开启：若当前模式为关闭，则默认使用"普通去除"
+                    val cur = PathPreferences.getSignRemovalMode(this@SettingsActivity)
+                    if (cur == 0) {
+                        PathPreferences.setSignRemovalMode(this@SettingsActivity,
+                            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_NORMAL)
+                    }
+                    UiUtils.info(this@SettingsActivity, "签名效验去除已启用")
+                } else {
+                    val cur = PathPreferences.getSignRemovalMode(this@SettingsActivity)
+                    if (cur != 0) {
+                        PathPreferences.setSignRemovalMode(this@SettingsActivity, 0)
+                    }
+                    UiUtils.info(this@SettingsActivity, "签名效验去除已关闭")
+                }
+                refreshSignModeUi()
+            }
+        }
+
+        // 修改签名效验模式：普通去除 / 原包去除
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSignMode)?.setOnClickListener {
+            showSignModeDialog()
+        }
+
+        // 自定义注入参数：原包路径 / 解压路径 / So库名
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSignParams)?.setOnClickListener {
+            showSignParamsDialog()
+        }
+        refreshSignModeUi()
+        refreshSignParamsUi()
+    }
+
+    /**
+     * 刷新签名效验去除的 UI 显示（开关状态 + 模式文案）。
+     */
+    private fun refreshSignModeUi() {
+        val mode = PathPreferences.getSignRemovalMode(this)
+        findViewById<SwitchCompat>(R.id.swSignRemovalEnabled)?.isChecked = mode != 0
+        findViewById<TextView>(R.id.tvSignMode)?.text = when (mode) {
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_ORIGINAL -> "原包去除签名效验"
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_NORMAL -> "普通去除签名效验"
+            else -> "未启用（点击修改选择模式）"
+        }
+    }
+
+    /**
+     * 弹出签名效验模式选择对话框。
+     */
+    private fun showSignModeDialog() {
+        val options = arrayOf("普通去除签名效验", "原包去除签名效验")
+        val startMode = PathPreferences.getSignRemovalMode(this)
+        val checked = when {
+            startMode == com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_ORIGINAL -> 1
+            else -> 0
+        }
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("选择签名效验去除模式")
+            .setSingleChoiceItems(options, checked) { _, which ->
+                when (which) {
+                    0 -> PathPreferences.setSignRemovalMode(this,
+                        com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_NORMAL)
+                    else -> PathPreferences.setSignRemovalMode(this,
+                        com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_ORIGINAL)
+                }
+                refreshSignModeUi()
+                UiUtils.info(this, "签名效验模式已设为：${options[which]}")
+            }
+            .setPositiveButton("确定", null)
+            .show()
+    }
+
+    /**
+     * 刷新注入参数显示（原包路径 / 解压路径 / So库名 / 钩子类名 / 签名信息 / 入口名称）。
+     */
+    private fun refreshSignParamsUi() {
+        val origin = PathPreferences.getSignOriginPath(this)
+        val extract = PathPreferences.getSignExtractPath(this)
+        val so = PathPreferences.getSignSoName(this)
+        val hook = PathPreferences.getSignHookClass(this)
+        val info = PathPreferences.getSignInfo(this)
+        val entry = PathPreferences.getSignEntry(this)
+        val isCustom = origin != com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_ORIGIN_ASSET_PATH ||
+            extract != com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_EXTRACT_PATH ||
+            so != com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_SO_NAME ||
+            hook != com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_HOOK_CLASS ||
+            info != com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_SIGN_INFO ||
+            entry != com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_ENTRY_NAME
+        findViewById<TextView>(R.id.tvSignParams)?.text =
+            if (isCustom) "已自定义（$so / $hook）" else "默认（SignatureKiIIer）"
+    }
+
+    /**
+     * 弹出自定义注入参数对话框：原包路径 / 解压路径 / So库名 / 钩子类名 / 签名信息 / 入口名称。
+     * 前三个值会写入钩子 <clinit> 的 const-string（对应 MT 的"注入原包路径/原包解压路径/注入So库名"），
+     * 钩子类名会重命名注入的 KillerApplication 类（含 12 个内部类）；
+     * 签名信息（Base64 证书）与入口名称（包名）留空则运行时自动从原包 / manifest 读取。
+     */
+    private fun showSignParamsDialog() {
+        val inflater = LayoutInflater.from(this)
+        val view = inflater.inflate(R.layout.dialog_sign_params, null)
+        val etOrigin = view.findViewById<EditText>(R.id.etSignOrigin)
+        val etExtract = view.findViewById<EditText>(R.id.etSignExtract)
+        val etSo = view.findViewById<EditText>(R.id.etSignSo)
+        val etHook = view.findViewById<EditText>(R.id.etSignHookClass)
+        val etInfo = view.findViewById<EditText>(R.id.etSignInfo)
+        val etEntry = view.findViewById<EditText>(R.id.etSignEntry)
+        etOrigin.setText(PathPreferences.getSignOriginPath(this))
+        etExtract.setText(PathPreferences.getSignExtractPath(this))
+        etSo.setText(PathPreferences.getSignSoName(this))
+        etHook.setText(PathPreferences.getSignHookClass(this))
+        etInfo.setText(PathPreferences.getSignInfo(this))
+        etEntry.setText(PathPreferences.getSignEntry(this))
+
+        val signDialog = androidx.appcompat.app.AlertDialog.Builder(this)
+            .setView(view)
+            .create()
+        signDialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(signDialog)
+
+        // 布局内自定义按钮：保存 / 取消（避免 AlertDialog 底部按钮被长内容挤出屏幕）
+        view.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSignSave).setOnClickListener {
+            val origin = etOrigin.text?.toString()?.trim().orEmpty()
+            val extract = etExtract.text?.toString()?.trim().orEmpty()
+            val so = etSo.text?.toString()?.trim().orEmpty()
+            val hook = etHook.text?.toString()?.trim().orEmpty()
+            val info = etInfo.text?.toString()?.trim().orEmpty()
+            val entry = etEntry.text?.toString()?.trim().orEmpty()
+            if (origin.isEmpty() || extract.isEmpty() || so.isEmpty() || hook.isEmpty()) {
+                UiUtils.info(this, "原包路径 / 解压路径 / So库名 / 钩子类名均不能为空")
+                return@setOnClickListener
+            }
+            PathPreferences.setSignOriginPath(this, origin)
+            PathPreferences.setSignExtractPath(this, extract)
+            PathPreferences.setSignSoName(this, so)
+            PathPreferences.setSignHookClass(this, hook)
+            PathPreferences.setSignInfo(this, info)
+            PathPreferences.setSignEntry(this, entry)
+            refreshSignParamsUi()
+            signDialog.dismiss()
+            UiUtils.info(this, "注入参数已保存：$so / $hook")
+        }
+        view.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSignCancel).setOnClickListener {
+            signDialog.dismiss()
         }
     }
 
@@ -277,7 +511,7 @@ class SettingsActivity : AppCompatActivity() {
         }
         dialogView.findViewById<TextView>(R.id.tvPathHint).text = hint
 
-        AlertDialog.Builder(this)
+        val pathDialog = AlertDialog.Builder(this)
             .setTitle(title)
             .setView(dialogView)
             .setPositiveButton("确定") { _, _ ->
@@ -316,7 +550,10 @@ class SettingsActivity : AppCompatActivity() {
                 }
             }
             .setNegativeButton("取消", null)
-            .show()
+            .create()
+        pathDialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(pathDialog)
     }
 
     /**
@@ -402,6 +639,7 @@ class SettingsActivity : AppCompatActivity() {
         Category.LIB_FILE_KEYWORDS -> R.drawable.ic_category_lib
         Category.ASSET_KEYWORDS -> R.drawable.ic_category_layer
         Category.METHOD_NEUTRALIZE_KEYWORDS -> R.drawable.ic_category_neutralize
+        Category.STRING_PATTERNS -> R.drawable.ic_category_method
         Category.AD_PERMISSIONS -> R.drawable.ic_category_permission
         Category.ROOT_FILE_KEYWORDS -> R.drawable.ic_category_rootfile
         Category.RES_LAYOUT_KEYWORDS -> R.drawable.ic_category_layout
@@ -426,6 +664,7 @@ class SettingsActivity : AppCompatActivity() {
         Category.LIB_FILE_KEYWORDS -> R.color.accent
         Category.ASSET_KEYWORDS -> R.color.accent_dark
         Category.METHOD_NEUTRALIZE_KEYWORDS -> R.color.teal_700
+        Category.STRING_PATTERNS -> R.color.teal_700
         Category.AD_PERMISSIONS -> R.color.primary
         Category.ROOT_FILE_KEYWORDS -> R.color.accent_dark
         Category.RES_LAYOUT_KEYWORDS -> R.color.primary_dark
@@ -511,7 +750,7 @@ class SettingsActivity : AppCompatActivity() {
 
         updateEmptyHint(list, tvEmptyHint)
 
-        AlertDialog.Builder(this)
+        val patternDialog = AlertDialog.Builder(this)
             .setTitle(category.displayName + " (${list.size} 条)")
             .setView(dialogView)
             .setPositiveButton("关闭", null)
@@ -519,7 +758,10 @@ class SettingsActivity : AppCompatActivity() {
                 updateCategoryCount(category, list.size)
                 updateStats()
             }
-            .show()
+            .create()
+        patternDialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(patternDialog)
     }
 
     /**
@@ -533,14 +775,17 @@ class SettingsActivity : AppCompatActivity() {
             setSingleLine(true)
         }
 
-        AlertDialog.Builder(this)
+        val editDialog = AlertDialog.Builder(this)
             .setTitle("编辑特征")
             .setView(input)
             .setPositiveButton("保存") { _, _ ->
                 onSave(input.text.toString().trim())
             }
             .setNegativeButton("取消", null)
-            .show()
+            .create()
+        editDialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(editDialog)
     }
 
     /**
@@ -581,10 +826,13 @@ class SettingsActivity : AppCompatActivity() {
         // 提示
         addHelpSection(body, "小贴士", help.tip, R.color.text_secondary)
 
-        AlertDialog.Builder(this)
+        val helpDialog = AlertDialog.Builder(this)
             .setView(dialogView)
             .setPositiveButton("知道了", null)
-            .show()
+            .create()
+        helpDialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(helpDialog)
     }
 
     /**
@@ -734,10 +982,13 @@ class SettingsActivity : AppCompatActivity() {
 
         refreshSubscriptionList(subscriptions, rvSubscriptions, tvEmptyHint)
 
-        AlertDialog.Builder(this)
+        val subListDialog = AlertDialog.Builder(this)
             .setView(dialogView)
             .setPositiveButton("关闭", null)
-            .show()
+            .create()
+        subListDialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(subListDialog)
         } catch (e: Exception) {
             Log.e("SettingsActivity", "订阅管理对话框打开失败", e)
             UiUtils.error(this, "打开失败: ${e.message}")
@@ -808,6 +1059,8 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         dialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(dialog)
     }
 
     /**
@@ -899,6 +1152,8 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         dialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(dialog)
     }
 
     /**
@@ -991,6 +1246,8 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         dialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(dialog)
     }
 
     /**

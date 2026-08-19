@@ -30,7 +30,8 @@ import java.io.File
  *   "ad_asset_paths": ["assets/gdt_plugin/gdtadv2.jar", "assets/qumeng", ...],
  *   "lib_file_keywords": ["ttad", "gdt", "pangle", "admob", ...],
  *   "asset_keywords": ["gdt", "oneway", "bdxadsdk", "qumeng", ...],
- *   "method_neutralize_keywords": ["showad", "loadad", "onadloaded", ...]
+ *   "method_neutralize_keywords": ["showad", "loadad", "onadloaded", ...],
+ *   "string_patterns": ["banner_ad_unit", "interstitial_ad_unit", ...]
  * }
  */
 object AdPatternConfig {
@@ -56,6 +57,7 @@ object AdPatternConfig {
     private const val KEY_AD_PERMISSIONS = "ad_permissions"
     private const val KEY_ROOT_FILE_KEYWORDS = "root_file_keywords"
     private const val KEY_RES_LAYOUT_KEYWORDS = "res_layout_keywords"
+    private const val KEY_STRING_PATTERNS = "string_patterns"
     private const val KEY_FLUTTER_PATTERNS = "flutter_string_patterns"
 
     /**
@@ -79,6 +81,7 @@ object AdPatternConfig {
         val adPermissions: MutableList<String> = mutableListOf(),
         val rootFileKeywords: MutableList<String> = mutableListOf(),
         val resLayoutKeywords: MutableList<String> = mutableListOf(),
+        val stringPatterns: MutableList<String> = mutableListOf(),
         val flutterPatterns: MutableList<String> = mutableListOf()
     ) {
         /**
@@ -107,7 +110,7 @@ object AdPatternConfig {
             forceTrueMethodNames.size + forceFalseMethodNames.size + adAssetPaths.size +
             libFileKeywords.size + assetKeywords.size +
             methodNeutralizeKeywords.size + adPermissions.size + rootFileKeywords.size +
-            resLayoutKeywords.size + flutterPatterns.size
+            resLayoutKeywords.size + stringPatterns.size + flutterPatterns.size
     }
 
     /**
@@ -131,6 +134,7 @@ object AdPatternConfig {
         AD_PERMISSIONS(KEY_AD_PERMISSIONS, "广告权限特征"),
         ROOT_FILE_KEYWORDS(KEY_ROOT_FILE_KEYWORDS, "APK根目录文件关键词"),
         RES_LAYOUT_KEYWORDS(KEY_RES_LAYOUT_KEYWORDS, "Res布局广告View关键词"),
+        STRING_PATTERNS(KEY_STRING_PATTERNS, "DEX字符串广告特征"),
         FLUTTER_PATTERNS(KEY_FLUTTER_PATTERNS, "Flutter 字符串特征")
     }
 
@@ -213,6 +217,7 @@ object AdPatternConfig {
                     KEY_RES_LAYOUT_KEYWORDS,
                     defaults.resLayoutKeywords
                 ),
+                stringPatterns = jsonToStringList(json, KEY_STRING_PATTERNS),
                 flutterPatterns = jsonToStringList(json, KEY_FLUTTER_PATTERNS)
             )
         } catch (_: Exception) {
@@ -249,6 +254,7 @@ object AdPatternConfig {
             json.put(KEY_AD_PERMISSIONS, listToJsonArray(config.adPermissions))
             json.put(KEY_ROOT_FILE_KEYWORDS, listToJsonArray(config.rootFileKeywords))
             json.put(KEY_RES_LAYOUT_KEYWORDS, listToJsonArray(config.resLayoutKeywords))
+            json.put(KEY_STRING_PATTERNS, listToJsonArray(config.stringPatterns))
             json.put(KEY_FLUTTER_PATTERNS, listToJsonArray(config.flutterPatterns))
 
             getConfigFile(context).writeText(json.toString(2), Charsets.UTF_8)
@@ -289,6 +295,7 @@ object AdPatternConfig {
             Category.AD_PERMISSIONS -> config.adPermissions
             Category.ROOT_FILE_KEYWORDS -> config.rootFileKeywords
             Category.RES_LAYOUT_KEYWORDS -> config.resLayoutKeywords
+            Category.STRING_PATTERNS -> config.stringPatterns
             Category.FLUTTER_PATTERNS -> config.flutterPatterns
         }
     }
@@ -315,6 +322,7 @@ object AdPatternConfig {
         json.put(KEY_AD_PERMISSIONS, listToJsonArray(config.adPermissions))
         json.put(KEY_ROOT_FILE_KEYWORDS, listToJsonArray(config.rootFileKeywords))
         json.put(KEY_RES_LAYOUT_KEYWORDS, listToJsonArray(config.resLayoutKeywords))
+        json.put(KEY_STRING_PATTERNS, listToJsonArray(config.stringPatterns))
         json.put(KEY_FLUTTER_PATTERNS, listToJsonArray(config.flutterPatterns))
         return json
     }
@@ -345,6 +353,7 @@ object AdPatternConfig {
             adPermissions = jsonToStringListOrDefault(json, KEY_AD_PERMISSIONS, defaults.adPermissions),
             rootFileKeywords = jsonToStringListOrDefault(json, KEY_ROOT_FILE_KEYWORDS, defaults.rootFileKeywords),
             resLayoutKeywords = jsonToStringListOrDefault(json, KEY_RES_LAYOUT_KEYWORDS, defaults.resLayoutKeywords),
+            stringPatterns = jsonToStringList(json, KEY_STRING_PATTERNS),
             flutterPatterns = jsonToStringList(json, KEY_FLUTTER_PATTERNS)
         )
     }
@@ -375,6 +384,7 @@ object AdPatternConfig {
             adPermissions = configs.flatMap { it.adPermissions }.distinct().toMutableList(),
             rootFileKeywords = configs.flatMap { it.rootFileKeywords }.distinct().toMutableList(),
             resLayoutKeywords = configs.flatMap { it.resLayoutKeywords }.distinct().toMutableList(),
+            stringPatterns = configs.flatMap { it.stringPatterns }.distinct().toMutableList(),
             flutterPatterns = configs.flatMap { it.flutterPatterns }.distinct().toMutableList()
         )
     }
@@ -444,6 +454,7 @@ object AdPatternConfig {
                     adPermissions = jsonToStringList(json, KEY_AD_PERMISSIONS),
                     rootFileKeywords = jsonToStringList(json, KEY_ROOT_FILE_KEYWORDS),
                     resLayoutKeywords = jsonToStringList(json, KEY_RES_LAYOUT_KEYWORDS),
+                    stringPatterns = jsonToStringList(json, KEY_STRING_PATTERNS),
                     flutterPatterns = jsonToStringList(json, KEY_FLUTTER_PATTERNS)
                 )
             }

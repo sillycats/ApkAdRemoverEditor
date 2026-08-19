@@ -7,11 +7,6 @@
         android:orderInCategory="70"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_theme"
-        android:title="主题切换"
-        android:orderInCategory="90"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_about"
         android:title="关于应用"
         android:orderInCategory="100"

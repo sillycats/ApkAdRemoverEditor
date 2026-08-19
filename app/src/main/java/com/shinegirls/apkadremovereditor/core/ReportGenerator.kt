@@ -58,6 +58,7 @@ object ReportGenerator {
         sb.appendLine("| 广告 SDK 类置空 | ${report.totalPatchedClasses} |")
         sb.appendLine("| 广告方法置空 | ${report.totalNeutralizedMethods} |")
         sb.appendLine("| 广告链接置空 | ${report.totalNeutralizedUrls} |")
+        sb.appendLine("| 广告字符串置空 | ${report.totalNeutralizedStrings} |")
         sb.appendLine("| 强制返回 true | ${report.totalForcedTrueMethods} |")
         sb.appendLine("| 强制返回 false | ${report.totalForcedFalseMethods} |")
         sb.appendLine("| AXML 广告组件移除 | ${report.axmlRemovedComponents} |")
@@ -67,6 +68,13 @@ object ReportGenerator {
         sb.appendLine("| 根目录广告文件清理 | ${report.cleanedRootFiles} |")
         sb.appendLine("| Res 广告布局隐藏 | ${report.hiddenLayoutViews} |")
         sb.appendLine("| Flutter libapp.so 处理 | ${report.totalFlutterLibapps} 个库, 替换 ${report.totalFlutterReplaced} 处 |")
+        if (report.signRemovalEnabled) {
+            val modeText = if (report.signRemovalMode == SignatureVerificationRemover.MODE_ORIGINAL) "原包去除" else "普通去除"
+            sb.appendLine("| 签名效验去除 | $modeText (MT式注入), 注入 ${report.totalSignPatchedMethods} 个签名钩子, 涉及 ${report.totalSignPatchedDex} 个 DEX |")
+            if (report.originalSignerFingerprint.isNotBlank()) {
+                sb.appendLine("| 原包签名指纹 | ${report.originalSignerFingerprint.take(16)}… |")
+            }
+        }
         sb.appendLine("| 跳过 DEX 数 | ${report.totalSkippedDex} |")
         sb.appendLine("| 失败 DEX 数 | ${report.totalFailedDex} |")
         sb.appendLine()

@@ -474,6 +474,8 @@ object UpdateChecker {
         // 透明背景 + 圆角卡片
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(dialog)
 
         // 强制更新：隐藏"稍后再说"与右上角关闭按钮
         if (info.forceUpdate) {
@@ -568,6 +570,8 @@ object UpdateChecker {
         // 透明背景 + 圆角卡片
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(dialog)
 
         // 强制公告：隐藏关闭按钮与"不再提示"，禁用确认按钮，弹窗无法以任何方式关闭
         if (ann.isForce) {
@@ -887,6 +891,8 @@ object UpdateChecker {
         dialog.setCanceledOnTouchOutside(false)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
+        // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
+        UiUtils.fitDialogToScreen(dialog)
 
         btnClose.setOnClickListener { }
         // 下载期间关闭按钮置灰不可用，避免误关导致下载中断
