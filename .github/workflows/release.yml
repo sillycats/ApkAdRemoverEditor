@@ -25,9 +25,6 @@ jobs:
       - name: 设置 Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: 设置 Gradle 缓存
-        uses: gradle/actions/setup-gradle@v4
-
       - name: 授权 Gradle 可执行
         run: chmod +x gradlew
 

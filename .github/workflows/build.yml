@@ -27,9 +27,6 @@ jobs:
       - name: 设置 Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: 设置 Gradle 缓存
-        uses: gradle/actions/setup-gradle@v4
-
       - name: 授权 Gradle 可执行
         run: chmod +x gradlew
 
@@ -37,6 +34,14 @@ jobs:
         run: |
           sed -i 's#distributionUrl=.*#distributionUrl=https\\://services.gradle.org/distributions/gradle-8.5-bin.zip#' gradle/wrapper/gradle-wrapper.properties
           cat gradle/wrapper/gradle-wrapper.properties | grep distributionUrl
+
+      - name: 网络诊断（排查 Gradle 下载失败）
+        run: |
+          echo "--- curl services.gradle.org ---"
+          curl -sI --max-time 20 https://services.gradle.org/distributions/gradle-8.5-bin.zip | head -5 || echo "curl 失败"
+          echo "--- 预装 Gradle 版本 ---"
+          ls /usr/local/gradle* 2>/dev/null || echo "无预装 gradle"
+          which gradle && gradle --version 2>/dev/null | head -5 || echo "gradle 不在 PATH"
 
       - name: 构建 Debug APK
         run: ./gradlew assembleDebug --no-daemon
