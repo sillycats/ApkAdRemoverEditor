@@ -4,8 +4,10 @@ import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -130,11 +132,49 @@ object UiUtils {
             )
             val contentHeight = root.measuredHeight
             if (contentHeight > maxHeight) {
-                lp.height = maxHeight
+                // 关键修复：内容超高时，先限制内容区 ScrollView 的高度，
+                // 让过长内容在 ScrollView 内滚动，而不是把底部按钮挤出屏幕。
+                findScrollView(root)?.let { sv ->
+                    // 先把 ScrollView 高度置 0，测量其余固定内容的高度
+                    val svLp = sv.layoutParams
+                    svLp.height = 0
+                    root.measure(
+                        View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+                        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                    )
+                    val fixedHeight = root.measuredHeight
+                    // 滚动区可用高度 = 窗口最大高度 - 固定内容高度
+                    val scrollMaxHeight = (maxHeight - fixedHeight).coerceAtLeast(100)
+                    // 将 ScrollView 设为固定高度，内容超出时在内部滚动
+                    svLp.height = scrollMaxHeight
+                    sv.layoutParams = svLp
+                    sv.requestLayout()
+                }
+                // 重新测量：限制 ScrollView 后若总高度仍超限，才压缩窗口高度
+                root.measure(
+                    View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                )
+                if (root.measuredHeight > maxHeight) {
+                    lp.height = maxHeight
+                }
                 win.attributes = lp
             }
         } catch (_: Exception) {
             // 极端情况下保持系统默认行为，不影响弹窗展示
         }
+    }
+
+    /**
+     * 深度优先遍历 View 树，查找第一个 ScrollView。
+     */
+    private fun findScrollView(view: View): ScrollView? {
+        if (view is ScrollView) return view
+        if (view is ViewGroup) {
+            for (i in 0 until view.childCount) {
+                findScrollView(view.getChildAt(i))?.let { return it }
+            }
+        }
+        return null
     }
 }
