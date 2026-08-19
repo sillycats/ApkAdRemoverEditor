@@ -1,0 +1,48 @@
+name: 发布 Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: 构建并发布 Release APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: 设置 Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: 设置 Gradle 缓存
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: 授权 Gradle 可执行
+        run: chmod +x gradlew
+
+      - name: 构建 Release APK
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: 重命名 APK（附带版本号）
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          cp app/build/outputs/apk/release/app-release.apk \
+             "app/build/outputs/apk/release/ApkAdRemoverEditor-v${VERSION}.apk"
+
+      - name: 创建 GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: app/build/outputs/apk/release/ApkAdRemoverEditor-v*.apk
+          generate_release_notes: true
+          fail_on_unmatched_files: true
