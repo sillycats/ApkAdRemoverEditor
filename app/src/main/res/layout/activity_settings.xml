@@ -295,86 +295,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 订阅功能卡片 -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="@color/bg_card"
-                app:strokeColor="@color/blush_light"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/bg_icon_round"
-                            android:contentDescription="订阅"
-                            android:padding="9dp"
-                            android:src="@drawable/ic_subscribe"
-                            app:tint="@color/accent" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="订阅源"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
-                                android:textColor="?attr/colorOnSurface" />
-
-                            <TextView
-                                android:id="@+id/tvSubscriptionStats"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:textSize="13sp"
-                                android:textColor="@color/accent"
-                                android:text="共 0 个订阅源" />
-                        </LinearLayout>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnManageSubscriptions"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="管理"
-                            android:textSize="13sp"
-                            android:textColor="@color/primary_dark"
-                            app:icon="@drawable/ic_subscribe"
-                            app:iconSize="16dp"
-                            app:iconTint="@color/primary_dark" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:text="支持添加 / 编辑 / 删除 / 分享订阅源，配置内容可分享为订阅源口令。" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
             <!-- 外观 / 主题设置卡片 -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -452,131 +372,6 @@
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
                         android:text="选择应用的显示模式：跟随系统 / 白天 / 夜间，切换后立即生效并保存。" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- 分类列表标题 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="广告特征分类"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="?attr/colorOnSurface" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="点击「管理」可编辑 / 添加 / 删除"
-                    android:textSize="11sp"
-                    android:textColor="@color/text_hint" />
-            </LinearLayout>
-
-            <!-- Flutter 去广告特征管理 -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="@color/bg_card"
-                app:strokeColor="@color/blush_light"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/bg_icon_round"
-                            android:contentDescription="Flutter特征"
-                            android:padding="9dp"
-                            android:src="@drawable/ic_category_layer"
-                            app:tint="@color/accent_dark" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Flutter 广告特征"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
-                                android:textColor="?attr/colorOnSurface" />
-
-                            <TextView
-                                android:id="@+id/tvFlutterStats"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:textSize="13sp"
-                                android:textColor="@color/accent_dark"
-                                android:text="共 0 条特征" />
-                        </LinearLayout>
-
-                        <ImageButton
-                            android:id="@+id/btnFlutterHelp"
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="查看说明"
-                            android:src="@drawable/ic_help"
-                            android:tint="@color/accent_dark" />
-
-                        <!-- Flutter 广告特征启停开关：关闭后 processing 时跳过 Flutter libapp.so 去广告 -->
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/swFlutterEnabled"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="4dp"
-                            android:checked="true"
-                            android:contentDescription="启用 Flutter 广告特征"
-                            app:thumbTint="@color/accent_dark"
-                            app:trackTint="@color/accent_light" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnManageFlutterPatterns"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="管理"
-                            android:textSize="13sp"
-                            android:textColor="@color/accent_dark" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:text="自定义 Flutter libapp.so 中的广告字符串特征。设置后优先于 DEX 特征，留空则自动沿用下方的广告特征分类。" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -834,6 +629,211 @@
                             android:lineSpacingExtra="2dp"
                             android:text="免责声明：签名效验去除功能仅供学习、研究与个人合法用途使用。请勿对您不拥有版权、未获授权或受法律保护的应用进行修改与分发，由此产生的法律责任由使用者自行承担。" />
                     </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 订阅功能卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:strokeColor="@color/blush_light"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_icon_round"
+                            android:contentDescription="订阅"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_subscribe"
+                            app:tint="@color/accent" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="订阅源"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:textColor="?attr/colorOnSurface" />
+
+                            <TextView
+                                android:id="@+id/tvSubscriptionStats"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:textSize="13sp"
+                                android:textColor="@color/accent"
+                                android:text="共 0 个订阅源" />
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnManageSubscriptions"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="管理"
+                            android:textSize="13sp"
+                            android:textColor="@color/primary_dark"
+                            app:icon="@drawable/ic_subscribe"
+                            app:iconSize="16dp"
+                            app:iconTint="@color/primary_dark" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary"
+                        android:text="支持添加 / 编辑 / 删除 / 分享订阅源，配置内容可分享为订阅源口令。" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 分类列表标题 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="广告特征分类"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="点击「管理」可编辑 / 添加 / 删除"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_hint" />
+            </LinearLayout>
+
+            <!-- Flutter 去广告特征管理 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:strokeColor="@color/blush_light"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_icon_round"
+                            android:contentDescription="Flutter特征"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_category_layer"
+                            app:tint="@color/accent_dark" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Flutter 广告特征"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:textColor="?attr/colorOnSurface" />
+
+                            <TextView
+                                android:id="@+id/tvFlutterStats"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:textSize="13sp"
+                                android:textColor="@color/accent_dark"
+                                android:text="共 0 条特征" />
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/btnFlutterHelp"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="查看说明"
+                            android:src="@drawable/ic_help"
+                            android:tint="@color/accent_dark" />
+
+                        <!-- Flutter 广告特征启停开关：关闭后 processing 时跳过 Flutter libapp.so 去广告 -->
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/swFlutterEnabled"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:checked="true"
+                            android:contentDescription="启用 Flutter 广告特征"
+                            app:thumbTint="@color/accent_dark"
+                            app:trackTint="@color/accent_light" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnManageFlutterPatterns"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="管理"
+                            android:textSize="13sp"
+                            android:textColor="@color/accent_dark" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary"
+                        android:text="自定义 Flutter libapp.so 中的广告字符串特征。设置后优先于 DEX 特征，留空则自动沿用下方的广告特征分类。" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

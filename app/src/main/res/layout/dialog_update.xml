@@ -201,6 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:maxHeight="260dp"
                 android:overScrollMode="never">
 
                 <TextView
@@ -213,7 +214,7 @@
                     android:textSize="13sp" />
             </ScrollView>
 
-            <!-- ======== 按钮区 ======== -->
+            <!-- ======== 按钮区：左右各一个按钮（用浏览器打开链接 | 立即更新） ======== -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,16 +222,21 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnLater"
+                    android:id="@+id/btnBrowserDownload"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="52dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:text="稍后再说"
-                    android:textSize="14sp"
+                    android:text="用浏览器打开链接"
+                    android:textSize="13sp"
                     android:textColor="@color/text_secondary"
                     app:cornerRadius="26dp"
+                    app:icon="@drawable/ic_subscribe"
+                    app:iconGravity="textStart"
+                    app:iconPadding="4dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/text_secondary"
                     app:strokeColor="@color/text_hint"
                     app:strokeWidth="1dp" />
 
@@ -248,25 +254,22 @@
                     app:cornerRadius="26dp" />
             </LinearLayout>
 
-            <!-- ======== 手机浏览器下载入口（蓝奏云） ======== -->
+            <!-- ======== 稍后再说（非强制更新时显示，紧凑链接样式） ======== -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBrowserDownload"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginTop="10dp"
+                android:id="@+id/btnLater"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
                 android:backgroundTint="@android:color/transparent"
-                android:text="更新下载不畅？点此用手机浏览器访问蓝奏云下载"
-                android:textColor="@color/accent"
+                android:minWidth="0dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:text="稍后再说"
+                android:textColor="@color/text_hint"
                 android:textSize="12sp"
-                app:cornerRadius="23dp"
-                app:icon="@drawable/ic_subscribe"
-                app:iconGravity="textStart"
-                app:iconPadding="6dp"
-                app:iconSize="16dp"
-                app:iconTint="@color/accent"
-                app:rippleColor="#33B388FF"
-                app:strokeColor="@color/text_hint"
-                app:strokeWidth="1dp" />
+                app:cornerRadius="18dp"
+                app:rippleColor="#33B388FF" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
