@@ -123,6 +123,61 @@ a:hover { color: #7deeff; }
 .topnav-links a { color: var(--text-mid); }
 .topnav-links a:hover { color: var(--cyan); }
 
+/* 汉堡菜单按钮（仅移动端显示） */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  border: 1px solid rgba(90, 140, 255, .25);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .04);
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-hi);
+  transition: transform .3s ease, opacity .3s ease;
+}
+.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* 移动端下拉菜单 */
+.nav-menu {
+  display: none;
+  position: fixed;
+  top: 69px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  flex-direction: column;
+  padding: 10px 18px 16px;
+  background: rgba(6, 10, 20, .95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(90, 140, 255, .18);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .5);
+}
+.nav-menu.open { display: flex; }
+.nav-menu a {
+  padding: 13px 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-mid);
+  border-bottom: 1px solid rgba(90, 140, 255, .1);
+  transition: background .2s ease, color .2s ease;
+}
+.nav-menu a:last-child { border-bottom: none; }
+.nav-menu a:hover { background: rgba(77, 124, 255, .12); color: var(--cyan); }
+
 /* ============ Hero 首屏 ============ */
 .hero {
   position: relative;
@@ -382,10 +437,35 @@ a:hover { color: #7deeff; }
 /* ============ 响应式 ============ */
 @media (max-width: 640px) {
   .topnav-links { display: none; }
+  .nav-toggle { display: flex; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .btn { justify-content: center; }
   .main-content h1 { font-size: 24px; }
   .main-content h2 { font-size: 20px; }
   .main-content table { font-size: 13px; }
   .main-content th, .main-content td { padding: 9px 10px; }
+
+  /* 表格横向滚动容器 */
+  .main-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 代码块更紧凑 */
+  .main-content pre { padding: 14px 16px; font-size: 12.5px; }
+
+  /* 图片圆角微调 */
+  .main-content img { border-radius: 10px; }
+
+  /* 页脚堆叠 */
+  .footer-inner { flex-direction: column; text-align: center; gap: 8px; }
+}
+
+@media (max-width: 380px) {
+  .brand-text { font-size: 16px; }
+  .hero { padding-top: 48px; }
+  .hero-chips { gap: 8px; }
+  .chip { font-size: 11.5px; padding: 5px 11px; }
 }
