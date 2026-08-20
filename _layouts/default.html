@@ -1,29 +1,86 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "zh-CN" }}">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% seo %}
-    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-    {% include head-custom.html %}
-  </head>
-  <body>
-    <a id="skip-to-content" href="#content" class="sr-only">Skip to the content.</a>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% seo %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+</head>
+<body>
+  <!-- 背景特效：渐变光球 + 网格 -->
+  <div class="bg-fx" aria-hidden="true">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+    <div class="grid-lines"></div>
+    <div class="scanline"></div>
+  </div>
 
-    <header class="page-header" role="banner">
+  <!-- 顶部导航 -->
+  <nav class="topnav">
+    <a class="topnav-brand" href="{{ site.github.repository_url }}">
+      <span class="brand-mark">A</span>
+      <span class="brand-text">ApkAdRemoverEditor</span>
+    </a>
+    <div class="topnav-links">
+      <a href="{{ site.github.repository_url }}">GitHub</a>
+      <a href="{{ site.github.zip_url }}">Releases</a>
+      <a href="{{ site.github.tar_url }}">Discussions</a>
+    </div>
+  </nav>
+
+  <!-- Hero 首屏 -->
+  <header class="hero" role="banner">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        APK 逆向实验室 · 本地离线处理
+      </div>
       <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
-      <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
-      <a href="{{ site.github.repository_url }}" class="btn">📦 GitHub 仓库</a>
-      <a href="{{ site.github.zip_url }}" class="btn">📥 下载 APK</a>
-      <a href="{{ site.github.tar_url }}" class="btn">💬 社区讨论</a>
-    </header>
+      <p class="project-tagline">{{ site.description | default: site.github.project_tagline }}</p>
+      <div class="hero-actions">
+        <a href="{{ site.github.repository_url }}" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub 仓库
+        </a>
+        <a href="{{ site.github.zip_url }}" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          下载 APK
+        </a>
+        <a href="{{ site.github.tar_url }}" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          社区讨论
+        </a>
+      </div>
+      <div class="hero-chips">
+        <span class="chip">Android 7.0+</span>
+        <span class="chip">Kotlin + Java</span>
+        <span class="chip">v3.1</span>
+        <span class="chip">MIT License</span>
+        <span class="chip">字节码直接修补</span>
+      </div>
+    </div>
+  </header>
 
-    <main id="content" class="main-content" role="main">
-      {{ content }}
-      <footer class="site-footer">
-        <span class="site-footer-owner">由 <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> 维护 · 基于 <a href="{{ site.github.repository_url }}/blob/main/LICENSE">MIT License</a> 开源</span>
-      </footer>
-    </main>
-  </body>
+  <!-- 正文内容 -->
+  <main id="content" class="main-content" role="main">
+    {{ content }}
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>由 <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> 维护 · 基于 <a href="{{ site.github.repository_url }}/blob/main/LICENSE">MIT License</a> 开源</span>
+      <span class="footer-links">
+        <a href="{{ site.github.repository_url }}">GitHub</a> ·
+        <a href="{{ site.github.zip_url }}">Releases</a> ·
+        <a href="{{ site.github.tar_url }}">Discussions</a>
+      </span>
+    </div>
+  </footer>
+</body>
 </html>
