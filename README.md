@@ -79,7 +79,7 @@
 
 ## 📸 界面预览
 
-<table>
+<table class="preview-table">
   <tr>
     <td align="center" width="50%">
       <b>主界面 · 一键处理</b><br>

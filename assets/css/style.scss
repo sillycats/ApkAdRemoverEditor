@@ -207,10 +207,12 @@ a:hover { color: #7deeff; }
 .project-name {
   margin: 22px 0 14px;
   font-family: var(--font-display);
-  font-size: clamp(40px, 8vw, 76px);
+  font-size: clamp(26px, 7vw, 76px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 1px;
+  overflow-wrap: break-word;
+  word-break: break-word;
   background: linear-gradient(120deg, #eaf2ff 0%, #7deeff 40%, #4d7cff 70%, #a78bfa 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -221,8 +223,12 @@ a:hover { color: #7deeff; }
 .project-tagline {
   margin: 0 auto 34px;
   max-width: 640px;
-  font-size: clamp(15px, 2.4vw, 19px);
+  font-size: clamp(14px, 2.4vw, 19px);
+  line-height: 1.9;
   color: var(--text-mid);
+  overflow-wrap: break-word;
+  word-break: keep-all;
+  text-wrap: balance;
   animation: fadeUp .8s .2s ease both;
 }
 
@@ -285,6 +291,8 @@ a:hover { color: #7deeff; }
   max-width: 880px;
   margin: 0 auto;
   padding: 26px clamp(18px, 5vw, 40px) 80px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* 隐藏 README 顶部重复标题（Hero 已展示项目名） */
@@ -445,12 +453,38 @@ a:hover { color: #7deeff; }
   .main-content table { font-size: 13px; }
   .main-content th, .main-content td { padding: 9px 10px; }
 
-  /* 表格横向滚动容器 */
+  /* 表格：移动端允许单元格换行，长链接自动换行避免横向溢出 */
   .main-content table {
     display: block;
     overflow-x: auto;
-    white-space: nowrap;
+    white-space: normal;
     -webkit-overflow-scrolling: touch;
+  }
+  /* 表格单元格长文本/长链接换行，避免横向溢出 */
+  .main-content table td,
+  .main-content table th {
+    word-break: break-all;
+    overflow-wrap: anywhere;
+  }
+  .main-content table a {
+    word-break: break-all;
+  }
+
+  /* 界面预览表格：移动端纵向堆叠，图片自适应 */
+  .main-content table.preview-table {
+    display: block;
+    white-space: normal;
+    overflow: visible;
+  }
+  .main-content table.preview-table td {
+    display: block;
+    width: 100% !important;
+    padding: 12px 0;
+  }
+  .main-content table.preview-table td + td { border-top: 1px dashed rgba(90, 140, 255, .18); }
+  .main-content table.preview-table img {
+    width: 100% !important;
+    height: auto;
   }
 
   /* 代码块更紧凑 */
