@@ -164,8 +164,22 @@
 
 参与本项目即表示你同意遵守 [行为准则](CODE_OF_CONDUCT.md)。
 
-## 📄 许可证
+## 📄 版权与许可证
 
-本项目基于 [MIT License](LICENSE) 开源，版权归 sillycat 所有。所使用第三方库的许可信息详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+- **版权声明**：本软件及相关文档版权归 **© 2026 sillycats** 所有，保留所有权利
+- **开源协议**：本项目基于 [MIT License](LICENSE) 开源，您可自由使用、修改、分发本项目（含商业用途），但需保留原始版权声明与许可文本
+- **使用限制**：不得使用本项目作者名义进行推广；不得对项目进行歪曲、误导性描述
+- **无担保**：本项目按"现状"提供，不附带任何形式的明示或默示担保
+
+所使用第三方库的许可信息详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)，参考代码出处与更多开源说明详见 [开源声明.md](开源声明.md)。
 
 > ⚠️ 本工具仅供学习、研究与个人合法用途使用。请勿对您不拥有版权、未获授权或受法律保护的应用进行修改与分发，由此产生的法律责任由使用者自担。
+
+---
+
+<div align="center">
+
+**© 2026 sillycats · 本项目基于 [MIT License](LICENSE) 开源**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>
