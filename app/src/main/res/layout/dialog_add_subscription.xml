@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="输入口令或订阅源直链链接即可添加"
+                android:text="输入口令、直链链接或粘贴广告特征配置内容即可添加"
                 android:textSize="12sp"
                 android:textColor="@color/text_secondary" />
         </LinearLayout>
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:text="支持两种方式：\n① 口令：以 ADSUB: 开头\n② 直链：http(s):// 开头的配置 JSON 链接"
+            android:text="支持三种方式：\n① 口令：以 ADSUB: 开头\n② 直链：http(s):// 开头的配置 JSON 链接\n③ 配置内容：直接粘贴广告特征配置 JSON 文本（以 { 开始）"
             android:textSize="12sp"
             android:textColor="@color/text_secondary"
             android:lineSpacingExtra="2dp" />
@@ -81,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:hint="订阅源口令"
+        android:hint="订阅源口令 / 直链链接 / 配置内容"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"
@@ -94,11 +94,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:minLines="3"
-            android:maxLines="5"
+            android:minLines="5"
+            android:maxLines="10"
             android:textSize="13sp"
             android:fontFamily="monospace"
-            android:gravity="top" />
+            android:gravity="top"
+            android:scrollbars="vertical" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- 口令预览/结果 -->

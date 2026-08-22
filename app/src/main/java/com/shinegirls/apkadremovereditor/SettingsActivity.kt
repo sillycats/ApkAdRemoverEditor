@@ -1008,11 +1008,12 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     /**
-     * 显示"添加订阅"对话框：输入口令或订阅源直链链接，解析并添加订阅源。
+     * 显示"添加订阅"对话框：输入口令、直链链接或直接粘贴广告特征配置内容，解析并添加订阅源。
      *
-     * 支持两种输入：
+     * 支持三种输入：
      * - 订阅源口令：以 ADSUB: 开头，解码后直接添加
      * - 直链链接：http(s):// 开头的配置 JSON 地址，异步拉取并校验后添加为 URL 型订阅
+     * - 配置内容：直接粘贴广告特征配置 JSON 文本，校验合法后添加为 CONTENT 型订阅
      */
     private fun showAddSubscriptionDialog(onAdded: (Subscription) -> Unit) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_subscription, null)
@@ -1029,7 +1030,7 @@ class SettingsActivity : AppCompatActivity() {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 val input = etToken.text.toString().trim()
                 if (input.isEmpty()) {
-                    UiUtils.warning(this, "请输入订阅源口令或直链链接")
+                    UiUtils.warning(this, "请输入订阅源口令、直链链接或粘贴配置内容")
                     return@setOnClickListener
                 }
 
@@ -1039,10 +1040,28 @@ class SettingsActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
+                // 直接粘贴的广告特征配置 JSON：以 { 开头且校验为合法配置
+                if (input.startsWith("{")) {
+                    if (!SubscriptionManager.isValidConfigJson(input)) {
+                        UiUtils.warning(this, "粘贴内容不是有效的广告特征配置 JSON，请检查后重试")
+                        return@setOnClickListener
+                    }
+                    val newSub = Subscription(
+                        id = java.util.UUID.randomUUID().toString(),
+                        name = "手动输入配置",
+                        type = SubscriptionManager.Type.CONTENT,
+                        contentJson = input
+                    )
+                    onAdded(newSub)
+                    dialog.dismiss()
+                    UiUtils.success(this, "已添加手动输入的订阅源")
+                    return@setOnClickListener
+                }
+
                 // 订阅源口令
                 val parsed = SubscriptionManager.decodeToken(input)
                 if (parsed == null) {
-                    UiUtils.warning(this, "口令无效，请检查后重试")
+                    UiUtils.warning(this, "输入内容无效：既不是口令也不是有效配置 JSON，请检查后重试")
                     return@setOnClickListener
                 }
                 val newSub = Subscription(
