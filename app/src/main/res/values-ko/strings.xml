@@ -177,7 +177,7 @@
     <string name="s_fe5cc438">버전 1.7</string>
     <string name="s_fe60ed78">내장형 구독은 설정을 변경할 수 없습니다. 이름만 변경 가능</string>
     <string name="s_ff3e568a">v1.0</string>
-</resources>
+
     <string name="app_title_local">원클릭 광고 제거 · 언팩/수정/재패키징/서명</string>
     <string name="app_subtitle_about">앱 정보 · 버전 및 고지</string>
     <string name="app_title_download">다운로드 센터</string>
@@ -186,3 +186,4 @@
     <string name="lang_desc">표시 언어를 선택하세요. 즉시 적용되어 저장됩니다.</string>
     <string name="lang_default">중국어(간체)</string>
     <string name="lang_dialog_title">언어 선택</string>
+</resources>

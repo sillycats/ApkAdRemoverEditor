@@ -177,7 +177,7 @@
     <string name="s_fe5cc438">バージョン 1.7</string>
     <string name="s_fe60ed78">内蔵型サブスクは設定を変更できません。名前のみ変更可能</string>
     <string name="s_ff3e568a">v1.0</string>
-</resources>
+
     <string name="app_title_local">APKワンタップ広告除去 · 解凍/修正/再パック/署名</string>
     <string name="app_subtitle_about">アプリについて · バージョン情報と声明</string>
     <string name="app_title_download">ダウンロードセンター</string>
@@ -186,3 +186,4 @@
     <string name="lang_desc">表示言語を選択。即座に適用され保存されます。</string>
     <string name="lang_default">簡体中文</string>
     <string name="lang_dialog_title">表示言語を選択</string>
+</resources>

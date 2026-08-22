@@ -272,20 +272,10 @@ class SettingsActivity : AppCompatActivity() {
         val cards = mutableListOf<com.google.android.material.card.MaterialCardView>()
         val checks = mutableListOf<View>()
 
-        for (tag in LanguageManager.supportedTags()) {
-            val row = layoutInflater.inflate(R.layout.item_language_choice, container, false)
-            val card = row.findViewById<com.google.android.material.card.MaterialCardView>(R.id.optionLang)
-            val check = row.findViewById<View>(R.id.ivLangCheck)
-            row.findViewById<TextView>(R.id.tvLangName).text = LanguageManager.displayName(tag)
-            cards.add(card)
-            checks.add(check)
-            row.tag = tag
-
-            card.setOnClickListener { v ->
-                choose(v.tag as String)
-            }
-            container.addView(row)
-        }
+        val langDialogHolder = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setPositiveButton("取消", null)
+            .create()
 
         fun resetSelection() {
             for (i in cards.indices) {
@@ -307,11 +297,6 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-        val langDialogHolder = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setPositiveButton("取消", null)
-            .create()
-
         fun choose(tag: String) {
             if (tag == current) {
                 select(tag)
@@ -321,6 +306,21 @@ class SettingsActivity : AppCompatActivity() {
             langDialogHolder.dismiss()
             // 语言影响全局所有页面，重启主界面并清空返回栈，让整体界面立即以新语言呈现。
             restartApp()
+        }
+
+        for (tag in LanguageManager.supportedTags()) {
+            val row = layoutInflater.inflate(R.layout.item_language_choice, container, false)
+            val card = row.findViewById<com.google.android.material.card.MaterialCardView>(R.id.optionLang)
+            val check = row.findViewById<View>(R.id.ivLangCheck)
+            row.findViewById<TextView>(R.id.tvLangName).text = LanguageManager.displayName(tag)
+            cards.add(card)
+            checks.add(check)
+            row.tag = tag
+
+            card.setOnClickListener { v ->
+                choose(v.tag as String)
+            }
+            container.addView(row)
         }
 
         // 标注当前选中项

@@ -177,7 +177,7 @@
     <string name="s_fe5cc438">版本 1.7</string>
     <string name="s_fe60ed78">內嵌配置型訂閱源無法修改配置內容，僅可修改名稱</string>
     <string name="s_ff3e568a">v1.0</string>
-</resources>
+
     <string name="app_title_local">本地 APK 一鍵去廣告 · 解包 / 修補 / 打包 / 簽名</string>
     <string name="app_subtitle_about">關於應用 · 版本資訊與聲明</string>
     <string name="app_title_download">下載中心</string>
@@ -186,3 +186,4 @@
     <string name="lang_desc">選擇應用顯示語言，切換後立即生效並保存。</string>
     <string name="lang_default">簡體中文</string>
     <string name="lang_dialog_title">選擇界面語言</string>
+</resources>

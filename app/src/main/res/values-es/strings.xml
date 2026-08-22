@@ -177,7 +177,7 @@
     <string name="s_fe5cc438">Versión 1.7</string>
     <string name="s_fe60ed78">Las suscripciones integradas no permiten cambiar la configuración, solo el nombre</string>
     <string name="s_ff3e568a">v1.0</string>
-</resources>
+
     <string name="app_title_local">Elimina anuncios con un toque · Descomprimir / Parchear / Reempaquetar / Firmar</string>
     <string name="app_subtitle_about">Acerca de · Versión y aviso</string>
     <string name="app_title_download">Centro de descargas</string>
@@ -186,3 +186,4 @@
     <string name="lang_desc">Elige el idioma de la app. Se aplica y guarda al instante.</string>
     <string name="lang_default">Chino simplificado</string>
     <string name="lang_dialog_title">Elegir idioma</string>
+</resources>

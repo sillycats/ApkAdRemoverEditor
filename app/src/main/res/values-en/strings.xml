@@ -177,7 +177,7 @@
     <string name="s_fe5cc438">Version 1.7</string>
     <string name="s_fe60ed78">Embedded subscriptions cannot change config content, only the name</string>
     <string name="s_ff3e568a">v1.0</string>
-</resources>
+
     <string name="app_title_local">One-click ad removal · Unpack / Patch / Repack / Sign</string>
     <string name="app_subtitle_about">About · Version &amp; Notice</string>
     <string name="app_title_download">Download Center</string>
@@ -186,3 +186,4 @@
     <string name="lang_desc">Choose the app language. It takes effect immediately and is saved.</string>
     <string name="lang_default">Simplified Chinese</string>
     <string name="lang_dialog_title">Choose Language</string>
+</resources>
