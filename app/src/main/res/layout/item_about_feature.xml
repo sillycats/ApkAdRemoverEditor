@@ -12,7 +12,7 @@
         android:id="@+id/ivFeatureIcon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:contentDescription="特性"
+        android:contentDescription="@string/s_c666ad11"
         app:srcCompat="@drawable/ic_check" />
 
     <TextView
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginStart="10dp"
-        android:text="功能特性"
+        android:text="@string/s_48ab146a"
         android:textColor="@color/text_primary"
         android:textSize="13sp"
         android:lineSpacingExtra="2dp" />

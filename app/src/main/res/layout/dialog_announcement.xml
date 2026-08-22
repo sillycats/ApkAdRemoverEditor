@@ -28,7 +28,7 @@
                 android:layout_width="44dp"
                 android:layout_height="44dp"
                 android:background="@drawable/bg_icon_round"
-                android:contentDescription="公告"
+                android:contentDescription="@string/s_fa86f1a5"
                 android:padding="10dp"
                 android:src="@drawable/ic_announcement" />
 
@@ -43,7 +43,7 @@
                     android:id="@+id/tvAnnTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="官方公告"
+                    android:text="@string/s_a1b863fa"
                     android:textColor="@color/white"
                     android:textSize="19sp"
                     android:textStyle="bold" />
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="请仔细阅读以下内容"
+                    android:text="@string/s_50388292"
                     android:textColor="@color/text_on_primary_80"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -62,7 +62,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="关闭"
+                android:contentDescription="@string/s_b15d9127"
                 android:src="@drawable/ic_close" />
         </LinearLayout>
 
@@ -105,7 +105,7 @@
                     android:layout_height="52dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:text="不再提示"
+                    android:text="@string/s_d106afb1"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary"
                     app:cornerRadius="26dp"
@@ -118,7 +118,7 @@
                     android:layout_height="52dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="知道了"
+                    android:text="@string/s_ce26955a"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"

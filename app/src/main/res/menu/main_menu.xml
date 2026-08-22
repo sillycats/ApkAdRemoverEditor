@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
-        android:title="应用设置"
+        android:title="@string/s_4006f452"
         android:orderInCategory="70"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_about"
-        android:title="关于应用"
+        android:title="@string/s_c10c6741"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>

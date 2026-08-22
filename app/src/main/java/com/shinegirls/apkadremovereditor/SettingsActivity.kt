@@ -32,6 +32,7 @@ import com.shinegirls.apkadremovereditor.core.AdPatternConfig.Category
 import com.shinegirls.apkadremovereditor.core.SubscriptionManager
 import com.shinegirls.apkadremovereditor.core.SubscriptionManager.Subscription
 import com.shinegirls.apkadremovereditor.core.ThemeManager
+import com.shinegirls.apkadremovereditor.core.LanguageManager
 import com.shinegirls.apkadremovereditor.utils.PathPreferences
 import com.shinegirls.apkadremovereditor.utils.UiUtils
 import com.google.android.material.button.MaterialButton
@@ -54,9 +55,14 @@ import org.json.JSONObject
  */
 class SettingsActivity : AppCompatActivity() {
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageManager.wrapContext(newBase))
+    }
+
     private lateinit var tvConfigPath: TextView
     private lateinit var tvConfigStats: TextView
     private lateinit var tvThemeMode: TextView
+    private lateinit var tvLanguageMode: TextView
     private lateinit var btnSave: MaterialButton
     private lateinit var tvSubscriptionStats: TextView
     private lateinit var btnManageSubscriptions: MaterialButton
@@ -101,6 +107,13 @@ class SettingsActivity : AppCompatActivity() {
             updateThemeDisplay()
             findViewById<MaterialButton>(R.id.btnChangeTheme).setOnClickListener {
                 showThemeDialog()
+            }
+
+            // 语言切换（多语言设置）
+            tvLanguageMode = findViewById(R.id.tvLanguageMode)
+            updateLanguageDisplay()
+            findViewById<MaterialButton>(R.id.btnChangeLanguage).setOnClickListener {
+                showLanguageDialog()
             }
 
             // 订阅源管理按钮
@@ -234,6 +247,101 @@ class SettingsActivity : AppCompatActivity() {
         themeDialog.show()
         // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
         UiUtils.fitDialogToScreen(themeDialog)
+    }
+
+    /**
+     * 更新语言卡片中当前语言的显示名称。
+     */
+    private fun updateLanguageDisplay() {
+        val tag = LanguageManager.getTag(this)
+        tvLanguageMode.text = LanguageManager.displayName(tag)
+    }
+
+    /**
+     * 语言切换对话框：跟随系统 / 简体 / 繁體 / 英文 / 日文 / 韩文 / 西班牙文。
+     * 选项基于 [LanguageManager.supportedTags] 动态构建，选中项高亮，
+     * 选中后持久化并重启当前页面以立即应用新语言。
+     */
+    private fun showLanguageDialog() {
+        val current = LanguageManager.getTag(this)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_language_choice, null)
+        val container = dialogView.findViewById<LinearLayout>(R.id.llLanguageOptions)
+        container.removeAllViews()
+
+        // 每个选项占位（用于高亮/取消高亮）
+        val cards = mutableListOf<com.google.android.material.card.MaterialCardView>()
+        val checks = mutableListOf<View>()
+
+        for (tag in LanguageManager.supportedTags()) {
+            val row = layoutInflater.inflate(R.layout.item_language_choice, container, false)
+            val card = row.findViewById<com.google.android.material.card.MaterialCardView>(R.id.optionLang)
+            val check = row.findViewById<View>(R.id.ivLangCheck)
+            row.findViewById<TextView>(R.id.tvLangName).text = LanguageManager.displayName(tag)
+            cards.add(card)
+            checks.add(check)
+            row.tag = tag
+
+            card.setOnClickListener { v ->
+                choose(v.tag as String)
+            }
+            container.addView(row)
+        }
+
+        fun resetSelection() {
+            for (i in cards.indices) {
+                cards[i].strokeWidth = 1
+                cards[i].strokeColor = ContextCompat.getColor(this, R.color.primary_light)
+                checks[i].visibility = View.INVISIBLE
+            }
+        }
+
+        fun select(tag: String) {
+            resetSelection()
+            for (i in cards.indices) {
+                if (container.getChildAt(i)?.tag == tag) {
+                    cards[i].strokeWidth = 2
+                    cards[i].strokeColor = ContextCompat.getColor(this, R.color.accent)
+                    checks[i].visibility = View.VISIBLE
+                    break
+                }
+            }
+        }
+
+        val langDialogHolder = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setPositiveButton("取消", null)
+            .create()
+
+        fun choose(tag: String) {
+            if (tag == current) {
+                select(tag)
+                return
+            }
+            LanguageManager.setTag(this, tag)
+            langDialogHolder.dismiss()
+            // 语言影响全局所有页面，重启主界面并清空返回栈，让整体界面立即以新语言呈现。
+            restartApp()
+        }
+
+        // 标注当前选中项
+        select(current)
+
+        langDialogHolder.show()
+        UiUtils.fitDialogToScreen(langDialogHolder)
+    }
+
+    /**
+     * 重启应用主界面并清空 Activity 返回栈，用于语言切换后让全部页面统一应用新语言。
+     */
+    private fun restartApp() {
+        try {
+            val launcher = packageManager.getLaunchIntentForPackage(packageName)
+                ?: Intent(this, MainActivity::class.java)
+            launcher.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(launcher)
+        } catch (_: Exception) {
+            recreate()
+        }
     }
 
     /**

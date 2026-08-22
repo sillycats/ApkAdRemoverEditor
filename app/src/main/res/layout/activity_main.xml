@@ -23,7 +23,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:title="@string/app_name"
                 app:titleTextColor="@color/white"
-                app:subtitle="本地 APK 一键去广告 · 解包 / 修补 / 打包 / 签名"
+                app:subtitle="@string/app_title_local"
                 app:subtitleTextColor="@color/primary_light" />
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -65,7 +65,7 @@
                         android:layout_height="52dp"
                         android:background="@drawable/bg_icon_round"
                         android:padding="10dp"
-                        android:contentDescription="图标"
+                        android:contentDescription="@string/s_5ef69f62"
                         app:srcCompat="@drawable/ic_launcher" />
 
                     <LinearLayout
@@ -78,7 +78,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="一键去除广告"
+                            android:text="@string/s_8d89dabd"
                             android:textColor="@color/text_primary"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -87,7 +87,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="本地离线处理 · 支持特征自定义"
+                            android:text="@string/s_30fe4dbb"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -97,7 +97,7 @@
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="开始处理"
+                        android:text="@string/s_a18f884e"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:minWidth="0dp"
@@ -112,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="选择 APK 后自动完成：解包 → DEX 去广告 → 清理资源 → 打包 → 签名 → 导出，全程本地完成。"
+                    android:text="@string/s_e01c6b70"
                     android:textColor="@color/text_hint"
                     android:textSize="12sp"
                     android:lineSpacingExtra="2dp" />
@@ -152,7 +152,7 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:contentDescription="日志"
+                        android:contentDescription="@string/s_456d29ef"
                         android:src="@drawable/ic_terminal"
                         app:tint="@color/primary_dark" />
 
@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="8dp"
-                        android:text="处理日志"
+                        android:text="@string/s_98ea2a77"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -171,7 +171,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="复制日志"
+                        android:contentDescription="@string/s_3615f734"
                         android:src="@drawable/ic_copy"
                         app:tint="@color/primary_dark" />
 
@@ -180,7 +180,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="清空日志"
+                        android:contentDescription="@string/s_a15a9ef1"
                         android:src="@drawable/ic_clear"
                         app:tint="@color/primary_dark" />
                 </LinearLayout>
@@ -204,7 +204,7 @@
                         android:textIsSelectable="true"
                         android:scrollbars="vertical"
                         android:background="@color/bg_card"
-                        android:text="准备就绪，点击顶部&apos;开始处理&apos;选择 APK 开始一键处理。" />
+                        android:text="@string/s_39928582" />
                 </ScrollView>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

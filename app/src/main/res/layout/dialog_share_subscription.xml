@@ -17,7 +17,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:background="@drawable/bg_icon_round"
-            android:contentDescription="分享配置"
+            android:contentDescription="@string/s_f5f3fb1a"
             android:padding="10dp"
             android:src="@android:drawable/ic_menu_share"
             app:tint="@color/primary" />
@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分享配置为订阅源口令"
+                android:text="@string/s_5f535b47"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary" />
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="将当前广告特征配置生成口令分享给他人"
+                android:text="@string/s_0baadd9e"
                 android:textSize="12sp"
                 android:textColor="@color/text_secondary" />
         </LinearLayout>
@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="订阅源名称"
+        android:hint="@string/s_7295f03c"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="分享类型"
+        android:text="@string/s_73d906b6"
         android:textSize="13sp"
         android:textStyle="bold"
         android:textColor="@color/text_primary" />
@@ -123,7 +123,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="内嵌配置型"
+                        android:text="@string/s_d78b7b9b"
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary" />
@@ -132,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="无需服务器，口令直接包含完整配置"
+                        android:text="@string/s_148c7b02"
                         android:textSize="11sp"
                         android:textColor="@color/text_secondary" />
                 </LinearLayout>
@@ -172,7 +172,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="URL 订阅源型"
+                        android:text="@string/s_7f68b9ad"
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary" />
@@ -181,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="口令包含远程地址，需自建服务器托管配置"
+                        android:text="@string/s_e35b0fb4"
                         android:textSize="11sp"
                         android:textColor="@color/text_secondary" />
                 </LinearLayout>
@@ -196,7 +196,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="远程配置 URL（https://...）"
+        android:hint="@string/s_01769a6e"
         android:visibility="gone"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"

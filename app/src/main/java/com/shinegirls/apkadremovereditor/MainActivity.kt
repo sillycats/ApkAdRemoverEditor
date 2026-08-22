@@ -2,6 +2,7 @@ package com.shinegirls.apkadremovereditor
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -43,6 +44,7 @@ import com.shinegirls.apkadremovereditor.core.Signer
 import com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover
 
 import com.shinegirls.apkadremovereditor.core.ThemeManager
+import com.shinegirls.apkadremovereditor.core.LanguageManager
 import com.shinegirls.apkadremovereditor.core.UpdateChecker
 import com.shinegirls.apkadremovereditor.utils.Format
 import com.shinegirls.apkadremovereditor.utils.PathPreferences
@@ -59,6 +61,10 @@ import java.util.Date
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageManager.wrapContext(newBase))
+    }
 
     companion object {
         private const val REQUEST_CODE_PICK_APK = 1001

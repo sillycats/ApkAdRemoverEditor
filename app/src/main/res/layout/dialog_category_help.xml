@@ -17,7 +17,7 @@
                 android:id="@+id/ivHelpIcon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:contentDescription="说明"
+                android:contentDescription="@string/s_f411d0f1"
                 android:src="@drawable/ic_help"
                 app:tint="@color/white" />
 
@@ -29,7 +29,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:text="功能说明" />
+                android:text="@string/s_10445608" />
 
             <TextView
                 android:id="@+id/tvHelpSubtitle"
@@ -38,7 +38,7 @@
                 android:layout_marginTop="2dp"
                 android:textColor="@color/primary_light"
                 android:textSize="12sp"
-                android:text="添加方式 · 作用范围 · 修改内容" />
+                android:text="@string/s_84fad3a4" />
     </LinearLayout>
 
     <ScrollView

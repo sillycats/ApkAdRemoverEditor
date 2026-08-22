@@ -1,5 +1,6 @@
 package com.shinegirls.apkadremovereditor.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import com.shinegirls.apkadremovereditor.R
+import com.shinegirls.apkadremovereditor.core.LanguageManager
 import com.shinegirls.apkadremovereditor.utils.UiUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,6 +17,10 @@ import kotlinx.coroutines.withContext
 import java.io.File
 
 class SmaliEditorActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageManager.wrapContext(newBase))
+    }
 
     private lateinit var editText: EditText
     private var smaliFilePath: String? = null

@@ -17,7 +17,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:background="@drawable/bg_icon_round"
-            android:contentDescription="路径"
+            android:contentDescription="@string/s_4f35e80d"
             android:padding="10dp"
             android:src="@drawable/ic_category_sdk"
             app:tint="@color/accent" />
@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="自定义路径"
+                android:text="@string/s_4f356348"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary" />
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="输入完整路径，确保目录可写"
+                android:text="@string/s_8a2cba4b"
                 android:textSize="12sp"
                 android:textColor="@color/text_secondary" />
         </LinearLayout>
@@ -60,7 +60,7 @@
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:contentDescription="提示"
+            android:contentDescription="@string/s_02d9819d"
             android:src="@drawable/ic_info"
             app:tint="@color/accent_dark" />
 
@@ -81,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:hint="路径"
+        android:hint="@string/s_4f35e80d"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"

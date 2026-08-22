@@ -17,7 +17,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:background="@drawable/bg_icon_round"
-            android:contentDescription="添加订阅"
+            android:contentDescription="@string/s_d94cc5ea"
             android:padding="10dp"
             android:src="@android:drawable/ic_input_add"
             app:tint="@color/primary" />
@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="添加订阅源"
+                android:text="@string/s_498f1d06"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary" />
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="输入口令、直链链接或粘贴广告特征配置内容即可添加"
+                android:text="@string/s_f801c69d"
                 android:textSize="12sp"
                 android:textColor="@color/text_secondary" />
         </LinearLayout>
@@ -60,7 +60,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:contentDescription="提示"
+            android:contentDescription="@string/s_02d9819d"
             android:src="@drawable/ic_info"
             app:tint="@color/accent_dark" />
 
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:text="支持三种方式：\n① 口令：以 ADSUB: 开头\n② 直链：http(s):// 开头的配置 JSON 链接\n③ 配置内容：直接粘贴广告特征配置 JSON 文本（以 { 开始）"
+            android:text="@string/s_1b4a7056"
             android:textSize="12sp"
             android:textColor="@color/text_secondary"
             android:lineSpacingExtra="2dp" />
@@ -81,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:hint="订阅源口令 / 直链链接 / 配置内容"
+        android:hint="@string/s_b7a331b9"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"

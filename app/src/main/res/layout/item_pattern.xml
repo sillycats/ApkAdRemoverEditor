@@ -30,7 +30,7 @@
             android:fontFamily="monospace"
             android:singleLine="true"
             android:ellipsize="middle"
-            android:text="pattern" />
+            android:text="@string/s_240bf022" />
 
         <ImageButton
             android:id="@+id/btnEditItem"
@@ -38,7 +38,7 @@
             android:layout_height="36dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@android:drawable/ic_menu_edit"
-            android:contentDescription="编辑"
+            android:contentDescription="@string/s_95b351c8"
             app:tint="@color/primary" />
 
         <ImageButton
@@ -48,7 +48,7 @@
             android:layout_marginStart="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@android:drawable/ic_menu_delete"
-            android:contentDescription="删除"
+            android:contentDescription="@string/s_2f4aaddd"
             app:tint="@color/primary_dark" />
 
     </LinearLayout>

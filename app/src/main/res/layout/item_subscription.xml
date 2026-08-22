@@ -29,7 +29,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_icon_round"
-                android:contentDescription="订阅源"
+                android:contentDescription="@string/s_0c7d604b"
                 android:padding="9dp"
                 android:src="@drawable/ic_subscribe"
                 app:tint="@color/primary" />
@@ -50,7 +50,7 @@
                     android:textColor="?attr/colorOnSurface"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:text="订阅源名称" />
+                    android:text="@string/s_7295f03c" />
 
                 <!-- 类型标签 -->
                 <TextView
@@ -66,7 +66,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/primary_dark"
                     android:background="@drawable/bg_type_badge_accent"
-                    android:text="URL 订阅源" />
+                    android:text="@string/s_2c3f3245" />
             </LinearLayout>
 
             <!-- 开启/关闭开关：开启即应用该订阅配置 -->
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:contentDescription="开启/关闭订阅" />
+                android:contentDescription="@string/s_09d71337" />
         </LinearLayout>
 
         <!-- 分割线 -->
@@ -101,7 +101,7 @@
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_weight="1"
-                android:text="分享"
+                android:text="@string/s_c31f48f8"
                 android:textSize="12sp"
                 android:textColor="@color/primary"
                 app:icon="@android:drawable/ic_menu_share"
@@ -119,7 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_weight="1"
-                android:text="编辑"
+                android:text="@string/s_95b351c8"
                 android:textSize="12sp"
                 android:textColor="@color/accent"
                 app:icon="@android:drawable/ic_menu_edit"
@@ -137,7 +137,7 @@
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_weight="1"
-                android:text="删除"
+                android:text="@string/s_2f4aaddd"
                 android:textSize="12sp"
                 android:textColor="@color/log_error"
                 app:icon="@drawable/ic_close"

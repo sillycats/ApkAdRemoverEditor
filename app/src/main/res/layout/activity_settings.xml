@@ -16,9 +16,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="应用设置"
+            app:title="@string/s_4006f452"
             app:titleTextColor="@color/white"
-            app:subtitle="自定义去广告特征"
+            app:subtitle="@string/app_subtitle_settings"
             app:subtitleTextColor="@color/primary_light" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -61,7 +61,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/bg_icon_round"
-                            android:contentDescription="配置"
+                            android:contentDescription="@string/s_224e2ccd"
                             android:padding="9dp"
                             android:src="@drawable/ic_category_sdk"
                             app:tint="@color/primary" />
@@ -76,7 +76,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="配置文件"
+                                android:text="@string/s_15c64aa0"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
                                 android:textColor="?attr/colorOnSurface" />
@@ -88,7 +88,7 @@
                                 android:layout_marginTop="2dp"
                                 android:textSize="13sp"
                                 android:textColor="@color/accent"
-                                android:text="共 0 条特征" />
+                                android:text="@string/s_3ac820e0" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -103,7 +103,7 @@
                         android:background="@drawable/bg_path_box"
                         android:padding="10dp"
                         android:fontFamily="monospace"
-                        android:text="/storage/emulated/0/APKEditor/ad_patterns.json" />
+                        android:text="@string/s_c09d811a" />
 
                     <!-- 三按钮一行：保存 | 自定义 | 默认 -->
                     <LinearLayout
@@ -123,7 +123,7 @@
                             android:insetRight="0dp"
                             android:paddingLeft="2dp"
                             android:paddingRight="2dp"
-                            android:text="保存"
+                            android:text="@string/s_be5fbbe3"
                             android:textSize="12sp"
                             android:textStyle="bold"
                             app:autoSizeMaxTextSize="12sp"
@@ -147,7 +147,7 @@
                             android:insetRight="0dp"
                             android:paddingLeft="2dp"
                             android:paddingRight="2dp"
-                            android:text="自定义"
+                            android:text="@string/s_f1d4ff50"
                             android:textSize="12sp"
                             app:autoSizeMaxTextSize="12sp"
                             app:autoSizeMinTextSize="9sp"
@@ -171,7 +171,7 @@
                             android:insetRight="0dp"
                             android:paddingLeft="2dp"
                             android:paddingRight="2dp"
-                            android:text="默认"
+                            android:text="@string/s_18c63459"
                             android:textSize="12sp"
                             app:autoSizeMaxTextSize="12sp"
                             app:autoSizeMinTextSize="9sp"
@@ -214,7 +214,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/bg_icon_round"
-                            android:contentDescription="输出"
+                            android:contentDescription="@string/s_8ba7c3a7"
                             android:padding="9dp"
                             android:src="@drawable/ic_category_sdk"
                             app:tint="@color/accent" />
@@ -229,7 +229,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="APK 输出目录"
+                                android:text="@string/s_928e0c3e"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
                                 android:textColor="?attr/colorOnSurface" />
@@ -240,7 +240,7 @@
                                 android:layout_marginTop="2dp"
                                 android:textSize="12sp"
                                 android:textColor="@color/text_secondary"
-                                android:text="去广告后 APK 的保存位置" />
+                                android:text="@string/s_9819b267" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -254,7 +254,7 @@
                         android:background="@drawable/bg_path_box"
                         android:padding="10dp"
                         android:fontFamily="monospace"
-                        android:text="/storage/emulated/0/APKEditor" />
+                        android:text="@string/s_9e23cf09" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -269,7 +269,7 @@
                             android:layout_height="44dp"
                             android:layout_weight="1"
                             android:layout_marginEnd="4dp"
-                            android:text="自定义"
+                            android:text="@string/s_f1d4ff50"
                             android:textSize="13sp"
                             app:cornerRadius="22dp"
                             app:icon="@android:drawable/ic_menu_edit"
@@ -284,7 +284,7 @@
                             android:layout_height="44dp"
                             android:layout_weight="1"
                             android:layout_marginStart="4dp"
-                            android:text="默认"
+                            android:text="@string/s_18c63459"
                             android:textSize="13sp"
                             app:cornerRadius="22dp"
                             app:icon="@android:drawable/ic_menu_revert"
@@ -322,7 +322,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/bg_icon_round"
-                            android:contentDescription="外观"
+                            android:contentDescription="@string/s_afcde261"
                             android:padding="9dp"
                             android:src="@drawable/ic_system_mode"
                             app:tint="@color/primary" />
@@ -337,7 +337,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="外观"
+                                android:text="@string/s_afcde261"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
                                 android:textColor="?attr/colorOnSurface" />
@@ -349,7 +349,7 @@
                                 android:layout_marginTop="2dp"
                                 android:textSize="13sp"
                                 android:textColor="@color/accent"
-                                android:text="跟随系统" />
+                                android:text="@string/s_71bbc726" />
                         </LinearLayout>
 
                         <com.google.android.material.button.MaterialButton
@@ -357,7 +357,7 @@
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="切换"
+                            android:text="@string/s_bec7e4d6"
                             android:textSize="13sp"
                             android:textColor="@color/primary_dark"
                             app:icon="@drawable/ic_system_mode"
@@ -371,7 +371,87 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
-                        android:text="选择应用的显示模式：跟随系统 / 白天 / 夜间，切换后立即生效并保存。" />
+                        android:text="@string/s_a6fe5ea4" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 语言切换 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:strokeColor="@color/primary_light"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_icon_round"
+                            android:contentDescription="@string/lang_title"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_language"
+                            app:tint="@color/primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/lang_title"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:textColor="?attr/colorOnSurface" />
+
+                            <TextView
+                                android:id="@+id/tvLanguageMode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:textSize="13sp"
+                                android:textColor="@color/accent"
+                                android:text="@string/lang_default" />
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnChangeLanguage"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_bec7e4d6"
+                            android:textSize="13sp"
+                            android:textColor="@color/primary_dark"
+                            app:icon="@drawable/ic_language"
+                            app:iconSize="16dp"
+                            app:iconTint="@color/primary_dark" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary"
+                        android:text="@string/lang_desc" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -402,7 +482,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/bg_icon_round"
-                            android:contentDescription="DEX体积优化"
+                            android:contentDescription="@string/s_469de3c4"
                             android:padding="9dp"
                             android:src="@drawable/ic_update"
                             app:tint="@color/accent_dark" />
@@ -417,7 +497,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="DEX 体积优化"
+                                android:text="@string/s_74fda23d"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
                                 android:textColor="?attr/colorOnSurface" />
@@ -428,7 +508,7 @@
                                 android:layout_marginTop="2dp"
                                 android:textSize="13sp"
                                 android:textColor="@color/accent_dark"
-                                android:text="移除调试信息，减小 APK 体积" />
+                                android:text="@string/s_55e69200" />
                         </LinearLayout>
 
                         <!-- DEX 体积优化开关：关闭后保留调试信息（行号/局部变量表），APK 体积略大 -->
@@ -439,7 +519,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="4dp"
                             android:checked="true"
-                            android:contentDescription="启用 DEX 体积优化"
+                            android:contentDescription="@string/s_d5932fe6"
                             app:thumbTint="@color/accent_dark"
                             app:trackTint="@color/accent_light" />
                     </LinearLayout>
@@ -450,7 +530,7 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
-                        android:text="处理含广告的 DEX 时移除调试信息（行号/局部变量表/参数名），可减小 APK 体积 5%~15%，不影响运行功能，仅崩溃堆栈不再显示行号。" />
+                        android:text="@string/s_71938084" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -481,7 +561,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/bg_icon_round"
-                            android:contentDescription="签名效验去除"
+                            android:contentDescription="@string/s_25488ce0"
                             android:padding="9dp"
                             android:src="@drawable/ic_check_circle"
                             app:tint="@color/accent_dark" />
@@ -496,7 +576,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="签名效验去除"
+                                android:text="@string/s_25488ce0"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
                                 android:textColor="?attr/colorOnSurface" />
@@ -507,7 +587,7 @@
                                 android:layout_marginTop="2dp"
                                 android:textSize="13sp"
                                 android:textColor="@color/accent_dark"
-                                android:text="重打包后去除应用签名校验" />
+                                android:text="@string/s_7a5db88b" />
                         </LinearLayout>
 
                         <androidx.appcompat.widget.SwitchCompat
@@ -517,7 +597,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="4dp"
                             android:checked="false"
-                            android:contentDescription="启用签名效验去除"
+                            android:contentDescription="@string/s_089e87fe"
                             app:thumbTint="@color/accent_dark"
                             app:trackTint="@color/accent_light" />
                     </LinearLayout>
@@ -536,7 +616,7 @@
                             android:layout_weight="1"
                             android:textSize="13sp"
                             android:textColor="@color/text_primary"
-                            android:text="效验模式" />
+                            android:text="@string/s_09bbf66d" />
 
                         <TextView
                             android:id="@+id/tvSignMode"
@@ -544,14 +624,14 @@
                             android:layout_height="wrap_content"
                             android:textSize="13sp"
                             android:textColor="@color/accent_dark"
-                            android:text="普通去除签名效验" />
+                            android:text="@string/s_636c1a42" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnSignMode"
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="修改"
+                            android:text="@string/s_8347a927"
                             android:textSize="13sp"
                             android:textColor="@color/accent_dark" />
                     </LinearLayout>
@@ -569,7 +649,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="13sp"
                             android:textColor="@color/text_primary"
-                            android:text="注入参数" />
+                            android:text="@string/s_86a6d929" />
 
                         <TextView
                             android:id="@+id/tvSignParams"
@@ -582,14 +662,14 @@
                             android:maxLines="1"
                             android:ellipsize="end"
                             android:gravity="end"
-                            android:text="默认（SignatureKiIIer）" />
+                            android:text="@string/s_4d96525d" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnSignParams"
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="自定义"
+                            android:text="@string/s_f1d4ff50"
                             android:textSize="13sp"
                             android:textColor="@color/accent_dark" />
                     </LinearLayout>
@@ -600,7 +680,7 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
-                        android:text="开启后，在去广告处理过程中自动去除应用的签名效验，避免重打包换签后应用检测到签名变化而拒绝运行。普通模式覆盖大多数应用；原包模式读取原始签名参与匹配，覆盖更广。" />
+                        android:text="@string/s_dd8d0881" />
 
                     <!-- 免责声明 -->
                     <LinearLayout
@@ -615,7 +695,7 @@
                         <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
-                            android:contentDescription="免责声明"
+                            android:contentDescription="@string/s_58125852"
                             android:src="@drawable/ic_info"
                             app:tint="@color/log_warning" />
 
@@ -627,7 +707,7 @@
                             android:textSize="11sp"
                             android:textColor="@color/text_secondary"
                             android:lineSpacingExtra="2dp"
-                            android:text="免责声明：签名效验去除功能仅供学习、研究与个人合法用途使用。请勿对您不拥有版权、未获授权或受法律保护的应用进行修改与分发，由此产生的法律责任由使用者自行承担。" />
+                            android:text="@string/s_a56d1fbd" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -659,7 +739,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/bg_icon_round"
-                            android:contentDescription="订阅"
+                            android:contentDescription="@string/s_02daf71f"
                             android:padding="9dp"
                             android:src="@drawable/ic_subscribe"
                             app:tint="@color/accent" />
@@ -674,7 +754,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="订阅源"
+                                android:text="@string/s_0c7d604b"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
                                 android:textColor="?attr/colorOnSurface" />
@@ -686,7 +766,7 @@
                                 android:layout_marginTop="2dp"
                                 android:textSize="13sp"
                                 android:textColor="@color/accent"
-                                android:text="共 0 个订阅源" />
+                                android:text="@string/s_93964033" />
                         </LinearLayout>
 
                         <com.google.android.material.button.MaterialButton
@@ -694,7 +774,7 @@
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="管理"
+                            android:text="@string/s_08b55fea"
                             android:textSize="13sp"
                             android:textColor="@color/primary_dark"
                             app:icon="@drawable/ic_subscribe"
@@ -708,7 +788,7 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
-                        android:text="支持添加 / 编辑 / 删除 / 分享订阅源，配置内容可分享为订阅源口令。" />
+                        android:text="@string/s_1fc1da7d" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -725,7 +805,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="广告特征分类"
+                    android:text="@string/s_17a8bc26"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="?attr/colorOnSurface" />
@@ -733,7 +813,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="点击「管理」可编辑 / 添加 / 删除"
+                    android:text="@string/s_12121846"
                     android:textSize="11sp"
                     android:textColor="@color/text_hint" />
             </LinearLayout>
@@ -765,7 +845,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/bg_icon_round"
-                            android:contentDescription="Flutter特征"
+                            android:contentDescription="@string/s_767f6a2d"
                             android:padding="9dp"
                             android:src="@drawable/ic_category_layer"
                             app:tint="@color/accent_dark" />
@@ -780,7 +860,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Flutter 广告特征"
+                                android:text="@string/s_728ee208"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
                                 android:textColor="?attr/colorOnSurface" />
@@ -792,7 +872,7 @@
                                 android:layout_marginTop="2dp"
                                 android:textSize="13sp"
                                 android:textColor="@color/accent_dark"
-                                android:text="共 0 条特征" />
+                                android:text="@string/s_3ac820e0" />
                         </LinearLayout>
 
                         <ImageButton
@@ -801,7 +881,7 @@
                             android:layout_height="34dp"
                             android:layout_gravity="center_vertical"
                             android:background="?attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="查看说明"
+                            android:contentDescription="@string/s_dc91b561"
                             android:src="@drawable/ic_help"
                             android:tint="@color/accent_dark" />
 
@@ -813,7 +893,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="4dp"
                             android:checked="true"
-                            android:contentDescription="启用 Flutter 广告特征"
+                            android:contentDescription="@string/s_c6973b8d"
                             app:thumbTint="@color/accent_dark"
                             app:trackTint="@color/accent_light" />
 
@@ -822,7 +902,7 @@
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="管理"
+                            android:text="@string/s_08b55fea"
                             android:textSize="13sp"
                             android:textColor="@color/accent_dark" />
                     </LinearLayout>
@@ -833,7 +913,7 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
-                        android:text="自定义 Flutter libapp.so 中的广告字符串特征。设置后优先于 DEX 特征，留空则自动沿用下方的广告特征分类。" />
+                        android:text="@string/s_efc6ceba" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

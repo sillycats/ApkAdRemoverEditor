@@ -2,6 +2,7 @@ package com.shinegirls.apkadremovereditor
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.shinegirls.apkadremovereditor.core.LanguageManager
 import com.shinegirls.apkadremovereditor.core.UpdateChecker
 import com.shinegirls.apkadremovereditor.utils.UiUtils
 
@@ -23,6 +25,10 @@ import com.shinegirls.apkadremovereditor.utils.UiUtils
  * 展示应用信息、作者信息、开源项目、隐私声明与免责声明。
  */
 class AboutActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageManager.wrapContext(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

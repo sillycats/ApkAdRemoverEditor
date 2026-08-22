@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             app:title="@string/app_name"
             app:titleTextColor="@color/white"
-            app:subtitle="关于应用 · 版本信息与声明"
+            app:subtitle="@string/app_subtitle_about"
             app:subtitleTextColor="@color/primary_light"
             app:navigationIcon="@android:drawable/ic_menu_revert" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -58,7 +58,7 @@
                         android:layout_height="88dp"
                         android:background="@drawable/bg_icon_round"
                         android:padding="12dp"
-                        android:contentDescription="应用图标"
+                        android:contentDescription="@string/s_e27bfdd7"
                         app:srcCompat="@drawable/ic_launcher" />
 
                     <TextView
@@ -75,7 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="版本 1.7"
+                        android:text="@string/s_fe5cc438"
                         android:textColor="@color/accent"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -91,7 +91,7 @@
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="检查更新"
+                            android:text="@string/s_4ff13370"
                             android:textSize="13sp"
                             app:cornerRadius="20dp"
                             app:strokeColor="@color/primary"
@@ -105,7 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:backgroundTint="@color/primary"
-                            android:text="立即下载"
+                            android:text="@string/s_2a813bc3"
                             android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
@@ -120,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
                         android:gravity="center"
-                        android:text="APK 解包 · DEX 去广告 · 打包签名\n一键去除广告，本地离线处理"
+                        android:text="@string/s_23f849fb"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp"
                         android:lineSpacingExtra="3dp" />
@@ -147,7 +147,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="功能特性"
+                        android:text="@string/s_48ab146a"
                         android:textColor="@color/primary_dark"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -181,7 +181,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="作者信息"
+                        android:text="@string/s_068d0c44"
                         android:textColor="@color/primary_dark"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -201,14 +201,14 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:contentDescription="作者"
+                                android:contentDescription="@string/s_62cea749"
                                 android:src="@drawable/ic_launcher" />
 
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
-                                android:text="作者"
+                                android:text="@string/s_62cea749"
                                 android:textColor="@color/text_hint"
                                 android:textSize="14sp" />
 
@@ -232,7 +232,7 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:contentDescription="QQ"
+                                android:contentDescription="@string/s_7e56035a"
                                 android:src="@drawable/ic_info"
                                 app:tint="@color/text_hint" />
 
@@ -240,7 +240,7 @@
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
-                                android:text="联系QQ"
+                                android:text="@string/s_39388352"
                                 android:textColor="@color/text_hint"
                                 android:textSize="14sp" />
 
@@ -264,7 +264,7 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:contentDescription="邮箱"
+                                android:contentDescription="@string/s_3bc5e602"
                                 android:src="@drawable/ic_info"
                                 app:tint="@color/text_hint" />
 
@@ -272,7 +272,7 @@
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
-                                android:text="联系邮箱"
+                                android:text="@string/s_a6695e34"
                                 android:textColor="@color/text_hint"
                                 android:textSize="14sp" />
 
@@ -309,7 +309,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="开源项目"
+                        android:text="@string/s_ab6eb4cc"
                         android:textColor="@color/primary_dark"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -345,7 +345,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="参考内容与代码出处"
+                        android:text="@string/s_60bf6001"
                         android:textColor="@color/primary_dark"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -381,7 +381,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="隐私声明"
+                        android:text="@string/s_de763e1a"
                         android:textColor="@color/primary_dark"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -417,7 +417,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="免责声明"
+                        android:text="@string/s_58125852"
                         android:textColor="@color/primary_dark"
                         android:textSize="16sp"
                         android:textStyle="bold" />

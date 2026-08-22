@@ -28,7 +28,7 @@
                 android:layout_width="44dp"
                 android:layout_height="44dp"
                 android:background="@drawable/bg_icon_round"
-                android:contentDescription="下载"
+                android:contentDescription="@string/s_f26ef914"
                 android:padding="10dp"
                 android:src="@drawable/ic_update" />
 
@@ -43,7 +43,7 @@
                     android:id="@+id/tvDlTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发现新版本"
+                    android:text="@string/s_78f2095f"
                     android:textColor="@color/white"
                     android:textSize="19sp"
                     android:textStyle="bold" />
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="已捕获下载地址，正在为您下载"
+                    android:text="@string/s_3c00064c"
                     android:textColor="@color/text_on_primary_80"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -62,7 +62,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="关闭"
+                android:contentDescription="@string/s_b15d9127"
                 android:src="@drawable/ic_close" />
         </LinearLayout>
 
@@ -94,7 +94,7 @@
                     android:id="@+id/dlPercent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0%"
+                    android:text="@string/s_9f1ef078"
                     android:textColor="@color/primary"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -106,7 +106,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="0 B / 0 B"
+                    android:text="@string/s_e616aaeb"
                     android:textColor="@color/text_hint"
                     android:textSize="12sp" />
             </LinearLayout>

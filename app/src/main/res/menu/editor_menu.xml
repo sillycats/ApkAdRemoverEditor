@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_save"
-        android:title="保存"
+        android:title="@string/s_be5fbbe3"
         android:orderInCategory="1" />
     <item
         android:id="@+id/action_find_replace"
-        android:title="查找替换"
+        android:title="@string/s_5f7707b4"
         android:orderInCategory="2" />
 </menu>

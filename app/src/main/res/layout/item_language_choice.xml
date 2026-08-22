@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/optionLang"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/primary_light"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/ivLangFlag"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_icon_round"
+            android:contentDescription="@string/lang_title"
+            android:padding="8dp"
+            android:src="@drawable/ic_language"
+            app:tint="@color/primary" />
+
+        <TextView
+            android:id="@+id/tvLangName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:text=""
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ivLangCheck"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:contentDescription="@string/lang_title"
+            android:src="@drawable/ic_check_circle"
+            android:visibility="invisible"
+            app:tint="@color/accent" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

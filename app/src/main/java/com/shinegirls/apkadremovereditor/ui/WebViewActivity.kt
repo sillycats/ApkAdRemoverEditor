@@ -1,6 +1,7 @@
 package com.shinegirls.apkadremovereditor.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.shinegirls.apkadremovereditor.R
+import com.shinegirls.apkadremovereditor.core.LanguageManager
 import com.shinegirls.apkadremovereditor.core.UpdateChecker
 import com.shinegirls.apkadremovereditor.utils.UiUtils
 
@@ -31,6 +33,10 @@ import com.shinegirls.apkadremovereditor.utils.UiUtils
  *   保证用户始终通过内置更新弹窗的进度下载流程完成新版安装。
  */
 class WebViewActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageManager.wrapContext(newBase))
+    }
 
     companion object {
         const val EXTRA_URL = "extra_url"

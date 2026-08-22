@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="下载中心"
+            app:title="@string/app_title_download"
             app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="在页面内点击下载按钮，本应用会自动拦截 APK 下载地址并使用应用内下载。"
+            android:text="@string/s_4cc541a3"
             android:textColor="@color/accent"
             android:textSize="12sp" />
     </LinearLayout>
