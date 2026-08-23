@@ -18,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
@@ -81,17 +82,15 @@ class SettingsActivity : AppCompatActivity() {
         try {
             setContentView(R.layout.activity_settings)
         } catch (e: Exception) {
-            Log.e("SettingsActivity", "布局加载失败", e)
-            UiUtils.error(this, "设置界面加载失败: ${e.message}")
+            Log.e("SettingsActivity", getString(R.string.h_06b81d3d), e)
+            UiUtils.error(this, getString(R.string.h_23348314, e.message))
             finish()
             return
         }
 
         try {
-            val toolbar = findViewById<Toolbar>(R.id.toolbar)
-            setSupportActionBar(toolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            toolbar.setNavigationOnClickListener { finish() }
+            // 自定义头部：返回按钮 + 可换行的标题/副标题
+            findViewById<ImageButton>(R.id.btnSettingsBack)?.setOnClickListener { finish() }
 
             tvConfigPath = findViewById(R.id.tvConfigPath)
             tvConfigStats = findViewById(R.id.tvConfigStats)
@@ -133,7 +132,7 @@ class SettingsActivity : AppCompatActivity() {
                 PathPreferences.resetConfigPath(this)
                 updatePathDisplay()
                 loadAndDisplayConfig()
-                UiUtils.success(this, "已重置为默认配置路径")
+                UiUtils.success(this, getString(R.string.h_d8a58722))
             }
             findViewById<MaterialButton>(R.id.btnChangeOutputDir).setOnClickListener {
                 showChangePathDialog(isConfigPath = false)
@@ -141,35 +140,35 @@ class SettingsActivity : AppCompatActivity() {
             findViewById<MaterialButton>(R.id.btnResetOutputDir).setOnClickListener {
                 PathPreferences.resetOutputDir(this)
                 updatePathDisplay()
-                UiUtils.success(this, "已重置为默认输出目录")
+                UiUtils.success(this, getString(R.string.h_c6af077e))
             }
 
             // 保存按钮：单击保存，长按重置默认
             btnSave.setOnClickListener {
                 val success = AdPatternConfig.saveConfig(config, this)
                 if (success) {
-                    UiUtils.success(this, "配置已保存")
+                    UiUtils.success(this, getString(R.string.h_e9472910))
                     updateStats()
                 } else {
-                    UiUtils.error(this, "保存失败，请检查存储权限")
+                    UiUtils.error(this, getString(R.string.h_01d3d9f4))
                 }
             }
             btnSave.setOnLongClickListener {
                 AlertDialog.Builder(this)
-                    .setTitle("重置默认配置")
-                    .setMessage("确定要恢复所有广告特征为内置默认值？\n当前自定义修改将丢失。")
-                    .setPositiveButton("重置") { _, _ ->
+                    .setTitle(getString(R.string.h_300739f4))
+                    .setMessage(getString(R.string.h_0e13f623))
+                    .setPositiveButton(getString(R.string.h_4b9c3271)) { _, _ ->
                         config = AdPatternConfig.resetToDefault(this)
                         displayConfig()
-                        UiUtils.success(this, "已重置为默认配置")
+                        UiUtils.success(this, getString(R.string.h_0fd47041))
                     }
-                    .setNegativeButton("取消", null)
+                    .setNegativeButton(getString(R.string.s_625fb26b), null)
                     .show()
                 true
             }
         } catch (e: Exception) {
-            Log.e("SettingsActivity", "初始化失败", e)
-            UiUtils.error(this, "设置初始化失败: ${e.message}")
+            Log.e("SettingsActivity", getString(R.string.h_ab94e2c3), e)
+            UiUtils.error(this, getString(R.string.h_c20905d1, e.message))
             finish()
         }
     }
@@ -178,7 +177,7 @@ class SettingsActivity : AppCompatActivity() {
      * 更新外观卡片中当前主题模式的显示。
      */
     private fun updateThemeDisplay() {
-        tvThemeMode.text = ThemeManager.modeDisplayName(ThemeManager.getMode(this))
+        tvThemeMode.text = getString(ThemeManager.modeDisplayNameRes(ThemeManager.getMode(this)))
     }
 
     /**
@@ -242,7 +241,7 @@ class SettingsActivity : AppCompatActivity() {
 
         val themeDialog = AlertDialog.Builder(this)
             .setView(dialogView)
-            .setPositiveButton("取消", null)
+            .setPositiveButton(getString(R.string.s_625fb26b), null)
             .create()
         themeDialog.show()
         // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
@@ -274,7 +273,7 @@ class SettingsActivity : AppCompatActivity() {
 
         val langDialogHolder = AlertDialog.Builder(this)
             .setView(dialogView)
-            .setPositiveButton("取消", null)
+            .setPositiveButton(getString(R.string.s_625fb26b), null)
             .create()
 
         fun resetSelection() {
@@ -303,6 +302,8 @@ class SettingsActivity : AppCompatActivity() {
                 return
             }
             LanguageManager.setTag(this, tag)
+            // 同步刷新全局 appContext，使核心引擎/Toast/对话框立即使用新语言
+            LanguageManager.refreshAppContext(this)
             langDialogHolder.dismiss()
             // 语言影响全局所有页面，重启主界面并清空返回栈，让整体界面立即以新语言呈现。
             restartApp()
@@ -351,7 +352,7 @@ class SettingsActivity : AppCompatActivity() {
         try {
             config = AdPatternConfig.loadConfig(this)
         } catch (e: Exception) {
-            Log.e("SettingsActivity", "加载配置失败，使用默认配置", e)
+            Log.e("SettingsActivity", getString(R.string.h_327638c1), e)
             config = AdPatternConfig.AdPatterns()
         }
         displayConfig()
@@ -365,9 +366,9 @@ class SettingsActivity : AppCompatActivity() {
         updateStats()
 
         // 设置分组标题
-        setSectionTitle(R.id.sectionDex, "DEX 代码处理", "置空广告方法 / 解锁 VIP")
-        setSectionTitle(R.id.sectionRes, "资源文件清理", "删除广告 SDK 文件")
-        setSectionTitle(R.id.sectionManifest, "清单权限", "移除广告权限声明")
+        setSectionTitle(R.id.sectionDex, getString(R.string.h_42f52a63), getString(R.string.h_9f4a2d63))
+        setSectionTitle(R.id.sectionRes, getString(R.string.h_db0dc430), getString(R.string.h_ee7d1dad))
+        setSectionTitle(R.id.sectionManifest, getString(R.string.h_91337ff2), getString(R.string.h_92fab849))
 
         // 绑定各分类卡片
         bindCategoryCard(R.id.cardSdkPackages, Category.SDK_PACKAGES)
@@ -406,7 +407,7 @@ class SettingsActivity : AppCompatActivity() {
             setOnCheckedChangeListener { _, isChecked ->
                 PathPreferences.setFlutterLibappEnabled(this@SettingsActivity, isChecked)
                 UiUtils.info(this@SettingsActivity,
-                    if (isChecked) "Flutter 广告特征已启用" else "Flutter 广告特征已关闭")
+                    if (isChecked) getString(R.string.h_02317889) else getString(R.string.h_844bbd8d))
             }
         }
 
@@ -416,7 +417,7 @@ class SettingsActivity : AppCompatActivity() {
             setOnCheckedChangeListener { _, isChecked ->
                 PathPreferences.setDexOptimizeEnabled(this@SettingsActivity, isChecked)
                 UiUtils.info(this@SettingsActivity,
-                    if (isChecked) "DEX 体积优化已启用" else "DEX 体积优化已关闭")
+                    if (isChecked) getString(R.string.h_ed310a00) else getString(R.string.h_31e413e3))
             }
         }
 
@@ -431,13 +432,13 @@ class SettingsActivity : AppCompatActivity() {
                         PathPreferences.setSignRemovalMode(this@SettingsActivity,
                             com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_NORMAL)
                     }
-                    UiUtils.info(this@SettingsActivity, "签名效验去除已启用")
+                    UiUtils.info(this@SettingsActivity, getString(R.string.h_3bd446d8))
                 } else {
                     val cur = PathPreferences.getSignRemovalMode(this@SettingsActivity)
                     if (cur != 0) {
                         PathPreferences.setSignRemovalMode(this@SettingsActivity, 0)
                     }
-                    UiUtils.info(this@SettingsActivity, "签名效验去除已关闭")
+                    UiUtils.info(this@SettingsActivity, getString(R.string.h_9d60567b))
                 }
                 refreshSignModeUi()
             }
@@ -452,6 +453,18 @@ class SettingsActivity : AppCompatActivity() {
         findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSignParams)?.setOnClickListener {
             showSignParamsDialog()
         }
+
+        // 打包时是否重签名：开启后打包自动重签名，关闭后输出未签名 APK
+        findViewById<SwitchCompat>(R.id.swSkipSigning)?.apply {
+            // 开关当前状态：ON=重签名（即偏好中的未跳过签名）
+            isChecked = !PathPreferences.isSigningSkipped(this@SettingsActivity)
+            setOnCheckedChangeListener { _, isChecked ->
+                // isChecked=true 表示重签名，即不跳过签名
+                PathPreferences.setSigningSkipped(this@SettingsActivity, !isChecked)
+                UiUtils.info(this@SettingsActivity,
+                    if (isChecked) getString(R.string.h_53d2a9b1) else getString(R.string.h_8c9f1e7b))
+            }
+        }
         refreshSignModeUi()
         refreshSignParamsUi()
     }
@@ -463,9 +476,9 @@ class SettingsActivity : AppCompatActivity() {
         val mode = PathPreferences.getSignRemovalMode(this)
         findViewById<SwitchCompat>(R.id.swSignRemovalEnabled)?.isChecked = mode != 0
         findViewById<TextView>(R.id.tvSignMode)?.text = when (mode) {
-            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_ORIGINAL -> "原包去除签名效验"
-            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_NORMAL -> "普通去除签名效验"
-            else -> "未启用（点击修改选择模式）"
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_ORIGINAL -> getString(R.string.h_15286e90)
+            com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_NORMAL -> getString(R.string.s_636c1a42)
+            else -> getString(R.string.h_0b1609fb)
         }
     }
 
@@ -473,14 +486,14 @@ class SettingsActivity : AppCompatActivity() {
      * 弹出签名效验模式选择对话框。
      */
     private fun showSignModeDialog() {
-        val options = arrayOf("普通去除签名效验", "原包去除签名效验")
+        val options = arrayOf(getString(R.string.s_636c1a42), getString(R.string.h_15286e90))
         val startMode = PathPreferences.getSignRemovalMode(this)
         val checked = when {
             startMode == com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_ORIGINAL -> 1
             else -> 0
         }
         androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("选择签名效验去除模式")
+            .setTitle(getString(R.string.h_158dee5e))
             .setSingleChoiceItems(options, checked) { _, which ->
                 when (which) {
                     0 -> PathPreferences.setSignRemovalMode(this,
@@ -489,9 +502,9 @@ class SettingsActivity : AppCompatActivity() {
                         com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.MODE_ORIGINAL)
                 }
                 refreshSignModeUi()
-                UiUtils.info(this, "签名效验模式已设为：${options[which]}")
+                UiUtils.info(this, getString(R.string.h_05360de7, options[which]))
             }
-            .setPositiveButton("确定", null)
+            .setPositiveButton(getString(R.string.s_38cf16f2), null)
             .show()
     }
 
@@ -512,7 +525,7 @@ class SettingsActivity : AppCompatActivity() {
             info != com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_SIGN_INFO ||
             entry != com.shinegirls.apkadremovereditor.core.SignatureVerificationRemover.DEFAULT_ENTRY_NAME
         findViewById<TextView>(R.id.tvSignParams)?.text =
-            if (isCustom) "已自定义（$so / $hook）" else "默认（SignatureKiIIer）"
+            if (isCustom) getString(R.string.h_720380b4, so, hook) else getString(R.string.s_4d96525d)
     }
 
     /**
@@ -553,7 +566,7 @@ class SettingsActivity : AppCompatActivity() {
             val info = etInfo.text?.toString()?.trim().orEmpty()
             val entry = etEntry.text?.toString()?.trim().orEmpty()
             if (origin.isEmpty() || extract.isEmpty() || so.isEmpty() || hook.isEmpty()) {
-                UiUtils.info(this, "原包路径 / 解压路径 / So库名 / 钩子类名均不能为空")
+                UiUtils.info(this, getString(R.string.h_b8fa7cb1))
                 return@setOnClickListener
             }
             PathPreferences.setSignOriginPath(this, origin)
@@ -564,7 +577,7 @@ class SettingsActivity : AppCompatActivity() {
             PathPreferences.setSignEntry(this, entry)
             refreshSignParamsUi()
             signDialog.dismiss()
-            UiUtils.info(this, "注入参数已保存：$so / $hook")
+            UiUtils.info(this, getString(R.string.h_582b60a3, so, hook))
         }
         view.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSignCancel).setOnClickListener {
             signDialog.dismiss()
@@ -575,8 +588,8 @@ class SettingsActivity : AppCompatActivity() {
      * 更新统计信息。
      */
     private fun updateStats() {
-        tvConfigStats.text = "共 ${config.totalCount()} 条特征"
-        findViewById<TextView>(R.id.tvFlutterStats)?.text = "共 ${config.flutterPatterns.size} 条特征"
+        tvConfigStats.text = getString(R.string.h_fc69844a2, config.totalCount())
+        findViewById<TextView>(R.id.tvFlutterStats)?.text = getString(R.string.h_fc69844a, config.flutterPatterns.size)
     }
 
     /**
@@ -585,7 +598,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun updateSubscriptionStats() {
         val all = SubscriptionManager.loadSubscriptions(this)
         val enabled = all.count { it.enabled }
-        tvSubscriptionStats.text = "共 ${all.size} 个订阅源，已开启 $enabled 个"
+        tvSubscriptionStats.text = getString(R.string.h_54d484f4, all.size, enabled)
     }
 
     /**
@@ -611,28 +624,28 @@ class SettingsActivity : AppCompatActivity() {
         val etPath = dialogView.findViewById<TextInputEditText>(R.id.etPath)
         etPath.setText(currentPath)
 
-        val title = if (isConfigPath) "修改配置文件路径" else "修改 APK 输出目录"
+        val title = if (isConfigPath) getString(R.string.h_1e52f7a3) else getString(R.string.h_351683da)
         val hint = if (isConfigPath) {
-            "完整文件路径，例如：\n/storage/emulated/0/APKEditor/ad_patterns.json"
+            getString(R.string.h_d8328f57)
         } else {
-            "目录路径，例如：\n/storage/emulated/0/APKEditor"
+            getString(R.string.h_7258ddc9)
         }
         dialogView.findViewById<TextView>(R.id.tvPathHint).text = hint
 
         val pathDialog = AlertDialog.Builder(this)
             .setTitle(title)
             .setView(dialogView)
-            .setPositiveButton("确定") { _, _ ->
+            .setPositiveButton(getString(R.string.s_38cf16f2)) { _, _ ->
                 val newPath = etPath.text.toString().trim()
                 if (newPath.isBlank()) {
-                    UiUtils.warning(this, "路径不能为空")
+                    UiUtils.warning(this, getString(R.string.h_60aa379b))
                     return@setPositiveButton
                 }
 
                 val success = if (isConfigPath) {
                     // 配置文件路径必须以 .json 结尾
                     if (!newPath.endsWith(".json")) {
-                        UiUtils.warning(this, "配置文件路径需以 .json 结尾")
+                        UiUtils.warning(this, getString(R.string.h_599c01d1))
                         return@setPositiveButton
                     }
                     // 如果旧配置文件存在，迁移到新路径
@@ -652,12 +665,12 @@ class SettingsActivity : AppCompatActivity() {
                     if (isConfigPath) {
                         loadAndDisplayConfig()
                     }
-                    UiUtils.success(this, "路径已更新")
+                    UiUtils.success(this, getString(R.string.h_73468857))
                 } else {
-                    UiUtils.error(this, "路径设置失败，请检查权限")
+                    UiUtils.error(this, getString(R.string.h_2fe6efbe))
                 }
             }
-            .setNegativeButton("取消", null)
+            .setNegativeButton(getString(R.string.s_625fb26b), null)
             .create()
         pathDialog.show()
         // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
@@ -682,7 +695,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun bindCategoryCard(cardId: Int, category: Category) {
         try {
             val card = findViewById<View>(cardId) ?: run {
-                Log.w("SettingsActivity", "卡片视图未找到: cardId=$cardId")
+                Log.w("SettingsActivity", getString(R.string.h_b8884134, cardId))
                 return
             }
             categoryCards[category] = card
@@ -695,13 +708,13 @@ class SettingsActivity : AppCompatActivity() {
             val swEnabled = card.findViewById<SwitchCompat>(R.id.swCategoryEnabled)
 
             if (tvName == null || tvCount == null || btnManage == null) {
-                Log.w("SettingsActivity", "卡片子视图未找到: $category")
+                Log.w("SettingsActivity", getString(R.string.h_e03c4e1e, category))
                 return
             }
 
-            tvName.text = category.displayName
+            tvName.text = getString(category.titleRes)
             val list = AdPatternConfig.getCategoryList(config, category)
-            tvCount.text = "${list.size} 条"
+            tvCount.text = getString(R.string.h_c71a303c, list.size)
 
             // 设置分类图标（不同分类不同图标与配色）
             ivIcon?.setImageResource(categoryIcon(category))
@@ -721,11 +734,11 @@ class SettingsActivity : AppCompatActivity() {
                 swEnabled.isChecked = PathPreferences.isCategoryEnabled(this, category.name)
                 swEnabled.setOnCheckedChangeListener { _, isChecked ->
                     PathPreferences.setCategoryEnabled(this, category.name, isChecked)
-                    UiUtils.info(this, if (isChecked) "${category.displayName}已启用" else "${category.displayName}已关闭")
+                    UiUtils.info(this, if (isChecked) getString(R.string.h_8ae1f6e1, getString(category.titleRes)) else getString(R.string.h_66c23c1c, getString(category.titleRes)))
                 }
             }
         } catch (e: Exception) {
-            Log.e("SettingsActivity", "绑定分类卡片失败: $category", e)
+            Log.e("SettingsActivity", getString(R.string.h_0d2d462b, category), e)
         }
     }
 
@@ -798,7 +811,7 @@ class SettingsActivity : AppCompatActivity() {
                     if (newValue.isNotBlank() && newValue != oldValue) {
                         // 检查是否已存在
                         if (list.any { it.equals(newValue, ignoreCase = true) }) {
-                            UiUtils.warning(this@SettingsActivity, "该特征已存在")
+                            UiUtils.warning(this@SettingsActivity, getString(R.string.h_f2765b03))
                             return@showEditDialog
                         }
                         list[position] = newValue.trim()
@@ -813,9 +826,9 @@ class SettingsActivity : AppCompatActivity() {
 
             override fun onDelete(position: Int) {
                 AlertDialog.Builder(this@SettingsActivity)
-                    .setTitle("删除特征")
+                    .setTitle(getString(R.string.h_8f7f9a61))
                     .setMessage("确定删除 \"${list[position].take(50)}\" ？")
-                    .setPositiveButton("删除") { _, _ ->
+                    .setPositiveButton(getString(R.string.s_2f4aaddd)) { _, _ ->
                         list.removeAt(position)
                         rvPatterns.adapter?.notifyItemRemoved(position)
                         rvPatterns.adapter?.notifyItemRangeChanged(position, list.size)
@@ -825,7 +838,7 @@ class SettingsActivity : AppCompatActivity() {
                         updateCategoryCount(category, list.size)
                         updateStats()
                     }
-                    .setNegativeButton("取消", null)
+                    .setNegativeButton(getString(R.string.s_625fb26b), null)
                     .show()
             }
         })
@@ -837,11 +850,11 @@ class SettingsActivity : AppCompatActivity() {
         btnAddPattern.setOnClickListener {
             val text = etNewPattern.text.toString().trim()
             if (text.isEmpty()) {
-                UiUtils.warning(this, "请输入特征内容")
+                UiUtils.warning(this, getString(R.string.h_f57b7d67))
                 return@setOnClickListener
             }
             if (list.any { it.equals(text, ignoreCase = true) }) {
-                UiUtils.warning(this, "该特征已存在")
+                UiUtils.warning(this, getString(R.string.h_f2765b03))
                 return@setOnClickListener
             }
             list.add(text)
@@ -853,15 +866,15 @@ class SettingsActivity : AppCompatActivity() {
             AdPatternConfig.saveConfig(config, this)
             updateCategoryCount(category, list.size)
             updateStats()
-            UiUtils.success(this, "已添加")
+            UiUtils.success(this, getString(R.string.h_b189550a))
         }
 
         updateEmptyHint(list, tvEmptyHint)
 
         val patternDialog = AlertDialog.Builder(this)
-            .setTitle(category.displayName + " (${list.size} 条)")
+            .setTitle(getString(category.titleRes) + getString(R.string.h_1b5de080, list.size))
             .setView(dialogView)
-            .setPositiveButton("关闭", null)
+            .setPositiveButton(getString(R.string.s_b15d9127), null)
             .setOnDismissListener {
                 updateCategoryCount(category, list.size)
                 updateStats()
@@ -884,12 +897,12 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         val editDialog = AlertDialog.Builder(this)
-            .setTitle("编辑特征")
+            .setTitle(getString(R.string.h_d0f51307))
             .setView(input)
-            .setPositiveButton("保存") { _, _ ->
+            .setPositiveButton(getString(R.string.s_be5fbbe3)) { _, _ ->
                 onSave(input.text.toString().trim())
             }
-            .setNegativeButton("取消", null)
+            .setNegativeButton(getString(R.string.s_625fb26b), null)
             .create()
         editDialog.show()
         // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
@@ -913,30 +926,30 @@ class SettingsActivity : AppCompatActivity() {
         val help = CATEGORY_HELP[category] ?: return
         val dialogView = layoutInflater.inflate(R.layout.dialog_category_help, null)
 
-        dialogView.findViewById<TextView>(R.id.tvHelpTitle).text = help.title
-        dialogView.findViewById<TextView>(R.id.tvHelpSubtitle).text = help.subtitle
+        dialogView.findViewById<TextView>(R.id.tvHelpTitle).text = getString(help.titleRes)
+        dialogView.findViewById<TextView>(R.id.tvHelpSubtitle).text = getString(help.subtitleRes)
 
         val body = dialogView.findViewById<LinearLayout>(R.id.llHelpBody)
         body.removeAllViews()
 
         // 功能说明
-        addHelpSection(body, "功能说明", help.description, R.color.primary)
+        addHelpSection(body, getString(R.string.s_10445608), getString(help.descriptionRes), R.color.primary)
         // 添加方式
-        addHelpSection(body, "添加方式", help.addHow, R.color.accent)
+        addHelpSection(body, getString(R.string.h_1897b7f5), getString(help.addHowRes), R.color.accent)
         // 示例
-        addHelpSection(body, "示例", help.examples, R.color.accent_dark)
+        addHelpSection(body, getString(R.string.h_1a63ac23), getString(help.examplesRes), R.color.accent_dark)
         // 修改内容
-        addHelpSection(body, "修改的文件 / 代码", help.modifiedWhat, R.color.primary_dark)
+        addHelpSection(body, getString(R.string.h_710378a3), getString(help.modifiedWhatRes), R.color.primary_dark)
         // 配合使用
-        if (help.relatedWith.isNotBlank()) {
-            addHelpSection(body, "配合使用", help.relatedWith, R.color.teal_700)
+        if (help.relatedWithRes != 0) {
+            addHelpSection(body, getString(R.string.h_fea9a093), getString(help.relatedWithRes), R.color.teal_700)
         }
         // 提示
-        addHelpSection(body, "小贴士", help.tip, R.color.text_secondary)
+        addHelpSection(body, getString(R.string.h_b5f40c44), getString(help.tipRes), R.color.text_secondary)
 
         val helpDialog = AlertDialog.Builder(this)
             .setView(dialogView)
-            .setPositiveButton("知道了", null)
+            .setPositiveButton(getString(R.string.s_ce26955a), null)
             .create()
         helpDialog.show()
         // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
@@ -1003,7 +1016,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun updateCategoryCount(category: Category, count: Int) {
         val card = categoryCards[category] ?: return
         val tvCount = card.findViewById<TextView>(R.id.tvCategoryCount)
-        tvCount.text = "$count 条"
+        tvCount.text = getString(R.string.h_62d0f9f8, count)
     }
 
     // ==================== 订阅源功能 ====================
@@ -1052,9 +1065,9 @@ class SettingsActivity : AppCompatActivity() {
 
             override fun onDelete(sub: Subscription) {
                 AlertDialog.Builder(this@SettingsActivity)
-                    .setTitle("删除订阅源")
+                    .setTitle(getString(R.string.h_7c64bdce))
                     .setMessage("确定删除订阅源 \"${sub.name}\" ？")
-                    .setPositiveButton("删除") { _, _ ->
+                    .setPositiveButton(getString(R.string.s_2f4aaddd)) { _, _ ->
                         val wasEnabled = sub.enabled
                         SubscriptionManager.deleteSubscription(sub.id, this@SettingsActivity)
                         subscriptions.removeAll { it.id == sub.id }
@@ -1065,7 +1078,7 @@ class SettingsActivity : AppCompatActivity() {
                             applyEnabledSubscriptions(subscriptions)
                         }
                     }
-                    .setNegativeButton("取消", null)
+                    .setNegativeButton(getString(R.string.s_625fb26b), null)
                     .show()
             }
         })
@@ -1092,14 +1105,14 @@ class SettingsActivity : AppCompatActivity() {
 
         val subListDialog = AlertDialog.Builder(this)
             .setView(dialogView)
-            .setPositiveButton("关闭", null)
+            .setPositiveButton(getString(R.string.s_b15d9127), null)
             .create()
         subListDialog.show()
         // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕
         UiUtils.fitDialogToScreen(subListDialog)
         } catch (e: Exception) {
-            Log.e("SettingsActivity", "订阅管理对话框打开失败", e)
-            UiUtils.error(this, "打开失败: ${e.message}")
+            Log.e("SettingsActivity", getString(R.string.h_956dd267), e)
+            UiUtils.error(this, getString(R.string.h_db72862a, e.message))
         }
     }
 
@@ -1128,17 +1141,17 @@ class SettingsActivity : AppCompatActivity() {
         val etToken = dialogView.findViewById<TextInputEditText>(R.id.etSubscriptionToken)
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("添加订阅")
+            .setTitle(getString(R.string.s_d94cc5ea))
             .setView(dialogView)
-            .setPositiveButton("添加", null)
-            .setNegativeButton("取消", null)
+            .setPositiveButton(getString(R.string.s_b58c7549), null)
+            .setNegativeButton(getString(R.string.s_625fb26b), null)
             .create()
 
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 val input = etToken.text.toString().trim()
                 if (input.isEmpty()) {
-                    UiUtils.warning(this, "请输入订阅源口令、直链链接或粘贴配置内容")
+                    UiUtils.warning(this, getString(R.string.h_1b92ede8))
                     return@setOnClickListener
                 }
 
@@ -1151,25 +1164,25 @@ class SettingsActivity : AppCompatActivity() {
                 // 直接粘贴的广告特征配置 JSON：以 { 开头且校验为合法配置
                 if (input.startsWith("{")) {
                     if (!SubscriptionManager.isValidConfigJson(input)) {
-                        UiUtils.warning(this, "粘贴内容不是有效的广告特征配置 JSON，请检查后重试")
+                        UiUtils.warning(this, getString(R.string.h_9fce216a))
                         return@setOnClickListener
                     }
                     val newSub = Subscription(
                         id = java.util.UUID.randomUUID().toString(),
-                        name = "手动输入配置",
+                        name = getString(R.string.h_299bd8c9),
                         type = SubscriptionManager.Type.CONTENT,
                         contentJson = input
                     )
                     onAdded(newSub)
                     dialog.dismiss()
-                    UiUtils.success(this, "已添加手动输入的订阅源")
+                    UiUtils.success(this, getString(R.string.h_ee4e2a27))
                     return@setOnClickListener
                 }
 
                 // 订阅源口令
                 val parsed = SubscriptionManager.decodeToken(input)
                 if (parsed == null) {
-                    UiUtils.warning(this, "输入内容无效：既不是口令也不是有效配置 JSON，请检查后重试")
+                    UiUtils.warning(this, getString(R.string.h_5a8cb987))
                     return@setOnClickListener
                 }
                 val newSub = Subscription(
@@ -1181,7 +1194,7 @@ class SettingsActivity : AppCompatActivity() {
                 )
                 onAdded(newSub)
                 dialog.dismiss()
-                UiUtils.success(this, "已添加订阅源：${parsed.name}")
+                UiUtils.success(this, getString(R.string.h_975cc249, parsed.name))
             }
         }
 
@@ -1200,7 +1213,7 @@ class SettingsActivity : AppCompatActivity() {
     ) {
         // 拉取期间禁用添加按钮，防止重复提交
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
-        UiUtils.info(this, "正在拉取订阅源配置...")
+        UiUtils.info(this, getString(R.string.h_f5f084be))
 
         lifecycleScope.launch {
             val jsonStr = withContext(Dispatchers.IO) {
@@ -1209,19 +1222,19 @@ class SettingsActivity : AppCompatActivity() {
             if (jsonStr == null) {
                 withContext(Dispatchers.Main) {
                     dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = true
-                    UiUtils.error(this@SettingsActivity, "拉取失败，请检查链接是否有效")
+                    UiUtils.error(this@SettingsActivity, getString(R.string.h_2fcb517d))
                 }
                 return@launch
             }
             if (!SubscriptionManager.isValidConfigJson(jsonStr)) {
                 withContext(Dispatchers.Main) {
                     dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = true
-                    UiUtils.error(this@SettingsActivity, "链接内容不是有效的广告特征配置")
+                    UiUtils.error(this@SettingsActivity, getString(R.string.h_c6439a1a))
                 }
                 return@launch
             }
             withContext(Dispatchers.Main) {
-                val name = url.substringAfterLast('/').substringBefore('.').ifBlank { "直链订阅源" }
+                val name = url.substringAfterLast('/').substringBefore('.').ifBlank { getString(R.string.h_7b695da8) }
                 val newSub = Subscription(
                     id = java.util.UUID.randomUUID().toString(),
                     name = name,
@@ -1230,7 +1243,7 @@ class SettingsActivity : AppCompatActivity() {
                 )
                 onAdded(newSub)
                 dialog.dismiss()
-                UiUtils.success(this@SettingsActivity, "已添加订阅源：$name")
+                UiUtils.success(this@SettingsActivity, getString(R.string.h_92d2d9c6, name))
             }
         }
     }
@@ -1246,25 +1259,27 @@ class SettingsActivity : AppCompatActivity() {
         val etName = dialogView.findViewById<TextInputEditText>(R.id.etEditName)
         val etUrl = dialogView.findViewById<TextInputEditText>(R.id.etEditUrl)
         val tilUrl = dialogView.findViewById<TextInputLayout>(R.id.tilEditUrl)
+        val tvUrlLabel = dialogView.findViewById<TextView>(R.id.tvEditUrlLabel)
 
         etName.setText(sub.name)
         if (sub.type == SubscriptionManager.Type.URL) {
             tilUrl.visibility = View.VISIBLE
+            tvUrlLabel.visibility = View.VISIBLE
             etUrl.setText(sub.url)
         }
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("编辑订阅源")
+            .setTitle(getString(R.string.s_07ee07e4))
             .setView(dialogView)
-            .setPositiveButton("保存", null)
-            .setNegativeButton("取消", null)
+            .setPositiveButton(getString(R.string.s_be5fbbe3), null)
+            .setNegativeButton(getString(R.string.s_625fb26b), null)
             .create()
 
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 val name = etName.text.toString().trim()
                 if (name.isEmpty()) {
-                    UiUtils.warning(this, "请输入订阅源名称")
+                    UiUtils.warning(this, getString(R.string.h_0b34e814))
                     return@setOnClickListener
                 }
                 val updated = if (sub.type == SubscriptionManager.Type.URL) {
@@ -1274,7 +1289,7 @@ class SettingsActivity : AppCompatActivity() {
                 }
                 onSaved(updated)
                 dialog.dismiss()
-                UiUtils.success(this, "已保存订阅源")
+                UiUtils.success(this, getString(R.string.h_432ecd96))
             }
         }
 
@@ -1293,32 +1308,34 @@ class SettingsActivity : AppCompatActivity() {
         val tilUrl = dialogView.findViewById<TextInputLayout>(R.id.tilShareUrl)
         val etUrl = dialogView.findViewById<TextInputEditText>(R.id.etShareUrl)
         val tvPreview = dialogView.findViewById<TextView>(R.id.tvSharePreview)
+        val tvUrlLabel = dialogView.findViewById<TextView>(R.id.tvShareUrlLabel)
 
         rgType.setOnCheckedChangeListener { _, checkedId ->
             val isUrl = checkedId == R.id.rbShareUrl
             tilUrl.visibility = if (isUrl) View.VISIBLE else View.GONE
+            tvUrlLabel.visibility = if (isUrl) View.VISIBLE else View.GONE
             tvPreview.visibility = View.GONE
         }
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("分享配置为订阅源口令")
+            .setTitle(getString(R.string.s_5f535b47))
             .setView(dialogView)
-            .setPositiveButton("生成口令", null)
-            .setNegativeButton("取消", null)
+            .setPositiveButton(getString(R.string.h_cdb8ce5c), null)
+            .setNegativeButton(getString(R.string.s_625fb26b), null)
             .create()
 
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 val name = etName.text.toString().trim()
                 if (name.isEmpty()) {
-                    UiUtils.warning(this, "请输入订阅源名称")
+                    UiUtils.warning(this, getString(R.string.h_0b34e814))
                     return@setOnClickListener
                 }
                 val isUrl = rgType.checkedRadioButtonId == R.id.rbShareUrl
                 val token = if (isUrl) {
                     val url = etUrl.text.toString().trim()
                     if (url.isEmpty()) {
-                        UiUtils.warning(this, "请输入远程配置 URL")
+                        UiUtils.warning(this, getString(R.string.h_4b30694f))
                         return@setOnClickListener
                     }
                     SubscriptionManager.encodeToken(
@@ -1351,21 +1368,21 @@ class SettingsActivity : AppCompatActivity() {
         val tvPreview = dialogView.findViewById<TextView>(R.id.tvTokenPreview)
 
         etToken.setText(token)
-        tvPreview.text = "口令已生成，可复制或分享给他人。"
+        tvPreview.text = getString(R.string.h_05ade75d)
         tvPreview.visibility = View.VISIBLE
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("订阅源口令")
+            .setTitle(getString(R.string.h_63d55e8f))
             .setView(dialogView)
-            .setPositiveButton("复制", null)
-            .setNeutralButton("系统分享", null)
-            .setNegativeButton("关闭", null)
+            .setPositiveButton(getString(R.string.h_79d3abe9), null)
+            .setNeutralButton(getString(R.string.h_8f6495fd), null)
+            .setNegativeButton(getString(R.string.s_b15d9127), null)
             .create()
 
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 copyToClipboard(token)
-                UiUtils.success(this, "口令已复制到剪贴板")
+                UiUtils.success(this, getString(R.string.h_ee0a3ba0))
             }
             dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener {
                 shareToken(token)
@@ -1381,7 +1398,7 @@ class SettingsActivity : AppCompatActivity() {
      * 复制文本到剪贴板。
      */
     private fun copyToClipboard(text: String) {
-        val clip = ClipData.newPlainText("订阅源口令", text)
+        val clip = ClipData.newPlainText(getString(R.string.h_63d55e8f), text)
         (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(clip)
     }
 
@@ -1393,7 +1410,7 @@ class SettingsActivity : AppCompatActivity() {
             type = "text/plain"
             putExtra(Intent.EXTRA_TEXT, token)
         }
-        startActivity(Intent.createChooser(sendIntent, "分享订阅源口令"))
+        startActivity(Intent.createChooser(sendIntent, getString(R.string.h_c2501d73)))
     }
 
     /**
@@ -1425,7 +1442,7 @@ class SettingsActivity : AppCompatActivity() {
             config = AdPatternConfig.getDefaultConfig(this)
             AdPatternConfig.saveConfig(config, this)
             displayConfig()
-            UiUtils.info(this, "已关闭所有订阅，恢复默认配置")
+            UiUtils.info(this, getString(R.string.h_c7fdb835))
             return
         }
 
@@ -1439,7 +1456,7 @@ class SettingsActivity : AppCompatActivity() {
                 try {
                     configs.add(AdPatternConfig.fromJson(JSONObject(sub.contentJson), this))
                 } catch (e: Exception) {
-                    Log.e("SettingsActivity", "解析订阅配置失败: ${sub.name}", e)
+                    Log.e("SettingsActivity", getString(R.string.h_be5de496, sub.name), e)
                 }
             }
         }
@@ -1454,7 +1471,7 @@ class SettingsActivity : AppCompatActivity() {
         val fetchedConfigs = mutableListOf<AdPatternConfig.AdPatterns>()
         val errors = mutableListOf<String>()
 
-        UiUtils.info(this, "正在拉取远程配置...")
+        UiUtils.info(this, getString(R.string.h_583bde12))
 
         lifecycleScope.launch {
             for (sub in urlSubs) {
@@ -1477,7 +1494,7 @@ class SettingsActivity : AppCompatActivity() {
             applyMergedConfigs(configs, enabledSubs.size)
 
             if (errors.isNotEmpty()) {
-                UiUtils.error(this@SettingsActivity, "部分订阅拉取失败：${errors.joinToString(", ")}")
+                UiUtils.error(this@SettingsActivity, getString(R.string.h_50542d9e, errors.joinToString(", ")))
             }
         }
     }
@@ -1487,16 +1504,16 @@ class SettingsActivity : AppCompatActivity() {
      */
     private fun applyMergedConfigs(configs: List<AdPatternConfig.AdPatterns>, totalEnabled: Int) {
         if (configs.isEmpty()) {
-            UiUtils.warning(this, "订阅配置为空，未做更改")
+            UiUtils.warning(this, getString(R.string.h_de0412d9))
             return
         }
         config = AdPatternConfig.merge(configs)
         val success = AdPatternConfig.saveConfig(config, this)
         if (success) {
             displayConfig()
-            UiUtils.success(this, "已应用 $totalEnabled 个订阅源（共 ${config.totalCount()} 条特征）")
+            UiUtils.success(this, getString(R.string.h_f0b2a7b1, totalEnabled, config.totalCount()))
         } else {
-            UiUtils.error(this, "应用订阅失败，请检查存储权限")
+            UiUtils.error(this, getString(R.string.h_f744e671))
         }
     }
 }
@@ -1587,13 +1604,13 @@ class SubscriptionAdapter(
 
         // 类型标签：不同类型使用不同颜色
         if (item.type == SubscriptionManager.Type.URL) {
-            holder.tvType.text = "URL 订阅源"
+            holder.tvType.text = holder.itemView.context.getString(R.string.s_2c3f3245)
             holder.tvType.setTextColor(
                 androidx.core.content.ContextCompat.getColor(holder.itemView.context, R.color.primary_dark)
             )
             holder.tvType.setBackgroundResource(R.drawable.bg_type_badge_accent)
         } else {
-            holder.tvType.text = "内嵌配置"
+            holder.tvType.text = holder.itemView.context.getString(R.string.h_9140cf96)
             holder.tvType.setTextColor(
                 androidx.core.content.ContextCompat.getColor(holder.itemView.context, R.color.accent_dark)
             )
@@ -1641,14 +1658,14 @@ class SubscriptionAdapter(
  * @param tip         小贴士
  */
 data class HelpInfo(
-    val title: String,
-    val subtitle: String,
-    val description: String,
-    val addHow: String,
-    val examples: String,
-    val modifiedWhat: String,
-    val relatedWith: String = "",
-    val tip: String = ""
+    @StringRes val titleRes: Int,
+    @StringRes val subtitleRes: Int,
+    @StringRes val descriptionRes: Int,
+    @StringRes val addHowRes: Int,
+    @StringRes val examplesRes: Int,
+    @StringRes val modifiedWhatRes: Int,
+    @StringRes val relatedWithRes: Int = 0,
+    @StringRes val tipRes: Int = 0
 )
 
 /** 配置目录（用于帮助文本展示，与 AdPatternConfig 保持一致） */
@@ -1666,215 +1683,193 @@ private const val HELP_CONFIG_NAME = "ad_patterns.json"
  */
 private val CATEGORY_HELP: Map<AdPatternConfig.Category, HelpInfo> = mapOf(
     AdPatternConfig.Category.SDK_PACKAGES to HelpInfo(
-        title = "广告 SDK 包名",
-        subtitle = "识别并移除广告 SDK 的根包名",
-        description = "声明要识别/移除的广告 SDK 的 Java 包名。这是最核心的分类：处理时用它识别广告类、广告清单组件，并自动推导 lib 目录里的 .so 原生库名。",
-        addHow = "点击右侧\"管理\"→ 在输入框输入广告 SDK 的完整包名 → 点\"添加\"。也可用手机文件管理器直接编辑配置文件。",
-        examples = "com.google.android.gms.ads\n" +
-            "com.bytedance.sdk.openadsdk\n" +
-            "com.qq.e.ads\n" +
-            "com.mbridge.msdk",
-        modifiedWhat = "写入外部配置文件 $HELP_CONFIG_NAME 的 \"sdk_packages\" 字段。\n" +
-            "运行时由 core/DexPatcher.kt（DEX 类识别）、core/AxmlAdRemover.kt（清单组件移除）、core/AdRemover.kt（lib 原生库清理）读取。",
-        relatedWith = "常与\"广告类名关键词\"\"广告 SDK 原生库关键词\"配合；包名会自动推导 lib 目录 .so 库名关键词。",
-        tip = "包名用点号格式（如 com.x.y），处理时自动转为斜杠格式匹配 DEX 类名。"
+        titleRes = R.string.h_7e235a0c,
+        subtitleRes = R.string.h_6e8ddbbd,
+        descriptionRes = R.string.h_70bbbe57,
+        addHowRes = R.string.h_6a3c653f,
+        examplesRes = R.string.h_00a68483,
+        modifiedWhatRes = R.string.h_6c1094f9,
+        relatedWithRes = R.string.h_2d8e8ed2,
+        tipRes = R.string.h_36427794
     ),
     AdPatternConfig.Category.CLASS_KEYWORDS to HelpInfo(
-        title = "广告类名关键词",
-        subtitle = "按关键词识别广告类",
-        description = "广告类名的关键词片段。类名命中即判定为广告类，将其广告方法体替换为返回默认值（置空），从而屏蔽广告展示逻辑。",
-        addHow = "点击\"管理\"→ 输入广告类名关键词（可只写片段）→ 点\"添加\"。",
-        examples = "AdView\nAdActivity\nBannerAd\nInterstitialAd",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"class_keywords\" 字段。\n" +
-            "运行时由 core/DexPatcher.kt 做广告类匹配，也由 core/AxmlAdRemover.kt 匹配清单组件。",
-        relatedWith = "与\"广告 SDK 包名\"配合效果最佳，也常与\"广告 View 类名\"\"广告 Activity\"等用途重叠。",
-        tip = "建议写通用片段而非完整路径，命中率更高；关键词越多误伤可能性越大，请谨慎。"
+        titleRes = R.string.h_32b1989c,
+        subtitleRes = R.string.h_599cc493,
+        descriptionRes = R.string.h_6ab5a0e9,
+        addHowRes = R.string.h_6303de15,
+        examplesRes = R.string.h_04cd3cff,
+        modifiedWhatRes = R.string.h_af7dfb03,
+        relatedWithRes = R.string.h_7f86257a,
+        tipRes = R.string.h_1e8d2df8
     ),
     AdPatternConfig.Category.METHOD_PATTERNS to HelpInfo(
-        title = "广告方法名",
-        subtitle = "精确置空指定方法",
-        description = "要精确置空的广告方法名。方法名与该列表项完全一致时，方法体被替换为返回默认值，从而取消广告加载/展示调用。",
-        addHow = "点击\"管理\"→ 输入与代码中完全一致的方法名 → 点\"添加\"。",
-        examples = "loadAd\nshowAd\nloadInterstitialAd\nshowRewardedVideo",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"method_patterns\" 字段。\n" +
-            "运行时由 core/DexPatcher.kt 做方法名精确匹配并置空方法体。",
-        relatedWith = "与\"广告方法置空关键词\"配合使用：本分类为精确匹配，后者为模糊关键词匹配。",
-        tip = "方法名需与反编译后的代码完全一致（含大小写），否则无法命中。"
+        titleRes = R.string.h_d0997ec0,
+        subtitleRes = R.string.h_6ac37232,
+        descriptionRes = R.string.h_90af539a,
+        addHowRes = R.string.h_21806150,
+        examplesRes = R.string.h_16753bc3,
+        modifiedWhatRes = R.string.h_b82698e4,
+        relatedWithRes = R.string.h_6d79cd1c,
+        tipRes = R.string.h_9fd2d8c2
     ),
     AdPatternConfig.Category.URL_PATTERNS to HelpInfo(
-        title = "广告 URL / 域名",
-        subtitle = "置空广告请求链接",
-        description = "广告请求 URL 或域名。处理时会把 DEX 中以 const-string 形式存在的广告链接字符串置空为空字符串，阻断广告请求。",
-        addHow = "点击\"管理\"→ 输入广告域名或 URL 片段 → 点\"添加\"。",
-        examples = "googleads.g.doubleclick.net\nadmob.com\nadview.cn\nca-app-pub-",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"url_patterns\" 字段。\n" +
-            "运行时由 core/DexPatcher.kt 扫描 const-string 指令并置空匹配的广告链接。",
-        relatedWith = "通常独立使用，也可与\"广告 SDK 包名\"配合增强屏蔽效果。",
-        tip = "只影响形如网址的字符串（含 ://、www、.com 等），避免误伤普通文本。"
+        titleRes = R.string.h_bc77dbf8,
+        subtitleRes = R.string.h_b4ea6ec8,
+        descriptionRes = R.string.h_fe97b23b,
+        addHowRes = R.string.h_9fa3cca0,
+        examplesRes = R.string.h_87ae9335,
+        modifiedWhatRes = R.string.h_fa8a0296,
+        relatedWithRes = R.string.h_0b1c5479,
+        tipRes = R.string.h_166c2b0d
     ),
     AdPatternConfig.Category.AD_VIEW_NAMES to HelpInfo(
-        title = "广告 View 类名",
-        subtitle = "识别广告视图组件类",
-        description = "广告 View 组件类名关键词，用于识别广告视图类（如横幅、插屏、激励视频的 View）。类名命中即按广告类处理并置空其广告方法。",
-        addHow = "点击\"管理\"→ 输入广告 View 类名或关键词 → 点\"添加\"。",
-        examples = "AdView\nBannerAd\nNativeAdView\nSplashView",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"ad_view_names\" 字段。\n" +
-            "运行时由 core/DexPatcher.kt 做广告类匹配。",
-        relatedWith = "与\"广告 SDK 包名\"\"广告类名关键词\"配合，同属类名识别体系。",
-        tip = "与\"广告类名关键词\"的作用有重叠，可任选其一维护。"
+        titleRes = R.string.h_02be3cd1,
+        subtitleRes = R.string.h_0094af95,
+        descriptionRes = R.string.h_e77ef5d2,
+        addHowRes = R.string.h_3c1e4f2e,
+        examplesRes = R.string.h_98d11213,
+        modifiedWhatRes = R.string.h_bffae154,
+        relatedWithRes = R.string.h_14e50afa,
+        tipRes = R.string.h_ddc38ea1
     ),
     AdPatternConfig.Category.AD_ACTIVITIES to HelpInfo(
-        title = "广告 Activity",
-        subtitle = "识别广告页面类",
-        description = "广告 Activity（页面）类名关键词，用于识别广告页面类，处理时置空其广告方法，并在清单中移除对应组件。",
-        addHow = "点击\"管理\"→ 输入广告 Activity 类名或关键词 → 点\"添加\"。",
-        examples = "AdActivity\nInterstitialAdActivity\nSplashActivity",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"ad_activities\" 字段。\n" +
-            "由 core/DexPatcher.kt（类识别）与 core/AxmlAdRemover.kt（AndroidManifest 组件移除）读取。",
-        relatedWith = "与\"广告 SDK 包名\"配合，可同时清理清单中的相关 Activity。",
-        tip = "清单中匹配的 <activity> 会被整体移除，删除前请确认该 Activity 确为广告用途。"
+        titleRes = R.string.h_f08c72bc,
+        subtitleRes = R.string.h_53cb60e6,
+        descriptionRes = R.string.h_284f10db,
+        addHowRes = R.string.h_a6775ccc,
+        examplesRes = R.string.h_17ac7253,
+        modifiedWhatRes = R.string.h_21d3c920,
+        relatedWithRes = R.string.h_4222e5fa,
+        tipRes = R.string.h_52279c25
     ),
     AdPatternConfig.Category.AD_SERVICES to HelpInfo(
-        title = "广告 Service",
-        subtitle = "识别广告后台服务类",
-        description = "广告 Service（后台服务）类名关键词，用于识别广告后台服务类，处理时置空其广告方法，并在清单中移除对应组件。",
-        addHow = "点击\"管理\"→ 输入广告 Service 类名或关键词 → 点\"添加\"。",
-        examples = "AdService\nDownloadService\nUpdateService",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"ad_services\" 字段。\n" +
-            "由 core/DexPatcher.kt（类识别）与 core/AxmlAdRemover.kt（清单组件移除）读取。",
-        relatedWith = "与\"广告 SDK 包名\"配合使用。",
-        tip = "清单中匹配的 <service> 会被整体移除。"
+        titleRes = R.string.h_a092d8f0,
+        subtitleRes = R.string.h_324f699a,
+        descriptionRes = R.string.h_cab966b6,
+        addHowRes = R.string.h_a17816fd,
+        examplesRes = R.string.h_3141af8c,
+        modifiedWhatRes = R.string.h_80943b1f,
+        relatedWithRes = R.string.h_ffdeee21,
+        tipRes = R.string.h_430a8d97
     ),
     AdPatternConfig.Category.AD_RECEIVERS to HelpInfo(
-        title = "广告 Receiver",
-        subtitle = "识别广告广播接收类",
-        description = "广告广播接收器（Receiver）类名关键词，用于识别广告广播组件，处理时置空其广告方法，并在清单中移除对应组件。",
-        addHow = "点击\"管理\"→ 输入广告 Receiver 类名或关键词 → 点\"添加\"。",
-        examples = "AdReceiver\nBootReceiver\nInstallReceiver",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"ad_receivers\" 字段。\n" +
-            "由 core/DexPatcher.kt（类识别）与 core/AxmlAdRemover.kt（清单组件移除）读取。",
-        relatedWith = "与\"广告 SDK 包名\"配合使用。",
-        tip = "清单中匹配的 <receiver> 会被整体移除。"
+        titleRes = R.string.h_840399bf,
+        subtitleRes = R.string.h_bc9facfc,
+        descriptionRes = R.string.h_0a855e59,
+        addHowRes = R.string.h_cfd21cdc,
+        examplesRes = R.string.h_bf82a4bf,
+        modifiedWhatRes = R.string.h_b7a517ca,
+        relatedWithRes = R.string.h_ffdeee21,
+        tipRes = R.string.h_1c397bbb
     ),
     AdPatternConfig.Category.FORCE_TRUE_METHODS to HelpInfo(
-        title = "强制返回 true 的方法名",
-        subtitle = "解锁 VIP / 会员 / 专业版判定",
-        description = "用于解锁 VIP/会员/专业版等付费判定方法。方法名精确命中且返回类型为 boolean 或 int 时，方法体被替换为\"返回 true / 1\"，直接绕过付费校验。",
-        addHow = "点击\"管理\"→ 输入要解锁的判定方法名 → 点\"添加\"。",
-        examples = "isVip\nisPro\nisPremium\nisMember\nisPaid",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"force_true_methods\" 字段。\n" +
-            "运行时由 core/DexPatcher.kt 的强制返回 true 逻辑处理（仅 boolean/int 返回类型）。",
-        relatedWith = "独立功能，作用于所有类、所有方法，不依赖其他分类。",
-        tip = "仅影响返回类型为 boolean(Z) 或 int(I) 的方法；其他类型自动跳过，避免生成非法指令。"
+        titleRes = R.string.h_3c1862f0,
+        subtitleRes = R.string.h_6bfa92c8,
+        descriptionRes = R.string.h_8d7ba09c,
+        addHowRes = R.string.h_0d37a3a3,
+        examplesRes = R.string.h_03277167,
+        modifiedWhatRes = R.string.h_2be69e45,
+        relatedWithRes = R.string.h_130a118a,
+        tipRes = R.string.h_69f3d080
     ),
     AdPatternConfig.Category.FORCE_FALSE_METHODS to HelpInfo(
-        title = "强制返回 false 的方法名",
-        subtitle = "让广告判定方法返回 false",
-        description = "用于\"广告是否已加载 / 是否正在展示 / 是否有广告\"等判定方法。方法名精确命中且返回类型为 boolean 或 int 时，方法体被替换为\"返回 false / 0\"，让应用认为广告从未加载或展示，从而跳过广告展示逻辑。",
-        addHow = "点击\"管理\"→ 输入要强制返回 false 的判定方法名 → 点\"添加\"。",
-        examples = "isAdLoaded\nhasAd\nisAdShowing\nisAdReady\nisInterstitialLoaded",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"force_false_methods\" 字段。\n" +
-            "运行时由 core/DexPatcher.kt 的强制返回 false 逻辑处理（仅 boolean/int 返回类型）。",
-        relatedWith = "与\"强制返回 true\"互补：true 用于解锁 VIP，false 用于屏蔽广告展示判定。",
-        tip = "仅影响返回类型为 boolean(Z) 或 int(I) 的方法；其他类型自动跳过，避免生成非法指令。"
+        titleRes = R.string.h_c84eabb9,
+        subtitleRes = R.string.h_e17b0b80,
+        descriptionRes = R.string.h_481170fc,
+        addHowRes = R.string.h_46137025,
+        examplesRes = R.string.h_556c8e96,
+        modifiedWhatRes = R.string.h_dd6c571b,
+        relatedWithRes = R.string.h_67fac552,
+        tipRes = R.string.h_69f3d080
     ),
     AdPatternConfig.Category.AD_ASSET_PATHS to HelpInfo(
-        title = "assets 广告文件路径",
-        subtitle = "删除指定广告资源路径",
-        description = "要删除的 assets 目录下的广告 SDK 文件/目录路径。精确匹配，命中即整条（文件或目录）删除，用于移除打进 assets 的广告插件、胶水层等。",
-        addHow = "点击\"管理\"→ 输入相对路径（可写 assets/ 前缀，也可省略）→ 点\"添加\"。",
-        examples = "assets/gdt_plugin/gdtadv2.jar\nassets/qumeng\nassets/bdxadsdk",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"ad_asset_paths\" 字段。\n" +
-            "运行时由 core/AdRemover.kt 的 cleanAdSdkAssets() 删除对应路径。",
-        relatedWith = "与\"assets 广告关键词\"配合：本分类为精确路径，后者为模糊关键词。",
-        tip = "只删除 assets 目录内的内容，不影响 lib 与 res 目录。"
+        titleRes = R.string.h_69000422,
+        subtitleRes = R.string.h_5d4aa133,
+        descriptionRes = R.string.h_f7d28e75,
+        addHowRes = R.string.h_52aa344f,
+        examplesRes = R.string.h_7dda6d57,
+        modifiedWhatRes = R.string.h_e785557e,
+        relatedWithRes = R.string.h_8c6fb706,
+        tipRes = R.string.h_8b98d772
     ),
     AdPatternConfig.Category.LIB_FILE_KEYWORDS to HelpInfo(
-        title = "广告 SDK 原生库关键词",
-        subtitle = "删除广告 so 原生库",
-        description = "lib 目录下要删除的 .so 原生库名关键词。用于删除广告 SDK 的动态库文件（如确保 lib 目录里的广告 so 被移除）。",
-        addHow = "点击\"管理\"→ 输入 .so 库名关键词 → 点\"添加\"。",
-        examples = "ttad\ngdt\npangle\nadmob\nbaiduad",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"lib_file_keywords\" 字段。\n" +
-            "运行时由 core/AdRemover.kt 的 cleanAdSdkLibs() 遍历 lib/*/ 并删除匹配的 .so 文件。",
-        relatedWith = "与\"广告 SDK 包名\"配合使用（包名会自动推导部分库名关键词）。",
-        tip = "关键词为子串匹配（如 ttad 可命中 libttad.so），请勿写完整路径。"
+        titleRes = R.string.h_c4ed42f4,
+        subtitleRes = R.string.h_85a0ed61,
+        descriptionRes = R.string.h_122f1ca8,
+        addHowRes = R.string.h_a3e07f53,
+        examplesRes = R.string.h_1516029a,
+        modifiedWhatRes = R.string.h_fc2459c8,
+        relatedWithRes = R.string.h_e0aa11ae,
+        tipRes = R.string.h_b9ca883a
     ),
     AdPatternConfig.Category.ASSET_KEYWORDS to HelpInfo(
-        title = "assets 广告关键词",
-        subtitle = "按关键词删除广告资源",
-        description = "assets 广告文件关键词。assets 内路径或文件名包含该关键词即删除，用于覆盖已知路径之外的同类广告资产。",
-        addHow = "点击\"管理\"→ 输入关键词 → 点\"添加\"。",
-        examples = "gdt\noneway\nbdxadsdk\nqumeng",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"asset_keywords\" 字段。\n" +
-            "运行时由 core/AdRemover.kt 的 cleanAdSdkAssets() 按关键词匹配删除。",
-        relatedWith = "与\"assets 广告文件路径\"配合使用。",
-        tip = "关键词为子串匹配，覆盖面广，请避免使用过于通用的词以防误删。"
+        titleRes = R.string.h_757b3361,
+        subtitleRes = R.string.h_1394b002,
+        descriptionRes = R.string.h_5c5b99c0,
+        addHowRes = R.string.h_0456832d,
+        examplesRes = R.string.h_3db4cd4d,
+        modifiedWhatRes = R.string.h_48574fbe,
+        relatedWithRes = R.string.h_f66c3cc8,
+        tipRes = R.string.h_fa4706ec
     ),
     AdPatternConfig.Category.METHOD_NEUTRALIZE_KEYWORDS to HelpInfo(
-        title = "广告方法置空关键词",
-        subtitle = "模糊匹配置空广告方法",
-        description = "广告方法置空关键词（模糊匹配）。命中广告类后，只置空方法名包含这些关键词的方法，避免过度置空导致程序崩溃（如保留构造方法、生命周期方法等）。",
-        addHow = "点击\"管理\"→ 输入方法名关键词 → 点\"添加\"。",
-        examples = "showad\nloadad\nonadloaded\nadclick",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"method_neutralize_keywords\" 字段。\n" +
-            "运行时由 core/DexPatcher.kt 的方法置空筛选逻辑（带单词边界感知）读取。",
-        relatedWith = "与\"广告方法名\"配合：一个模糊关键词、一个精确方法名；常与\"广告 SDK 包名\"\"广告类名关键词\"搭配。",
-        tip = "内置了大量默认关键词（_ad_、showad、loadad 等），此分类主要用于补充自定义关键词。"
+        titleRes = R.string.h_7c6a17aa,
+        subtitleRes = R.string.h_7ba901d8,
+        descriptionRes = R.string.h_430b3928,
+        addHowRes = R.string.h_b3c9c976,
+        examplesRes = R.string.h_e75ba18c,
+        modifiedWhatRes = R.string.h_521147e7,
+        relatedWithRes = R.string.h_68c89932,
+        tipRes = R.string.h_91d57778
     ),
     AdPatternConfig.Category.AD_PERMISSIONS to HelpInfo(
-        title = "广告权限特征",
-        subtitle = "移除清单中的广告 SDK 权限声明",
-        description = "广告 SDK 常在 AndroidManifest.xml 中声明自定义权限（如 com.lineone.connecter.openadsdk.permission.TT_PANGOLIN、com.lineone.connecter.permission.KW_SDK_BROADCAST 等），用于保护其广告组件。命中这些权限的 <uses-permission> 声明会被从清单中移除。",
-        addHow = "点击\"管理\"→ 输入权限名或权限关键词 → 点\"添加\"。运行时会按子串匹配（不区分大小写），可用广告 SDK 包名前缀或权限特征词。",
-        examples = "TT_PANGOLIN\nKW_SDK\ncom.bytedance\ncom.qq.e\ncom.mbridge.msdk\ncom.kwad.sdk",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"ad_permissions\" 字段。\n" +
-            "运行时由 core/AxmlAdRemover.kt 的 removeAdPermissions() 匹配并移除 AndroidManifest.xml 中的 <uses-permission> 声明。",
-        relatedWith = "与\"广告 SDK 包名\"\"广告 Activity / Service / Receiver\"配合使用，用于清理广告 SDK 在清单中的权限声明。",
-        tip = "仅移除命中特征的权限声明，不影响 INTERNET / CAMERA 等正常功能权限；请勿把正常功能权限加入特征以免影响应用运行。"
+        titleRes = R.string.h_7de4534e,
+        subtitleRes = R.string.h_ceefa2cd,
+        descriptionRes = R.string.h_bde178a7,
+        addHowRes = R.string.h_5c244e39,
+        examplesRes = R.string.h_e870ac19,
+        modifiedWhatRes = R.string.h_7b58f794,
+        relatedWithRes = R.string.h_01be0fd6,
+        tipRes = R.string.h_67914606
     ),
     AdPatternConfig.Category.ROOT_FILE_KEYWORDS to HelpInfo(
-        title = "APK 根目录文件关键词",
-        subtitle = "删除包文件根目录的广告残留文件",
-        description = "APK 解包后根目录（与 classes.dex 同目录）中可能残留的广告 SDK 配置文件、标识文件等。文件名包含该关键词即被删除，用于清理不在 lib / assets 目录里的广告残留。",
-        addHow = "点击\"管理\"→ 输入文件名词关键词 → 点\"添加\"。运行时会按子串匹配（不区分大小写）。",
-        examples = "tt_version\nstartup_config\noaid\nuuid\ndevice_id\noa_sdk",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"root_file_keywords\" 字段。\n" +
-            "运行时由 core/AdRemover.kt 的 cleanRootFiles() 遍历 APK 根目录（仅一层，不递归）并删除匹配文件。",
-        relatedWith = "与\"assets 广告关键词\"\"广告 SDK 原生库关键词\"配合，分别覆盖 assets、lib、以及根目录三处广告残留。",
-        tip = "只扫描 APK 根目录一层文件，不含子目录；classes.dex 等核心文件不会被删除。"
+        titleRes = R.string.h_e58abe16,
+        subtitleRes = R.string.h_41994826,
+        descriptionRes = R.string.h_9fe0ce82,
+        addHowRes = R.string.h_e25ab6b8,
+        examplesRes = R.string.h_18374fbf,
+        modifiedWhatRes = R.string.h_ec07479c,
+        relatedWithRes = R.string.h_7d2579cf,
+        tipRes = R.string.h_6591496b
     ),
     AdPatternConfig.Category.RES_LAYOUT_KEYWORDS to HelpInfo(
-        title = "Res 布局广告 View 关键词",
-        subtitle = "隐藏布局文件中的广告视图区域",
-        description = "APK 的 res/layout 布局文件中，广告 SDK 常以自定义 View 形式嵌入（如 com.meishu.sdk.meishu_ad.view.MeishuVideoCahceTextureView、AdView 等）。元素类名包含该关键词时，处理后会把该元素的 layout_width / layout_height 改为 0dp，将广告区域压缩为 0 尺寸隐藏，而不移除其在布局中的位置与引用，避免破坏布局结构。",
-        addHow = "点击\"管理\"→ 输入广告 View 类名或关键词片段 → 点\"添加\"。运行时会按子串匹配（不区分大小写）。",
-        examples = ".ad.\nmeishu_ad\nadview\nadcontainer\nbannerad\nsplashad\nadmob",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"res_layout_keywords\" 字段。\n" +
-            "运行时由 core/AxmlAdRemover.kt 的 hideAdLayoutViews() 改写 res/layout 及 res/layout-* 下 AXML 布局中命中元素宽高为 0dp。",
-        relatedWith = "常与\"广告 SDK 包名\"\"广告 View 类名\"\"广告类名关键词\"配合：这些分类的关键词也会被一起用于布局元素匹配，命中即隐藏。",
-        tip = "此关键词用于匹配布局元素类名，覆盖面广，请避免使用过于通用的词（如 ad）以防隐藏正常控件；建议使用 .ad.、具体 SDK 名或完整类名。"
+        titleRes = R.string.h_e93cb7ad,
+        subtitleRes = R.string.h_827cfb79,
+        descriptionRes = R.string.h_04cc78d8,
+        addHowRes = R.string.h_4f5a392d,
+        examplesRes = R.string.h_73a8f02e,
+        modifiedWhatRes = R.string.h_0d3ea6cb,
+        relatedWithRes = R.string.h_cd984ab2,
+        tipRes = R.string.h_37f14a6c
     ),
     AdPatternConfig.Category.STRING_PATTERNS to HelpInfo(
-        title = "DEX 字符串广告特征",
-        subtitle = "置空 DEX 中命中的广告字符串",
-        description = "用户自定义的 DEX 字符串广告特征（如广告位 ID、SDK 特征串、统计上报关键字等）。处理时会扫描所有方法体内的 const-string / const-string/jumbo 指令，字符串值（小写化后）命中任一特征即被置空为空字符串，从而破坏广告 SDK 对相关字符串的引用，阻断广告逻辑。",
-        addHow = "点击\"管理\"→ 输入广告字符串特征（可只写片段）→ 点\"添加\"。运行时会按子串匹配（不区分大小写）。",
-        examples = "ad_unit_id\nplacementid\nrewarded_video_id\nbanner_pos_id",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"string_patterns\" 字段。\n" +
-            "运行时由 core/DexPatcher.kt 扫描 const-string 指令并置空匹配的广告字符串。",
-        relatedWith = "与\"广告 URL / 域名\"\"广告方法名\"配合：本分类置空任意命中的字符串，覆盖面更广。",
-        tip = "请填写和广告 SDK 强相关的唯一字符串（如广告位 ID、SDK 特征串），避免过于通用导致误伤正常功能字符串。"
+        titleRes = R.string.h_369a31f0,
+        subtitleRes = R.string.h_aa223402,
+        descriptionRes = R.string.h_dd0a7c93,
+        addHowRes = R.string.h_0f8a3b32,
+        examplesRes = R.string.h_f3a25b4b,
+        modifiedWhatRes = R.string.h_cc8469a8,
+        relatedWithRes = R.string.h_271e5d10,
+        tipRes = R.string.h_2664f5c6
     ),
     AdPatternConfig.Category.FLUTTER_PATTERNS to HelpInfo(
-        title = "Flutter 字符串特征",
-        subtitle = "自定义 libapp.so 中去广告的字符串",
-        description = "Flutter 应用（AOT）的 libapp.so 内嵌 Dart 快照，以原始 ASCII 字节保存了广告 SDK 包名、广告 URL/域名、广告类名等字符串。此处维护在快照中要抹除的字符串特征：命中后会在 libapp.so 解包/去广告/回编译时做等长 NUL 覆盖，使广告字符串内容失效。",
-        addHow = "点击\"管理\"→ 输入要在 libapp.so 中抹除的广告字符串（长度≥2 的可打印 ASCII）→ 点\"添加\"。",
-        examples = "com.google.android.gms.ads\ngoogleads.g.doubleclick.net\npangle\nadview\nadmob\ncom.bytedance.sdk",
-        modifiedWhat = "写入 $HELP_CONFIG_NAME 的 \"flutter_string_patterns\" 字段。\n" +
-            "运行时由 core/LibappSoPatcher.kt 在 Dart 快照内做等长 NUL 覆盖；core/FlutterAdRemover.kt 负责解包/回编译与自动保存。",
-        relatedWith = "此特征独立于 DEX 特征。设置后优先用于 Flutter 处理；留空则自动沿用下方\"广告特征分类\"中的 URL/包名/类名等特征。",
-        tip = "仅支持可打印 ASCII 字符串（长度≥2）。请填写和广告 SDK 强相关的唯一字符串，避免过于通用导致误伤正常功能。"
+        titleRes = R.string.h_566859e2,
+        subtitleRes = R.string.h_9a5a28fd,
+        descriptionRes = R.string.h_0dd640d5,
+        addHowRes = R.string.h_c1ca70de,
+        examplesRes = R.string.h_c393daa8,
+        modifiedWhatRes = R.string.h_857a16c4,
+        relatedWithRes = R.string.h_ad3146c4,
+        tipRes = R.string.h_94d2d961
     )
 )

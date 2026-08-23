@@ -43,13 +43,12 @@
 
                 <TextView
                     android:id="@+id/tvSubName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:textColor="?attr/colorOnSurface"
-                    android:singleLine="true"
-                    android:ellipsize="end"
+                    android:breakStrategy="high_quality"
                     android:text="@string/s_7295f03c" />
 
                 <!-- 类型标签 -->
@@ -101,11 +100,16 @@
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_weight="1"
+                android:maxLines="1"
                 android:text="@string/s_c31f48f8"
                 android:textSize="12sp"
                 android:textColor="@color/primary"
+                app:autoSizeMaxTextSize="12sp"
+                app:autoSizeMinTextSize="9sp"
+                app:autoSizeStepGranularity="0.5sp"
+                app:autoSizeTextType="uniform"
                 app:icon="@android:drawable/ic_menu_share"
-                app:iconSize="16dp"
+                app:iconSize="14dp"
                 app:iconTint="@color/primary" />
 
             <View
@@ -119,11 +123,16 @@
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_weight="1"
+                android:maxLines="1"
                 android:text="@string/s_95b351c8"
                 android:textSize="12sp"
                 android:textColor="@color/accent"
+                app:autoSizeMaxTextSize="12sp"
+                app:autoSizeMinTextSize="9sp"
+                app:autoSizeStepGranularity="0.5sp"
+                app:autoSizeTextType="uniform"
                 app:icon="@android:drawable/ic_menu_edit"
-                app:iconSize="16dp"
+                app:iconSize="14dp"
                 app:iconTint="@color/accent" />
 
             <View
@@ -137,11 +146,16 @@
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_weight="1"
+                android:maxLines="1"
                 android:text="@string/s_2f4aaddd"
                 android:textSize="12sp"
                 android:textColor="@color/log_error"
+                app:autoSizeMaxTextSize="12sp"
+                app:autoSizeMinTextSize="9sp"
+                app:autoSizeStepGranularity="0.5sp"
+                app:autoSizeTextType="uniform"
                 app:icon="@drawable/ic_close"
-                app:iconSize="16dp"
+                app:iconSize="14dp"
                 app:iconTint="@color/log_error" />
         </LinearLayout>
     </LinearLayout>

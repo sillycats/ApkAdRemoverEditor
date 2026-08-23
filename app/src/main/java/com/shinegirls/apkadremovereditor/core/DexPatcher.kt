@@ -1,5 +1,6 @@
 package com.shinegirls.apkadremovereditor.core
 
+import com.shinegirls.apkadremovereditor.R
 import org.jf.dexlib2.DexFileFactory
 import org.jf.dexlib2.Opcodes
 import org.jf.dexlib2.Opcode
@@ -22,6 +23,7 @@ import org.jf.dexlib2.immutable.instruction.ImmutableInstruction12x
 import org.jf.dexlib2.immutable.instruction.ImmutableInstruction21c
 import org.jf.dexlib2.immutable.instruction.ImmutableInstruction31c
 import org.jf.dexlib2.immutable.reference.ImmutableStringReference
+import android.content.Context
 import com.shinegirls.apkadremovereditor.utils.Format
 import java.io.File
 
@@ -274,6 +276,7 @@ object DexPatcher {
         neutralizeMethodKeywords: List<String> = emptyList(),
         stringPatterns: List<String> = emptyList(),
         stripDebugInfo: Boolean = false,
+        context: Context,
         logger: Logger? = null
     ): DexPatchOutcome {
 
@@ -284,7 +287,7 @@ object DexPatcher {
         val dex: DexFile = try {
             DexFileFactory.loadDexFile(dexFile, Opcodes.getDefault())
         } catch (e: Exception) {
-            log("  ✗ 无法加载 ${dexFile.name}: ${e.message}")
+            log(context.getString(R.string.h_44057142, dexFile.name, e.message))
             return DexPatchOutcome(
                 originalSize, originalSize, failed = true, error = e.message,
                 elapsedMs = System.currentTimeMillis() - startTime
@@ -302,7 +305,7 @@ object DexPatcher {
         if (adClassNames.isEmpty()) {
             // 无广告 DEX：自动跳过，不处理不写回
             val elapsed = System.currentTimeMillis() - startTime
-            log("  ℹ ${dexFile.name} 未发现广告特征，自动跳过 (${elapsed}ms)")
+            log(context.getString(R.string.h_a7c027a6, dexFile.name, elapsed))
             return DexPatchOutcome(originalSize, originalSize, skippedNoAd = true, elapsedMs = elapsed)
         }
 
@@ -321,7 +324,7 @@ object DexPatcher {
             if (classDef.type in adClassNames) {
                 try {
                     // 逐类细节不再输出日志（精简为 DEX 级汇总）
-                    val result = patchSingleClass(classDef, classDef.type, patterns, {})
+                    val result = patchSingleClass(classDef, classDef.type, patterns, context, {})
                     newClasses.add(result.classDef)
                     patchedClasses++
                     neutralizedMethods += result.neutralized
@@ -343,7 +346,7 @@ object DexPatcher {
         // 零修改 DEX：识别到广告特征但实际无任何修改，直接保留原样，跳过最耗时的写回
         if (patchedClasses == 0) {
             val elapsed = System.currentTimeMillis() - startTime
-            log("  ℹ ${dexFile.name} 识别到广告特征但无实际修改，跳过写回 (${elapsed}ms)")
+            log(context.getString(R.string.h_42a1235e, dexFile.name, elapsed))
             return DexPatchOutcome(originalSize, originalSize, skippedNoChange = true, elapsedMs = elapsed)
         }
 
@@ -352,17 +355,17 @@ object DexPatcher {
             writeDexWithProtection(dexFile, newClasses, stripDebugInfo)
         } catch (e: OutOfMemoryError) {
             newClasses.clear()
-            throw RuntimeException("DEX写入内存不足: ${dexFile.name}", e)
+            throw RuntimeException(context.getString(R.string.h_362944cf, dexFile.name), e)
         }
 
         val elapsed = System.currentTimeMillis() - startTime
-        val urlSuffix = if (neutralizedUrlStrings > 0) ", 链接置空=$neutralizedUrlStrings" else ""
-        val forcedSuffix = if (forcedTrueMethods > 0) ", 强制true=$forcedTrueMethods" else ""
-        val forcedFalseSuffix = if (forcedFalseMethods > 0) ", 强制false=$forcedFalseMethods" else ""
-        val stringSuffix = if (neutralizedStrings > 0) ", 字符串置空=$neutralizedStrings" else ""
-        log("  ✓ ${dexFile.name} 完成: 广告类=$patchedClasses, 方法置空=$neutralizedMethods$urlSuffix$forcedSuffix$forcedFalseSuffix$stringSuffix (${elapsed}ms, ${formatSize(originalSize)}→${formatSize(dexFile.length())})")
+        val urlSuffix = if (neutralizedUrlStrings > 0) context.getString(R.string.h_7db41333, neutralizedUrlStrings) else ""
+        val forcedSuffix = if (forcedTrueMethods > 0) context.getString(R.string.h_db41810b, forcedTrueMethods) else ""
+        val forcedFalseSuffix = if (forcedFalseMethods > 0) context.getString(R.string.h_1da8eee1, forcedFalseMethods) else ""
+        val stringSuffix = if (neutralizedStrings > 0) context.getString(R.string.h_327c8914, neutralizedStrings) else ""
+        log(context.getString(R.string.h_9c6c3d16, dexFile.name, patchedClasses, neutralizedMethods, urlSuffix, forcedSuffix, forcedFalseSuffix, stringSuffix, elapsed, formatSize(originalSize), formatSize(dexFile.length())))
         if (failedClasses > 0) {
-            log("  ⚠ $failedClasses 个类处理失败已跳过")
+            log(context.getString(R.string.h_75403159, failedClasses))
         }
 
         return DexPatchOutcome(
@@ -584,6 +587,7 @@ object DexPatcher {
         classDef: ClassDef,
         className: String,
         patterns: CompiledPatterns,
+        context: Context,
         log: Logger
     ): SingleClassPatch {
         val needUrl = patterns.urlPatternLowercase.isNotEmpty()
@@ -730,16 +734,17 @@ object DexPatcher {
         }
 
         if (forcedTrueCount > 0) {
-            log("    -> $className: 强制返回 true $forcedTrueCount 个方法")
+            log(context.getString(R.string.h_9140b5bf, className, forcedTrueCount))
         }
         if (forcedFalseCount > 0) {
-            log("    -> $className: 强制返回 false $forcedFalseCount 个方法")
+            log(context.getString(R.string.h_3ae2b7d3, className, forcedFalseCount))
         }
-        val stringSuffix2 = if (stringCount > 0) ", 字符串置空 $stringCount 处" else ""
+        val stringSuffix2 = if (stringCount > 0) context.getString(R.string.h_daea0bf6, stringCount) else ""
+        val urlSuffix = if (urlCount > 0) context.getString(R.string.dexpatcher_link_neutral, urlCount) else ""
         if (neutralizedCount > 0) {
-            log("    -> $className: 置空 $neutralizedCount 个广告方法, 跳过 $skippedCount 个非广告方法${if (urlCount > 0) ", 链接置空 $urlCount 处" else ""}$stringSuffix2")
+            log(context.getString(R.string.dexpatcher_neutral, className, neutralizedCount, skippedCount, urlSuffix, stringSuffix2))
         } else if (urlCount > 0 || stringCount > 0) {
-            log("    -> $className: 链接置空 $urlCount 处$stringSuffix2")
+            log(context.getString(R.string.h_11ca9ed7, className, urlCount, stringSuffix2))
         }
 
         val newClass = ImmutableClassDef(

@@ -61,7 +61,7 @@ class SmaliEditorActivity : AppCompatActivity() {
                     false
                 }
             }
-            val msg = if (ok) "Smali文件已保存" else "保存失败: ${File(path).name}"
+            val msg = if (ok) getString(R.string.h_e655531f) else getString(R.string.h_9094d3923, File(path).name)
             if (ok) UiUtils.success(this@SmaliEditorActivity, msg)
             else UiUtils.error(this@SmaliEditorActivity, msg)
         }

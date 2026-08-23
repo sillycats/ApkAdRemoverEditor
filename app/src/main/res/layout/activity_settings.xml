@@ -6,21 +6,52 @@
     android:orientation="vertical"
     android:background="@color/bg_page">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!-- 自定义头部：标题 + 副标题可换行，避免俄语等长文本被截断 -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:background="@drawable/bg_gradient_header"
-        app:elevation="0dp">
+        android:paddingStart="4dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="12dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/s_4006f452"
-            app:titleTextColor="@color/white"
-            app:subtitle="@string/app_subtitle_settings"
-            app:subtitleTextColor="@color/primary_light" />
-    </com.google.android.material.appbar.AppBarLayout>
+        <ImageButton
+            android:id="@+id/btnSettingsBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/s_settings_back"
+            android:src="@drawable/ic_arrow_forward"
+            android:rotation="180"
+            android:tint="@color/white" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s_4006f452"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/app_subtitle_settings"
+                android:textSize="12sp"
+                android:breakStrategy="high_quality"
+                android:textColor="@color/primary_light" />
+        </LinearLayout>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -121,19 +152,21 @@
                             android:layout_marginEnd="4dp"
                             android:insetLeft="0dp"
                             android:insetRight="0dp"
+                            android:maxLines="1"
+                            android:minLines="1"
                             android:paddingLeft="2dp"
                             android:paddingRight="2dp"
                             android:text="@string/s_be5fbbe3"
                             android:textSize="12sp"
                             android:textStyle="bold"
                             app:autoSizeMaxTextSize="12sp"
-                            app:autoSizeMinTextSize="9sp"
+                            app:autoSizeMinTextSize="7sp"
                             app:autoSizeStepGranularity="0.5sp"
                             app:autoSizeTextType="uniform"
                             app:cornerRadius="22dp"
                             app:icon="@android:drawable/ic_menu_save"
                             app:iconGravity="textStart"
-                            app:iconSize="14dp" />
+                            app:iconSize="13dp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnChangeConfigPath"
@@ -145,18 +178,20 @@
                             android:layout_marginEnd="4dp"
                             android:insetLeft="0dp"
                             android:insetRight="0dp"
+                            android:maxLines="1"
+                            android:minLines="1"
                             android:paddingLeft="2dp"
                             android:paddingRight="2dp"
                             android:text="@string/s_f1d4ff50"
                             android:textSize="12sp"
                             app:autoSizeMaxTextSize="12sp"
-                            app:autoSizeMinTextSize="9sp"
+                            app:autoSizeMinTextSize="7sp"
                             app:autoSizeStepGranularity="0.5sp"
                             app:autoSizeTextType="uniform"
                             app:cornerRadius="22dp"
                             app:icon="@android:drawable/ic_menu_edit"
                             app:iconGravity="textStart"
-                            app:iconSize="14dp"
+                            app:iconSize="13dp"
                             app:strokeColor="@color/accent"
                             app:strokeWidth="1dp" />
 
@@ -169,18 +204,20 @@
                             android:layout_marginStart="4dp"
                             android:insetLeft="0dp"
                             android:insetRight="0dp"
+                            android:maxLines="1"
+                            android:minLines="1"
                             android:paddingLeft="2dp"
                             android:paddingRight="2dp"
                             android:text="@string/s_18c63459"
                             android:textSize="12sp"
                             app:autoSizeMaxTextSize="12sp"
-                            app:autoSizeMinTextSize="9sp"
+                            app:autoSizeMinTextSize="7sp"
                             app:autoSizeStepGranularity="0.5sp"
                             app:autoSizeTextType="uniform"
                             app:cornerRadius="22dp"
                             app:icon="@android:drawable/ic_menu_revert"
                             app:iconGravity="textStart"
-                            app:iconSize="14dp"
+                            app:iconSize="13dp"
                             app:strokeColor="@color/primary"
                             app:strokeWidth="1dp" />
                     </LinearLayout>
@@ -269,11 +306,19 @@
                             android:layout_height="44dp"
                             android:layout_weight="1"
                             android:layout_marginEnd="4dp"
+                            android:maxLines="1"
+                            android:minLines="1"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
                             android:text="@string/s_f1d4ff50"
                             android:textSize="13sp"
+                            app:autoSizeMaxTextSize="13sp"
+                            app:autoSizeMinTextSize="7sp"
+                            app:autoSizeStepGranularity="0.5sp"
+                            app:autoSizeTextType="uniform"
                             app:cornerRadius="22dp"
                             app:icon="@android:drawable/ic_menu_edit"
-                            app:iconSize="18dp"
+                            app:iconSize="16dp"
                             app:strokeColor="@color/accent"
                             app:strokeWidth="1dp" />
 
@@ -284,11 +329,19 @@
                             android:layout_height="44dp"
                             android:layout_weight="1"
                             android:layout_marginStart="4dp"
+                            android:maxLines="1"
+                            android:minLines="1"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
                             android:text="@string/s_18c63459"
                             android:textSize="13sp"
+                            app:autoSizeMaxTextSize="13sp"
+                            app:autoSizeMinTextSize="7sp"
+                            app:autoSizeStepGranularity="0.5sp"
+                            app:autoSizeTextType="uniform"
                             app:cornerRadius="22dp"
                             app:icon="@android:drawable/ic_menu_revert"
-                            app:iconSize="18dp"
+                            app:iconSize="16dp"
                             app:strokeColor="@color/primary"
                             app:strokeWidth="1dp" />
                     </LinearLayout>
@@ -371,6 +424,8 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
+                        android:breakStrategy="high_quality"
+                        android:lineSpacingExtra="2dp"
                         android:text="@string/s_a6fe5ea4" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -451,6 +506,8 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
+                        android:breakStrategy="high_quality"
+                        android:lineSpacingExtra="2dp"
                         android:text="@string/lang_desc" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -530,6 +587,8 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
+                        android:breakStrategy="high_quality"
+                        android:lineSpacingExtra="2dp"
                         android:text="@string/s_71938084" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -606,7 +665,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="8dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
 
@@ -618,61 +677,73 @@
                             android:textColor="@color/text_primary"
                             android:text="@string/s_09bbf66d" />
 
-                        <TextView
-                            android:id="@+id/tvSignMode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:textColor="@color/accent_dark"
-                            android:text="@string/s_636c1a42" />
-
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnSignMode"
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:maxLines="1"
                             android:text="@string/s_8347a927"
                             android:textSize="13sp"
-                            android:textColor="@color/accent_dark" />
+                            android:textColor="@color/accent_dark"
+                            app:autoSizeMinTextSize="11sp"
+                            app:autoSizeMaxTextSize="13sp"
+                            app:autoSizeStepGranularity="0.5sp"
+                            app:autoSizeTextType="uniform" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvSignMode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/accent_dark"
+                        android:breakStrategy="high_quality"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@string/s_636c1a42" />
 
                     <!-- 自定义注入参数（原包路径 / 解压路径 / So库名 / 钩子类名） -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="6dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_primary"
-                            android:text="@string/s_86a6d929" />
-
-                        <TextView
-                            android:id="@+id/tvSignParams"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginStart="8dp"
-                            android:textSize="12sp"
-                            android:textColor="@color/accent_dark"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:gravity="end"
-                            android:text="@string/s_4d96525d" />
+                            android:textSize="13sp"
+                            android:textColor="@color/text_primary"
+                            android:text="@string/s_86a6d929" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnSignParams"
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:maxLines="1"
                             android:text="@string/s_f1d4ff50"
                             android:textSize="13sp"
-                            android:textColor="@color/accent_dark" />
+                            android:textColor="@color/accent_dark"
+                            app:autoSizeMinTextSize="11sp"
+                            app:autoSizeMaxTextSize="13sp"
+                            app:autoSizeStepGranularity="0.5sp"
+                            app:autoSizeTextType="uniform" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvSignParams"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/accent_dark"
+                        android:breakStrategy="high_quality"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@string/s_4d96525d" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -680,6 +751,8 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
+                        android:breakStrategy="high_quality"
+                        android:lineSpacingExtra="2dp"
                         android:text="@string/s_dd8d0881" />
 
                     <!-- 免责声明 -->
@@ -706,9 +779,82 @@
                             android:layout_marginStart="8dp"
                             android:textSize="11sp"
                             android:textColor="@color/text_secondary"
+                            android:breakStrategy="high_quality"
                             android:lineSpacingExtra="2dp"
                             android:text="@string/s_a56d1fbd" />
                     </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 打包签名选项卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:strokeColor="@color/blush_light"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_icon_round"
+                            android:contentDescription="@string/s_skip_signing_cd"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_check_circle"
+                            app:tint="@color/accent" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/s_skip_signing_title"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:textColor="?attr/colorOnSurface" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/swSkipSigning"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:checked="true"
+                            android:contentDescription="@string/s_skip_signing_cd"
+                            app:thumbTint="@color/accent_dark"
+                            app:trackTint="@color/accent_light" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary"
+                        android:breakStrategy="high_quality"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@string/s_skip_signing_desc" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -788,31 +934,35 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
+                        android:breakStrategy="high_quality"
+                        android:lineSpacingExtra="2dp"
                         android:text="@string/s_1fc1da7d" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 分类列表标题 -->
+            <!-- 分类列表标题：标题整行可换行完整显示，提示文字另起一行整行完整换行 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:breakStrategy="high_quality"
+                    android:lineSpacingExtra="1dp"
                     android:text="@string/s_17a8bc26"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="?attr/colorOnSurface" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:breakStrategy="high_quality"
                     android:text="@string/s_12121846"
                     android:textSize="11sp"
                     android:textColor="@color/text_hint" />
@@ -858,8 +1008,10 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:ellipsize="none"
+                                android:breakStrategy="high_quality"
                                 android:text="@string/s_728ee208"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
@@ -877,8 +1029,8 @@
 
                         <ImageButton
                             android:id="@+id/btnFlutterHelp"
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:layout_gravity="center_vertical"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:contentDescription="@string/s_dc91b561"
@@ -891,7 +1043,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="4dp"
+                            android:layout_marginStart="2dp"
                             android:checked="true"
                             android:contentDescription="@string/s_c6973b8d"
                             app:thumbTint="@color/accent_dark"
@@ -902,9 +1054,18 @@
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:maxWidth="80dp"
+                            android:maxLines="1"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
                             android:text="@string/s_08b55fea"
                             android:textSize="13sp"
-                            android:textColor="@color/accent_dark" />
+                            android:textColor="@color/accent_dark"
+                            app:autoSizeMinTextSize="9sp"
+                            app:autoSizeMaxTextSize="13sp"
+                            app:autoSizeStepGranularity="0.5sp"
+                            app:autoSizeTextType="uniform" />
                     </LinearLayout>
 
                     <TextView
@@ -913,6 +1074,8 @@
                         android:layout_marginTop="8dp"
                         android:textSize="12sp"
                         android:textColor="@color/text_secondary"
+                        android:breakStrategy="high_quality"
+                        android:lineSpacingExtra="2dp"
                         android:text="@string/s_efc6ceba" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

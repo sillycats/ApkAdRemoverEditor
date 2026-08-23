@@ -38,6 +38,8 @@ object PathPreferences {
     private const val KEY_SIGN_ENTRY = "sign_entry"
     /** 上次记录的版本号（用于升级后重置签名效验为默认关闭） */
     private const val KEY_LAST_VERSION_CODE = "last_version_code"
+    /** 打包 APK 时是否跳过重签名（true=不签名，直接输出未签名 APK） */
+    private const val KEY_SKIP_SIGNING = "skip_apk_signing"
 
     /** 默认配置文件完整路径。 */
     val DEFAULT_CONFIG_PATH: String = "${Format.EXPORT_DIR}/ad_patterns.json"
@@ -338,5 +340,22 @@ object PathPreferences {
      */
     fun setSignEntry(context: Context, entry: String) {
         getPrefs(context).edit().putString(KEY_SIGN_ENTRY, entry).apply()
+    }
+
+    /**
+     * 打包 APK 时是否跳过重签名。
+     *
+     * true = 打包时不重签名，直接输出未签名 APK（适合需要二次签名/加固等场景）；
+     * false = 打包后自动进行 v1+v2 重签名（默认）。
+     */
+    fun isSigningSkipped(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_SKIP_SIGNING, false)
+    }
+
+    /**
+     * 设置打包 APK 时是否跳过重签名。
+     */
+    fun setSigningSkipped(context: Context, skip: Boolean) {
+        getPrefs(context).edit().putBoolean(KEY_SKIP_SIGNING, skip).apply()
     }
 }

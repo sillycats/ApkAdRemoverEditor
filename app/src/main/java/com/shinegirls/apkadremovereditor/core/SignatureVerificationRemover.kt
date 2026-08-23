@@ -1,5 +1,6 @@
 package com.shinegirls.apkadremovereditor.core
 
+import com.shinegirls.apkadremovereditor.R
 import android.content.Context
 import org.jf.dexlib2.DexFileFactory
 import org.jf.dexlib2.Opcodes
@@ -138,26 +139,26 @@ object SignatureVerificationRemover {
         val log = logger ?: {}
         val startTime = System.currentTimeMillis()
         if (mode == MODE_OFF) {
-            log("  · 签名效验去除已关闭，跳过")
+            log(context.getString(R.string.h_7d8a5387))
             return SignRemovalReport()
         }
         val enhance = mode == MODE_ORIGINAL
-        val modeLabel = if (enhance) "原包去除(增强)" else "普通去除"
+        val modeLabel = if (enhance) context.getString(R.string.h_530b0af0) else context.getString(R.string.h_ad4097b5)
         // 规范化钩子类名 → descriptor 形式（兼容用户输入点号 / 斜杠 / L...; 三种写法）
         val hookType = normalizeHookType(hookClass)
         val hookClassDotted = hookType.removePrefix("L").removeSuffix(";").replace('/', '.')
-        log("▶ 签名效验去除 · $modeLabel")
-        log("  · 原理: 注入 $hookClassDotted 钩子, 改写 Application 父类, 运行时覆盖原包签名")
+        log(context.getString(R.string.h_50e67da4, modeLabel))
+        log(context.getString(R.string.h_eedf995a, hookClassDotted))
 
         // 1. 签名信息（Base64）：优先用用户自定义值，否则从原包读取真实签名证书
         val signB64 = if (signInfo.isNotBlank()) {
-            log("  · 使用自定义签名信息（${signInfo.length} 字符）")
+            log(context.getString(R.string.h_ff4c2138, signInfo.length))
             signInfo
         } else if (originalApk != null && originalApk.exists()) {
             readOriginalSignatureBase64(originalApk)
         } else null
         if (signB64 == null) {
-            log("  ✗ 无法读取原包签名（原包缺失或未签名），无法注入钩子")
+            log(context.getString(R.string.h_3738dcca))
             return SignRemovalReport(
                 mode = mode,
                 elapsedMs = System.currentTimeMillis() - startTime
@@ -170,28 +171,28 @@ object SignatureVerificationRemover {
         val manifestInfo = AxmlAdRemover.readManifestInfo(manifestFile)
         val packageName = entryName.takeIf { it.isNotBlank() } ?: manifestInfo?.packageName
         if (entryName.isNotBlank()) {
-            log("  · 使用自定义入口名称: $entryName")
+            log(context.getString(R.string.h_f0b77403, entryName))
         }
         val customApp = manifestInfo?.applicationName
         val customAppType = resolveClassType(customApp, packageName)
         if (customAppType == null) {
-            log("  · 原包未声明自定义 Application，将按策略选择注入目标")
+            log(context.getString(R.string.h_c975dbf1))
         } else {
-            log("  · 原包自定义 Application: $customApp")
+            log(context.getString(R.string.h_64e1f491, customApp))
         }
 
         // 3. 校验解包目录存在 DEX 文件
         val dexFiles = extractDir.listFiles { f -> f.isFile && f.name.endsWith(".dex") }
             ?: emptyArray()
         if (dexFiles.isEmpty()) {
-            log("  · 未找到 DEX 文件，跳过")
+            log(context.getString(R.string.h_ec83d6b2))
             return SignRemovalReport(
                 mode = mode,
                 originalSignerFingerprint = fingerprint,
                 elapsedMs = System.currentTimeMillis() - startTime
             )
         }
-        log("  · 已读取原包签名: ${fingerprint.take(16)}…")
+        log(context.getString(R.string.h_eaa67708, fingerprint.take(16)))
 
         // 4. 注入 KillerApplication 钩子 DEX（独立 classesN.dex）
         val hookStats = injectHookDex(
@@ -202,7 +203,7 @@ object SignatureVerificationRemover {
         // 5. 改写 Application 父类 / 清单指向（MT 式注入目标选择）
         var appStats: SignRemovalStats? = null
         if (!hookStats.failed) {
-            appStats = patchApplicationSuperclass(extractDir, manifestFile, customAppType, hookType, hookClassDotted, log)
+            appStats = patchApplicationSuperclass(context, extractDir, manifestFile, customAppType, hookType, hookClassDotted, log)
         }
 
         // 6. 原包模式：嵌入 origin.apk 与原生库
@@ -221,7 +222,7 @@ object SignatureVerificationRemover {
             elapsedMs = System.currentTimeMillis() - startTime
         )
         if (!hookStats.failed) {
-            log("  ✓ 签名效验去除完成: 已注入 KillerApplication 钩子($modeLabel), 涉及 ${report.totalPatchedDex} 个 DEX (${report.elapsedMs}ms)")
+            log(context.getString(R.string.h_aa5da2f6, modeLabel, report.totalPatchedDex, report.elapsedMs))
         }
         return report
     }
@@ -259,20 +260,20 @@ object SignatureVerificationRemover {
         val dexStart = System.currentTimeMillis()
         val workDir = createTempDir("SignatureKiIIer")
         return try {
-            log("  ▶ 注入 MT 式签名钩子 (${hookType.removePrefix("L").removeSuffix(";")})…")
+            log(context.getString(R.string.sigrem_inject_hook, hookType.removePrefix("L").removeSuffix(";")))
 
             // 1. 从 assets 读取预编译钩子 DEX（KillerApplication 父类固定为 android.app.Application）
             val baseDex = File(workDir, "hook_base.dex")
             if (!loadAssetToFile(context, ASSET_HOOK_DEX, baseDex)) {
-                throw RuntimeException("内置钩子 DEX 资源缺失: $ASSET_HOOK_DEX")
+                throw RuntimeException(context.getString(R.string.h_8efae575, ASSET_HOOK_DEX))
             }
 
             // 2. 若用户自定义了钩子类名，用 DexRewriter 重命名钩子 DEX 中的 13 个类（主类 + 内部类 a~l）
             val renamed = if (hookType == HOOK_TYPE) {
                 baseDex
             } else {
-                log("  · 自定义钩子类名: ${hookType.removePrefix("L").removeSuffix(";")}")
-                renameHookClasses(baseDex, hookType, log)
+                log(context.getString(R.string.h_47903a91, hookType.removePrefix("L").removeSuffix(";")))
+                renameHookClasses(context, baseDex, hookType, log)
             }
 
             // 3. 重建 <clinit>：注入真实包名 / 签名 / 路径（三个路径用户可自定义）
@@ -287,12 +288,12 @@ object SignatureVerificationRemover {
             val checkDex = DexFileFactory.loadDexFile(patched, Opcodes.getDefault())
             val hookClass = checkDex.classes.firstOrNull { it.type == hookType }
             if (hookClass == null) {
-                throw RuntimeException("钩子 DEX 构建产物缺少 ${hookType} 类，已中止")
+                throw RuntimeException(context.getString(R.string.h_d64d53e1, hookType))
             }
             if (hookClass.superclass != HOOK_SUPER_APPLICATION) {
                 throw RuntimeException(
-                    "钩子 DEX 构建产物中 ${hookType} 父类异常: ${hookClass.superclass}，" +
-                        "应为 $HOOK_SUPER_APPLICATION，已中止"
+                    context.getString(R.string.h_0b1b3420, hookType, hookClass.superclass) +
+                        context.getString(R.string.h_8dce58af, HOOK_SUPER_APPLICATION)
                 )
             }
 
@@ -303,7 +304,7 @@ object SignatureVerificationRemover {
                 val reserved = File(extractDir, "classes${nextIndex + 100}.dex")
                 patched.copyTo(reserved, overwrite = true)
                 val elapsed = System.currentTimeMillis() - dexStart
-                log("  ✓ 签名钩子已写入独立 DEX: ${reserved.name} (${formatSize(reserved.length())}, ${elapsed}ms)")
+                log(context.getString(R.string.h_6b9c9749d, reserved.name, formatSize(reserved.length()), elapsed))
                 return SignRemovalStats(
                     name = reserved.name,
                     originalSize = reserved.length(),
@@ -315,7 +316,7 @@ object SignatureVerificationRemover {
             patched.copyTo(outDex, overwrite = true)
 
             val elapsed = System.currentTimeMillis() - dexStart
-            log("  ✓ 签名钩子已写入独立 DEX: ${outDex.name} (${formatSize(outDex.length())}, ${elapsed}ms)")
+            log(context.getString(R.string.h_6b9c9749, outDex.name, formatSize(outDex.length()), elapsed))
             SignRemovalStats(
                 name = outDex.name,
                 originalSize = outDex.length(),
@@ -325,7 +326,7 @@ object SignatureVerificationRemover {
             )
         } catch (e: Exception) {
             val s = SignWriteName(extractDir) ?: "hook.dex"
-            log("  ✗ 签名钩子注入失败: ${e.message}")
+            log(context.getString(R.string.h_4a060eb9, e.message))
             SignRemovalStats(name = s, failed = true, error = e.message,
                 elapsedMs = System.currentTimeMillis() - dexStart)
         } finally {
@@ -411,6 +412,7 @@ object SignatureVerificationRemover {
      * 若该类不在任何 DEX 中（极罕见），返回失败，由调用方决定清单兜底。
      */
     private fun modifyApplicationSuperclass(
+        context: Context,
         extractDir: File,
         customAppType: String,
         hookType: String,
@@ -424,7 +426,7 @@ object SignatureVerificationRemover {
                 val dex = DexFileFactory.loadDexFile(dexFile, Opcodes.getDefault())
                 val target = dex.classes.firstOrNull { it.type == customAppType } ?: continue
                 if (target.superclass == hookType) {
-                    log("  · ${dexFile.name} 中 $customAppType 已是钩子类父类")
+                    log(context.getString(R.string.h_e2dc63b4, dexFile.name, customAppType))
                     return SignRemovalStats(name = dexFile.name, patchedMethods = 1,
                         elapsedMs = System.currentTimeMillis() - start)
                 }
@@ -438,16 +440,16 @@ object SignatureVerificationRemover {
                     newClasses.add(if (cd.type == customAppType) newCd else ImmutableClassDef.of(cd))
                 }
                 writeDexWithProtection(dexFile, newClasses)
-                log("  ✓ 已将 $customAppType 的父类改为钩子类 (${dexFile.name})")
+                log(context.getString(R.string.h_9c446657, customAppType, dexFile.name))
                 return SignRemovalStats(name = dexFile.name, patchedMethods = 1,
                     elapsedMs = System.currentTimeMillis() - start)
             } catch (e: Exception) {
-                log("  ⚠ 处理 ${dexFile.name} 失败: ${e.message}")
+                log(context.getString(R.string.h_9beb1005, dexFile.name, e.message))
             }
         }
-        log("  ✗ 未在 DEX 中找到自定义 Application 类 $customAppType，父类改写失败")
+        log(context.getString(R.string.h_ab71b49d, customAppType))
         return SignRemovalStats(name = "classes.dex", failed = true,
-            error = "未找到 $customAppType", elapsedMs = System.currentTimeMillis() - start)
+            error = context.getString(R.string.h_8ccf2963, customAppType), elapsedMs = System.currentTimeMillis() - start)
     }
 
     // ==================== 注入目标选择（MT 式） ====================
@@ -464,6 +466,7 @@ object SignatureVerificationRemover {
      *    （清单无 name 时新建一个 name 写入）。
      */
     private fun patchApplicationSuperclass(
+        context: Context,
         extractDir: File,
         manifestFile: File,
         customAppType: String?,
@@ -472,23 +475,23 @@ object SignatureVerificationRemover {
         log: Logger
     ): SignRemovalStats {
         // 1. 优先：改写 androidx.multidex.MultiDexApplication 的父类（Application -> KillerApplication）
-        val multidexStats = modifyClassSuperclass(extractDir, HOOK_SUPER_MULTIDEX, hookType, log)
+        val multidexStats = modifyClassSuperclass(context, extractDir, HOOK_SUPER_MULTIDEX, hookType, log)
         if (multidexStats != null) return multidexStats
 
         // 2. 其次：自定义 Application（若其直接继承 android.app.Application，且非钩子类本身）
         if (customAppType != null && customAppType != hookType &&
             findClassSuperclass(extractDir, customAppType) == HOOK_SUPER_APPLICATION
         ) {
-            val stats = modifyApplicationSuperclass(extractDir, customAppType, hookType, log)
+            val stats = modifyApplicationSuperclass(context, extractDir, customAppType, hookType, log)
             if (!stats.failed) return stats
         }
 
         // 3. 再次：任意继承 android.app.Application 的类（排除钩子类与 MultiDexApplication）
-        val fallback = findAndModifyApplicationSubclass(extractDir, customAppType, hookType, log)
+        val fallback = findAndModifyApplicationSubclass(context, extractDir, customAppType, hookType, log)
         if (fallback != null) return fallback
 
         // 4. 兜底：改写 axml 的 application name（无 name 则新建）
-        return setManifestApplicationName(manifestFile, hookClassDotted, log)
+        return setManifestApplicationName(context, manifestFile, hookClassDotted, log)
     }
 
     /**
@@ -497,6 +500,7 @@ object SignatureVerificationRemover {
      * 返回 null 表示未找到该类（或无需改写）。
      */
     private fun modifyClassSuperclass(
+        context: Context,
         extractDir: File,
         classType: String,
         hookType: String,
@@ -510,15 +514,15 @@ object SignatureVerificationRemover {
                 val dex = DexFileFactory.loadDexFile(dexFile, Opcodes.getDefault())
                 val target = dex.classes.firstOrNull { it.type == classType } ?: continue
                 if (target.superclass == hookType) {
-                    log("  · ${dexFile.name} 中 $classType 已是钩子类父类")
+                    log(context.getString(R.string.h_b8ed0364, dexFile.name, classType))
                     return SignRemovalStats(name = dexFile.name, patchedMethods = 1,
                         elapsedMs = System.currentTimeMillis() - start)
                 }
                 if (target.superclass != HOOK_SUPER_APPLICATION) {
-                    log("  · ${dexFile.name} 中 $classType 父类为 ${target.superclass}，跳过改写")
+                    log(context.getString(R.string.h_b3a0d18e, dexFile.name, classType, target.superclass))
                     return null
                 }
-                log("  · 找到 $classType (${dexFile.name})，改写其父类")
+                log(context.getString(R.string.h_cddb60a3, classType, dexFile.name))
                 val newCd = ImmutableClassDef(
                     target.type, target.accessFlags, hookType, target.interfaces,
                     target.sourceFile, target.annotations,
@@ -529,11 +533,11 @@ object SignatureVerificationRemover {
                     newClasses.add(if (cd.type == classType) newCd else ImmutableClassDef.of(cd))
                 }
                 writeDexWithProtection(dexFile, newClasses)
-                log("  ✓ 已将 $classType 的父类改为钩子类 (${dexFile.name})")
+                log(context.getString(R.string.h_b588b1bd, classType, dexFile.name))
                 return SignRemovalStats(name = dexFile.name, patchedMethods = 1,
                     elapsedMs = System.currentTimeMillis() - start)
             } catch (e: Exception) {
-                log("  ⚠ 处理 ${dexFile.name} 失败: ${e.message}")
+                log(context.getString(R.string.h_9beb1005, dexFile.name, e.message))
             }
         }
         return null
@@ -542,14 +546,14 @@ object SignatureVerificationRemover {
     /**
      * 改写 axml 的 application.android:name 指向钩子类。
      */
-    private fun setManifestApplicationName(manifestFile: File, hookClassDotted: String, log: Logger): SignRemovalStats {
+    private fun setManifestApplicationName(context: Context, manifestFile: File, hookClassDotted: String, log: Logger): SignRemovalStats {
         val ok = AxmlAdRemover.setApplicationName(manifestFile, hookClassDotted)
         if (ok) {
-            log("  ✓ 已改写 application.android:name 指向 $hookClassDotted")
+            log(context.getString(R.string.h_cb00b355, hookClassDotted))
             return SignRemovalStats(name = "AndroidManifest.xml", patchedMethods = 1)
         }
-        log("  ⚠ 改写清单失败（钩子类可能不生效）")
-        return SignRemovalStats(name = "AndroidManifest.xml", failed = true, error = "改写清单失败")
+        log(context.getString(R.string.h_c65d2600))
+        return SignRemovalStats(name = "AndroidManifest.xml", failed = true, error = context.getString(R.string.h_06265e81))
     }
 
     /**
@@ -558,6 +562,7 @@ object SignatureVerificationRemover {
      * 返回 null 表示未找到任何可改写的类。
      */
     private fun findAndModifyApplicationSubclass(
+        context: Context,
         extractDir: File,
         excludeType: String?,
         hookType: String,
@@ -575,7 +580,7 @@ object SignatureVerificationRemover {
                         it.type != hookType &&
                         it.type != HOOK_SUPER_MULTIDEX
                 } ?: continue
-                log("  · 找到继承 android.app.Application 的类: ${target.type} (${dexFile.name})")
+                log(context.getString(R.string.h_eb46cd7f, target.type, dexFile.name))
                 val newCd = ImmutableClassDef(
                     target.type, target.accessFlags, hookType, target.interfaces,
                     target.sourceFile, target.annotations,
@@ -586,11 +591,11 @@ object SignatureVerificationRemover {
                     newClasses.add(if (cd.type == target.type) newCd else ImmutableClassDef.of(cd))
                 }
                 writeDexWithProtection(dexFile, newClasses)
-                log("  ✓ 已将 ${target.type} 的父类改为钩子类 (${dexFile.name})")
+                log(context.getString(R.string.h_b723808a, target.type, dexFile.name))
                 return SignRemovalStats(name = dexFile.name, patchedMethods = 1,
                     elapsedMs = System.currentTimeMillis() - start)
             } catch (e: Exception) {
-                log("  ⚠ 处理 ${dexFile.name} 失败: ${e.message}")
+                log(context.getString(R.string.h_9beb1005, dexFile.name, e.message))
             }
         }
         return null
@@ -624,9 +629,9 @@ object SignatureVerificationRemover {
                 originFile.parentFile?.mkdirs()
                 originalApk.copyTo(originFile, overwrite = true)
                 embedded++
-                log("  ✓ 已嵌入原包: $originAssetPath (${formatSize(originFile.length())})")
+                log(context.getString(R.string.h_fe77d47f, originAssetPath, formatSize(originFile.length())))
             } else {
-                log("  ⚠ 原包缺失，无法嵌入 origin.apk")
+                log(context.getString(R.string.h_92d0ff18))
             }
 
             // 2. lib<soName>.so：按目标 APK 已存在的 ABI 写入；无 lib 目录则全部写入
@@ -637,14 +642,14 @@ object SignatureVerificationRemover {
 
             val soAssets = context.assets.list(ASSET_SO_DIR) ?: emptyArray()
             val abisToWrite = if (existingAbis.isEmpty()) {
-                log("  · 目标 APK 无 lib 目录，写入全部 ABI（含 x86 / x86_64）")
+                log(context.getString(R.string.h_f16e570f))
                 soAssets.toList()
             } else {
-                log("  · 检测到目标 APK lib 目录 ABI: ${existingAbis.sorted().joinToString()}")
+                log(context.getString(R.string.h_c807c057, existingAbis.sorted().joinToString()))
                 soAssets.filter { it in existingAbis }
             }
             if (abisToWrite.isEmpty()) {
-                log("  ⚠ 目标 APK 已存在的 ABI 均无对应原生库资源，未嵌入 so")
+                log(context.getString(R.string.h_1f2ebce9))
             }
             for (abi in abisToWrite) {
                 val srcName = "$abi/libSignatureKiIIer.so"
@@ -652,15 +657,15 @@ object SignatureVerificationRemover {
                 target.parentFile?.mkdirs()
                 if (loadAssetToFile(context, "$ASSET_SO_DIR/$srcName", target)) {
                     embedded++
-                    log("  ✓ 已嵌入原生库: lib/$abi/lib$soName.so (${formatSize(target.length())})")
+                    log(context.getString(R.string.h_d4c58d3d, abi, soName, formatSize(target.length())))
                 } else {
-                    log("  ⚠ 原生库资源缺失: $srcName")
+                    log(context.getString(R.string.h_73801f75, srcName))
                 }
             }
             return SignRemovalStats(name = "$originAssetPath + lib", patchedMethods = embedded,
                 elapsedMs = System.currentTimeMillis() - start)
         } catch (e: Exception) {
-            log("  ✗ 原包模式资源嵌入失败: ${e.message}")
+            log(context.getString(R.string.h_04f51da8, e.message))
             return SignRemovalStats(name = "$originAssetPath + lib", failed = true, error = e.message,
                 elapsedMs = System.currentTimeMillis() - start)
         }
@@ -673,7 +678,7 @@ object SignatureVerificationRemover {
      * 钩子类内部无点号类名字符串字面量，因此无需处理字符串池。
      * 主类父类恒为 android.app.Application，不受影响。
      */
-    private fun renameHookClasses(baseDex: File, hookType: String, log: Logger): File {
+    private fun renameHookClasses(context: Context, baseDex: File, hookType: String, log: Logger): File {
         val dexFile = DexFileFactory.loadDexFile(baseDex, Opcodes.getDefault())
         val oldPrefix = HOOK_TYPE.removeSuffix(";")   // Lbin/mt/signature/KillerApplication
         val newPrefix = hookType.removeSuffix(";")    // Lcom/custom/MyHook
@@ -691,7 +696,7 @@ object SignatureVerificationRemover {
         val rewritten = DexRewriter(module).getDexFileRewriter().rewrite(dexFile)
         val out = File(baseDex.parentFile, "hook_renamed.dex")
         DexFileFactory.writeDexFile(out.absolutePath, rewritten)
-        log("  ✓ 钩子类已重命名为 ${hookType.removePrefix("L").removeSuffix(";")} (含 12 个内部类)")
+        log(context.getString(R.string.sigrem_class_renamed, hookType.removePrefix("L").removeSuffix(";")))
         return out
     }
 

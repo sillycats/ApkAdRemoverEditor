@@ -46,7 +46,7 @@ class FileAdapter(
             if (file.isDirectory) {
                 iconView.setImageResource(R.drawable.ic_category_view)
                 val childCount = file.listFiles()?.size ?: 0
-                infoView.text = "$childCount 项"
+                infoView.text = itemView.context.getString(R.string.h_71a40f61, childCount)
             } else {
                 iconView.setImageResource(getFileIcon(file))
                 infoView.text = Format.formatSize(file.length())

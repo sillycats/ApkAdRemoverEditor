@@ -1,14 +1,852 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_copyright" formatted="false">© 2026 小奶瓶 · 保留所有權利\nPowered by dexlib2 / apksig / AndroidX</string>
+    <string name="about_disclaimer" formatted="false">請在使用本應用前仔細閱讀以下免責聲明：\n\n1. 合法用途限制：本應用僅供學習、研究與個人合法用途使用。請勿對您不擁有版權、未獲授權或受法律保護的應用進行修改與分發。\n\n2. 使用風險自擔：使用本應用處理 APK 所產生的任何後果（包括但不限於：應用無法安裝、閃退、功能異常、帳號風險、數據丟失等）均由使用者自行承擔。\n\n3. 商業使用責任：修改後的 APK 若用於商業用途或對外分發，請確保遵守相關應用的所有權、版權、商標及所在國家或地區的法律法規，由此產生的法律責任由使用者自擔。\n\n4. 無擔保聲明：本應用按其現狀提供，不附帶任何形式的明示或默示擔保。作者不對因使用或無法使用本應用而造成的任何直接或間接損失承擔責任。\n\n5. 第三方內容：本應用引用的開源項目與廣告特徵規則均來自公開渠道，僅供技術參考，其版權歸原作者所有。\n\n6. 條款變更：作者保留隨時修改本免責聲明的權利，更新後的內容將在新版本中生效。\n\n7. 使用本應用即視為您已閱讀、理解並同意以上全部條款。若不同意，請停止使用本應用。</string>
+    <string name="about_open_source" formatted="false">本應用基於以下開源項目構建並調用，在此向各位作者表示誠摯感謝與敬意：\n\n1. ApkDataMultiplexing (L-JINBIN)\n   APK 數據復用優化：通過中央目錄數據偏移復用原包數據段，刪除重複數據段，\n   顯著減小過籤包體積（最多約 50%），並配套 V2V3SchemeSigner 籤名方案\n   - 主頁: https://github.com/L-JINBIN/ApkDataMultiplexing\n   - 協議: 未標註許可證，僅供學習參考\n\n2. dexlib2 / smali / baksmali (JesusFreke)\n   DEX 文件讀寫與 smali 反彙編 / 彙編工具鏈，去廣告核心引擎\n   - 主頁: https://github.com/JesusFreke/smali\n   - 協議: BSD 3-Clause\n\n3. apksig (Android Open Source Project)\n   APK v1 / v2 / v3 籤名實現，保證處理結果可安裝\n   - 主頁: https://android.googlesource.com/platform/tools/apksig\n   - 協議: Apache License 2.0\n\n4. BouncyCastle : bcprov / bcpkix\n   Java 加解密與證書生成庫，用於生成籤名證書\n   - 主頁: https://www.bouncycastle.org/\n   - 協議: MIT License\n\n5. Guava (Google)\n   Java 集合與工具庫，提供 dexlib2 所需的不可變集合\n   - 主頁: https://github.com/google/guava\n   - 協議: Apache License 2.0\n\n6. AndroidX (Android Open Source Project)\n   core-ktx / appcompat / constraintlayout / recyclerview / lifecycle / coordinatorlayout\n   Android 官方 Jetpack 支持庫\n   - 主頁: https://developer.android.com/jetpack\n   - 協議: Apache License 2.0\n\n7. Material Components (Google)\n   Material Design 組件庫，提供卡片、按鈕、對話框等 UI 組件\n   - 主頁: https://github.com/material-components/material-components-android\n   - 協議: Apache License 2.0\n\n8. Kotlin 標準庫 (JetBrains)\n   Kotlin 程式語言與標準庫\n   - 主頁: https://kotlinlang.org/\n   - 協議: Apache License 2.0\n\n9. DTL-X (Gameye98)\n   廣告類名 / 方法名 / URL 特徵規則參考來源\n   - 主頁: https://github.com/Gameye98/DTL-X\n   - 僅供特徵參考與學習，未修改其二進位\n\n10. Android Asset Packaging Tool (AAPT2)\n    Android 資源編譯與打包工具，用於 AXML / 資源處理\n    - 主頁: https://developer.android.com/tools/aapt2\n    - 協議: Apache License 2.0\n\n11. MT 管理器 ApkSignatureKillerEx 樣本 (Bin.MT)\n    籤名效驗去除鉤子類（bin.mt.signature.KillerApplication）與原生庫思路來源\n    - 主頁: https://mt2.cn/\n    - 僅供學習參考，鉤子類與原生庫為樣本內置資源，未修改其二進位\n\n12. dexlib2 DexRewriter (JesusFreke)\n    基於 RewriterModule / TypeRewriter 的 DEX 類重命名方案，用於自定義鉤子類名\n    - 主頁: https://github.com/JesusFreke/smali\n    - 協議: BSD 3-Clause\n\n以上項目的完整版權與許可文本，請訪問對應主頁查看。</string>
+    <string name="about_privacy" formatted="false">本應用遵守最小化收集原則，高度重視並保護您的個人隱私：\n\n1. 本地離線處理：所有 APK 的解包、去廣告、打包、籤名均在您的設備本地完成，應用不會上傳任何 APK 文件或內部數據到伺服器。\n\n2. 聯網行為透明：本應用僅在您主動點擊&quot;檢查更新&quot;時聯網請求版本信息，其餘時間不會在後臺聯網、收集或上傳任何個人信息。\n\n3. 權限最小化：本應用不讀取、不存儲、不訪問您的通訊錄、相冊、定位、簡訊、通話記錄等敏感信息。\n\n4. 數據本地存儲：應用的配置、處理特徵等數據僅保存在您的設備本地，應用卸載後即被清除，不會留存任何雲端記錄。\n\n5. 第三方連結：關於與更新頁面可能包含外部連結，點擊後由第三方平臺處理您的訪問行為，建議您查閱相關第三方的隱私政策。\n\n6. 若您在使用過程中有任何隱私疑問、建議或顧慮，歡迎通過作者聯繫方式與我們溝通，我們將盡力解答。</string>
+    <string name="about_reference" formatted="false">本應用的實現過程中參考了以下公開的技術文檔、開源教程與社區逆向資料，在此一併致謝，並說明出處：\n\n1. DEX 直接修補方案 (基於 dexlib2)\n   參考 Facebook 曾開源的 android-dexdump 思路，以及 dexlib2 官方示例\n   - dexlib2 主頁: https://github.com/JesusFreke/smali\n   - 借鑑其 API 文檔與示例用法，自行實現廣告類/方法/字符串的定位與改寫\n\n2. AXML 二進位格式解析 (Android Asset Packaging)\n   參考 AOSP 的 XmlPullParser 與 AXML 二進位格式說明\n   - 出處: https://android.googlesource.com/platform/frameworks/base/ (core/res)\n   - 依據 AXML chunk 頭、資源表 StringPool/ResourceMap 結構與公共逆向資料編寫\n\n3. Dart AOT 快照解析 (Flutter libapp.so)\n   參考 Dart VM 源碼 snapshot.h 與社區 Flutter 逆向資料\n   - snapshot.h 出處: https://github.com/dart-lang/sdk/blob/main/runtime/vm/snapshot.h\n   - 用於定位 libapp.so 內 Dart 快照頭並提取/抹除廣告字符串\n\n4. 廣告特徵規則整理\n   廣告 SDK 包名 / 域名 / 類名關鍵詞參考開源項目 DTL-X 的規則整理擴充\n   - 主頁: https://github.com/Gameye98/DTL-X\n   - 參考其 adloader / 域名黑名單 / 方法關鍵詞思路，結合主流廣告 SDK 自行整理\n\n5. APK v1 / v2 籤名與對齊\n   參考 apksig 官方實現與 Android 文檔中關於 ZIP alignment 的說明\n   - apksig: https://android.googlesource.com/platform/tools/apksig\n   - ZIP alignment: https://developer.android.com/studio/command-line/zipalign\n\n6. 數據復用優化（過籤包體積優化）\n   參考 L-JINBIN 的 ApkDataMultiplexing 項目與 LSPatch 過籤包結構\n   - 主頁: https://github.com/L-JINBIN/ApkDataMultiplexing\n   - 思路來源: LSP 技術團隊（過籤包 + IO 重定向對抗整包校驗）\n   - 原理: 通過中央目錄數據偏移復用原包數據段，刪除重複數據段實現體積優化\n   - 已移植其 DataMultiplexing / ZipMaker / ZipFile / V2V3SchemeSigner 實現\n\n7. 界面主題與排版\n   基於 Material Design 規範與 Material Components 組件庫示例編寫\n   - 規範: https://m3.material.io/\n   - 組件: https://github.com/material-components/material-components-android\n\n8. 籤名效驗去除（過籤）\n   參考 MT 管理器 ApkSignatureKillerEx 的鉤子注入思路：\n   - 注入 KillerApplication 鉤子類並改寫 manifest 的 Application 指向\n   - 鉤子 &lt;clinit&gt; 中通過 PackageManager 讀取籤名並緩存，覆蓋 getPackageInfo / 原生校驗\n   - 原包模式：嵌入原始 APK 與過籤 SO，讀取原始籤名參與匹配，覆蓋更廣\n   - 出處: https://mt2.cn/ （僅供學習參考）\n\n9. DEX 類重命名（自定義鉤子類名）\n   參考 dexlib2 官方 RewriterModule / TypeRewriter 示例，實現類定義與全部引用的一併改寫\n   - 出處: https://github.com/JesusFreke/smali\n   - 依據類型描述符前綴匹配重寫，兼容點號 / 斜槓 / L...; 三種輸入寫法\n\n以上內容僅作技術學習參考，最終實現均為本項目自研；涉及版權歸原作者與作者所屬機構所有。</string>
     <string name="app_name">APK去廣告編輯器</string>
+    <string name="app_subtitle_about">關於應用 · 版本資訊與聲明</string>
+    <string name="app_subtitle_settings">自訂去廣告特徵</string>
+    <string name="app_title_download">下載中心</string>
+    <string name="app_title_local">本地 APK 一鍵去廣告 · 解包 / 修補 / 打包 / 簽名</string>
     <string name="author_email">3679265780@qq.com</string>
     <string name="author_name">小奶瓶</string>
     <string name="author_qq_note">3679265780</string>
     <string name="file_item_icon">檔案圖示</string>
+    <string name="h_00110af8">日本語</string>
+    <string name="h_0046342a">  · 未找到 DEX 文件</string>
+    <string name="h_0078e971" formatted="false">| APK 體積 | %1$s | %2$s | %3$s |</string>
+    <string name="h_0094af95">識別廣告視圖組件類</string>
+    <string name="h_00a68483">com.google.android.gms.ads\ncom.bytedance.sdk.openadsdk\nCOM.QQ.E.ADS\ncom.mbridge.msdk</string>
+    <string name="h_00db9073">運行時由 core/DexPatcher.kt 的方法置空篩選邏輯（帶單詞邊界感知）讀取。</string>
+    <string name="h_01213463">    - 主頁: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_0148e9c3" formatted="false">| 總耗時 | - | %1$s | - |</string>
+    <string name="h_0189f54f">   Java 集合與工具庫，提供 dexlib2 所需的不可變集合\n</string>
+    <string name="h_01ad6b8a" formatted="false">  ✓ %1$s 回編譯完成: 快照=%2$s, </string>
+    <string name="h_01be0fd6">與&quot;廣告 SDK 包名&quot;&quot;廣告 Activity / Service / Receiver&quot;配合使用，用於清理廣告 SDK 在清單中的權限聲明。</string>
+    <string name="h_01d3d9f4">保存失敗，請檢查存儲權限</string>
+    <string name="h_01ee9186" formatted="false">| 跳過 DEX 數 | %1$s |</string>
+    <string name="h_01f0ed64" formatted="false">  ⚠ 清理 Flutter 緩存失敗: %1$s</string>
+    <string name="h_02317889">Flutter 廣告特徵已啟用</string>
+    <string name="h_0253b8cd">通常獨立使用，也可與\</string>
+    <string name="h_02b610da">未檢測到 Flutter 應用（無 libapp.so），本項不適用。</string>
+    <string name="h_02be3cd1">廣告 View 類名</string>
+    <string name="h_02cd9acd" formatted="false">  ✓ 籤名 | %1$s | %2$s</string>
+    <string name="h_03277167">isVIP\nisPro\nisPremium\nis成員\n是已付費的</string>
+    <string name="h_037647ef">正在檢查更新…</string>
+    <string name="h_042f6c6a" formatted="false">  ⚠ 刪除失敗: %1$s/%2$s</string>
+    <string name="h_0456832d">點擊&quot;管理&quot;→ 輸入關鍵詞 → 點&quot;添加&quot;。</string>
+    <string name="h_04cc78d8">APK 的 res/layout 布局文件中，廣告 SDK 常以自定義 View 形式嵌入（如 com.meishu.sdk.meishu_ad.view.MeishuVideoCahceTextureView、AdView 等）。元素類名包含該關鍵詞時，處理後會把該元素的 layout_width / layout_height 改為 0dp，將廣告區域壓縮為 0 尺寸隱藏，而不移除其在布局中的位置與引用，避免破壞布局結構。</string>
+    <string name="h_04cd3cff">AdView\n廣告活動\n橫幅廣告\nInterstitialAd</string>
+    <string name="h_04ea27ce">廣告 View 類名\</string>
+    <string name="h_04f51da8" formatted="false">  ✗ 原包模式資源嵌入失敗: %1$s</string>
+    <string name="h_0502db8e">替換全部</string>
+    <string name="h_05112730">Res布局廣告View關鍵詞</string>
+    <string name="h_05360de7" formatted="false">籤名效驗模式已設為：%1$s</string>
+    <string name="h_0594e658">   - 協議: BSD 3-Clause\n\n</string>
+    <string name="h_05ade75d">口令已生成，可複製或分享給他人。</string>
+    <string name="h_06265e81">改寫清單失敗</string>
+    <string name="h_06b81d3d">布局加載失敗</string>
+    <string name="h_07f8a374">   - 出處: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_08430702" formatted="false">已是最新版本 (%1$s)</string>
+    <string name="h_08badd62">常與\</string>
+    <string name="h_08dc0848">    - 協議: Apache License 2.0\n\n</string>
+    <string name="h_09306e74" formatted="false">  ✗ 去廣告處理異常: %1$s</string>
+    <string name="h_0a855e59">廣告廣播接收器（Receiver）類名關鍵詞，用於識別廣告廣播組件，處理時置空其廣告方法，並在清單中移除對應組件。</string>
+    <string name="h_0b1609fb">未啟用（點擊修改選擇模式）</string>
+    <string name="h_0b1b3420" formatted="false">鉤子 DEX 構建產物中 %1$s 父類異常: %2$s，</string>
+    <string name="h_0b1c5479">通常獨立使用，也可與&quot;廣告 SDK 包名&quot;配合增強屏蔽效果。</string>
+    <string name="h_0b34e814">請輸入訂閱源名稱</string>
+    <string name="h_0b849763">## 處理檢查點（斷點續傳基礎設施）</string>
+    <string name="h_0c01c591">   - snapshot.h 出處: https://github.com/dart-lang/sdk/blob/main/runtime/vm/snapshot.h\n</string>
+    <string name="h_0c258295" formatted="false">| Res 廣告布局隱藏 | %1$s |</string>
+    <string name="h_0c374516" formatted="false">| AXML 廣告組件移除 | %1$s |</string>
+    <string name="h_0c94389e">本應用的實現過程中參考了以下公開的技術文檔、開源教程與社區逆向資料，在此一併致謝，並說明出處：\n\n</string>
+    <string name="h_0cad3ba2">過籤 SO 按 ABI 智能注入：僅寫入目標 APK 已存在的架構目錄，無 lib 目錄則全架構寫入</string>
+    <string name="h_0d05061e">   - 鉤子 &lt;clinit&gt; 中通過 PackageManager 讀取籤名並緩存，覆蓋 getPackageInfo / 原生校驗\n</string>
+    <string name="h_0d110ed8">配合效果最佳，也常與\</string>
+    <string name="h_0d2d462b" formatted="false">綁定分類卡片失敗: %1$s</string>
+    <string name="h_0d37a3a3">點擊&quot;管理&quot;→ 輸入要解鎖的判定方法名 → 點&quot;添加&quot;。</string>
+    <string name="h_0d3ea6cb">寫入 $HELP_CONFIG_NAME 的 &quot;res_layout_keywords&quot; 欄位。\n運行時由 core/AxmlAdRemover.kt 的 hideAdLayoutViews() 改寫 res/layout 及 res/layout-* 下 AXML 布局中命中元素寬高為 0dp。</string>
+    <string name="h_0dd640d5">Flutter 應用（AOT）的 libapp.so 內嵌 Dart 快照，以原始 ASCII 字節保存了廣告 SDK 包名、廣告 URL/域名、廣告類名等字符串。此處維護在快照中要抹除的字符串特徵：命中後會在 libapp.so 解包/去廣告/回編譯時做等長 NUL 覆蓋，使廣告字符串內容失效。</string>
+    <string name="h_0e13f623">確定要恢復所有廣告特徵為內置默認值？\n當前自定義修改將丟失。</string>
+    <string name="h_0e3149dd" formatted="false">  ▶ 處理 %1$s (%2$s, %3$s)</string>
+    <string name="h_0e655b36" formatted="false">| 廣告方法置空 | %1$s |</string>
+    <string name="h_0ed17ae5">4. 無擔保聲明：本應用按其現狀提供，不附帶任何形式的明示或默示擔保。作者不對因使用或無法使用本應用而造成的任何直接或間接損失承擔責任。\n\n</string>
+    <string name="h_0f5b9aec">   - 借鑑其 API 文檔與示例用法，自行實現廣告類/方法/字符串的定位與改寫\n\n</string>
+    <string name="h_0f8a3b32">點擊&quot;管理&quot;→ 輸入廣告字符串特徵（可只寫片段）→ 點&quot;添加&quot;。運行時會按子串匹配（不區分大小寫）。</string>
+    <string name="h_0fc61704">未命名訂閱</string>
+    <string name="h_0fd47041">已重置為默認配置</string>
+    <string name="h_101f062b">   - 注入 KillerApplication 鉤子類並改寫 manifest 的 Application 指向\n</string>
+    <string name="h_10286b03">   - 主頁: https://www.bouncycastle.org/\n</string>
+    <string name="h_1136c248">廣告類名關鍵詞\</string>
+    <string name="h_114cfdd0">用於\</string>
+    <string name="h_118b2282">強制更新 且 當前版本低於最新版本</string>
+    <string name="h_11b8b2c9">  · 優化失敗，回退常規 v1+v2 籤名</string>
+    <string name="h_11ca9ed7" formatted="false">    -&gt; %1$s: 連結置空 %2$s 處%3$s</string>
+    <string name="h_122f1ca8">lib 目錄下要刪除的 .so 原生庫名關鍵詞。用於刪除廣告 SDK 的動態庫文件（如確保 lib 目錄裡的廣告 so 被移除）。</string>
+    <string name="h_1233c111" formatted="false">文件: %1$s</string>
+    <string name="h_12f7aee0">,             // 公告唯一 ID（用於</string>
+    <string name="h_130a118a">獨立功能，作用於所有類、所有方法，不依賴其他分類。</string>
+    <string name="h_132ae845">  · 解包：未找到 Dart 快照</string>
+    <string name="h_1394b002">按關鍵詞刪除廣告資源</string>
+    <string name="h_14543bce">   - 主頁: https://android.googlesource.com/platform/tools/apksig\n</string>
+    <string name="h_14e50afa">與&quot;廣告 SDK 包名&quot;&quot;廣告類名關鍵詞&quot;配合，同屬類名識別體系。</string>
+    <string name="h_1516029a">嘖\nGDT\n潘格爾\nAdmob\n拜杜阿德</string>
+    <string name="h_15286e90">原包去除籤名效驗</string>
+    <string name="h_158dee5e">選擇籤名效驗去除模式</string>
+    <string name="h_15c99f22">廣告類方法置空、廣告連結置空、View 幾何置空、強制返回 true/false 解鎖會員並屏蔽廣告判定</string>
+    <string name="h_166a8328" formatted="false">AXML權限 %1$s</string>
+    <string name="h_166c2b0d">只影響形如網址的字符串（含 ://、www、.com 等），避免誤傷普通文本。</string>
+    <string name="h_16753bc3">載入廣告\nshowAd\nloadInterstitialAd\nshowRewardedVideo</string>
+    <string name="h_16a1939f" formatted="false">| 失敗 DEX 數 | %1$s |</string>
+    <string name="h_16a9197c" formatted="false">寫入外部配置文件 %1$s 的 \</string>
+    <string name="h_1716f0ff">⏭ 零修改</string>
+    <string name="h_17393ab7" formatted="false">方法數量: %1$s</string>
+    <string name="h_17ac7253">廣告活動\nInterstitialAdActivity\n濺射活動</string>
+    <string name="h_18374fbf">tt_version\nstartup_config\nOAID\nUUID\ndevice_id\noa_sdk</string>
+    <string name="h_1897b7f5">添加方式</string>
+    <string name="h_1901ab4f" formatted="false">  ✗ %1$s 內存不足: %2$s</string>
+    <string name="h_19071f26">▶ 階段 2.5 AXML 權限移除</string>
+    <string name="h_19c4ff08">運行時由 core/DexPatcher.kt 掃描 const-string 指令並置空匹配的廣告字符串。</string>
+    <string name="h_1a63ac23">示例</string>
+    <string name="h_1b5de080" formatted="false"> (%1$s 條)</string>
+    <string name="h_1b92ede8">請輸入訂閱源口令、直鏈連結或粘貼配置內容</string>
+    <string name="h_1c397bbb">清單中匹配的 &lt;receiver&gt; 會被整體移除。</string>
+    <string name="h_1cb37f65" formatted="false">  ✗ 未在 %1$s 中找到 Dart 快照，跳過</string>
+    <string name="h_1cdb9d2e">→ 在輸入框輸入廣告 SDK 的完整包名 → 點\</string>
+    <string name="h_1d0592d0" formatted="false">強制false %1$s</string>
+    <string name="h_1d0da9e5">   - 依據 AXML chunk 頭、資源表 StringPool/ResourceMap 結構與公共逆向資料編寫\n\n</string>
+    <string name="h_1d11c240">以上內容僅作技術學習參考，最終實現均為本項目自研；涉及版權歸原作者與作者所屬機構所有。</string>
+    <string name="h_1d9b17d9" formatted="false">| 強制返回 false | %1$s |</string>
+    <string name="h_1d9e668b" formatted="false">下載失敗: %1$s</string>
+    <string name="h_1da8eee1" formatted="false">, 強制false=%1$s</string>
+    <string name="h_1dc6377b">8. 籤名效驗去除（過籤）\n</string>
+    <string name="h_1e52f7a3">修改配置文件路徑</string>
+    <string name="h_1e8d2df8">建議寫通用片段而非完整路徑，命中率更高；關鍵詞越多誤傷可能性越大，請謹慎。</string>
+    <string name="h_1eaa01fa">配合使用。</string>
+    <string name="h_1f2ebce9">  ⚠ 目標 APK 已存在的 ABI 均無對應原生庫資源，未嵌入 so</string>
+    <string name="h_1f8edce8">配合使用（包名會自動推導部分庫名關鍵詞）。</string>
+    <string name="h_1fcaf3a3">運行時由 core/AdRemover.kt 的 cleanRootFiles() 遍歷 APK 根目錄（僅一層，不遞歸）並刪除匹配文件。</string>
+    <string name="h_1fdd9c8d">對高熵數據再壓縮</string>
+    <string name="h_2065c465" formatted="false">DEX 體積優化：移除調試信息（行號/局部變量表），再減小 5%~15% 體積</string>
+    <string name="h_21773eee">    - 僅供學習參考，鉤子類與原生庫為樣本內置資源，未修改其二進位\n\n</string>
+    <string name="h_21806150">點擊&quot;管理&quot;→ 輸入與代碼中完全一致的方法名 → 點&quot;添加&quot;。</string>
+    <string name="h_21888ee3">前往瀏覽器下載</string>
+    <string name="h_21be04bc">✅ 已修改</string>
+    <string name="h_21d3c920">寫入 $HELP_CONFIG_NAME 的 &quot;ad_activities&quot; 欄位。\n由 core/DexPatcher.kt（類識別）與 core/AxmlAdRemover.kt（AndroidManifest 組件移除）讀取。</string>
+    <string name="h_225b72f5">   - 原包模式：嵌入原始 APK 與過籤 SO，讀取原始籤名參與匹配，覆蓋更廣\n</string>
+    <string name="h_225efc14">    Android 資源編譯與打包工具，用於 AXML / 資源處理\n</string>
+    <string name="h_22c8b46e" formatted="false">  · 未壓縮大小: %1$s</string>
+    <string name="h_23348314" formatted="false">設置界面加載失敗: %1$s</string>
+    <string name="h_2364780e">  · 未找到 lib 目錄，Flutter 處理跳過</string>
+    <string name="h_23af2edf" formatted="false">  ✓ 已清理 Flutter 緩存: 刪除 %1$s 個文件，僅保留 strings.txt</string>
+    <string name="h_23cc02a1" formatted="false">  · 模式: %1$s</string>
+    <string name="h_23fa5ce2">   - 協議: MIT License\n\n</string>
+    <string name="h_2405c1bf" formatted="false">  ℹ 數據復用優化完成: %1$s -&gt; %2$s</string>
+    <string name="h_2664f5c6">請填寫和廣告 SDK 強相關的唯一字符串（如廣告位 ID、SDK 特徵串），避免過於通用導致誤傷正常功能字符串。</string>
+    <string name="h_26f0c819">鉤子類名 / 籤名信息 / 入口名稱 / 注入參數全部可自定義，內置 DEX 類名自動重命名</string>
+    <string name="h_2706339d">   - 主頁: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_271e5d10">與&quot;廣告 URL / 域名&quot;&quot;廣告方法名&quot;配合：本分類置空任意命中的字符串，覆蓋面更廣。</string>
+    <string name="h_284f10db">廣告 Activity（頁面）類名關鍵詞，用於識別廣告頁面類，處理時置空其廣告方法，並在清單中移除對應組件。</string>
+    <string name="h_288979b3">互補：true 用於解鎖 VIP，false 用於屏蔽廣告展示判定。</string>
+    <string name="h_2925d260">   - 主頁: https://developer.android.com/jetpack\n</string>
+    <string name="h_29767300">   參考 dexlib2 官方 RewriterModule / TypeRewriter 示例，實現類定義與全部引用的一併改寫\n</string>
+    <string name="h_298ae83f" formatted="false">  ✗ 處理 %1$s 失敗: %2$s</string>
+    <string name="h_299bd8c9">手動輸入配置</string>
+    <string name="h_2a6fc8f0" formatted="false">寫入 %1$s 的 \</string>
+    <string name="h_2b8b4e3c" formatted="false">\n... (%1$s bytes 未顯示)</string>
+    <string name="h_2be69e45">寫入 $HELP_CONFIG_NAME 的 &quot;force_true_methods&quot; 欄位。\n運行時由 core/DexPatcher.kt 的強制返回 true 邏輯處理（僅 boolean/int 返回類型）。</string>
+    <string name="h_2c72ee88">AXML 深度處理：移除廣告組件、廣告權限聲明、隱藏 Res 布局廣告 View</string>
+    <string name="h_2c7d15eb">運行時由 core/DexPatcher.kt 做方法名精確匹配並置空方法體。</string>
+    <string name="h_2d455ce5">下載中</string>
+    <string name="h_2d8e8ed2">常與&quot;廣告類名關鍵詞&quot;&quot;廣告 SDK 原生庫關鍵詞&quot;配合；包名會自動推導 lib 目錄 .so 庫名關鍵詞。</string>
+    <string name="h_2d96df70">過籤包</string>
+    <string name="h_2dee860f" formatted="false">  ✓ 已移除 %1$s 個廣告權限聲明</string>
+    <string name="h_2e352520">配合使用：本分類為精確匹配，後者為模糊關鍵詞匹配。</string>
+    <string name="h_2f5132d0">無條件為每個方法複製全部指令</string>
+    <string name="h_2fcb517d">拉取失敗，請檢查連結是否有效</string>
+    <string name="h_2fe6efbe">路徑設置失敗，請檢查權限</string>
+    <string name="h_300739f4">重置默認配置</string>
+    <string name="h_3020d50a">   廣告類名 / 方法名 / URL 特徵規則參考來源\n</string>
+    <string name="h_30d2a6e2">確定刪除 \</string>
+    <string name="h_31186ba1" formatted="false">  ✓ 清理 %1$s 個 assets 條目 | %2$sms</string>
+    <string name="h_3141af8c">廣告服務\n下載服務\n更新服務</string>
+    <string name="h_3155992e">   - dexlib2 主頁: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_31e413e3">DEX 體積優化已關閉</string>
+    <string name="h_324f699a">識別廣告後臺服務類</string>
+    <string name="h_327638c1">加載配置失敗，使用默認配置</string>
+    <string name="h_327c8914" formatted="false">, 字符串置空=%1$s</string>
+    <string name="h_328bae35">處理卡死</string>
+    <string name="h_32ae4cdd">  ℹ 該 DEX 較大，已啟用低內存安全掃描，請耐心等待...</string>
+    <string name="h_32b1989c">廣告類名關鍵詞</string>
+    <string name="h_33b16185">持平</string>
+    <string name="h_348519cb">▶ 步驟 4/5 打包籤名</string>
+    <string name="h_34e480ea" formatted="false">| Flutter libapp.so 處理 | %1$s 個庫, 替換 %2$s 處 |</string>
+    <string name="h_351683da">修改 APK 輸出目錄</string>
+    <string name="h_362944cf" formatted="false">DEX寫入內存不足: %1$s</string>
+    <string name="h_36427794">包名用點號格式（如 com.x.y），處理時自動轉為斜槓格式匹配 DEX 類名。</string>
+    <string name="h_364d2bba">未發現 DEX 文件或未處理。</string>
+    <string name="h_369a31f0">DEX 字符串廣告特徵</string>
+    <string name="h_36fc3fb9">不再提示 / 只顯示一次</string>
+    <string name="h_3738dcca">  ✗ 無法讀取原包籤名（原包缺失或未籤名），無法注入鉤子</string>
+    <string name="h_37f14a6c">此關鍵詞用於匹配布局元素類名，覆蓋面廣，請避免使用過於通用的詞（如 ad）以防隱藏正常控制項；建議使用 .ad.、具體 SDK 名或完整類名。</string>
+    <string name="h_380de9a9">未找到郵件客戶端</string>
+    <string name="h_38e6644d">targetSdkVersion &gt;= 30 的 APK 必須使用 v2 或更高籤名方案</string>
+    <string name="h_3942f40c" formatted="false">  · 復用原包(%1$s)數據段，節省 %2$s </string>
+    <string name="h_3a3bf3f6">內存不足，處理失敗</string>
+    <string name="h_3ab3b29b">配合：一個模糊關鍵詞、一個精確方法名；常與\</string>
+    <string name="h_3ae2b7d3" formatted="false">    -&gt; %1$s: 強制返回 false %2$s 個方法</string>
+    <string name="h_3b108349">保存成功</string>
+    <string name="h_3b98359d">→ 輸入與代碼中完全一致的方法名 → 點\</string>
+    <string name="h_3bab674a" formatted="false"># 字符串總數(去重): %1$s</string>
+    <string name="h_3bd446d8">籤名效驗去除已啟用</string>
+    <string name="h_3c1862f0">強制返回 true 的方法名</string>
+    <string name="h_3c1e4f2e">點擊&quot;管理&quot;→ 輸入廣告 View 類名或關鍵詞 → 點&quot;添加&quot;。</string>
+    <string name="h_3ce15ae3">。運行時會按子串匹配（不區分大小寫）。</string>
+    <string name="h_3ce7dc91">廣告View類名</string>
+    <string name="h_3db4cd4d">GDT\n單行道\nBDXADSDK\n庫明</string>
+    <string name="h_3dd3492b">DEX修補</string>
+    <string name="h_3e32cd6d">識別重命名嵌套 APK：無後綴或任意後綴的原包子包也能準確識別並復用優化</string>
+    <string name="h_40d44b02">未找到 Dart 快照</string>
+    <string name="h_40d55c2d">等判定方法。方法名精確命中且返回類型為 boolean 或 int 時，方法體被替換為\</string>
+    <string name="h_413880fa">  ℹ DEX 體積優化已開啟：移除調試信息，進一步減小 APK 體積</string>
+    <string name="h_416e6b73">數據起始偏移</string>
+    <string name="h_4193d899">運行時由 core/DexPatcher.kt 做廣告類匹配，也由 core/AxmlAdRemover.kt 匹配清單組件。</string>
+    <string name="h_41994826">刪除包文件根目錄的廣告殘留文件</string>
+    <string name="h_41d17685" formatted="false">| 廣告字符串置空 | %1$s |</string>
+    <string name="h_420b8289">正在處理 → 處理完成</string>
+    <string name="h_4222e5fa">與&quot;廣告 SDK 包名&quot;配合，可同時清理清單中的相關 Activity。</string>
+    <string name="h_424670d9">為了安裝新版本，請允許本應用安裝未知來源應用。</string>
+    <string name="h_4267eb34" formatted="false">  ✓ 已導出: %1$s</string>
+    <string name="h_42a1235e" formatted="false">  ℹ %1$s 識別到廣告特徵但無實際修改，跳過寫回 (%2$sms)</string>
+    <string name="h_42b0752f">，直接繞過付費校驗。</string>
+    <string name="h_42cffbac">5. 第三方連結：關於與更新頁面可能包含外部連結，點擊後由第三方平臺處理您的訪問行為，建議您查閱相關第三方的隱私政策。\n\n</string>
+    <string name="h_42f52a63">DEX 代碼處理</string>
+    <string name="h_430a8d97">清單中匹配的 &lt;service&gt; 會被整體移除。</string>
+    <string name="h_430b3928">廣告方法置空關鍵詞（模糊匹配）。命中廣告類後，只置空方法名包含這些關鍵詞的方法，避免過度置空導致程序崩潰（如保留構造方法、生命周期方法等）。</string>
+    <string name="h_432ecd96">已保存訂閱源</string>
+    <string name="h_4357855b">下載失敗，點擊重試</string>
+    <string name="h_437a2008">DEX 崩潰防護：備份保護 + 原子寫入 + 異常自動恢復，杜絕 DEX 損壞</string>
+    <string name="h_43a8f757">本應用基於以下開源項目構建並調用，在此向各位作者表示誠摯感謝與敬意：\n\n</string>
+    <string name="h_43e71a0b">11. MT 管理器 ApkSignatureKillerEx 樣本 (Bin.MT)\n</string>
+    <string name="h_44057142" formatted="false">  ✗ 無法加載 %1$s: %2$s</string>
+    <string name="h_441e7040">   - 主頁: https://github.com/google/guava\n</string>
+    <string name="h_44c58696">   - 已移植其 DataMultiplexing / ZipMaker / ZipFile / V2V3SchemeSigner 實現\n\n</string>
+    <string name="h_44fd089f">的作用有重疊，可任選其一維護。</string>
+    <string name="h_45020f68" formatted="false">版本 %1$s</string>
+    <string name="h_46137025">點擊&quot;管理&quot;→ 輸入要強制返回 false 的判定方法名 → 點&quot;添加&quot;。</string>
+    <string name="h_46c45c70" formatted="false"># 快照數: %1$s</string>
+    <string name="h_46c49965">繁體中文</string>
+    <string name="h_474fe5eb">   Material Design 組件庫，提供卡片、按鈕、對話框等 UI 組件\n</string>
+    <string name="h_47903a91" formatted="false">  · 自定義鉤子類名: %1$s</string>
+    <string name="h_4797fecd">    - 協議: BSD 3-Clause\n\n</string>
+    <string name="h_481170fc">用於&quot;廣告是否已加載 / 是否正在展示 / 是否有廣告&quot;等判定方法。方法名精確命中且返回類型為 boolean 或 int 時，方法體被替換為&quot;返回 false / 0&quot;，讓應用認為廣告從未加載或展示，從而跳過廣告展示邏輯。</string>
+    <string name="h_48399cb4">以上項目的完整版權與許可文本，請訪問對應主頁查看。</string>
+    <string name="h_4839e21f">   參考 AOSP 的 XmlPullParser 與 AXML 二進位格式說明\n</string>
+    <string name="h_483c1454">   參考 apksig 官方實現與 Android 文檔中關於 ZIP alignment 的說明\n</string>
+    <string name="h_48574fbe">寫入 $HELP_CONFIG_NAME 的 &quot;asset_keywords&quot; 欄位。\n運行時由 core/AdRemover.kt 的 cleanAdSdkAssets() 按關鍵詞匹配刪除。</string>
+    <string name="h_490a3d52" formatted="false">  ✗ AXML 解析失敗: %1$s</string>
+    <string name="h_4a060eb9" formatted="false">  ✗ 籤名鉤子注入失敗: %1$s</string>
+    <string name="h_4a804b6d" formatted="false">| 廣告連結置空 | %1$s |</string>
+    <string name="h_4a92250e">廣告Receiver</string>
+    <string name="h_4abbcecf">寫入 zip</string>
+    <string name="h_4aed3358">→ 輸入廣告 Receiver 類名或關鍵詞 → 點\</string>
+    <string name="h_4b30694f">請輸入遠程配置 URL</string>
+    <string name="h_4b9c3271">重置</string>
+    <string name="h_4d002649">需要安裝權限</string>
+    <string name="h_4dbf184b">9. DEX 類重命名（自定義鉤子類名）\n</string>
+    <string name="h_4df76273">此特徵獨立於 DEX 特徵。設置後優先用於 Flutter 處理；留空則自動沿用下方\</string>
+    <string name="h_4e20a9f5">處理完成自動導出到原包目錄，並自動清理緩存，不佔存儲</string>
+    <string name="h_4e308cd8" formatted="false">  ⚠ 解包 %1$s 失敗: %2$s</string>
+    <string name="h_4e63334a">Flutter 應用適配：解析 Dart AOT 快照並抹除 libapp.so 中的廣告字符串特徵</string>
+    <string name="h_4e835a62">截斷/改長度</string>
+    <string name="h_4f20bc64" formatted="false">  ✓ 打包完成: %1$s 個條目</string>
+    <string name="h_4f305d7d" formatted="false">%1$s → %2$s (節省 %3$s)</string>
+    <string name="h_4f5a392d">點擊&quot;管理&quot;→ 輸入廣告 View 類名或關鍵詞片段 → 點&quot;添加&quot;。運行時會按子串匹配（不區分大小寫）。</string>
+    <string name="h_50420f6e" formatted="false">  ▶ 注入 MT 式籤名鉤子 (%1$s</string>
+    <string name="h_50542d9e" formatted="false">部分訂閱拉取失敗：%1$s</string>
+    <string name="h_50e67da4" formatted="false">▶ 籤名效驗去除 · %1$s</string>
+    <string name="h_51a3142b">→ 輸入廣告域名或 URL 片段 → 點\</string>
+    <string name="h_51c8f936">→ 輸入 .so 庫名關鍵詞 → 點\</string>
+    <string name="h_521147e7">寫入 $HELP_CONFIG_NAME 的 &quot;method_neutralize_keywords&quot; 欄位。\n運行時由 core/DexPatcher.kt 的方法置空篩選邏輯（帶單詞邊界感知）讀取。</string>
+    <string name="h_52279c25">清單中匹配的 &lt;activity&gt; 會被整體移除，刪除前請確認該 Activity 確為廣告用途。</string>
+    <string name="h_523f7b8b">廣告Activity</string>
+    <string name="h_52aa344f">點擊&quot;管理&quot;→ 輸入相對路徑（可寫 assets/ 前綴，也可省略）→ 點&quot;添加&quot;。</string>
+    <string name="h_52b36576">步驟</string>
+    <string name="h_530b0af0">原包去除(增強)</string>
+    <string name="h_53cb60e6">識別廣告頁面類</string>
+    <string name="h_5418bedc">最佳 host</string>
+    <string name="h_542664ea">⏭ 零修改跳過</string>
+    <string name="h_54d484f4" formatted="false">共 %1$s 個訂閱源，已開啟 %2$s 個</string>
+    <string name="h_5503edc4">▶ 步驟 2/5 解包</string>
+    <string name="h_556c8e96">isAdLoaded\nhasAd\n是正在展示的\nisAdReady（準備就緒）\nisInterstitialLoaded</string>
+    <string name="h_566859e2">Flutter 字符串特徵</string>
+    <string name="h_568e50df">  · 未發現需移除的廣告組件</string>
+    <string name="h_56ef97b2">重建/重籤</string>
+    <string name="h_575bd6a0">▶ 階段 4 assets 清理</string>
+    <string name="h_5781c4c1">廣告是否已加載/展示/有廣告</string>
+    <string name="h_57c12e61">廣告URL/域名</string>
+    <string name="h_582b60a3" formatted="false">注入參數已保存：%1$s / %2$s</string>
+    <string name="h_583bde12">正在拉取遠程配置...</string>
+    <string name="h_594b988c">   廣告 SDK 包名 / 域名 / 類名關鍵詞參考開源項目 DTL-X 的規則整理擴充\n</string>
+    <string name="h_599c01d1">配置文件路徑需以 .json 結尾</string>
+    <string name="h_599cc493">按關鍵詞識別廣告類</string>
+    <string name="h_59b8b3f0">算 CRC</string>
+    <string name="h_59e52cbd">6. 數據復用優化（過籤包體積優化）\n</string>
+    <string name="h_5a046f71">▶ 處理完成</string>
+    <string name="h_5a8cb987">輸入內容無效：既不是口令也不是有效配置 JSON，請檢查後重試</string>
+    <string name="h_5a9cf305" formatted="false">  ✓ Res 廣告布局隱藏完成: %1$s 個布局文件, %2$s 個元素, 耗時 %3$sms</string>
+    <string name="h_5af3990c" formatted="false">  ✓ 已移除 %1$s 個廣告組件</string>
+    <string name="h_5c244e39">點擊&quot;管理&quot;→ 輸入權限名或權限關鍵詞 → 點&quot;添加&quot;。運行時會按子串匹配（不區分大小寫），可用廣告 SDK 包名前綴或權限特徵詞。</string>
+    <string name="h_5c286b32">  · 未找到任何 res 布局 xml 文件，跳過</string>
+    <string name="h_5c5b99c0">assets 廣告文件關鍵詞。assets 內路徑或文件名包含該關鍵詞即刪除，用於覆蓋已知路徑之外的同類廣告資產。</string>
+    <string name="h_5c65f54a">用於解鎖 VIP/會員/專業版等付費判定方法。方法名精確命中且返回類型為 boolean 或 int 時，方法體被替換為\</string>
+    <string name="h_5d4aa133">刪除指定廣告資源路徑</string>
+    <string name="h_5df66715">  · 未配置 Res 布局關鍵詞，跳過</string>
+    <string name="h_5e213ddb">去開啟</string>
+    <string name="h_606a0ed7" formatted="false">  ⏱ %1$s 耗時: %2$sms</string>
+    <string name="h_60a5152a" formatted="false">  ✓ V1 籤名 | %1$s</string>
+    <string name="h_60aa379b">路徑不能為空</string>
+    <string name="h_618d3deb" formatted="false">  ✓ %1$s | 總耗時 %2$s</string>
+    <string name="h_61d7146b">中的 URL/包名/類名等特徵。</string>
+    <string name="h_62d0f9f8" formatted="false">%1$s 條</string>
+    <string name="h_6303de15">點擊&quot;管理&quot;→ 輸入廣告類名關鍵詞（可只寫片段）→ 點&quot;添加&quot;。</string>
+    <string name="h_63751f8a">強制返回true的方法名</string>
+    <string name="h_63d55e8f">訂閱源口令</string>
+    <string name="h_645b8198" formatted="false">AXML組件 %1$s</string>
+    <string name="h_645d0193">運行時由 core/LibappSoPatcher.kt 在 Dart 快照內做等長 NUL 覆蓋；core/FlutterAdRemover.kt 負責解包/回編譯與自動保存。</string>
+    <string name="h_64a506cb">   - 出處: https://mt2.cn/ （僅供學習參考）\n\n</string>
+    <string name="h_64e1f491" formatted="false">  · 原包自定義 Application: %1$s</string>
+    <string name="h_6517e1ca">請在使用本應用前仔細閱讀以下免責聲明：\n\n</string>
+    <string name="h_653e26a7" formatted="false">  ℹ %1$s 未命中任何廣告特徵，保留原樣</string>
+    <string name="h_6591496b">只掃描 APK 根目錄一層文件，不含子目錄；classes.dex 等核心文件不會被刪除。</string>
+    <string name="h_65963a23">\n十六進位預覽 (前512位元組):\n</string>
+    <string name="h_65ffcf5a">內置專業更新彈窗，含進度條、百分比、版本號與文件大小</string>
+    <string name="h_669acb71">AXML權限移除</string>
+    <string name="h_66b00047" formatted="false">移除 %1$s 個</string>
+    <string name="h_66b000471" formatted="false">移除 %1$s 個</string>
+    <string name="h_66b947eb" formatted="false">  · 壓縮率: %1$s</string>
+    <string name="h_66c23c1c" formatted="false">%1$s已關閉</string>
+    <string name="h_672dcd46">配合，可同時清理清單中的相關 Activity。</string>
+    <string name="h_67914606">僅移除命中特徵的權限聲明，不影響 INTERNET / CAMERA 等正常功能權限；請勿把正常功能權限加入特徵以免影響應用運行。</string>
+    <string name="h_679b5837">每條日誌都 runOnUiThread + fullScroll</string>
+    <string name="h_67fac552">與&quot;強制返回 true&quot;互補：true 用於解鎖 VIP，false 用於屏蔽廣告展示判定。</string>
+    <string name="h_68004de2">→ 輸入廣告 Service 類名或關鍵詞 → 點\</string>
+    <string name="h_681186f0">原包是否自定義 Application</string>
+    <string name="h_687f7144">實時彩色處理日誌，支持一鍵複製 / 清空，進度可視化</string>
+    <string name="h_68c89932">與&quot;廣告方法名&quot;配合：一個模糊關鍵詞、一個精確方法名；常與&quot;廣告 SDK 包名&quot;&quot;廣告類名關鍵詞&quot;搭配。</string>
+    <string name="h_68ea25aa">命中</string>
+    <string name="h_69000422">assets 廣告文件路徑</string>
+    <string name="h_69438ee5">   - 協議: Apache License 2.0\n\n</string>
+    <string name="h_695163f8">   基於 Material Design 規範與 Material Components 組件庫示例編寫\n</string>
+    <string name="h_69de4f41">強制返回false的方法名</string>
+    <string name="h_69f3d080">僅影響返回類型為 boolean(Z) 或 int(I) 的方法；其他類型自動跳過，避免生成非法指令。</string>
+    <string name="h_6a2eb85f" formatted="false">  · 共發現 %1$s 個 res 布局 xml 文件（含 %2$s 個 res 根目錄混淆 xml）</string>
+    <string name="h_6a3c653f">點擊右側&quot;管理&quot;→ 在輸入框輸入廣告 SDK 的完整包名 → 點&quot;添加&quot;。也可用手機文件管理器直接編輯配置文件。</string>
+    <string name="h_6a80c39a">▶ 處理失敗: 內存不足</string>
+    <string name="h_6ab5a0e9">廣告類名的關鍵詞片段。類名命中即判定為廣告類，將其廣告方法體替換為返回默認值（置空），從而屏蔽廣告展示邏輯。</string>
+    <string name="h_6ac37232">精確置空指定方法</string>
+    <string name="h_6af466b2">| 統計項 | 數量 |</string>
+    <string name="h_6b3b93c7">中精確指定</string>
+    <string name="h_6b3f9d20">原包 host</string>
+    <string name="h_6b9a5016">▶ 階段 1 DEX 修補</string>
+    <string name="h_6b9c9749" formatted="false">  ✓ 籤名鉤子已寫入獨立 DEX: %1$s (%2$s, %3$sms)</string>
+    <string name="h_6b9c9749d" formatted="false">  ✓ 籤名鉤子已寫入獨立 DEX: %1$s (%2$s, %3$sms)</string>
+    <string name="h_6bfa92c8">解鎖 VIP / 會員 / 專業版判定</string>
+    <string name="h_6c1094f9">寫入外部配置文件 $HELP_CONFIG_NAME 的 &quot;sdk_packages&quot; 欄位。\n運行時由 core/DexPatcher.kt（DEX 類識別）、core/AxmlAdRemover.kt（清單組件移除）、core/AdRemover.kt（lib 原生庫清理）讀取。</string>
+    <string name="h_6c39cca5">回編譯</string>
+    <string name="h_6c59c767">你可以通過手機瀏覽器訪問藍奏雲網盤，手動下載最新版本：\n\n</string>
+    <string name="h_6c5f734b">  · 建議: 減少同時處理的DEX大小或關閉其他應用後重試</string>
+    <string name="h_6d2ef53d" formatted="false">| 強制返回 true | %1$s |</string>
+    <string name="h_6d79cd1c">與&quot;廣告方法置空關鍵詞&quot;配合使用：本分類為精確匹配，後者為模糊關鍵詞匹配。</string>
+    <string name="h_6dedd2e5" formatted="false">| 廣告 SDK 類置空 | %1$s |</string>
+    <string name="h_6dfefe33">無法打開系統安裝器，請手動安裝更新包</string>
+    <string name="h_6e1073d7" formatted="false">| 籤名效驗去除 | %1$s (MT式注入), 注入 %2$s 個籤名鉤子, 涉及 %3$s 個 DEX |</string>
+    <string name="h_6e43bc9c">安裝未知來源應用</string>
+    <string name="h_6e8ddbbd">識別並移除廣告 SDK 的根包名</string>
+    <string name="h_6f532ea1">    基於 RewriterModule / TypeRewriter 的 DEX 類重命名方案，用於自定義鉤子類名\n</string>
+    <string name="h_702948c7">移除元素</string>
+    <string name="h_7030ff64">錯誤</string>
+    <string name="h_70bbbe57">聲明要識別/移除的廣告 SDK 的 Java 包名。這是最核心的分類：處理時用它識別廣告類、廣告清單組件，並自動推導 lib 目錄裡的 .so 原生庫名。</string>
+    <string name="h_710378a3">修改的文件 / 代碼</string>
+    <string name="h_71424776" formatted="false">欄位數量: %1$s</string>
+    <string name="h_71a40f61" formatted="false">%1$s 項</string>
+    <string name="h_720380b4" formatted="false">已自定義（%1$s / %2$s）</string>
+    <string name="h_72444798">## 處理匯總</string>
+    <string name="h_7258ddc9">目錄路徑，例如：\n/storage/emulated/0/APKEditor</string>
+    <string name="h_72ab6230" formatted="false">方法置空 %1$s</string>
+    <string name="h_7336558f" formatted="false">| 廣告 SDK 庫文件清理 | %1$s |</string>
+    <string name="h_73468857">路徑已更新</string>
+    <string name="h_73801f75" formatted="false">  ⚠ 原生庫資源缺失: %1$s</string>
+    <string name="h_73a8f02e">.ad。\nmeishu_ad\nAdview\nAdcontainer\n旗幟\n水花濺起\nAdmob</string>
+    <string name="h_73da9b6d">選擇APK文件</string>
+    <string name="h_746dc334">從磁碟 APK 重新讀取籤名</string>
+    <string name="h_74c4b77f">配合增強屏蔽效果。</string>
+    <string name="h_74f74cf4">| 項目 | 原始 | 處理後 | 變化 |</string>
+    <string name="h_75403159" formatted="false">  ⚠ %1$s 個類處理失敗已跳過</string>
+    <string name="h_757b3361">assets 廣告關鍵詞</string>
+    <string name="h_75baf427">二進位文件僅支持查看</string>
+    <string name="h_75c2bbcb">堆棧</string>
+    <string name="h_763264b4">點擊\</string>
+    <string name="h_7703af63">運行時由 core/AdRemover.kt 的 cleanAdSdkAssets() 刪除對應路徑。</string>
+    <string name="h_7784e35e">7. 界面主題與排版\n</string>
+    <string name="h_7822f13f">暫時無法連接更新伺服器。\n\n</string>
+    <string name="h_7831e844">5. 第三方內容：本應用引用的開源項目與廣告特徵規則均來自公開渠道，僅供技術參考，其版權歸原作者所有。\n\n</string>
+    <string name="h_785d24a8" formatted="false">字符串=%1$s, 廣告特徵替換=%2$s 處</string>
+    <string name="h_78e42143">| DEX | 處理前 | 處理後 | 廣告類 | 方法置空 | 連結置空 | 強制true | 強制false | 耗時 | 狀態 |</string>
+    <string name="h_790b1641">未捕獲到有效的下載地址</string>
+    <string name="h_79d3abe9">複製</string>
+    <string name="h_7a291fbf" formatted="false">  ✓ 清理 %1$s 個根目錄文件 | %2$sms</string>
+    <string name="h_7a8af100">下載完成，正在打開安裝器…</string>
+    <string name="h_7a8cb281">運行時由 core/AxmlAdRemover.kt 的 removeAdPermissions() 匹配並移除 AndroidManifest.xml 中的 &lt;uses-permission&gt; 聲明。</string>
+    <string name="h_7ae275b3"> 欄位。\n</string>
+    <string name="h_7b5257b5" formatted="false">  · 打包後大小: %1$s</string>
+    <string name="h_7b58f794">寫入 $HELP_CONFIG_NAME 的 &quot;ad_permissions&quot; 欄位。\n運行時由 core/AxmlAdRemover.kt 的 removeAdPermissions() 匹配並移除 AndroidManifest.xml 中的 &lt;uses-permission&gt; 聲明。</string>
+    <string name="h_7b59301c">6. 條款變更：作者保留隨時修改本免責聲明的權利，更新後的內容將在新版本中生效。\n\n</string>
+    <string name="h_7b695da8">直鏈訂閱源</string>
+    <string name="h_7b83ea7b">   參考 L-JINBIN 的 ApkDataMultiplexing 項目與 LSPatch 過籤包結構\n</string>
+    <string name="h_7b9a3cc4" formatted="false">   顯著減小過籤包體積（最多約 50%），並配套 V2V3SchemeSigner 籤名方案\n</string>
+    <string name="h_7ba901d8">模糊匹配置空廣告方法</string>
+    <string name="h_7babe509">日誌已複製到剪貼板</string>
+    <string name="h_7bb30f32">DEX字符串廣告特徵</string>
+    <string name="h_7be1d8e4">自動生成 Markdown 處理報告，記錄各階段處理明細與體積對比</string>
+    <string name="h_7bee061a" formatted="false">  ▶ 正在處理: %1$s (%2$s)</string>
+    <string name="h_7bfda754">▶ 階段 2 AXML 清單移除</string>
+    <string name="h_7c417117" formatted="false">| assets 廣告文件清理 | %1$s |</string>
+    <string name="h_7c64bdce">刪除訂閱源</string>
+    <string name="h_7c6a17aa">廣告方法置空關鍵詞</string>
+    <string name="h_7d0b10f4">## 各 DEX 處理明細</string>
+    <string name="h_7d2579cf">與&quot;assets 廣告關鍵詞&quot;&quot;廣告 SDK 原生庫關鍵詞&quot;配合，分別覆蓋 assets、lib、以及根目錄三處廣告殘留。</string>
+    <string name="h_7d8a5387">  · 籤名效驗去除已關閉，跳過</string>
+    <string name="h_7db41333" formatted="false">, 連結置空=%1$s</string>
+    <string name="h_7dcda328" formatted="false">  ⚠ %1$s/%2$s 處理失敗: %3$s</string>
+    <string name="h_7dda6d57">資產/gdt_plugin/gdtadv2.jar\n資產/qumeng\n資產/BDXADSDK</string>
+    <string name="h_7de4534e">廣告權限特徵</string>
+    <string name="h_7dfeadd0">▶ 步驟 3.5/5 Flutter 處理</string>
+    <string name="h_7e235a0c">廣告 SDK 包名</string>
+    <string name="h_7e666c8f">4. 數據本地存儲：應用的配置、處理特徵等數據僅保存在您的設備本地，應用卸載後即被清除，不會留存任何雲端記錄。\n\n</string>
+    <string name="h_7e82b085">已下載/總大小 + 百分比</string>
+    <string name="h_7ee53eea">歸類於 Res 布局</string>
+    <string name="h_7f604c7a">  · Flutter 處理已關閉（可在設置中開啟）</string>
+    <string name="h_7f86257a">與&quot;廣告 SDK 包名&quot;配合效果最佳，也常與&quot;廣告 View 類名&quot;&quot;廣告 Activity&quot;等用途重疊。</string>
+    <string name="h_7fcc9f20" formatted="false">  ✗ AXML 權限解析失敗: %1$s</string>
+    <string name="h_7ff042ba">基於 dexlib2 直接修補 DEX 字節碼，處理速度遠超傳統 smali 流程</string>
+    <string name="h_53d2a9b1">已開啟「重新簽名」，打包將自動重新簽名</string>
+    <string name="h_7fc2a18e">打包完成，輸出未簽名 APK</string>
+    <string name="h_8c9f1e7b">已關閉「重新簽名」，打包將輸出未簽名 APK</string>
+    <string name="h_802412e0">檢測到下載地址，正在使用應用內下載…</string>
+    <string name="h_803d2ae8">→ 輸入權限名或權限關鍵詞 → 點\</string>
+    <string name="h_80928937">已檢測到 Flutter 應用，但未生成處理明細。</string>
+    <string name="h_80943b1f">寫入 $HELP_CONFIG_NAME 的 &quot;ad_services&quot; 欄位。\n由 core/DexPatcher.kt（類識別）與 core/AxmlAdRemover.kt（清單組件移除）讀取。</string>
+    <string name="h_80d72d4c">   參考 Facebook 曾開源的 android-dexdump 思路，以及 dexlib2 官方示例\n</string>
+    <string name="h_81cbed17">© 2026 小奶瓶 · 保留所有權利\nPowered by dexlib2 / apksig / AndroidX</string>
+    <string name="h_827cfb79">隱藏布局文件中的廣告視圖區域</string>
+    <string name="h_8286533b">運行時由 core/DexPatcher.kt 的強制返回 true 邏輯處理（僅 boolean/int 返回類型）。</string>
+    <string name="h_839ae19b">下載的更新包無效，請重試</string>
+    <string name="h_840399bf">廣告 Receiver</string>
+    <string name="h_844bbd8d">Flutter 廣告特徵已關閉</string>
+    <string name="h_85286168">只顯示一次</string>
+    <string name="h_857a16c4">寫入 $HELP_CONFIG_NAME 的 &quot;flutter_string_patterns&quot; 欄位。\n運行時由 core/LibappSoPatcher.kt 在 Dart 快照內做等長 NUL 覆蓋；core/FlutterAdRemover.kt 負責解包/回編譯與自動保存。</string>
+    <string name="h_85a0ed61">刪除廣告 so 原生庫</string>
+    <string name="h_85bc04b3">→ 輸入要在 libapp.so 中抹除的廣告字符串（長度≥2 的可列印 ASCII）→ 點\</string>
+    <string name="h_85fc05ee">強制返回false</string>
+    <string name="h_8623ecbf" formatted="false">布局隱藏 %1$s</string>
+    <string name="h_863f7b7a" formatted="false">  ✓ 清理 %1$s 個 SDK 庫 | %2$sms</string>
+    <string name="h_8669676f" formatted="false">伺服器響應異常 (HTTP %1$s)</string>
+    <string name="h_86f7a22f">廣告Service</string>
+    <string name="h_87646ce3">   - 依據類型描述符前綴匹配重寫，兼容點號 / 斜槓 / L...; 三種輸入寫法\n\n</string>
+    <string name="h_87ae9335">googleads.g.doubleclick.net\nadmob.com\nadview.cn\nca-app-pub-</string>
+    <string name="h_87f4dbb8">   - 主頁: https://github.com/L-JINBIN/ApkDataMultiplexing\n</string>
+    <string name="h_88369617">   參考 Dart VM 源碼 snapshot.h 與社區 Flutter 逆向資料\n</string>
+    <string name="h_8859e393">明暗雙主題，支持跟隨系統、白天、夜間三種模式自由切換</string>
+    <string name="h_88a98dc6">廣告SDK原生庫關鍵詞</string>
+    <string name="h_88bac515"> 而非 android:visibility=</string>
+    <string name="h_8959b0a7">AXML權限</string>
+    <string name="h_8963ea3f" formatted="false">類數量: %1$s</string>
+    <string name="h_8ad3c4b2">\n包分布:</string>
+    <string name="h_8ae1f6e1" formatted="false">%1$s已啟用</string>
+    <string name="h_8afaf028">無法打開瀏覽器，請手動訪問藍奏雲下載</string>
+    <string name="h_8b98d772">只刪除 assets 目錄內的內容，不影響 lib 與 res 目錄。</string>
+    <string name="h_8bb73728">   - 原理: 通過中央目錄數據偏移復用原包數據段，刪除重複數據段實現體積優化\n</string>
+    <string name="h_8c6fb706">與&quot;assets 廣告關鍵詞&quot;配合：本分類為精確路徑，後者為模糊關鍵詞。</string>
+    <string name="h_8cab5dde">日誌為空</string>
+    <string name="h_8ccf2963" formatted="false">未找到 %1$s</string>
+    <string name="h_8d698916" formatted="false">  ✓ %1$s 個 libapp.so | 替換 %2$s 處 | %3$s</string>
+    <string name="h_8d7ba09c">用於解鎖 VIP/會員/專業版等付費判定方法。方法名精確命中且返回類型為 boolean 或 int 時，方法體被替換為&quot;返回 true / 1&quot;，直接繞過付費校驗。</string>
+    <string name="h_8dce58af" formatted="false">應為 %1$s，已中止</string>
+    <string name="h_8e8a7f64">原包去除</string>
+    <string name="h_8ea5613c">2. 聯網行為透明：本應用僅在您主動點擊\</string>
+    <string name="h_8eaa86c7">處理失敗: 文件結構異常</string>
+    <string name="h_8efae575" formatted="false">內置鉤子 DEX 資源缺失: %1$s</string>
+    <string name="h_8f331a4b">   Android 官方 Jetpack 支持庫\n</string>
+    <string name="h_8f6495fd">系統分享</string>
+    <string name="h_8f7f9a61">刪除特徵</string>
+    <string name="h_8fa638b6" formatted="false">- **特徵配置文件**: `%1$s`</string>
+    <string name="h_9031f10f">→ 輸入廣告 View 類名或關鍵詞片段 → 點\</string>
+    <string name="h_9094d392" formatted="false">保存失敗: %1$s</string>
+    <string name="h_9094d3923" formatted="false">保存失敗: %1$s</string>
+    <string name="h_90af539a">要精確置空的廣告方法名。方法名與該列表項完全一致時，方法體被替換為返回默認值，從而取消廣告加載/展示調用。</string>
+    <string name="h_90f6a26a">  · 命中特徵: </string>
+    <string name="h_91337ff2">清單權限</string>
+    <string name="h_9140b5bf" formatted="false">    -&gt; %1$s: 強制返回 true %2$s 個方法</string>
+    <string name="h_9140cf96">內嵌配置</string>
+    <string name="h_91d57778">內置了大量默認關鍵詞（_ad_、showad、loadad 等），此分類主要用於補充自定義關鍵詞。</string>
+    <string name="h_92c7d2cc">  · 未發現需移除的廣告權限</string>
+    <string name="h_92d0ff18">  ⚠ 原包缺失，無法嵌入 origin.apk</string>
+    <string name="h_92d2d9c6" formatted="false">已添加訂閱源：%1$s</string>
+    <string name="h_92fab849">移除廣告權限聲明</string>
+    <string name="h_9316d02c">→ 輸入廣告類名關鍵詞（可只寫片段）→ 點\</string>
+    <string name="h_937cb142">→ 輸入廣告字符串特徵（可只寫片段）→ 點\</string>
+    <string name="h_9380d8c8">▶ 步驟 1/5 讀取 APK</string>
+    <string name="h_93be8614">   DEX 文件讀寫與 smali 反彙編 / 彙編工具鏈，去廣告核心引擎\n</string>
+    <string name="h_941cd4b5" formatted="false">| 根目錄廣告文件清理 | %1$s |</string>
+    <string name="h_946f83e6">與\</string>
+    <string name="h_94b16984" formatted="false">  · 找到 %1$s 個 DEX 文件</string>
+    <string name="h_94beebcb">7. 使用本應用即視為您已閱讀、理解並同意以上全部條款。若不同意，請停止使用本應用。</string>
+    <string name="h_94d2d961">僅支持可列印 ASCII 字符串（長度≥2）。請填寫和廣告 SDK 強相關的唯一字符串，避免過於通用導致誤傷正常功能。</string>
+    <string name="h_956dd267">訂閱管理對話框打開失敗</string>
+    <string name="h_97160028">APK根目錄文件關鍵詞</string>
+    <string name="h_97349354">一鍵解包、去廣告、打包、籤名，全程本地離線處理，無需網絡</string>
+    <string name="h_97474ffc"># libapp.so Dart 快照字符串導出</string>
+    <string name="h_975cc249" formatted="false">已添加訂閱源：%1$s</string>
+    <string name="h_976e27bc">  · 未檢測到 libapp.so，該應用可能不是 Flutter（或為 AAB 拆分包），Flutter 處理跳過</string>
+    <string name="h_97beeaf3">APK去廣告編輯器反饋</string>
+    <string name="h_98601d36">已下載 0 B</string>
+    <string name="h_98ba9357">由 core/DexPatcher.kt（類識別）與 core/AxmlAdRemover.kt（AndroidManifest 組件移除）讀取。</string>
+    <string name="h_98d11213">AdView\n橫幅廣告\nNativeAdView\nSplashView</string>
+    <string name="h_98f6c908">更新內容...</string>
+    <string name="h_990ae7e6" formatted="false">  · Flutter 特徵 %1$s 條（URL/包名/類名等 ASCII 字符串）</string>
+    <string name="h_99f18050" formatted="false">| 原包籤名指紋 | %1$s… |</string>
+    <string name="h_9a0ee6cf" formatted="false">| AXML 廣告權限移除 | %1$s |</string>
+    <string name="h_9a5a28fd">自定義 libapp.so 中去廣告的字符串</string>
+    <string name="h_9a618818" formatted="false">  · 路徑 %1$s 個</string>
+    <string name="h_9a7e99e6">  · 未找到 lib 目錄，跳過原生庫清理</string>
+    <string name="h_9b708f36">▶ 步驟 3.4/5 去籤名效驗</string>
+    <string name="h_9bc8a038">廣告方法名\</string>
+    <string name="h_9bd51829" formatted="false">  ✓ 檢測到 %1$s 個 libapp.so: </string>
+    <string name="h_9beb1005" formatted="false">  ⚠ 處理 %1$s 失敗: %2$s</string>
+    <string name="h_9bec2ff2" formatted="false">處理失敗: %1$s</string>
+    <string name="h_9c446657" formatted="false">  ✓ 已將 %1$s 的父類改為鉤子類 (%2$s)</string>
+    <string name="h_9c6c3d16" formatted="false">  ✓ %1$s 完成: 廣告類=%2$s, 方法置空=%3$s%4$s%5$s%6$s%7$s (%8$sms, %9$s→%10$s)</string>
+    <string name="h_9d60567b">籤名效驗去除已關閉</string>
+    <string name="h_9d838569" formatted="false">  %1$s: %2$s 個類</string>
+    <string name="h_9d8fca31">運行時由 core/AdRemover.kt 的 cleanAdSdkAssets() 按關鍵詞匹配刪除。</string>
+    <string name="h_9d99f2d3">  · 建議: 該APK可能過大，請嘗試關閉其他應用後重試</string>
+    <string name="h_9e1acb3b">檢查更新失敗</string>
+    <string name="h_9e363bc7">運行時由 core/DexPatcher.kt（DEX 類識別）、core/AxmlAdRemover.kt（清單組件移除）、core/AdRemover.kt（lib 原生庫清理）讀取。</string>
+    <string name="h_9eb6d057">類簇(cluster)</string>
+    <string name="h_9ebb023e">   - 思路來源: LSP 技術團隊（過籤包 + IO 重定向對抗整包校驗）\n</string>
+    <string name="h_9f4a2d63">置空廣告方法 / 解鎖 VIP</string>
+    <string name="h_9fa3cca0">點擊&quot;管理&quot;→ 輸入廣告域名或 URL 片段 → 點&quot;添加&quot;。</string>
+    <string name="h_9fce216a">粘貼內容不是有效的廣告特徵配置 JSON，請檢查後重試</string>
+    <string name="h_9fd2d8c2">方法名需與反編譯後的代碼完全一致（含大小寫），否則無法命中。</string>
+    <string name="h_9fd3da28">   - 規範: https://m3.material.io/\n</string>
+    <string name="h_9fe0ce82">APK 解包後根目錄（與 classes.dex 同目錄）中可能殘留的廣告 SDK 配置文件、標識文件等。文件名包含該關鍵詞即被刪除，用於清理不在 lib / assets 目錄裡的廣告殘留。</string>
+    <string name="h_a092d8f0">廣告 Service</string>
+    <string name="h_a0a5e60f">注入原包路徑/原包解壓路徑/注入So庫名</string>
+    <string name="h_a17816fd">點擊&quot;管理&quot;→ 輸入廣告 Service 類名或關鍵詞 → 點&quot;添加&quot;。</string>
+    <string name="h_a2d56d37" formatted="false">  ✓ 打包 | %1$s</string>
+    <string name="h_a36b1457" formatted="false">SDK庫 %1$s</string>
+    <string name="h_a3e07f53">點擊&quot;管理&quot;→ 輸入 .so 庫名關鍵詞 → 點&quot;添加&quot;。</string>
+    <string name="h_a445d6b9" formatted="false">  ⚠ 刪除失敗: %1$s</string>
+    <string name="h_a4adb67a">1. DEX 直接修補方案 (基於 dexlib2)\n</string>
+    <string name="h_a4c8a5bb">  · 常規 v1+v2 籤名</string>
+    <string name="h_a4eff923">→ 輸入要強制返回 false 的判定方法名 → 點\</string>
+    <string name="h_a5290e50">廣告SDK包名</string>
+    <string name="h_a549a63d">本應用遵守最小化收集原則，高度重視並保護您的個人隱私：\n\n</string>
+    <string name="h_a56fd984">6. 若您在使用過程中有任何隱私疑問、建議或顧慮，歡迎通過作者聯繫方式與我們溝通，我們將盡力解答。</string>
+    <string name="h_a5bdf592">運行時由 core/DexPatcher.kt 做廣告類匹配。</string>
+    <string name="h_a674a27a">AXML組件</string>
+    <string name="h_a6775ccc">點擊&quot;管理&quot;→ 輸入廣告 Activity 類名或關鍵詞 → 點&quot;添加&quot;。</string>
+    <string name="h_a6d8b350">)} (含 12 個內部類)</string>
+    <string name="h_a73cec14">→ 輸入關鍵詞 → 點\</string>
+    <string name="h_a773cd7d">  ⚠ 無可用於 Flutter 的廣告特徵（需為 length&gt;=2 的 ASCII 字符串），僅執行解包，不做修改</string>
+    <string name="h_a7bf85e5">運行時由 core/AdRemover.kt 的 cleanAdSdkLibs() 遍歷 lib/*/ 並刪除匹配的 .so 文件。</string>
+    <string name="h_a7c027a6" formatted="false">  ℹ %1$s 未發現廣告特徵，自動跳過 (%2$sms)</string>
+    <string name="h_aa1a5948" formatted="false">數據復用優化：過籤包（如 LSPatch 產物）復用原包數據段，最多減小約 50% 體積</string>
+    <string name="h_aa223402">置空 DEX 中命中的廣告字符串</string>
+    <string name="h_aa5da2f6" formatted="false">  ✓ 籤名效驗去除完成: 已注入 KillerApplication 鉤子(%1$s), 涉及 %2$s 個 DEX (%3$sms)</string>
+    <string name="h_aacf7dd2">強制返回true</string>
+    <string name="h_ab71b49d" formatted="false">  ✗ 未在 DEX 中找到自定義 Application 類 %1$s，父類改寫失敗</string>
+    <string name="h_ab94e2c3">初始化失敗</string>
+    <string name="h_abefa2cf">apksig 籤名階段會自動對齊</string>
+    <string name="h_ac0e6cda">  · 未配置 assets 廣告文件路徑，跳過</string>
+    <string name="h_aca03acb" formatted="false">大小: %1$s bytes</string>
+    <string name="h_acd3e0fc">▶ 處理失敗</string>
+    <string name="h_acd5cb84">失敗</string>
+    <string name="h_ad125423" formatted="false">根文件 %1$s</string>
+    <string name="h_ad3146c4">此特徵獨立於 DEX 特徵。設置後優先用於 Flutter 處理；留空則自動沿用下方&quot;廣告特徵分類&quot;中的 URL/包名/類名等特徵。</string>
+    <string name="h_ad4097b5">普通去除</string>
+    <string name="h_ad9c82ac" formatted="false">連結置空 %1$s</string>
+    <string name="h_ae3222f3" formatted="false">  · 注入參數: 原包=%1$s, 解壓=%2$s, So=%3$s</string>
+    <string name="h_ae4e6627" formatted="false">%.2f s</string>
+    <string name="h_ae67a4cd">移除廣告SDK文件</string>
+    <string name="h_af7dfb03">寫入 $HELP_CONFIG_NAME 的 &quot;class_keywords&quot; 欄位。\n運行時由 core/DexPatcher.kt 做廣告類匹配，也由 core/AxmlAdRemover.kt 匹配清單組件。</string>
+    <string name="h_afb873ee" formatted="false">已下載 %1$s / %2$s</string>
+    <string name="h_b13822ab">   - 主頁: https://github.com/Gameye98/DTL-X\n</string>
+    <string name="h_b13d11bf">重要公告</string>
+    <string name="h_b189550a">已添加</string>
+    <string name="h_b1b762e6">下載完成，正在打開安裝器...</string>
+    <string name="h_b1e919bb">1. 合法用途限制：本應用僅供學習、研究與個人合法用途使用。請勿對您不擁有版權、未獲授權或受法律保護的應用進行修改與分發。\n\n</string>
+    <string name="h_b3a0d18e" formatted="false">  · %1$s 中 %2$s 父類為 %3$s，跳過改寫</string>
+    <string name="h_b3c9c976">點擊&quot;管理&quot;→ 輸入方法名關鍵詞 → 點&quot;添加&quot;。</string>
+    <string name="h_b4cbd6e5">   參考 MT 管理器 ApkSignatureKillerEx 的鉤子注入思路：\n</string>
+    <string name="h_b4ea6ec8">置空廣告請求連結</string>
+    <string name="h_b549dbe0">等長覆蓋</string>
+    <string name="h_b588b1bd" formatted="false">  ✓ 已將 %1$s 的父類改為鉤子類 (%2$s)</string>
+    <string name="h_b5b02676">5. APK v1 / v2 籤名與對齊\n</string>
+    <string name="h_b5e4a114">該安裝包無效或不完整</string>
+    <string name="h_b5f40c44">小貼士</string>
+    <string name="h_b60f14f9" formatted="false">  ✓ V2 籤名 | %1$s</string>
+    <string name="h_b6d8f56d" formatted="false">字符串置空 %1$s</string>
+    <string name="h_b6e9c971">已壓縮</string>
+    <string name="h_b7089816" formatted="false">強制true %1$s</string>
+    <string name="h_b723808a" formatted="false">  ✓ 已將 %1$s 的父類改為鉤子類 (%2$s)</string>
+    <string name="h_b76ce9e7">  · 未命中廣告特徵，無需修改</string>
+    <string name="h_b7a517ca">寫入 $HELP_CONFIG_NAME 的 &quot;ad_receivers&quot; 欄位。\n由 core/DexPatcher.kt（類識別）與 core/AxmlAdRemover.kt（清單組件移除）讀取。</string>
+    <string name="h_b7a6bc95">2. AXML 二進位格式解析 (Android Asset Packaging)\n</string>
+    <string name="h_b7aba98e">自動清理廣告 SDK 原生庫 (.so)、assets 廣告資源與根目錄廣告文件，精簡包體</string>
+    <string name="h_b82698e4">寫入 $HELP_CONFIG_NAME 的 &quot;method_patterns&quot; 欄位。\n運行時由 core/DexPatcher.kt 做方法名精確匹配並置空方法體。</string>
+    <string name="h_b86b62e5" formatted="false">  ⚠ 處理報告生成失敗: %1$s</string>
+    <string name="h_b8884134" formatted="false">卡片視圖未找到: cardId=%1$s</string>
+    <string name="h_b8ed0364" formatted="false">  · %1$s 中 %2$s 已是鉤子類父類</string>
+    <string name="h_b8fa7cb1">原包路徑 / 解壓路徑 / So庫名 / 鉤子類名均不能為空</string>
+    <string name="h_b914ff03">廣告是否已加載 / 是否正在展示 / 是否有廣告</string>
+    <string name="h_b93b4fec">▶ 處理失敗: 嵌套過深</string>
+    <string name="h_b9ca883a">關鍵詞為子串匹配（如 ttad 可命中 libttad.so），請勿寫完整路徑。</string>
+    <string name="h_b9f0ee4f">未捕獲到 APK 直鏈，請在頁面內點擊下載按鈕後重試</string>
+    <string name="h_ba5f8360" formatted="false">已下載 %1$s</string>
+    <string name="h_ba6a6863" formatted="false">  ✗ 內存不足: %1$s</string>
+    <string name="h_ba6e91fa">權限</string>
+    <string name="h_ba715cf4">  · 去籤名效驗未開啟（可在設置中開啟）</string>
+    <string name="h_bafd49a7">廣告字符串特徵</string>
+    <string name="h_bb543276" formatted="false">- **處理時間**: %1$s</string>
+    <string name="h_bbe82bbc">無法打開安裝權限設置</string>
+    <string name="h_bc0957da">邊讀邊算</string>
+    <string name="h_bc1b6e2e" formatted="false">  · 已關閉 %1$s 個分類: </string>
+    <string name="h_bc77dbf8">廣告 URL / 域名</string>
+    <string name="h_bc9facfc">識別廣告廣播接收類</string>
+    <string name="h_bcde615b">3. 權限最小化：本應用不讀取、不存儲、不訪問您的通訊錄、相冊、定位、簡訊、通話記錄等敏感信息。\n\n</string>
+    <string name="h_bcf5f2e1">解包</string>
+    <string name="h_bd3f0cc3">   Kotlin 程式語言與標準庫\n</string>
+    <string name="h_bde178a7">廣告 SDK 常在 AndroidManifest.xml 中聲明自定義權限（如 com.lineone.connecter.openadsdk.permission.TT_PANGOLIN、com.lineone.connecter.permission.KW_SDK_BROADCAST 等），用於保護其廣告組件。命中這些權限的 &lt;uses-permission&gt; 聲明會被從清單中移除。</string>
+    <string name="h_be5de496" formatted="false">解析訂閱配置失敗: %1$s</string>
+    <string name="h_beac550d">→ 輸入文件名詞關鍵詞 → 點\</string>
+    <string name="h_bece4178">  · 未配置根目錄文件關鍵詞，跳過</string>
+    <string name="h_bed1b443">▶ 階段 5 根目錄清理</string>
+    <string name="h_bee26e5d">QQ已複製到剪貼板</string>
+    <string name="h_beea3b77">廣告 Activity / Service / Receiver\</string>
+    <string name="h_bf82a4bf">廣告接收器\n啟動接收器\n安裝接收器</string>
+    <string name="h_bfd50952">無檢查點記錄。</string>
+    <string name="h_bffae154">寫入 $HELP_CONFIG_NAME 的 &quot;ad_view_names&quot; 欄位。\n運行時由 core/DexPatcher.kt 做廣告類匹配。</string>
+    <string name="h_c0a05071">內置籤名效驗鉤子（KillerApplication）基於 dexlib2 DexRewriter 重命名，含 12 個內部類</string>
+    <string name="h_c11c4e64" formatted="false">- **源 APK**: `%1$s`</string>
+    <string name="h_c15415d3">無法讀取所選文件</string>
+    <string name="h_c19bce70">跟隨系統 / System</string>
+    <string name="h_c1ca70de">點擊&quot;管理&quot;→ 輸入要在 libapp.so 中抹除的廣告字符串（長度≥2 的可列印 ASCII）→ 點&quot;添加&quot;。</string>
+    <string name="h_c20905d1" formatted="false">設置初始化失敗: %1$s</string>
+    <string name="h_c2501d73">分享訂閱源口令</string>
+    <string name="h_c3744c61">   Java 加解密與證書生成庫，用於生成籤名證書\n</string>
+    <string name="h_c393daa8">com.google.android.gms.ads\ngoogleads.g.doubleclick.net\n潘格爾\nAdview\nAdmob\ncom.bytedance.sdk</string>
+    <string name="h_c4114463">確定刪除訂閱源 \</string>
+    <string name="h_c4726818" formatted="false">替換了 %1$s 處</string>
+    <string name="h_c49c1ee6" formatted="false">%.1f sec</string>
+    <string name="h_c4daf443">解鎖 VIP / 會員 / 專業版</string>
+    <string name="h_c4ed42f4">廣告 SDK 原生庫關鍵詞</string>
+    <string name="h_c5bb1a82"># 工具: ApkAdRemoverEditor · Flutter 解包</string>
+    <string name="h_c6439a1a">連結內容不是有效的廣告特徵配置</string>
+    <string name="h_c65d2600">  ⚠ 改寫清單失敗（鉤子類可能不生效）</string>
+    <string name="h_c6af077e">已重置為默認輸出目錄</string>
+    <string name="h_c6e12265">## 處理前後對比</string>
+    <string name="h_c71a303c" formatted="false">%1$s 條</string>
+    <string name="h_c725db16">   APK 數據復用優化：通過中央目錄數據偏移復用原包數據段，刪除重複數據段，\n</string>
+    <string name="h_c743b4fe">置空校驗方法</string>
+    <string name="h_c7612287">大小合法 + 範圍在文件內</string>
+    <string name="h_c7fdb835">已關閉所有訂閱，恢復默認配置</string>
+    <string name="h_c8049515">由 core/DexPatcher.kt（類識別）與 core/AxmlAdRemover.kt（清單組件移除）讀取。</string>
+    <string name="h_c807c057" formatted="false">  · 檢測到目標 APK lib 目錄 ABI: %1$s</string>
+    <string name="h_c82adf9a">智能壓縮策略與 ZIP 對齊，保證打包後 APK 可正常安裝啟動</string>
+    <string name="h_c84eabb9">強制返回 false 的方法名</string>
+    <string name="h_c9300931">廣告 SDK 原生庫關鍵詞\</string>
+    <string name="h_c975dbf1">  · 原包未聲明自定義 Application，將按策略選擇注入目標</string>
+    <string name="h_c97b70ed">→ 輸入廣告 Activity 類名或關鍵詞 → 點\</string>
+    <string name="h_ca6ddf1c">廣告特徵</string>
+    <string name="h_cab966b6">廣告 Service（後臺服務）類名關鍵詞，用於識別廣告後臺服務類，處理時置空其廣告方法，並在清單中移除對應組件。</string>
+    <string name="h_cb00b355" formatted="false">  ✓ 已改寫 application.android:name 指向 %1$s</string>
+    <string name="h_cc8469a8">寫入 $HELP_CONFIG_NAME 的 &quot;string_patterns&quot; 欄位。\n運行時由 core/DexPatcher.kt 掃描 const-string 指令並置空匹配的廣告字符串。</string>
+    <string name="h_ccbc6e46" formatted="false">  ✗ 數據復用優化失敗: %1$s</string>
+    <string name="h_cd0f41eb">    - 主頁: https://mt2.cn/\n</string>
+    <string name="h_cd369de4">| ABI | 處理前 | 處理後 | 快照數 | 字符串 | 替換次數 | 命中特徵 | 耗時 | 狀態 |</string>
+    <string name="h_cd394527">   - 用於定位 libapp.so 內 Dart 快照頭並提取/抹除廣告字符串\n\n</string>
+    <string name="h_cd4fc2cd">單詞邊界</string>
+    <string name="h_cd984ab2">常與&quot;廣告 SDK 包名&quot;&quot;廣告 View 類名&quot;&quot;廣告類名關鍵詞&quot;配合：這些分類的關鍵詞也會被一起用於布局元素匹配，命中即隱藏。</string>
+    <string name="h_cdb8ce5c">生成口令</string>
+    <string name="h_cddb60a3" formatted="false">  · 找到 %1$s (%2$s)，改寫其父類</string>
+    <string name="h_ce5f4cc6" formatted="false">已下載 0 B / %1$s</string>
+    <string name="h_ce6d7c18">時聯網請求版本信息，其餘時間不會在後臺聯網、收集或上傳任何個人信息。\n\n</string>
+    <string name="h_ceefa2cd">移除清單中的廣告 SDK 權限聲明</string>
+    <string name="h_cf431781">運行時由 core/DexPatcher.kt 的強制返回 false 邏輯處理（僅 boolean/int 返回類型）。</string>
+    <string name="h_cf9a62ca">大 DEX 低內存安全掃描，超大 DEX 也能穩定處理不卡死</string>
+    <string name="h_cfd21cdc">點擊&quot;管理&quot;→ 輸入廣告 Receiver 類名或關鍵詞 → 點&quot;添加&quot;。</string>
+    <string name="h_d086cb5b">▶ 步驟 3/5 去廣告</string>
+    <string name="h_d0997ec0">廣告方法名</string>
+    <string name="h_d0f51307">編輯特徵</string>
+    <string name="h_d236f750">  · 已關閉 Res 布局廣告 View 分類，跳過布局隱藏</string>
+    <string name="h_d38458da" formatted="false">  · 解包完成: %1$s 個快照, %2$s 條字符串 → %3$s</string>
+    <string name="h_d3ed5e25">   - 組件: https://github.com/material-components/material-components-android\n\n</string>
+    <string name="h_d44f69ea" formatted="false">  ✗ %1$s 修補失敗: %2$s</string>
+    <string name="h_d4a0d6cb">→ 輸入方法名關鍵詞 → 點\</string>
+    <string name="h_d4c58d3d" formatted="false">  ✓ 已嵌入原生庫: lib/%1$s/lib%2$s.so (%3$s)</string>
+    <string name="h_d4cdf611">   - 僅供特徵參考與學習，未修改其二進位\n\n</string>
+    <string name="h_d54ac91c">無法打開外部連結</string>
+    <string name="h_d64d53e1" formatted="false">鉤子 DEX 構建產物缺少 %1$s 類，已中止</string>
+    <string name="h_d6c3b08e">→ 輸入要解鎖的判定方法名 → 點\</string>
+    <string name="h_d6fab15d" formatted="false">  ✓ 報告: %1$s</string>
+    <string name="h_d7c66a32">v1 + v2 雙籤名，兼容低版本設備，處理結果可直接安裝</string>
+    <string name="h_d7d0599f">作者QQ</string>
+    <string name="h_d7d6523f">▶ 日誌已清空</string>
+    <string name="h_d8328f57">完整文件路徑，例如：\n/storage/emulated/0/APKEditor/ad_patterns.json</string>
+    <string name="h_d8a58722">已重置為默認配置路徑</string>
+    <string name="h_d8db6779">檢測更新失敗</string>
+    <string name="h_d9cbc4b0">請先授予\</string>
+    <string name="h_d9da8cfd">數據快照</string>
+    <string name="h_d9f1a2ee"># APK 廣告移除處理報告</string>
+    <string name="h_da32f742">   - 主頁: https://github.com/material-components/material-components-android\n</string>
+    <string name="h_da946dfc">→ 輸入廣告 View 類名或關鍵詞 → 點\</string>
+    <string name="h_daea0bf6" formatted="false">, 字符串置空 %1$s 處</string>
+    <string name="h_daef5388">    - 主頁: https://developer.android.com/tools/aapt2\n</string>
+    <string name="h_db0dc430">資源文件清理</string>
+    <string name="h_db41810b" formatted="false">, 強制true=%1$s</string>
+    <string name="h_db72862a" formatted="false">打開失敗: %1$s</string>
+    <string name="h_dd0a7c93">用戶自定義的 DEX 字符串廣告特徵（如廣告位 ID、SDK 特徵串、統計上報關鍵字等）。處理時會掃描所有方法體內的 const-string / const-string/jumbo 指令，字符串值（小寫化後）命中任一特徵即被置空為空字符串，從而破壞廣告 SDK 對相關字符串的引用，阻斷廣告邏輯。</string>
+    <string name="h_dd6c571b">寫入 $HELP_CONFIG_NAME 的 &quot;force_false_methods&quot; 欄位。\n運行時由 core/DexPatcher.kt 的強制返回 false 邏輯處理（僅 boolean/int 返回類型）。</string>
+    <string name="h_ddafe46f">籤名效驗去除：普通模式 + 原包模式，重打包後自動去除籤名校驗，避免換籤後拒絕運行</string>
+    <string name="h_ddc38ea1">與&quot;廣告類名關鍵詞&quot;的作用有重疊，可任選其一維護。</string>
+    <string name="h_de0412d9">訂閱配置為空，未做更改</string>
+    <string name="h_de0bbf00" formatted="false">類置空 %1$s</string>
+    <string name="h_de139607">18 類廣告特徵覆蓋 SDK 庫 / 權限 / 類 / 方法 / 資源 / URL 等，可自定義增刪改查與重置</string>
+    <string name="h_de184846">所有彈窗自適應屏幕大小，內容過多時自動滾動，不溢出屏幕</string>
+    <string name="h_de6aac40">配合：本分類為精確路徑，後者為模糊關鍵詞。</string>
+    <string name="h_de979268">   - 協議: 未標註許可證，僅供學習參考\n\n</string>
+    <string name="h_deb3721e">8. Kotlin 標準庫 (JetBrains)\n</string>
+    <string name="h_deb381d0" formatted="false">  ✓ 注入 %1$s 個籤名鉤子 | %2$s DEX | %3$s</string>
+    <string name="h_e00d1d26">可數據復用的嵌套 APK 子包</string>
+    <string name="h_e02f104a" formatted="false">]} 資源=%1$s</string>
+    <string name="h_e03c4e1e" formatted="false">卡片子視圖未找到: %1$s</string>
+    <string name="h_e0aa11ae">與&quot;廣告 SDK 包名&quot;配合使用（包名會自動推導部分庫名關鍵詞）。</string>
+    <string name="h_e0e88403">運行時由 core/DexPatcher.kt 掃描 const-string 指令並置空匹配的廣告連結。</string>
+    <string name="h_e17b0b80">讓廣告判定方法返回 false</string>
+    <string name="h_e21ed9e7" formatted="false">    -&gt; %1$s: 置空 %2$s 個廣告方法, 跳過 %3$s 個非廣告方法%4$s</string>
+    <string name="h_e25ab6b8">點擊&quot;管理&quot;→ 輸入文件名詞關鍵詞 → 點&quot;添加&quot;。運行時會按子串匹配（不區分大小寫）。</string>
+    <string name="h_e2dc63b4" formatted="false">  · %1$s 中 %2$s 已是鉤子類父類</string>
+    <string name="h_e2dca2bb">   APK v1 / v2 / v3 籤名實現，保證處理結果可安裝\n</string>
+    <string name="h_e2e27a87">嚴重</string>
+    <string name="h_e313c9e9" formatted="false">文件大小: %1$s bytes</string>
+    <string name="h_e4090eb7">正在下載</string>
+    <string name="h_e4100029">4. 廣告特徵規則整理\n</string>
+    <string name="h_e430c849" formatted="false">  ✓ 鉤子類已重命名為 %1$s</string>
+    <string name="h_e5029582">## Flutter libapp.so 處理（解包 / 去廣告 / 回編譯）</string>
+    <string name="h_e52286ce" formatted="false">  ℹ 數據復用優化已啟用：識別出 %1$s 個內置 APK 子包</string>
+    <string name="h_e55011c4">與 classes.dex 平級</string>
+    <string name="h_e58abe16">APK 根目錄文件關鍵詞</string>
+    <string name="h_e5a42c92">從後往前</string>
+    <string name="h_e5bea172">AXML清單移除</string>
+    <string name="h_e63572b7" formatted="false">  · 堆棧: %1$s</string>
+    <string name="h_e63572b7b" formatted="false">  · 堆棧: %1$s</string>
+    <string name="h_e655531f">Smali文件已保存</string>
+    <string name="h_e71aba5e">3. Dart AOT 快照解析 (Flutter libapp.so)\n</string>
+    <string name="h_e7425f76">  · 無廣告SDK庫名關鍵詞，跳過</string>
+    <string name="h_e75ba18c">秀場\n載入\nonadloaded\nAdClick</string>
+    <string name="h_e77ef5d2">廣告 View 組件類名關鍵詞，用於識別廣告視圖類（如橫幅、插屏、激勵視頻的 View）。類名命中即按廣告類處理並置空其廣告方法。</string>
+    <string name="h_e785557e">寫入 $HELP_CONFIG_NAME 的 &quot;ad_asset_paths&quot; 欄位。\n運行時由 core/AdRemover.kt 的 cleanAdSdkAssets() 刪除對應路徑。</string>
+    <string name="h_e870ac19">TT_PANGOLIN\nKW_SDK\ncom.bytedance\ncom.qq.e\ncom.mbridge.msdk\ncom.kwad.sdk</string>
+    <string name="h_e88520b7">2. 使用風險自擔：使用本應用處理 APK 所產生的任何後果（包括但不限於：應用無法安裝、閃退、功能異常、帳號風險、數據丟失等）均由使用者自行承擔。\n\n</string>
+    <string name="h_e93cb7ad">Res 布局廣告 View 關鍵詞</string>
+    <string name="h_e9472910">配置已保存</string>
+    <string name="h_e98ea42f">1. 本地離線處理：所有 APK 的解包、去廣告、打包、籤名均在您的設備本地完成，應用不會上傳任何 APK 文件或內部數據到伺服器。\n\n</string>
+    <string name="h_e9a0b582">點擊右側\</string>
+    <string name="h_e9ef00eb">公告內容...</string>
+    <string name="h_e9ef6fc2" formatted="false">]} 庫=%1$s</string>
+    <string name="h_ea8aef83" formatted="false">  ✗ %1$s 處理失敗: %2$s</string>
+    <string name="h_eaa67708" formatted="false">  · 已讀取原包籤名: %1$s…</string>
+    <string name="h_eb057b11">▶ 階段 3 SDK 庫清理</string>
+    <string name="h_eb46cd7f" formatted="false">  · 找到繼承 android.app.Application 的類: %1$s (%2$s)</string>
+    <string name="h_eb83ed6d">廣告特徵支持訂閱導入與分享，快速同步更多去廣告規則</string>
+    <string name="h_ec07479c">寫入 $HELP_CONFIG_NAME 的 &quot;root_file_keywords&quot; 欄位。\n運行時由 core/AdRemover.kt 的 cleanRootFiles() 遍歷 APK 根目錄（僅一層，不遞歸）並刪除匹配文件。</string>
+    <string name="h_ec3b529d">暫無詳細說明</string>
+    <string name="h_ec3f26fa">  · 識別依據為文件真實格式(ZIP 容器)，不依賴後綴名，重命名的子包(base/base.dat 等)也能被識別</string>
+    <string name="h_ec83d6b2">  · 未找到 DEX 文件，跳過</string>
+    <string name="h_eca9a205">無法打開下載中心</string>
+    <string name="h_ed310a00">DEX 體積優化已啟用</string>
+    <string name="h_eded2e15">   - 主頁: https://kotlinlang.org/\n</string>
+    <string name="h_edf6faf2">列表為空則跳過</string>
+    <string name="h_ee0a3ba0">口令已複製到剪貼板</string>
+    <string name="h_ee4d78ba">⏭ 無廣告跳過</string>
+    <string name="h_ee4e2a27">已添加手動輸入的訂閱源</string>
+    <string name="h_ee7d1dad">刪除廣告 SDK 文件</string>
+    <string name="h_eec19ff3">assets廣告文件路徑</string>
+    <string name="h_eed66a8d">，讓應用認為廣告從未加載或展示，從而跳過廣告展示邏輯。</string>
+    <string name="h_eedf995a" formatted="false">  · 原理: 注入 %1$s 鉤子, 改寫 Application 父類, 運行時覆蓋原包籤名</string>
+    <string name="h_efb1a358">是會員/已解鎖/已購買</string>
+    <string name="h_f08c72bc">廣告 Activity</string>
+    <string name="h_f0b2a7b1" formatted="false">已應用 %1$s 個訂閱源（共 %2$s 條特徵）</string>
+    <string name="h_f0b77403" formatted="false">  · 使用自定義入口名稱: %1$s</string>
+    <string name="h_f16e570f">  · 目標 APK 無 lib 目錄，寫入全部 ABI（含 x86 / x86_64）</string>
+    <string name="h_f1936c65">廣告 Activity\</string>
+    <string name="h_f235618a">▶ 步驟 5/5 導出</string>
+    <string name="h_f26b60e4">更新地址為網頁連結，將打開內置瀏覽器前往藍奏雲下載</string>
+    <string name="h_f2765b03">該特徵已存在</string>
+    <string name="h_f389c2d9">  · 未找到 assets 目錄，跳過廣告文件清理</string>
+    <string name="h_f3a25b4b">ad_unit_id\n位置ID\nrewarded_video_id\nbanner_pos_id</string>
+    <string name="h_f42a751f" formatted="false">  · 特徵配置: SDK=%1$s 類=%2$s 方法=%3$s 總計=%4$s 條</string>
+    <string name="h_f4f76ad4">發送郵件</string>
+    <string name="h_f506fec2">→ 輸入相對路徑（可寫 assets/ 前綴，也可省略）→ 點\</string>
+    <string name="h_f57b7d67">請輸入特徵內容</string>
+    <string name="h_f5d25035">▶ 階段 6 布局隱藏</string>
+    <string name="h_f5f084be">正在拉取訂閱源配置...</string>
+    <string name="h_f66c3cc8">與&quot;assets 廣告文件路徑&quot;配合使用。</string>
+    <string name="h_f6c7ffc7">  · 未找到 res 目錄，跳過</string>
+    <string name="h_f6f23d2d">    籤名效驗去除鉤子類（bin.mt.signature.KillerApplication）與原生庫思路來源\n</string>
+    <string name="h_f73090dc">  ⚠ 廣告特徵配置為空，跳過去廣告處理</string>
+    <string name="h_f744e671">應用訂閱失敗，請檢查存儲權限</string>
+    <string name="h_f77dad26">   - 出處: https://android.googlesource.com/platform/frameworks/base/ (core/res)\n</string>
+    <string name="h_f7aabc54" formatted="false">  ℹ 過籤包結構，啟用數據復用優化 (host: %1$s)</string>
+    <string name="h_f7d28e75">要刪除的 assets 目錄下的廣告 SDK 文件/目錄路徑。精確匹配，命中即整條（文件或目錄）刪除，用於移除打進 assets 的廣告插件、膠水層等。</string>
+    <string name="h_f7da955e">▶ 開始處理 APK</string>
+    <string name="h_f9bb4128">⚠️ 失敗</string>
+    <string name="h_f9f03d96">。運行時會按子串匹配（不區分大小寫），可用廣告 SDK 包名前綴或權限特徵詞。</string>
+    <string name="h_f9f6e3e6">運行時由 core/AxmlAdRemover.kt 的 hideAdLayoutViews() 改寫 res/layout 及 res/layout-* 下 AXML 布局中命中元素寬高為 0dp。</string>
+    <string name="h_fa4706ec">關鍵詞為子串匹配，覆蓋面廣，請避免使用過於通用的詞以防誤刪。</string>
+    <string name="h_fa59ee8d">assets廣告關鍵詞</string>
+    <string name="h_fa8a0296">寫入 $HELP_CONFIG_NAME 的 &quot;url_patterns&quot; 欄位。\n運行時由 core/DexPatcher.kt 掃描 const-string 指令並置空匹配的廣告連結。</string>
+    <string name="h_faecff27" formatted="false">  ℹ 已跳過 %1$s 個 assets 內置 APK 文件（如 base.apk），如需刪除請在\</string>
+    <string name="h_fbc9e271">  · 已對這些子包按原字節直接復用(STORED)，避免對已壓縮嵌套 APK 重複壓縮導致的體積膨脹</string>
+    <string name="h_fbfccfde" formatted="false">  ✓ %1$s 文件 | %2$s DEX | %3$s</string>
+    <string name="h_fc2459c8">寫入 $HELP_CONFIG_NAME 的 &quot;lib_file_keywords&quot; 欄位。\n運行時由 core/AdRemover.kt 的 cleanAdSdkLibs() 遍歷 lib/*/ 並刪除匹配的 .so 文件。</string>
+    <string name="h_fc69844a" formatted="false">共 %1$s 條特徵</string>
+    <string name="h_fc69844a2" formatted="false">共 %1$s 條特徵</string>
+    <string name="h_fd5e5b52">。也可用手機文件管理器直接編輯配置文件。</string>
+    <string name="h_fe1aa884">| 階段 | 明細 | 耗時 |</string>
+    <string name="h_fe77d47f" formatted="false">  ✓ 已嵌入原包: %1$s (%2$s)</string>
+    <string name="h_fe97b23b">廣告請求 URL 或域名。處理時會把 DEX 中以 const-string 形式存在的廣告連結字符串置空為空字符串，阻斷廣告請求。</string>
+    <string name="h_fea9a093">配合使用</string>
+    <string name="h_ff4c2138" formatted="false">  · 使用自定義籤名信息（%1$s 字符）</string>
+    <string name="h_ff8a316f">   - 參考其 adloader / 域名黑名單 / 方法關鍵詞思路，結合主流廣告 SDK 自行整理\n\n</string>
+    <string name="h_ff94e7df">3. 商業使用責任：修改後的 APK 若用於商業用途或對外分發，請確保遵守相關應用的所有權、版權、商標及所在國家或地區的法律法規，由此產生的法律責任由使用者自擔。\n\n</string>
+    <string name="h_ffdeee21">與&quot;廣告 SDK 包名&quot;配合使用。</string>
+    <string name="h_ffe745b5" formatted="false">  · 關鍵詞 %1$s 個</string>
+    <string name="h_ffe745b5d" formatted="false">  · 關鍵詞 %1$s 個</string>
+    <string name="lang_default">簡體中文</string>
+    <string name="lang_desc">選擇應用顯示語言，切換後立即生效並保存。</string>
+    <string name="lang_dialog_title">選擇界面語言</string>
+    <string name="lang_title">語言</string>
     <string name="s_01769a6e">遠端配置 URL（https://...）</string>
     <string name="s_02d9819d">提示</string>
     <string name="s_02daf71f">訂閱</string>
     <string name="s_04d7d88e">分類名稱</string>
+    <string name="s_settings_back">返回</string>
     <string name="s_068d0c44">作者資訊</string>
     <string name="s_07ee07e4">編輯訂閱源</string>
     <string name="s_089e87fe">啟用簽名效驗去除</string>
@@ -17,7 +855,7 @@
     <string name="s_09d71337">開啟/關閉訂閱</string>
     <string name="s_0baadd9e">將當前廣告特徵配置生成口令分享給他人</string>
     <string name="s_0c7d604b">訂閱源</string>
-    <string name="s_0eb3c700">v2.0</string>
+    <string name="s_0eb3c700">v2.0 版本</string>
     <string name="s_0f60c989">新版本已釋出，歡迎升級體驗</string>
     <string name="s_10445608">功能說明</string>
     <string name="s_12121846">點選「管理」可編輯 / 新增 / 刪除</string>
@@ -32,7 +870,7 @@
     <string name="s_1fc1da7d">支援新增 / 編輯 / 刪除 / 分享訂閱源，配置內容可分享為訂閱源口令。</string>
     <string name="s_224e2ccd">配置</string>
     <string name="s_23f849fb">APK 解包 · DEX 去廣告 · 打包簽名\n一鍵去除廣告，本地離線處理</string>
-    <string name="s_240bf022">pattern</string>
+    <string name="s_240bf022">模式</string>
     <string name="s_2541ca48">立即更新</string>
     <string name="s_25488ce0">簽名效驗去除</string>
     <string name="s_2a813bc3">立即下載</string>
@@ -88,6 +926,9 @@
     <string name="s_6b7bcdcd">處理後大小</string>
     <string name="s_6ff3d989">選擇顯示模式</string>
     <string name="s_71938084" formatted="false">處理含廣告的 DEX 時移除除錯資訊（行號/區域性變數表/引數名），可減小 APK 體積 5%~15%，不影響執行功能，僅崩潰堆疊不再顯示行號。</string>
+    <string name="s_skip_signing_title">打包時重新簽名</string>
+    <string name="s_skip_signing_desc" formatted="false">開啟後打包完成自動重新簽名；關閉後輸出未簽名 APK，適合需要二次簽名 / 加固 / 自有證書等後續處理場景。</string>
+    <string name="s_skip_signing_cd">打包完成後是否重新簽名</string>
     <string name="s_71bbc726">跟隨系統</string>
     <string name="s_728ee208">Flutter 廣告特徵</string>
     <string name="s_7295f03c">訂閱源名稱</string>
@@ -176,14 +1017,21 @@
     <string name="s_fa86f1a5">公告</string>
     <string name="s_fe5cc438">版本 1.7</string>
     <string name="s_fe60ed78">內嵌配置型訂閱源無法修改配置內容，僅可修改名稱</string>
-    <string name="s_ff3e568a">v1.0</string>
-
-    <string name="app_title_local">本地 APK 一鍵去廣告 · 解包 / 修補 / 打包 / 簽名</string>
-    <string name="app_subtitle_about">關於應用 · 版本資訊與聲明</string>
-    <string name="app_title_download">下載中心</string>
-    <string name="app_subtitle_settings">自訂去廣告特徵</string>
-    <string name="lang_title">語言</string>
-    <string name="lang_desc">選擇應用顯示語言，切換後立即生效並保存。</string>
-    <string name="lang_default">簡體中文</string>
-    <string name="lang_dialog_title">選擇界面語言</string>
+    <string name="s_ff3e568a">v1.0 版本</string>
+    <string name="perm_all_files_access" formatted="false">請先授予\"所有檔案存取\"權限</string>
+    <string name="log_apkinfo" formatted="false">  ✓ %1$s | %2$s | DEX=%3$s 資源=%4$s 庫=%5$s | %6$s</string>
+    <string name="log_dexmultiplex_done" formatted="false">  ℹ 數據復用優化完成: %1$s -&gt; %2$s</string>
+    <string name="log_dexmultiplex_reuse" formatted="false">  · 復用原包(%1$s)數據段，節省 %2$s (%3$s%%)</string>
+    <string name="log_dexmultiplex_fail" formatted="false">  ✗ 數據復用優化失敗: %1$s</string>
+    <string name="dexinfo_file" formatted="false">文件: %1$s</string>
+    <string name="dexinfo_size" formatted="false">大小: %1$d bytes</string>
+    <string name="dexinfo_classes" formatted="false">類數量: %1$d</string>
+    <string name="dexinfo_methods" formatted="false">方法數量: %1$d</string>
+    <string name="dexinfo_fields" formatted="false">欄位數量: %1$d</string>
+    <string name="dexinfo_packages" formatted="false">\n包分布:</string>
+    <string name="dexinfo_pkg_line" formatted="false">  %1$s: %2$d 個類</string>
+    <string name="sigrem_inject_hook" formatted="false">  ▶ 注入 MT 式籤名鉤子 (%1$s)…</string>
+    <string name="sigrem_class_renamed" formatted="false">  ✓ 鉤子類已重命名為 %1$s (含 12 個內部類)</string>
+    <string name="dexpatcher_link_neutral" formatted="false">, 連結置空 %1$d 處</string>
+    <string name="dexpatcher_neutral" formatted="false">    -&gt; %1$s: 置空 %2$d 個廣告方法, 跳過 %3$d 個非廣告方法%4$s%5$s</string>
 </resources>

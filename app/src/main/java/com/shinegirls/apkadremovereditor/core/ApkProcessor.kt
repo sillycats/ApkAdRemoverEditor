@@ -1,5 +1,7 @@
 package com.shinegirls.apkadremovereditor.core
 
+import com.shinegirls.apkadremovereditor.R
+import android.content.Context
 import com.shinegirls.apkadremovereditor.utils.Format
 import java.io.File
 import java.io.FileOutputStream
@@ -141,6 +143,7 @@ class ApkProcessor {
     fun buildApk(
         sourceDir: File,
         outputApk: File,
+        context: Context,
         logger: Logger? = null,
         dataReuseOverride: Boolean? = null
     ) {
@@ -172,9 +175,9 @@ class ApkProcessor {
         lastEmbeddedApkPaths = embeddedApkPaths.sorted()
         val dataReuse = dataReuseOverride ?: (embeddedApkCount > 0)
         if (dataReuse) {
-            log("  ℹ 数据复用优化已启用：识别出 $embeddedApkCount 个内置 APK 子包")
-            log("  · 识别依据为文件真实格式(ZIP 容器)，不依赖后缀名，重命名的子包(base/base.dat 等)也能被识别")
-            log("  · 已对这些子包按原字节直接复用(STORED)，避免对已压缩嵌套 APK 重复压缩导致的体积膨胀")
+            log(context.getString(R.string.h_e52286ce, embeddedApkCount))
+            log(context.getString(R.string.h_ec3f26fa))
+            log(context.getString(R.string.h_fbc9e271))
         }
 
         var entryCount = 0
@@ -318,12 +321,12 @@ class ApkProcessor {
 
         totalCompressed = outputApk.length()
 
-        log("  ✓ 打包完成: $entryCount 个条目")
-        log("  · 未压缩大小: ${formatSize(totalUncompressed)}")
-        log("  · 打包后大小: ${formatSize(totalCompressed)}")
+        log(context.getString(R.string.h_4f20bc64, entryCount))
+        log(context.getString(R.string.h_22c8b46e, formatSize(totalUncompressed)))
+        log(context.getString(R.string.h_7b5257b5, formatSize(totalCompressed)))
         if (totalUncompressed > 0) {
             val ratio = (1.0 - totalCompressed.toDouble() / totalUncompressed) * 100
-            log("  · 压缩率: ${String.format(Locale.US, "%.1f", ratio)}%")
+            log(context.getString(R.string.h_66b947eb, String.format(Locale.US, "%.1f", ratio) + "%"))
         }
     }
 

@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_copyright" formatted="false">© 2026 XiaoNaiPing · Tutti i diritti riservati\nAlimentato da dexlib2 / apksig / AndroidX</string>
+    <string name="about_disclaimer" formatted="false">Leggi attentamente il seguente disclaimer prima di utilizzare questa app:\n\n1. Restrizione sull\'uso legale: questa app è destinata esclusivamente all\'apprendimento, alla ricerca e all\'uso personale e legale. Non modificare o ridistribuire app che non possiedi, per cui non sei autorizzato o che sono legalmente protette.\n\n2. Utilizzare a tuo rischio e pericolo: qualsiasi conseguenza dell\'elaborazione degli APK con questa app (inclusi, ma non limitati a app che non si installano, crashano, malfunzionanti, rischi dell\'account, perdita di dati, ecc.) sono a carico dell\'utente.\n\n3. Responsabilità per l\'uso commerciale: se APK modificati vengono utilizzati commercialmente o distribuiti, assicurarsi il rispetto delle leggi pertinenti sulla proprietà, copyright, marchio e locali. Tutta la responsabilità legale ricade sull\'utente.\n\n4. Nessuna garanzia: questa app è fornita così com\'è, senza garanzie espresse o implicite. L\'autore non è responsabile per alcuna perdita diretta o indiretta derivante dall\'uso o dall\'impossibilità di utilizzare questa app.\n\n5. Contenuti di terze parti: i progetti open-source e le regole sui modelli pubblicitari a cui questa app fa riferimento provengono da canali pubblici solo per riferimento tecnico; i loro diritti d\'autore appartengono agli autori originali.\n\n6. Modifiche ai termini: l\'autore si riserva il diritto di modificare questa dichiarazione di non responsabilità in qualsiasi momento; I termini aggiornati entrano in vigore nelle nuove versioni.\n\n7. Usare questa app significa che hai letto, compreso e accettato tutti i termini sopra elencati. Se non sei d\'accordo, ti preghiamo di smettere di usare questa app.</string>
+    <string name="about_open_source" formatted="false">Questa app è costruita e chiama i seguenti progetti open-source: Sinceri ringraziamenti e rispetto ai loro autori:\n\n1. Multiplexazione ApkData (L-JINBIN)\n   Riutilizza il segmento dati originale del pacchetto tramite offset central-directory e rimuove i dati duplicati, riducendo significativamente i pacchetti resigned (fino al ~50%), con lo schema di firma V2V3SchemeSigner\n   - Casa: https://github.com/L-JINBIN/ApkDataMultiplexing\n   - Licenza: non specificata, solo per l\'apprendimento\n\n2. dexlib2 / smali / baksmali (JesusFreke)\n   DEX di lettura/scrittura e smali disassembly/assembly toolchain, il motore principale di rimozione degli annunci\n   - Casa: https://github.com/JesusFreke/smali\n   - Licenza: BSD a 3 clausole\n\n3. apksig (Progetto Open Source Android)\n   APK v1 / v2 / v3 firmando quindi i risultati si installano con successo\n   - Casa: https://android.googlesource.com/platform/tools/apksig\n   - Licenza: Apache License 2.0\n\n4. Castello gonfiabile: bcprov / bcpkix\n   Libreria di criptovalute Java e generazione certificati per la firma dei certificati\n   - Casa: https://www.bouncycastle.org/\n   - Licenza: Licenza MIT\n\n5. Guava (Google)\n   Collezioni e utility Java che forniscono le collezioni immutabili di cui dexlib2 ha bisogno\n   - Casa: https://github.com/google/guava\n   - Licenza: Apache License 2.0\n\n6. AndroidX (Progetto Open Source Android)\n   Core-KTX / Appcompat / ConstraintLayout / RecyclerView / Lifecycle / CoordinatorLayout\n   Librerie ufficiali di supporto Jetpack di Android\n   - Casa: https://developer.android.com/jetpack\n   - Licenza: Apache License 2.0\n\n7. Componenti materiali (Google)\n   Biblioteca di componenti Material Design che fornisce carte, pulsanti, dialoghi e altri componenti dell\'interfaccia utente\n   - Casa: https://github.com/material-components/material-components-android\n   - Licenza: Apache License 2.0\n\n8. Biblioteca Standard di Kotlin (JetBrains)\n   Il linguaggio di programmazione e la libreria standard Kotlin\n   - Casa: https://kotlinlang.org/\n   - Licenza: Apache License 2.0\n\n9. DTL-X (Gameye98)\n   Riferimento per le regole di pattern di classe / metodo / URL ad\n   - Casa: https://github.com/Gameye98/DTL-X\n   - Solo per riferimento e apprendimento dei pattern; i suoi binari non sono stati modificati\n\n10. Strumento di Packaging degli Asset Android (AAPT2)\n    Strumento di compilazione e confezionamento di risorse Android per AXML / elaborazione delle risorse\n    - Casa: https://developer.android.com/tools/aapt2\n    - Licenza: Apache License 2.0\n\n11. Campione di Manager MT ApkSignatureKillerEx (Bin.MT)\n    Sorgente della classe hook per la verifica della firma (bin.mt.signature.KillerApplication) e idee per le librerie native\n    - Casa: https://mt2.cn/\n    - Solo per l\'apprendimento; La classe hook e la libreria nativa sono risorse integrate nel campione, non modificate\n\n12. dexlib2 DexRewriter (JesusFreke)\n    Uno schema di rinominazione delle classi DEX basato su RewriterModule / TypeRewriter per nomi di classi hook personalizzate\n    - Casa: https://github.com/JesusFreke/smali\n    - Licenza: BSD a 3 clausole\n\nPer vedere i testi completi di copyright e licenza dei progetti sopra menzionati, visita le loro homepage.</string>
+    <string name="about_privacy" formatted="false">Questa app segue il principio della raccolta minima e valorizza e protegge molto la tua privacy:\n\n1. Completamente offline: tutto il dispacking, la rimozione degli annunci, il repacking e il signing degli APK avvengono localmente sul tuo dispositivo. L\'app non carica mai file APK o dati interni su un server.\n\n2. Networking trasparente: l\'app contatta la rete solo per richiedere informazioni sulla versione quando tocchi &quot;Check Update&quot;; Non mette mai in rete nulla, non raccoglie o carica informazioni personali in background in altri momenti.\n\n3. Permessi minimi: l\'app non legge, memorizza né accede a dati sensibili come contatti, galleria, posizione, SMS o registri delle chiamate.\n\n4. Archiviazione locale dei dati: configurazione e pattern vengono memorizzati solo sul dispositivo e cancellati quando l\'app viene disinstallata, senza che vengano conservati i record cloud.\n\n5. Collegamenti di terze parti: le pagine Informazioni e aggiornamenti possono contenere link esterni; Cliccarci permette a una piattaforma di terze parti di elaborare il tuo accesso, quindi ti invito a consultare le loro politiche sulla privacy.\n\n6. Se avete domande, suggerimenti o dubbi sulla privacy, sentitevi liberi di contattarci tramite i contatti dell\'autore e faremo del nostro meglio per aiutarvi.</string>
+    <string name="about_reference" formatted="false">Durante lo sviluppo, questa app faceva riferimento ai seguenti documenti tecnici pubblici, tutorial open source e materiali comunitari per il reverse engineering. Ringraziamo gli autori e riportiamo le fonti qui:\n\n1. Patching diretto di DEX (basato su dexlib2)\n    Riferimenti alle idee di Facebook per il dexdump Android e agli esempi ufficiali di dexlib2\n   - dexlib2 Home: https://github.com/JesusFreke/smali\n   - Ha usato la documentazione API ed esempi per localizzare e riscrivere classi/metodi/stringhe di annuncio noi stessi\n\n2. Parsing in formato binario AXML (Android Asset Packaging)\n    Riferito alla documentazione XmlPullParser e AXML binary format di AOSP\\n   - Fonte: https://android.googlesource.com/platform/frameworks/base/ (nucleo/res)\n   - Scritto basandosi su header di chunk AXML, sulla struttura StringPool/ResourceMap delle risorse e su materiali pubblici di reverse engineering\n\n3. Parsing snapshot AOT Dart (Flutter libapp.so)\n    Ha fatto riferimento al codice sorgente Dart VM snapshot.h e alla community Flutter dei materiali per il reverse engineering\n   - snapshot.h: https://github.com/dart-lang/sdk/blob/main/runtime/vm/snapshot.h\n   - Utilizzato per localizzare l\'header snapshot Dart all\'interno di libapp.so ed estrarre/neutralizzare stringhe ad\n\n4. Organizzazione delle regole dei modelli pubblicitari\n    Nomi di pacchetti AD SDK / domini / parole chiave di classe riferiti ed estesi dal progetto open-source DTL-X\n   - Casa: https://github.com/Gameye98/DTL-X\n   - Ha fatto riferimento alle idee per adloader / blacklist di dominio / parole chiave di metodo e le ha organizzate con gli SDK pubblicitari mainstream\n\n5. APK Firma e allineamento v1 / v2\n    Ha fatto riferimento all\'implementazione ufficiale di apksig e alla documentazione sull\'allineamento ZIP di Android\n   - APKSIG: https://android.googlesource.com/platform/tools/apksig\n   - Allineamento ZIP: https://developer.android.com/studio/command-line/zipalign\n\n6. Multiplexazione dei dati (ottimizzazione delle dimensioni del pacchetto ricontrato)\n    Ha fatto riferimento al progetto ApkDataMultiplexing di L-JINBIN e alla struttura resigned-package di LSPatch\n   - Casa: https://github.com/L-JINBIN/ApkDataMultiplexing\n   - Fonte dell\'idea: il team LSP (pacchetto risegnato + reindirizzamento IO rispetto ai controlli completi del pacchetto)\n   - Principio: riutilizzare il segmento dati originale del pacchetto tramite offset central-directory e rimuovere i dati duplicati per ottimizzare la dimensione\n   - Ha portato le sue implementazioni DataMultiplexing / ZipMaker / ZipFile / V2V3SchemeSigner\n\n7. Tema e layout dell\'interfaccia utente\n    Scritto basandosi su specifiche di Progettazione dei Materiali e esempi di librerie di Componenti dei Materiali\n   - Specifica: https://m3.material.io/\n   - Componenti: https://github.com/material-components/material-components-android\n\n8. Verifica della firma, rimozione (dimissioni)\n    Ho citato le idee di iniezione hook del manager MT ApkSignatureKillerEx:\n   - Iniettare una classe hook KillerApplication e modificare il riferimento Application nel manifesto\n   - Il hook legge e memorizza la firma tramite PackageManager &lt;clinit&gt;in , coprendo getPackageInfo / controlli nativi\n   - Modalità Original-Package: incorpora l\'APK originale e la libreria nativa rinunciata, leggendo la firma originale per una copertura più ampia\n   - Fonte: https://mt2.cn/ (solo per apprendimento)\n\n9. Rinomina della classe DEX (nome della classe hook personalizzato)\n    Ho fatto riferimento agli esempi ufficiali di RewriterModule / TypeRewriter di dexlib2 per riscrivere sia la definizione della classe che tutti i riferimenti\n   - Fonte: https://github.com/JesusFreke/smali\n   - Riscritture tramite corrispondenza prefisso type-descriptor, compatibili con dot / slash / L...; Forme di input\n\nIl contenuto sopra riportato è solo per riferimento tecnico; Tutte le implementazioni finali sono autosviluppate da questo progetto. I diritti d\'autore appartengono agli autori originali e alle loro organizzazioni.</string>
+    <string name="app_name">Editor Rimozione Pub APK</string>
+    <string name="app_subtitle_about">Info · Versione e note legali</string>
+    <string name="app_subtitle_settings">Personalizza pattern pub</string>
+    <string name="app_title_download">Centro download</string>
+    <string name="app_title_local">Rimuovi pub con un tocco · Decompress / Patch / Pack / Firma</string>
+    <string name="author_email">3679265780@qq.com</string>
+    <string name="author_name">XiaoNaiPing</string>
+    <string name="author_qq_note">3679265780</string>
+    <string name="file_item_icon">Icona file</string>
+    <string name="h_00110af8">日本語</string>
+    <string name="h_0046342a">· Nessun file DEX trovato</string>
+    <string name="h_0078e971" formatted="false">| Dimensione APK | %1$s | %2$s | %3$s |</string>
+    <string name="h_0094af95">Identifica le classi di componenti della vista ad</string>
+    <string name="h_00a68483">com.google.android.gms.ads\ncom.bytedance.sdk.openadsdk\ncom.qq.e.ads\ncom.mbridge.msdk</string>
+    <string name="h_00db9073">In tempo reale, letti dalla logica di filtro di blanking del metodo core/DexPatcher.kt\ (con consapevolezza del confine delle parole).</string>
+    <string name="h_01213463">    - Casa: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_0148e9c3" formatted="false">| Tempo totale | - | %1$s | - |</string>
+    <string name="h_0189f54f">    Collezioni Java e librerie utilitari, che forniscono le collezioni immutabili necessarie a dexlib2\n</string>
+    <string name="h_01ad6b8a" formatted="false">✓ %1$s ricompilazione completa: snapshot=%2$s, </string>
+    <string name="h_01be0fd6">Funziona con \&quot;Ad SDK package names\&quot;, \&quot;Ad Activity / Service / Receiver\&quot; per pulire le dichiarazioni di permesso degli AD SDK nel manifesto.</string>
+    <string name="h_01d3d9f4">Salvataggio fallito, controllo permesso di archiviazione</string>
+    <string name="h_01ee9186" formatted="false">| Conteggio DEX saltato | %1$s |</string>
+    <string name="h_01f0ed64" formatted="false">⚠ Pulizia della cache Flutter fallita: %1$s</string>
+    <string name="h_02317889">Pattern pubblicitari Flutter abilitati</string>
+    <string name="h_0253b8cd">di solito usata standalone, o con </string>
+    <string name="h_02b610da">Nessuna app Flutter rilevata (nessuna libapp.so); Questa sezione non è applicabile.</string>
+    <string name="h_02be3cd1">Visualizzazione ad nome della classe</string>
+    <string name="h_02cd9acd" formatted="false">✓ Segno | %1$s | %2$s</string>
+    <string name="h_03277167">isVip\nisPro\nisPremium\nisMember\nisPaid</string>
+    <string name="h_037647ef">Controllo aggiornamenti...</string>
+    <string name="h_042f6c6a" formatted="false">⚠ Cancellazione fallita: %1$s/%2$s</string>
+    <string name="h_0456832d">Tocca \&quot;Gestisci\&quot; -&gt; inserisci una parola chiave -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_04cc78d8">Nei file di layout res/layout dell\'APK\, gli SDK ad sono spesso incorporati come Viste personalizzate (e.g. com.meishu.sdk.meishu_ad.view.MeishuVideoCahceTextureView, AdView, ecc.). Quando il nome della classe di un elemento contiene queste parole chiave, il layout_width / layout_height di quell\'elemento viene cambiato in 0dp dopo l\'elaborazione, comprimendo l\'area dell\'annuncio a dimensione zero per nasconderla, senza rimuovere la sua posizione o i riferimenti nel layout, evitando così di rompere la struttura del layout.</string>
+    <string name="h_04cd3cff">AdView\nAdAttività\nBannerAd\nInterstizialAd</string>
+    <string name="h_04ea27ce">Ad Visualizza nomi delle classi </string>
+    <string name="h_04f51da8" formatted="false">✗ Incorporamento della risorsa originale del pacchetto fallito: %1$s</string>
+    <string name="h_0502db8e">Sostituisci tutti</string>
+    <string name="h_05112730">Layout di Res e parole chiave per la visualizzazione dell\'annuncio</string>
+    <string name="h_05360de7" formatted="false">Modalità di verifica firma impostata su: %1$s</string>
+    <string name="h_0594e658">    - Licenza: BSD a 3 clausole\n\n</string>
+    <string name="h_05ade75d">Token generato; Copialo o condividilo con altri.</string>
+    <string name="h_06265e81">La riscrittura del manifesto è fallita</string>
+    <string name="h_06b81d3d">Caricamento del layout fallito</string>
+    <string name="h_07f8a374">    - Origine: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_08430702" formatted="false">Già l\'ultima versione (%1$s)</string>
+    <string name="h_08badd62"> comunemente con </string>
+    <string name="h_08dc0848">    - Licenza: Apache License 2.0\n\n</string>
+    <string name="h_09306e74" formatted="false">✗ Errore di elaborazione della rimozione degli annunci: %1$s</string>
+    <string name="h_0a855e59">Parole chiave per il nome della classe di ricevitore di broadcast (Receiver) di annunci, usate per identificare i componenti della trasmissione pubblicitaria. Durante l\'elaborazione, i loro metodi ad vengono bloccati e i componenti corrispondenti vengono rimossi dal manifesto.</string>
+    <string name="h_0b1609fb">Non abilitato (tocca per cambiare modalità)</string>
+    <string name="h_0b1b3420" formatted="false">Hook DEX output build %1$s errore della classe genitore: %2$s, </string>
+    <string name="h_0b1c5479">Di solito usati indipendentemente; può anche funzionare con &quot;Ad SDK package names\&quot; per rafforzare l\'effetto di blocco.</string>
+    <string name="h_0b34e814">Inserisci il nome dell\'abbonamento</string>
+    <string name="h_0b849763">## Elaborazione dei checkpoint (infrastruttura ripresa)</string>
+    <string name="h_0c01c591">    - Origine snapshot.h: https://github.com/dart-lang/sdk/blob/master/runtime/vm/snapshot.h\n</string>
+    <string name="h_0c258295" formatted="false">| Layout degli annunci Res Nascosti | %1$s |</string>
+    <string name="h_0c374516" formatted="false">| Componenti pubblicitari AXML rimossi | %1$s |</string>
+    <string name="h_0c94389e">Durante lo sviluppo sono stati citati i seguenti documenti tecnici pubblici, tutorial open-source e materiale comunitario di reverse engineering; Grazie e ringraziamenti seguono, con fonti indicate:\n\n</string>
+    <string name="h_0cad3ba2">Smart ABI-native injection: scrive le lib native solo sugli ABI già presenti nell\'APK target; scrive tutte le ABI quando non c\'è un lib dir</string>
+    <string name="h_0d05061e">    - Nel hook &lt;clinit&gt;, legge e memorizza la firma tramite PackageManager, coprendo getPackageInfo / verifica nativa\n</string>
+    <string name="h_0d110ed8"> insieme, meglio con </string>
+    <string name="h_0d2d462b" formatted="false">Non è riuscito ad associare la carta categoria: %1$s</string>
+    <string name="h_0d37a3a3">Tocca \&quot;Gestisci\&quot; -&gt; inserisci il nome del metodo di determinazione per sbloccare -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_0d3ea6cb">Scritto nel campo \&quot;res_layout_keywords\&quot; di $HELP_CONFIG_NAME.\nIn tempo reale viene letto da core/AxmlAdRemover.kt\'s hideAdLayoutViews() per riscrivere la larghezza/altezza a 0dp per abbinare elementi nei layout AXML sotto res/layout e res/layout-*.</string>
+    <string name="h_0dd640d5">Le app Flutter (AOT) incorporano uno snapshot Dart in libapp.so, che memorizza stringhe come nomi di pacchetti AD SDK, URL/domini pubblicitari e nomi di classi pubblicitarie come byte ASCII grezzi. Questo mantiene i pattern delle stringhe da cancellare dall\'snapshot: quando sono abbinati, vengono sovrascritti con byte NUL di uguale lunghezza durante libapp.so unpack/remove-ad/repack, rendendo inefficace il contenuto della stringa pubblicitaria.</string>
+    <string name="h_0e13f623">Ripristinare tutti i modelli pubblicitari ai valori predefiniti di base?\nLe tue modifiche personalizzate andranno perse.</string>
+    <string name="h_0e3149dd" formatted="false">▶ Processing %1$s (%2$s, %3$s)</string>
+    <string name="h_0e655b36" formatted="false">| Ad Methods Nulled | %1$s |</string>
+    <string name="h_0ed17ae5">4. Dichiarazione senza garanzia: questa app è fornita &quot;così com\'è\&quot;, senza alcuna garanzia esplicita o implicita. L\'autore non è responsabile per alcuna perdita diretta o indiretta causata dall\'utilizzo o dall\'impossibilità di utilizzare questa app.\n\n</string>
+    <string name="h_0f5b9aec">    Prendendo in prestito la documentazione API e gli esempi, la nostra implementazione personale di localizzazione e riscrittura di classi/metodi/stringhe ad\n\n</string>
+    <string name="h_0f8a3b32">Tocca \&quot;Gestisci\&quot; -&gt; inserisci i pattern di stringhe di annunci (basta un frammento) -&gt; tocca \&quot;Aggiungi\&quot;. L\'abbinamento avviene su sottostringhe a runtime (insensibile alla maiuscolagem).</string>
+    <string name="h_0fc61704">Abbonamento senza titolo</string>
+    <string name="h_0fd47041">Ripristina la configurazione predefinita</string>
+    <string name="h_101f062b">    - Inietta la classe hook KillerApplication e riscrive il riferimento manifest Application\n</string>
+    <string name="h_10286b03">    - Casa: https://www.bouncycastle.org/\n</string>
+    <string name="h_1136c248">Parole chiave per nome classe ad </string>
+    <string name="h_114cfdd0">Usato per </string>
+    <string name="h_118b2282">Force update E la versione attuale è inferiore all\'ultima</string>
+    <string name="h_11b8b2c9">· L\'ottimizzazione è fallita, tornando alla firma standard v1+v2</string>
+    <string name="h_11ca9ed7" formatted="false">-&gt; %1$s: link vuoti su %2$s spot%3$s</string>
+    <string name="h_122f1ca8">Parole chiave dei nomi delle librerie native sotto la cartella lib da eliminare. Usato per eliminare i file dinamici della libreria AD SDK (per garantire che i file ad .so nella directory lib vengano rimossi).</string>
+    <string name="h_1233c111" formatted="false">file: %1$s</string>
+    <string name="h_12f7aee0">, // annuncio ID univoco (per </string>
+    <string name="h_130a118a">Funzione autonoma; si applica a tutte le classi e a tutti i metodi, senza dipendenza da altre categorie.</string>
+    <string name="h_132ae845">· Disimballa: Istantanea del dardo non trovata</string>
+    <string name="h_1394b002">Elimina le risorse pubblicitarie per parola chiave</string>
+    <string name="h_14543bce">    - Casa: https://android.googlesource.com/platform/tools/apkzlib\n</string>
+    <string name="h_14e50afa">Funziona con \&quot;Ad SDK package names\&quot; e \&quot;Ad class name keywords\&quot;; tutto parte del sistema di identificazione dei nomi di classe.</string>
+    <string name="h_1516029a">ttad\nGDT\npangle\nadmob\nBaiduad</string>
+    <string name="h_15286e90">Rimuovi il controllo firma dall\'originale</string>
+    <string name="h_158dee5e">Scegli la modalità di rimozione dei controlli della firma</string>
+    <string name="h_15c99f22">Annulla i metodi e i link delle classi ad, azzera la geometria della visualizzazione e forza i ritorni vero/falso per sbloccare le iscrizioni e bloccare i controlli ad</string>
+    <string name="h_166a8328" formatted="false">Permesso AXML %1$s</string>
+    <string name="h_166c2b0d">Riguarda solo le stringhe che sembrano URL (contenenti ://, www, .com, ecc.) per evitare di danneggiare il testo ordinario.</string>
+    <string name="h_16753bc3">loadAd\nshowAd\nloadInterstitialAd\nshowRewardedVideo</string>
+    <string name="h_16a1939f" formatted="false">| Conteggio DEX fallito | %1$s |</string>
+    <string name="h_16a9197c" formatted="false">Scritto nel file di configurazione esterno %1$s\ </string>
+    <string name="h_1716f0ff">⏭ Nessun cambiamento</string>
+    <string name="h_17393ab7" formatted="false">Conteggio dei metodi: %1$s</string>
+    <string name="h_17ac7253">AdAttività\nInterstizialeAdattività\nSplashActivity</string>
+    <string name="h_18374fbf">tt_version\nstartup_config\noaid\nuuid\ndevice_id\noa_sdk</string>
+    <string name="h_1897b7f5">Come aggiungere</string>
+    <string name="h_1901ab4f" formatted="false">✗ %1$s fuori memoria: %2$s</string>
+    <string name="h_19071f26">▶ Fase 2.5 Rimozione dei permessi AXML</string>
+    <string name="h_19c4ff08">A runtime, core/DexPatcher.kt scansiona le istruzioni const-string e gli blank corrispondenti alle stringhe di annunci.</string>
+    <string name="h_1a63ac23">Esempi</string>
+    <string name="h_1b5de080" formatted="false"> (oggetti del %1$s)</string>
+    <string name="h_1b92ede8">Inserisci un token di abbonamento, un link diretto o incolla il contenuto della configurazione</string>
+    <string name="h_1c397bbb">Le &lt;receiver&gt; voci corrispondenti nel manifesto sono completamente rimesse.</string>
+    <string name="h_1cb37f65" formatted="false">✗ Istantanea dardo non trovata in %1$s, salto</string>
+    <string name="h_1cdb9d2e">→ inserire il nome completo del pacchetto dell\'AD SDK nella casella di input → toccare </string>
+    <string name="h_1d0592d0" formatted="false">forzare false %1$s</string>
+    <string name="h_1d0da9e5">    Scritto basandosi su header di chunk AXML, sulla struttura StringPool/ResourceMap della resource table e su materiale pubblico di reverse engineering\n</string>
+    <string name="h_1d11c240">Il contenuto sopra riportato è solo per riferimento tecnico; Le implementazioni finali sono tutte autosviluppate per questo progetto; Qualsiasi diritto d\'autore coinvolto appartiene agli autori originali e alle loro organizzazioni.\n</string>
+    <string name="h_1d9b17d9" formatted="false">| Falso con ritorno forzato | %1$s |</string>
+    <string name="h_1d9e668b" formatted="false">Download fallito: %1$s</string>
+    <string name="h_1da8eee1" formatted="false">, forceFalse=%1$s</string>
+    <string name="h_1dc6377b">8. Rimozione della verifica della firma (sovra-firma)</string>
+    <string name="h_1e52f7a3">Modifica il percorso del file di configurazione</string>
+    <string name="h_1e8d2df8">Si consiglia scrivere frammenti generali piuttosto che percorsi completi per un tasso di colpi più alto; Più parole chiave, maggiore è la probabilità di falsi positivi, quindi fai attenzione.</string>
+    <string name="h_1eaa01fa"> In combinazione.</string>
+    <string name="h_1f2ebce9">⚠ Nessuna corrispondenza delle risorse native della libreria per le ABI esistenti dell\'APK target, nessun .so embedded</string>
+    <string name="h_1f8edce8"> in combinazione (il nome del pacchetto deriva automaticamente alcune parole chiave del nome della libreria).</string>
+    <string name="h_1fcaf3a3">Durante l\'esecuzione, cleanRootFiles() di core/AdRemover.kt\ percorre la directory radice APK (solo un livello, non ricorsivo) ed elimina i file corrispondenti.</string>
+    <string name="h_1fdd9c8d">ricomprimere dati ad alta entropia</string>
+    <string name="h_2065c465" formatted="false">Ottimizzazione delle dimensioni DEX: rimuove le informazioni di debug (numeri di riga / tabelle variabili locali) per tagliare un 5%~15% in più</string>
+    <string name="h_21773eee">    - Solo per riferimento all\'apprendimento; Le classi hook e le lib native sono risorse campionari raggruppate, i loro binari non sono modificati\n\n</string>
+    <string name="h_21806150">Tocca \&quot;Manage\&quot; -&gt; inserisci il nome del metodo esattamente identico al codice -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_21888ee3">Vai al browser per scaricare</string>
+    <string name="h_21be04bc">✅ Modificato</string>
+    <string name="h_21d3c920">Scritto nel campo \&quot;ad_activities\&quot; di $HELP_CONFIG_NAME.\nViene letto in tempo reale da core/DexPatcher.kt (identificazione classe) e core/AxmlAdRemover.kt (rimozione componenti AndroidManifest).</string>
+    <string name="h_225b72f5">    - Modalità original-package: incorpora l\'APK originale e il SO-firmato sopra, legge la firma originale per la corrispondenza, coprendo più casi\n</string>
+    <string name="h_225efc14">    Strumento di compilazione e packaging di risorse Android, utilizzato per AXML / gestione delle risorse\n</string>
+    <string name="h_22c8b46e" formatted="false">· Dimensione non compressa: %1$s</string>
+    <string name="h_23348314" formatted="false">Impostazioni caricamento UI fallito: %1$s</string>
+    <string name="h_2364780e">· directory lib non trovata, elaborazione Flutter saltata</string>
+    <string name="h_23af2edf" formatted="false">✓ Cache Flutter pulita: file %1$s, mantenuti solo strings.txt</string>
+    <string name="h_23cc02a1" formatted="false">· Modalità: %1$s</string>
+    <string name="h_23fa5ce2">    - Licenza: Licenza MIT\n\n</string>
+    <string name="h_2405c1bf" formatted="false">  i Ottimizzazione per il riutilizzo dei dati effettuata: %1$s -&gt; %2$s</string>
+    <string name="h_2664f5c6">Per favore, compila stringhe uniche strettamente correlate all\'SDK pubblicitario (come ID delle unità pubblicitarie, stringhe di funzionalità SDK) ed evita quelle troppo generiche che potrebbero danneggiare le stringhe di funzione normale.</string>
+    <string name="h_26f0c819">Nome della classe hook / informazioni sulla firma / nome delle voci / parametri di iniezione completamente personalizzabili, con rinominazione automatica della classe DEX integrata</string>
+    <string name="h_2706339d">    - Casa: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_271e5d10">Funziona con \&quot;Ad URL / domains\&quot; e \&quot;Ad method names\&quot;: questa categoria elimina qualsiasi stringa corrispondente, coprendo più terreno.</string>
+    <string name="h_284f10db">Attività Annuncio (pagina) parole chiave per il nome della classe, utilizzate per identificare le classi di pagina pubblicitaria. Durante l\'elaborazione, i loro metodi ad vengono bloccati e i componenti corrispondenti vengono rimossi dal manifesto.</string>
+    <string name="h_288979b3">Complementare: True sblocca il VIP, False blocca il controllo della pubblicità.</string>
+    <string name="h_2925d260">    - Casa: https://developer.android.com/jetpack\n</string>
+    <string name="h_29767300">    Riferimento agli esempi ufficiali di dexlib2 RewriterModule / TypeRewriter per riscrivere le definizioni di classe e tutti i riferimenti insieme\n</string>
+    <string name="h_298ae83f" formatted="false">✗ Elaborazione %1$s fallito: %2$s</string>
+    <string name="h_299bd8c9">Inserisci manualmente la configurazione</string>
+    <string name="h_2a6fc8f0" formatted="false">Scritto a %1$s\ </string>
+    <string name="h_2b8b4e3c" formatted="false">\n... (%1$s byte non mostrati)</string>
+    <string name="h_2be69e45">Scritto nel campo \&quot;force_true_methods\&quot; di $HELP_CONFIG_NAME.\nIn tempo reale viene gestito dalla logica force-return-true di core/DexPatcher.kt\ (solo tipi di ritorno booleano/int).</string>
+    <string name="h_2c72ee88">Elaborazione AXML profonda: rimuove componenti pubblicitari, dichiarazioni di permesso pubblicitario e nasconde le viste ad Res-layout</string>
+    <string name="h_2c7d15eb">Durante l\'esecuzione, core/DexPatcher.kt fa l\'abbinamento esatto dei nomi dei metodi e cancella il corpo del metodo.</string>
+    <string name="h_2d455ce5">Scaricamento</string>
+    <string name="h_2d8e8ed2">Spesso funziona con \&quot;Ad class name keywords\&quot; e \&quot;Ad SDK native library keywords\&quot;; I nomi dei pacchetti derivano automaticamente le parole chiave dei nomi della libreria .so nella directory lib.</string>
+    <string name="h_2d96df70">Pacchetto sovrafirmato</string>
+    <string name="h_2dee860f" formatted="false">✓ Dichiarazioni di permesso pubblicitario rimosse %1$s</string>
+    <string name="h_2e352520"> In combinazione: questa categoria è corrispondenza esatta, la seconda è corrispondenza di parole chiave fuzzy.</string>
+    <string name="h_2f5132d0">Copia incondizionatamente tutte le istruzioni per ogni metodo</string>
+    <string name="h_2fcb517d">Recupero fallito, controlla se il link è valido</string>
+    <string name="h_2fe6efbe">Impostazione del percorso fallita, controllo permesso</string>
+    <string name="h_300739f4">Reset configurazione predefinita</string>
+    <string name="h_3020d50a">    Fonte delle regole di caratteristica nome classe / nome metodo / URL dell\'annuncio\n</string>
+    <string name="h_30d2a6e2">Conferma elimina </string>
+    <string name="h_31186ba1" formatted="false">✓ Risorse di %1$s | %2$s</string>
+    <string name="h_3141af8c">AdService\nDownloadService\nServizio Aggiornamento</string>
+    <string name="h_3155992e">    - dexlib2 Home: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_31e413e3">Ottimizzazione delle dimensioni DEX disattivata</string>
+    <string name="h_324f699a">Identifica le classi di servizio in background degli annunci</string>
+    <string name="h_327638c1">Caricamento della configurazione fallito, usando la configurazione predefinita</string>
+    <string name="h_327c8914" formatted="false">, stringBlank=%1$s</string>
+    <string name="h_328bae35">Lavorazione dell\'arresto</string>
+    <string name="h_32ae4cdd">I Questo DEX è grande, scansione sicura a bassa memoria abilitata, per favore aspetta...</string>
+    <string name="h_32b1989c">Parole chiave per il nome della classe pubblicitaria</string>
+    <string name="h_33b16185">Nessun cambiamento</string>
+    <string name="h_348519cb">▶ Passo 4/5: Impacchettare e firmare</string>
+    <string name="h_34e480ea" formatted="false">| Flutter libapp.so Elaborazione | %1$s libs, %2$s sostituti |</string>
+    <string name="h_351683da">Modifica directory di output APK</string>
+    <string name="h_362944cf" formatted="false">Scrittura DEX dalla memoria: %1$s</string>
+    <string name="h_36427794">I nomi dei pacchetti utilizzano il formato punteggiato (e.g. com.x.y) e vengono automaticamente convertiti in formato slash durante l\'elaborazione per corrispondere ai nomi delle classi DEX.</string>
+    <string name="h_364d2bba">Nessun file DEX trovato, o nessuno è stato elaborato.</string>
+    <string name="h_369a31f0">Pattern pubblicitari di stringhe DEX</string>
+    <string name="h_36fc3fb9">Non ricordarlo di nuovo / mostrarlo solo una volta</string>
+    <string name="h_3738dcca">✗ Non può leggere la firma originale (mancante o non firmata), non può iniettare l\'uncino</string>
+    <string name="h_37f14a6c">Questa parola chiave viene usata per abbinare i nomi delle classi degli elementi di layout e copre una superficie ampia; evita parole troppo generiche (ad esempio ad) per evitare di nascondere i controlli normali; si consiglia di utilizzare .ad., nomi specifici SDK o nomi completi delle classi.</string>
+    <string name="h_380de9a9">Nessun client email trovato</string>
+    <string name="h_38e6644d">Gli APK con targetSdkVersion &gt;= 30 devono utilizzare schemi di firma v2 o superiori</string>
+    <string name="h_3942f40c" formatted="false">  · Riutilizzò il segmento dati originale del package (%1$s), risparmiando %2$s</string>
+    <string name="h_3a3bf3f6">Esaurita memoria, l\'elaborazione è fallita</string>
+    <string name="h_3ab3b29b"> In combinazione: una parola chiave fuzzy, un nome esatto del metodo; spesso con </string>
+    <string name="h_3ae2b7d3" formatted="false">-&gt; %1$s: force-return false per i metodi %2$s</string>
+    <string name="h_3b108349">Salvata con successo</string>
+    <string name="h_3b98359d">→ inserire un nome di metodo che corrisponde esattamente al codice → tocco </string>
+    <string name="h_3bab674a" formatted="false"># Stringhe totali (deduplicate): %1$s</string>
+    <string name="h_3bd446d8">Rimozione del controllo firma abilitata</string>
+    <string name="h_3c1862f0">Nomi dei metodi per forzare il ritorno true</string>
+    <string name="h_3c1e4f2e">Tocca \&quot;Gestisci\&quot; -&gt; inserisci annuncio, visualizza, nome della classe o parola chiave -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_3ce15ae3">. In tempo reale corrisponde per sottostringa (insensibile alla maiuscolemcole).</string>
+    <string name="h_3ce7dc91">Nomi delle classi con visualizzazione pubblicitaria</string>
+    <string name="h_3db4cd4d">GDT\nunidirezione\nbdxadsdk\nqumeng</string>
+    <string name="h_3dd3492b">Patching DEX</string>
+    <string name="h_3e32cd6d">Rileva APK annidati rinominati: i sottopacchetti originali senza o senza estensione sono riconosciuti e ottimizzati</string>
+    <string name="h_40d44b02">Istantanea del dardo non trovata</string>
+    <string name="h_40d55c2d">tali metodi di controllo. Quando un nome di metodo corrisponde esattamente e il suo tipo di ritorno è booleano o int, il corpo del metodo viene sostituito in </string>
+    <string name="h_413880fa">ottimizzazione della dimensione i DEX attivata: rimuove le informazioni di debug per ridurre ulteriormente l\'APK</string>
+    <string name="h_416e6b73">Offset di inizio dati</string>
+    <string name="h_4193d899">In runtime, core/DexPatcher.kt fa il matching delle classi ad e core/AxmlAdRemover.kt abbina anche i componenti manifest.</string>
+    <string name="h_41994826">Elimina i file residui di annunci nella directory radice del pacchetto</string>
+    <string name="h_41d17685" formatted="false">| Stringhe di pubblicità annullate | %1$s |</string>
+    <string name="h_420b8289">L\'elaborazione → eseguita</string>
+    <string name="h_4222e5fa">Funziona con \&quot;Ad SDK package names\&quot; per pulire anche le attività correlate nel manifesto.</string>
+    <string name="h_424670d9">Per installare la nuova versione, si prega di consentire a questa app di installare app da fonti sconosciute.</string>
+    <string name="h_4267eb34" formatted="false">✓ Esportato: %1$s</string>
+    <string name="h_42a1235e" formatted="false">I/%1$s ha rilevato i modelli pubblicitari ma non ha apportato cambiamenti reali, saltando la scrittura (%2$sms)</string>
+    <string name="h_42b0752f">, bypassando direttamente l\'assegno pagato.</string>
+    <string name="h_42cffbac">5. Collegamenti di terze parti: le pagine Informazioni e Aggiornamento possono contenere link esterni; Accederli permette alle piattaforme di terze parti di gestire il tuo accesso, quindi ti invitiamo a consultare le politiche di privacy di terze parti pertinenti.\n\n</string>
+    <string name="h_42f52a63">Elaborazione del codice DEX</string>
+    <string name="h_430a8d97">Le &lt;service&gt; voci corrispondenti nel manifesto sono completamente rimesse.</string>
+    <string name="h_430b3928">Metodo pubblicitario con parole chiave in blank-out (fuzzy matching). Dopo che una classe di annuncio è stata abbinata, vengono svuotati solo i metodi i cui nomi contengono queste parole chiave, evitando così un eccessivo svuotamento che potrebbe far crashare l\'app (ad esempio preservare i costruttori, metodi del ciclo di vita, ecc.).</string>
+    <string name="h_432ecd96">Abbonamento salvato</string>
+    <string name="h_4357855b">Download fallito, tocca per riprovare</string>
+    <string name="h_437a2008">Protezione contro crash DEX: backup, scritture atomiche e auto-recupero prevengono la corruzione di DEX</string>
+    <string name="h_43a8f757">Questa app è costruita e chiama i seguenti progetti open-source: Sinceri ringraziamenti e rispetto ai loro autori:\n\n</string>
+    <string name="h_43e71a0b">11. Campione di Manager MT ApkSignatureKillerEx (Bin.MT)</string>
+    <string name="h_44057142" formatted="false">✗ Non può caricare %1$s: %2$s</string>
+    <string name="h_441e7040">    - Casa: https://github.com/google/guava\n</string>
+    <string name="h_44c58696">    - Portato la sua implementazione DataMultiplexing / ZipMaker / ZipFile / V2V3SchemeSigner\n</string>
+    <string name="h_44fd089f"> avere scopi sovrapposti, quindi puoi mantenere uno dei due.</string>
+    <string name="h_45020f68" formatted="false">Versione %1$s</string>
+    <string name="h_46137025">Tocca \&quot;Manage\&quot; -&gt; inserisci il nome del metodo di determinazione per forzare il ritorno false -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_46c45c70" formatted="false"># Conteggio delle istantanee: %1$s</string>
+    <string name="h_46c49965">繁體中文</string>
+    <string name="h_474fe5eb">    Biblioteca di componenti Material Design, che fornisce carte, pulsanti, dialoghi e altri componenti dell\'interfaccia utente\n</string>
+    <string name="h_47903a91" formatted="false">· Nome della classe hook personalizzata: %1$s</string>
+    <string name="h_4797fecd">    - Licenza: BSD a 3 clausole\n\n</string>
+    <string name="h_481170fc">Utilizzato per metodi di determinazione come \&quot;is ad loaded / is displayed / has ad\&quot;. Quando il nome del metodo corrisponde esattamente e il tipo di ritorno è booleano o int, il corpo del metodo viene sostituito con \&quot;return false / 0\&quot;, facendo credere all\'app che l\'annuncio non venga mai caricato o mostrato, saltando la logica di visualizzazione degli annunci.</string>
+    <string name="h_48399cb4">Per i testi completi di copyright e licenza dei progetti sopra indicati, si prega di visitare le rispettive homepage.\n</string>
+    <string name="h_4839e21f">    Riferimento all\'XmlPullParser di AOSP\ e alla specifica del formato binario AXML\n</string>
+    <string name="h_483c1454">    Riferimento all\'implementazione ufficiale di apksig e alla documentazione Android sull\'allineamento ZIP\n</string>
+    <string name="h_48574fbe">Scritto nel campo \&quot;asset_keywords\&quot; di $HELP_CONFIG_NAME.\nA runtime core/AdRemover.kt\'s cleanAdSdkAssets() elimina le voci corrispondenti per parola chiave.</string>
+    <string name="h_490a3d52" formatted="false">✗ Analisi AXML fallita: %1$s</string>
+    <string name="h_4a060eb9" formatted="false">✗ Iniezione signature hook fallita: %1$s</string>
+    <string name="h_4a804b6d" formatted="false">| Collegamenti pubblicitari annullati | %1$s |</string>
+    <string name="h_4a92250e">Ricevitore pubblicitario</string>
+    <string name="h_4abbcecf">scritto a zip</string>
+    <string name="h_4aed3358">→ inserire un annuncio Nome o parola chiave Ricevitore → toccare </string>
+    <string name="h_4b30694f">Inserisci URL di configurazione remota</string>
+    <string name="h_4b9c3271">Reset</string>
+    <string name="h_4d002649">Permesso di installazione richiesto</string>
+    <string name="h_4dbf184b">9. Ridenominazione delle classi DEX (nomi di classi hook personalizzate)</string>
+    <string name="h_4df76273">Questo pattern è indipendente dai pattern DEX. Quando impostato, viene usato prima per l\'elaborazione del Flutter; lasciare vuoto per tornare automaticamente al </string>
+    <string name="h_4e20a9f5">Esporta automaticamente il risultato nella directory sorgente e cancella la cache, risparmiando spazio</string>
+    <string name="h_4e308cd8" formatted="false">⚠ Dispacchaggio %1$s fallito: %2$s</string>
+    <string name="h_4e63334a">Supporto Futter: analizza lo snapshot AOT di Dart e neutralizza i pattern di stringhe di annunci all\'interno di libapp.so</string>
+    <string name="h_4e835a62">troncare / modificare la lunghezza</string>
+    <string name="h_4f20bc64" formatted="false">✓ Imballaggio completato: %1$s voci</string>
+    <string name="h_4f305d7d" formatted="false">%1$s → %2$s (risparmiati %3$s)</string>
+    <string name="h_4f5a392d">Tocca \&quot;Gestisci&quot; -&gt; inserisci il nome della classe o il frammento di parola chiave nella visualizzazione dell\'annuncio -&gt; tocca \&quot;Aggiungi\&quot;. L\'abbinamento avviene su sottostringhe a runtime (insensibile alla maiuscolagem).</string>
+    <string name="h_50420f6e" formatted="false">  ▶ Iniettare un hook di firma in stile MT (%1$s</string>
+    <string name="h_50542d9e" formatted="false">Alcuni abbonamenti non sono riusciti a recuperare: %1$s</string>
+    <string name="h_50e67da4" formatted="false">▶ Rimozione del controllo della firma · %1$s</string>
+    <string name="h_51a3142b">→ inserire un dominio pubblicitario o un frammento URL → toccare </string>
+    <string name="h_51c8f936">→ inserire una parola chiave del nome della libreria .so → toccare </string>
+    <string name="h_521147e7">Scritto nel campo \&quot;method_neutralize_keywords\&quot; di $HELP_CONFIG_NAME.\nIn tempo reale viene letto dalla logica di filtro blank-out del metodo core/DexPatcher.kt\ (con consapevolezza del confine delle parole).</string>
+    <string name="h_52279c25">Le &lt;activity&gt; voci corrispondenti nel manifesto sono completamente rimesse; si prega di confermare che l\'Attività sia effettivamente a scopo pubblicitario prima di cancellare.</string>
+    <string name="h_523f7b8b">Attività pubblicitaria</string>
+    <string name="h_52aa344f">Tocca \&quot;Gestisci\&quot; -&gt; inserisci il percorso relativo (può includere gli asset/prefisso o ometterlo) -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_52b36576">Passo</string>
+    <string name="h_530b0af0">Rimozione del pacchetto originale (migliorata)</string>
+    <string name="h_53cb60e6">Identifica le classi di pagine pubblicitarie</string>
+    <string name="h_5418bedc">Miglior conduttore</string>
+    <string name="h_542664ea">⏭ Saltato (zero cambiamenti)</string>
+    <string name="h_54d484f4" formatted="false">%1$s abbonamenti totali, %2$s abilitati</string>
+    <string name="h_5503edc4">▶ Passo 2/5 Disfare le valigie</string>
+    <string name="h_556c8e96">isAdLoaded\nAd hasad\nisAdShowing\nisAdReady\nisInterstitialLoaded</string>
+    <string name="h_566859e2">Motivi di corde flutter</string>
+    <string name="h_568e50df">· Nessun componente pubblicitario da rimuovere trovato</string>
+    <string name="h_56ef97b2">Ricostruzione / Rifirma</string>
+    <string name="h_575bd6a0">▶ Pulizia degli asset di Fase 4</string>
+    <string name="h_5781c4c1">Se l\'annuncio sia caricato/mostrato/abbia annunci</string>
+    <string name="h_57c12e61">URL pubblicitario / domini</string>
+    <string name="h_582b60a3" formatted="false">Parametri di inserzione salvati: %1$s / %2$s</string>
+    <string name="h_583bde12">Recupero configurazione remota...</string>
+    <string name="h_594b988c">    Parole chiave nome del pacchetto AD SDK / dominio / nome classe espanse dalle regole open source del progetto DTL-X\n</string>
+    <string name="h_599c01d1">Il percorso del file di configurazione deve terminare con .json</string>
+    <string name="h_599cc493">Identifica le classi di annunci per parola chiave</string>
+    <string name="h_59b8b3f0">Calcolo CRC</string>
+    <string name="h_59e52cbd">6. Ottimizzazione del riutilizzo dei dati (riduzione della dimensione del pacchetto con sovra-firmato)</string>
+    <string name="h_5a046f71">▶ Elaborazione completata</string>
+    <string name="h_5a8cb987">Input non valido: non è né un token né un JSON di configurazione valido, verifica e riprova</string>
+    <string name="h_5a9cf305" formatted="false">✓ Res layout degli annunci nascosti completati: %1$s file layout, %2$s elements, %3$sms</string>
+    <string name="h_5af3990c" formatted="false">✓ Componenti pubblicitari rimossi %1$s</string>
+    <string name="h_5c244e39">Tocca \&quot;Gestisci\&quot; -&gt; inserisci il nome del permesso o la parola chiave permesso -&gt; tocca \&quot;Aggiungi\&quot;. L\'abbinamento avviene su sottostringhe a runtime (insensibile alla maiuscolagemmo); Puoi usare il prefisso del pacchetto AD SDK o le parole di funzione permesso.</string>
+    <string name="h_5c286b32">· Nessun file XML layout di Res trovati, salto</string>
+    <string name="h_5c5b99c0">Asset e parole chiave del file pubblicitario. Un percorso o un nome di file sotto asset contenenti questa parola chiave viene eliminato, coprendo asset pubblicitari simili al di fuori dei percorsi noti.</string>
+    <string name="h_5c65f54a">Usato per sbloccare assegni a pagamento per le edizioni VIP / abbonamento / pro. Quando un nome di metodo corrisponde esattamente e il suo tipo di ritorno è booleano o int, il corpo del metodo viene sostituito in </string>
+    <string name="h_5d4aa133">Elimina i percorsi specificati delle risorse pubblicitarie</string>
+    <string name="h_5df66715">· Nessuna parola chiave di layout Res configurata, salto</string>
+    <string name="h_5e213ddb">Per abilitare</string>
+    <string name="h_606a0ed7" formatted="false">⏱ %1$s time: %2$sms</string>
+    <string name="h_60a5152a" formatted="false">✓ Firma V1 | %1$s</string>
+    <string name="h_60aa379b">Il percorso non può essere vuoto</string>
+    <string name="h_618d3deb" formatted="false">✓ %1$s | tempo totale %2$s</string>
+    <string name="h_61d7146b"> funzionalità come URL / package / nomi di classe.</string>
+    <string name="h_62d0f9f8" formatted="false">Oggetti %1$s</string>
+    <string name="h_6303de15">Tocca \&quot;Gestisci\&quot; -&gt; inserisci la parola chiave nome della classe annuncio (basta un frammento) -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_63751f8a">Nomi dei metodi per forzare il ritorno true</string>
+    <string name="h_63d55e8f">Token di abbonamento</string>
+    <string name="h_645b8198" formatted="false">AXML component %1$s</string>
+    <string name="h_645d0193">A runtime, core/LibappSoPatcher.kt esegue la sovrascrittura NUL di uguale lunghezza all\'interno dello snapshot Dart; core/FlutterAdRemover.kt gestisce il discompilazione/ricompilazione e il salvataggio automatico.</string>
+    <string name="h_64a506cb">    - Origine: https://mt2.cn/ (solo per riferimento didattico)\n\n</string>
+    <string name="h_64e1f491" formatted="false">· Applicazione personalizzata originale: %1$s</string>
+    <string name="h_6517e1ca">Leggi attentamente il seguente disclaimer prima di utilizzare questa app:\n\n</string>
+    <string name="h_653e26a7" formatted="false">I %1$s ha corrisposto a nessun modello pubblicitario, ho mantenuto così com\'era</string>
+    <string name="h_6591496b">Solo scansiona i file nel livello principale della directory principale dell\'APK, non le sottodirectory; I file core come classes.dex non vengono mai cancellati.</string>
+    <string name="h_65963a23">\nAnteprima esadecimale (primi 512 byte):\n</string>
+    <string name="h_65ffcf5a">Dialogo di aggiornamento professionale integrato con barra di avanzamento, percentuale, versione e dimensione file</string>
+    <string name="h_669acb71">Rimozione dei permessi AXML</string>
+    <string name="h_66b00047" formatted="false">Rimuovi %1$s</string>
+    <string name="h_66b000471" formatted="false">Rimuovi %1$s</string>
+    <string name="h_66b947eb" formatted="false">· Rapporto di compressione: %1$s</string>
+    <string name="h_66c23c1c" formatted="false">%1$s sconto</string>
+    <string name="h_672dcd46"> in combinazione, vengono anche pulite le Attività correlate nel manifesto.</string>
+    <string name="h_67914606">Rimuove solo le dichiarazioni di permessi che corrispondono ai pattern e non influisce sui permessi funzionali normali come INTERNET / CAMERA; Per favore, non aggiungere i permessi funzionali normali per evitare di influenzare il funzionamento dell\'app.</string>
+    <string name="h_679b5837">ogni logline viene eseguita runOnUiThread + fullScroll</string>
+    <string name="h_67fac552">Complementi \&quot;Forzare ritorno true&quot;: true serve per sbloccare VIP, false per bloccare le determinazioni di visualizzazione degli annunci.</string>
+    <string name="h_68004de2">→ inserire un annuncio, il nome della classe di servizio o la parola chiave → toccare </string>
+    <string name="h_681186f0">se il pacchetto originale abbia un\'applicazione personalizzata</string>
+    <string name="h_687f7144">Registro di processo colorato in tempo reale con copia/cancellazione e visualizzazione dei progressi in un solo tocco</string>
+    <string name="h_68c89932">Funziona con \&quot;Ad method names&quot;: una è una parola chiave fuzzy, l\'altra un nome esatto del metodo; spesso abbinati a \&quot;Nomi di pacchetti Ad SDK\&quot; e \&quot;Parole chiave nome classe Ad &quot;.</string>
+    <string name="h_68ea25aa">colpo</string>
+    <string name="h_69000422">Percorsi dei file pubblicitari degli asset</string>
+    <string name="h_69438ee5">    - Licenza: Apache License 2.0\n\n</string>
+    <string name="h_695163f8">    Scritto basandosi sugli esempi della specifica di progettazione dei materiali e della libreria dei componenti materiali\n</string>
+    <string name="h_69de4f41">Nomi dei metodi per forzare il ritorno false</string>
+    <string name="h_69f3d080">Riguarda solo i metodi il cui tipo di ritorno è booleano(Z) o int(I); altri tipi vengono saltati automaticamente per evitare la generazione di istruzioni non valide.</string>
+    <string name="h_6a2eb85f" formatted="false">· Trovato file xml layout %1$s (inclusi %2$s obfuscated xml in res root)</string>
+    <string name="h_6a3c653f">Tocca \&quot;Manage\&quot; a destra -&gt; inserisci il nome completo del pacchetto dell\'AD SDK -&gt; tocca \&quot;Aggiungi\&quot;. Puoi anche modificare direttamente il file di configurazione con un gestore file.</string>
+    <string name="h_6a80c39a">▶ Elaborazione fallita: esaurita memoria</string>
+    <string name="h_6ab5a0e9">Frammenti di parole chiave dei nomi delle classi pubblicitarie. Quando il nome di una classe corrisponde, viene trattato come una classe ad e i corpi dei suoi metodi ad vengono sostituiti con valori di ritorno predefiniti (svuotati), bloccando così la logica di visualizzazione degli annunci.</string>
+    <string name="h_6ac37232">Elimina con precisione i metodi specificati</string>
+    <string name="h_6af466b2">| Statistica | Conte |</string>
+    <string name="h_6b3b93c7">per specificare esattamente</string>
+    <string name="h_6b3f9d20">Host originale del pacchetto</string>
+    <string name="h_6b9a5016">▶ Patching DEX di Fase 1</string>
+    <string name="h_6b9c9749" formatted="false">✓ Hook firma scritto per DEX separati: %1$s (%2$s, %3$sms)</string>
+    <string name="h_6b9c9749d" formatted="false">  ✓ Hook signature scritto a DEX standalone: %1$s (%2$s, %3$sms)</string>
+    <string name="h_6bfa92c8">Sblocca le determinazioni VIP / membri / pro</string>
+    <string name="h_6c1094f9">Scritto nel campo \&quot;sdk_packages\&quot; del file di configurazione esterno $HELP_NOME_CONFIGURAZIONE.\nIn tempo reale viene letto da core/DexPatcher.kt (identificazione della classe DEX), core/AxmlAdRemover.kt (rimozione dei componenti manifesti) e core/AdRemover.kt (pulizia della libreria nativa lib).</string>
+    <string name="h_6c39cca5">ricompilare</string>
+    <string name="h_6c59c767">Puoi usare il browser del tuo telefono per visitare Lanzou Cloud e scaricare manualmente l\'ultima versione:\n\n</string>
+    <string name="h_6c5f734b">· Suggerimento: ridurre la dimensione del DEX che viene elaborata contemporaneamente oppure chiudere altre app e riprovare</string>
+    <string name="h_6d2ef53d" formatted="false">| Ritorno forzato vero | %1$s |</string>
+    <string name="h_6d79cd1c">Funziona con &quot;Ad method blank-out keywords&quot;: questa categoria è corrispondenza esatta, mentre la seconda è corrispondenza fuzzy per parole chiave.</string>
+    <string name="h_6dedd2e5" formatted="false">| Ad SDK classi nulled | %1$s |</string>
+    <string name="h_6dfefe33">Non posso aprire l\'installatore di sistema, installare manualmente l\'aggiornamento</string>
+    <string name="h_6e1073d7" formatted="false">| Rimozione della Verifica della Firma | %1$s (iniezione in stile MT), %2$s signature hook iniettati, file DEX %3$s interessati |</string>
+    <string name="h_6e43bc9c">installa app da fonti sconosciute</string>
+    <string name="h_6e8ddbbd">Identifica e rimuovi i package radici degli SDK pubblicitari</string>
+    <string name="h_6f532ea1">    Schema di ridenominazione delle classi DEX basato su RewriterModule / TypeRewriter, usato per nomi di classi hook personalizzate\n</string>
+    <string name="h_702948c7">rimuovi elemento</string>
+    <string name="h_7030ff64">Errore</string>
+    <string name="h_70bbbe57">Dichiara i nomi dei pacchetti Java degli ad SDK da identificare/rimuovere. Questa è la categoria principale: l\'elaborazione la utilizza per identificare le classi ad e i componenti manifest, e per derivare automaticamente i nomi delle librerie .so native nella directory lib.</string>
+    <string name="h_710378a3">File / codice modificati</string>
+    <string name="h_71424776" formatted="false">Conteggio dei campi: %1$s</string>
+    <string name="h_71a40f61" formatted="false">Oggetti %1$s</string>
+    <string name="h_720380b4" formatted="false">Personalizzato (%1$s / %2$s)</string>
+    <string name="h_72444798">## Riepilogo dell\'elaborazione</string>
+    <string name="h_7258ddc9">Percorso di directory, ad esempio:\n/storage/emulated/0/APKEditor</string>
+    <string name="h_72ab6230" formatted="false">Metodo ad blanking %1$s</string>
+    <string name="h_7336558f" formatted="false">| Archivi della libreria AD SDK puliti | %1$s |</string>
+    <string name="h_73468857">Percorso aggiornato</string>
+    <string name="h_73801f75" formatted="false">⚠ Risorsa nativa della biblioteca mancante: %1$s</string>
+    <string name="h_73a8f02e">.ad.\nmeishu_ad\nadview\nadcontainer\nBannerad\nsplashad\nadmob</string>
+    <string name="h_73da9b6d">Scegli file APK</string>
+    <string name="h_746dc334">rileggere la firma dall\'APK su disco</string>
+    <string name="h_74c4b77f"> insieme per aumentare l\'effetto di blocco.</string>
+    <string name="h_74f74cf4">| Punto | Originale | Dopo | Cambiamento |</string>
+    <string name="h_75403159" formatted="false">⚠ Le classi del %1$s state fallite e sono state saltate</string>
+    <string name="h_757b3361">Parole chiave pubblicitarie di risorse</string>
+    <string name="h_75baf427">I file binari supportano solo la visualizzazione</string>
+    <string name="h_75c2bbcb">Stack</string>
+    <string name="h_763264b4">tap </string>
+    <string name="h_7703af63">Durante l\'esecuzione, cleanAdSdkAssets() di core/AdRemover.kt\ elimina i percorsi corrispondenti.</string>
+    <string name="h_7784e35e">7. Temi e layout dell\'interfaccia utente</string>
+    <string name="h_7822f13f">Temporaneamente impossibile raggiungere il server di aggiornamento.\n\n</string>
+    <string name="h_7831e844">5. Contenuti di terze parti: i progetti open-source e le regole sulle funzionalità pubblicitarie a cui questa app fa riferimento provengono da canali pubblici, sono solo a scopo tecnico e il loro copyright appartiene agli autori originali.\n\n</string>
+    <string name="h_785d24a8" formatted="false">string=%1$s, sostituzioni di ad-pattern=%2$s</string>
+    <string name="h_78e42143">| DEX | Prima di | Dopo | Classi pubblicitarie | Metodi | Collegamenti | Forza-vera | Forza-falso | Tempo | Stato |</string>
+    <string name="h_790b1641">Nessun URL valido per il download catturato</string>
+    <string name="h_79d3abe9">Ricevuto</string>
+    <string name="h_7a291fbf" formatted="false">✓ File root %1$s puliti | %2$sms</string>
+    <string name="h_7a8af100">Download completato, apertura installatori...</string>
+    <string name="h_7a8cb281">Durante l\'esecuzione, core/AxmlAdRemover.kt\'s removeAdPermissions() corrisponde e &lt;uses-permission&gt; rimuove le dichiarazioni in AndroidManifest.xml.</string>
+    <string name="h_7ae275b3"> campo.</string>
+    <string name="h_7b5257b5" formatted="false">· Dimensione post-pacchetto: %1$s</string>
+    <string name="h_7b58f794">Scritto nel campo \&quot;ad_permissions\&quot; di $HELP_CONFIG_NAME.\nA runtime core/AxmlAdRemover.kt\'s removeAdPermissions() corrisponde e rimuove le &lt;uses-permission&gt; dichiarazioni in AndroidManifest.xml.</string>
+    <string name="h_7b59301c">6. Modifiche ai termini: l\'autore si riserva il diritto di modificare questa dichiarazione di non responsabilità in qualsiasi momento; I contenuti aggiornati entrano in vigore nelle nuove versioni.\n\n</string>
+    <string name="h_7b695da8">Abbonamento tramite link diretto</string>
+    <string name="h_7b83ea7b">    Riferimento al progetto ApkDataMultiplexing di L-JINBIN e alla struttura del pacchetto con over-signed LSPatch\n</string>
+    <string name="h_7b9a3cc4" formatted="false">    Riduce significativamente la dimensione dei pacchetti sovra-firmati (fino al ~50%) con lo schema di firma V2V3SchemeSigner\n</string>
+    <string name="h_7ba901d8">Corrispondenza sfocata con metodi pubblicitari vuoti</string>
+    <string name="h_7babe509">Registro copiato sulla cartellina</string>
+    <string name="h_7bb30f32">Pattern pubblicitari di stringhe DEX</string>
+    <string name="h_7be1d8e4">Genera automaticamente un report Markdown che copre ogni fase e il confronto delle dimensioni</string>
+    <string name="h_7bee061a" formatted="false">▶ Elaborazione: %1$s (%2$s)</string>
+    <string name="h_7bfda754">▶ Fase 2 rimozione del manifesto AXML</string>
+    <string name="h_7c417117" formatted="false">| Risorse File pubblicitari puliti | %1$s |</string>
+    <string name="h_7c64bdce">Elimina l\'abbonamento</string>
+    <string name="h_7c6a17aa">Parole chiave per il metodo pubblicitario</string>
+    <string name="h_7d0b10f4">## Dettagli di elaborazione per DEX</string>
+    <string name="h_7d2579cf">Funziona con &quot;Asset ad keywords&quot; e &quot;Ad SDK native keywords\&quot; per coprire i residui degli annunci in tre località: assets, lib e la directory radice.</string>
+    <string name="h_7d8a5387">· Rimozione del controllo firma disattivata, salto</string>
+    <string name="h_7db41333" formatted="false">, linkBlank=%1$s</string>
+    <string name="h_7dcda328" formatted="false">⚠ %1$s/%2$s processing fallito: %3$s</string>
+    <string name="h_7dda6d57">Asset/gdt_plugin/gdtadv2.jar\nAsset/qumeng\nAsset/bdxadsdk</string>
+    <string name="h_7de4534e">Schemi di permesso pubblicitari</string>
+    <string name="h_7dfeadd0">▶ Passo 3.5/5 Elaborazione del flutter</string>
+    <string name="h_7e235a0c">Nomi dei pacchetti AdSDK</string>
+    <string name="h_7e666c8f">4. Archiviazione locale dei dati: configurazione, funzionalità di elaborazione e altri dati sono memorizzati solo localmente sul dispositivo e vengono cancellati quando l\'app viene disinstallata; Non rimangono registrazioni di nuvole.\n\n</string>
+    <string name="h_7e82b085">Scaricato/Dimensione totale + percentuale</string>
+    <string name="h_7ee53eea">categorizzato sotto layout Res</string>
+    <string name="h_7f604c7a">· L\'elaborazione del flutter disattivata (può essere attivata nelle Impostazioni)</string>
+    <string name="h_7f86257a">Funziona meglio con \&quot;Ad SDK package names\&quot;; spesso si sovrappone anche a \&quot;Nomi classi in vista pubblicità\&quot; e \&quot;Attività pubblicitaria&quot;.</string>
+    <string name="h_7fcc9f20" formatted="false">✗ AXML parse dei permessi fallito: %1$s</string>
+    <string name="h_7ff042ba">Patcha direttamente il bytecode DEX tramite dexlib2, molto più velocemente rispetto alla pipeline tradizionale di Smali</string>
+    <string name="h_53d2a9b1" formatted="false">Ri-firma attivata; l\'APK verrà ri-firmata automaticamente</string>
+    <string name="h_7fc2a18e">Confezionamento completato, APK non firmata generata</string>
+    <string name="h_8c9f1e7b" formatted="false">Ri-firma disattivata; verrà generata un\'APK non firmata</string>
+    <string name="h_802412e0">URL di download rilevato, usando il download in-app...</string>
+    <string name="h_803d2ae8">→ inserire un nome o una parola chiave di permesso → toccare </string>
+    <string name="h_80928937">L\'app Flutter è stata rilevata, ma non sono stati generati dettagli di elaborazione.</string>
+    <string name="h_80943b1f">Scritto nel campo \&quot;ad_services\&quot; di $HELP_CONFIG_NAME.\nViene letto da core/DexPatcher.kt (identificazione classe) e core/AxmlAdRemover.kt (rimozione manifest component).</string>
+    <string name="h_80d72d4c">    Riferimento all\'approccio open-source di Facebook con dexdump su Android e agli esempi ufficiali di dexlib2\n</string>
+    <string name="h_81cbed17">© 2026 XiaoNaiPing · Tutti i diritti riservati\nAlimentato da dexlib2 / apksig / AndroidX</string>
+    <string name="h_827cfb79">Nascondi le regioni della visualizzazione degli annunci nei file di layout</string>
+    <string name="h_8286533b">In tempo reale, gestito dalla logica force-return-true di core/DexPatcher.kt\ (solo tipi di ritorno boolean/int).</string>
+    <string name="h_839ae19b">Pacchetto aggiornamento scaricato non valido, riprova</string>
+    <string name="h_840399bf">Ricevitore pubblicitario</string>
+    <string name="h_844bbd8d">Flutter i modelli pubblicitari disattivati</string>
+    <string name="h_85286168">mostra solo una volta</string>
+    <string name="h_857a16c4">Scritto nel campo \&quot;flutter_string_patterns\&quot; di $HELP_CONFIG_NAME.\nA runtime core/LibappSoPatcher.kt esegue la sovrascrittura NUL di uguale lunghezza all\'interno dello snapshot Dart; core/FlutterAdRemover.kt gestisce il dispacking/repack e il salvataggio automatico.</string>
+    <string name="h_85a0ed61">Elimina le librerie native ad .so</string>
+    <string name="h_85bc04b3">→ inserire una stringa pubblicitaria per cancellare libapp.so (ASCII stampabile, lunghezza ≥ 2) → toccare </string>
+    <string name="h_85fc05ee">Ritorno forzato falso</string>
+    <string name="h_8623ecbf" formatted="false">layout nascondendo %1$s</string>
+    <string name="h_863f7b7a" formatted="false">✓ Liberato %1$s SDK libs | %2$sms</string>
+    <string name="h_8669676f" formatted="false">Il server ha risposto in modo anomalo (HTTP %1$s)</string>
+    <string name="h_86f7a22f">Servizio pubblicitario</string>
+    <string name="h_87646ce3">    Riscrittura abbinando i prefissi dei descrittori di tipo, compatibili con punto / barra / L...; Tre formati di input\n\n</string>
+    <string name="h_87ae9335">googleads.g.doubleclick.net\nadmob.com\nadview.cn\nca-app-pub-</string>
+    <string name="h_87f4dbb8">    - Casa: https://github.com/L-JINBIN/ApkDataMultiplexing\n</string>
+    <string name="h_88369617">    Riferimento a snapshot.h sorgente di Dart VM e alla comunità materiale di reverse engineering di Flutter\n</string>
+    <string name="h_8859e393">Temi Luce e Oscurità con Sistema Follow / Luce / Oscurità, liberamente commutabili</string>
+    <string name="h_88a98dc6">Parole chiave delle librerie native dell\'Ad SDK</string>
+    <string name="h_88bac515"> invece di android:visibility=</string>
+    <string name="h_8959b0a7">Permesso AXML</string>
+    <string name="h_8963ea3f" formatted="false">Numero di classi: %1$s</string>
+    <string name="h_8ad3c4b2">\nDistribuzione dei pacchetti:\n</string>
+    <string name="h_8ae1f6e1" formatted="false">%1$s ON</string>
+    <string name="h_8afaf028">Non posso aprire il browser, visita manualmente Lanzou Cloud per scaricare</string>
+    <string name="h_8b98d772">Elimina solo i contenuti all\'interno della cartella degli assets; Non influisce sulle directory Lib o Res.</string>
+    <string name="h_8bb73728">    - Principio: riutilizzare il segmento dati originale tramite offset dati centrali della directory, rimuovendo segmenti duplicati per ridurre la dimensione\n</string>
+    <string name="h_8c6fb706">Funziona con &quot;Assets ad file paths\&quot;: questa categoria è corrispondente a percorsi esatti, mentre la seconda è a parole chiave fuzzy.</string>
+    <string name="h_8cab5dde">Il log è vuoto</string>
+    <string name="h_8ccf2963" formatted="false">%1$s non trovati</string>
+    <string name="h_8d698916" formatted="false">✓ %1$s libapp.so | %2$s sostituzioni | %3$s</string>
+    <string name="h_8d7ba09c">Usate per sbloccare metodi di determinazione a pagamento come VIP/member/pro. Quando il nome del metodo corrisponde esattamente e il tipo di ritorno è booleano o int, il corpo del metodo viene sostituito con \&quot;return true / 1\&quot;, bypassando direttamente i controlli di pagamento.</string>
+    <string name="h_8dce58af" formatted="false">atteso %1$s, abortito</string>
+    <string name="h_8e8a7f64">Rimozione del pacchetto originale</string>
+    <string name="h_8ea5613c">2. Rete trasparente: questa app effettua richieste di informazioni sulla versione solo quando tocchi attivamente </string>
+    <string name="h_8eaa86c7">Elaborazione fallita: struttura file anomala</string>
+    <string name="h_8efae575" formatted="false">Risorsa DEX con hook integrato mancante: %1$s</string>
+    <string name="h_8f331a4b">    Libreria ufficiale di supporto Jetpack Android\n</string>
+    <string name="h_8f6495fd">Condivisione sistema</string>
+    <string name="h_8f7f9a61">Schema di cancellazione</string>
+    <string name="h_8fa638b6" formatted="false">- **File di configurazione delle funzioni**: \'%1$s\'</string>
+    <string name="h_9031f10f">→ inserire un annuncio Visualizza il nome della classe o il frammento di parola chiave → tocco </string>
+    <string name="h_9094d392" formatted="false">Salvataggio fallito: %1$s</string>
+    <string name="h_9094d3923" formatted="false">Salvataggio fallito: %1$s</string>
+    <string name="h_90af539a">I nomi dei metodi pubblicitari devono essere esattamente vuoti. Quando il nome di un metodo corrisponde completamente a questo elemento della lista, il suo corpo viene sostituito con un valore di ritorno predefinito, annullando il caricamento pubblicitario/le chiamate di mostra.</string>
+    <string name="h_90f6a26a">· Pattern abbinati:</string>
+    <string name="h_91337ff2">Permessi di manifestazione</string>
+    <string name="h_9140b5bf" formatted="false">-&gt; %1$s: forza-ritorno vero per i metodi %2$s</string>
+    <string name="h_9140cf96">Configurazione incorporata</string>
+    <string name="h_91d57778">Molte parole chiave predefinite sono integrate (_ad_, showad, loadad, ecc.); Questa categoria è principalmente dedicata all\'aggiunta di parole chiave personalizzate.</string>
+    <string name="h_92c7d2cc">· Nessun permesso pubblicitario da rimuovere trovato</string>
+    <string name="h_92d0ff18">⚠ APK originale mancante, non è possibile incorporare origin.apk</string>
+    <string name="h_92d2d9c6" formatted="false">Abbonamento aggiunto: %1$s</string>
+    <string name="h_92fab849">Rimuovi dichiarazioni di permesso pubblicitario</string>
+    <string name="h_9316d02c">→ inserire una parola chiave nome di classe ad (può essere solo un frammento) → toccare </string>
+    <string name="h_937cb142">→ inserire un pattern di stringhe pubblicitarie (può essere solo un frammento) → toccare </string>
+    <string name="h_9380d8c8">▶ Passo 1/5 Leggi APK</string>
+    <string name="h_93be8614">    DEX file read/write e smali disassembly/assembly toolchain, il motore principale di rimozione degli annunci\n</string>
+    <string name="h_941cd4b5" formatted="false">| Archivi pubblicitari della directory radice puliti | %1$s |</string>
+    <string name="h_946f83e6"> con </string>
+    <string name="h_94b16984" formatted="false">· Trovati file DEX %1$s</string>
+    <string name="h_94beebcb">7. Usare questa app significa che hai letto, compreso e accettato tutti i termini sopra elencati. Se non sei d\'accordo, per favore smetti di usarla.\n</string>
+    <string name="h_94d2d961">Sono supportate solo stringhe ASCII stampabili (lunghezza &gt;= 2). Si prega di compilare stringhe uniche strettamente correlate all\'AD SDK per evitare di danneggiare le funzioni normali.</string>
+    <string name="h_956dd267">Apertura del dialogo di abbonamento fallita</string>
+    <string name="h_97160028">Parole chiave del file di directory di APK</string>
+    <string name="h_97349354">Dispacchettatura con un clic, rimozione pubblicità, riconfezionamento e firma, completamente offline senza bisogno di rete</string>
+    <string name="h_97474ffc"># libapp.so Esportazione di stringhe snapshot Dart</string>
+    <string name="h_975cc249" formatted="false">Abbonamento aggiunto: %1$s</string>
+    <string name="h_976e27bc">· Nessun libapp.so rilevato, l\'app potrebbe non essere Flutter (o è una divisione AAB), l\'elaborazione Flutter è salta.</string>
+    <string name="h_97beeaf3">Feedback sull\'editor APK Ad Remover</string>
+    <string name="h_98601d36">Scaricato 0 B</string>
+    <string name="h_98ba9357">Letti da core/DexPatcher.kt (riconoscimento classi) e core/AxmlAdRemover.kt (rimozione componenti AndroidManifest).</string>
+    <string name="h_98d11213">AdView\nBannerAd\nNativeAdView\nSplashView</string>
+    <string name="h_98f6c908">Aggiorna contenuti...</string>
+    <string name="h_990ae7e6" formatted="false">· Pattern flutter %1$s (stringhe ASCII come URL/package/class)</string>
+    <string name="h_99f18050" formatted="false">| Impronta originale della firma | %1$s... |</string>
+    <string name="h_9a0ee6cf" formatted="false">| Permessi pubblicitari AXML rimossi | %1$s |</string>
+    <string name="h_9a5a28fd">Stringhe personalizzate per la rimozione degli annunci in libapp.so</string>
+    <string name="h_9a618818" formatted="false">· Paths %1$s</string>
+    <string name="h_9a7e99e6">· directory lib non trovata, salto la pulizia delle librerie native</string>
+    <string name="h_9b708f36">▶ Passo 3.4/5 Rimuovere il controllo della firma</string>
+    <string name="h_9bc8a038">Nomi dei metodi ad </string>
+    <string name="h_9bd51829" formatted="false">✓ Rilevato %1$s libapp.so file: </string>
+    <string name="h_9beb1005" formatted="false">⚠ Elaborazione %1$s fallito: %2$s</string>
+    <string name="h_9bec2ff2" formatted="false">Elaborazione fallita: %1$s</string>
+    <string name="h_9c446657" formatted="false">✓ Cambiato la classe madre %1$s classe hook (%2$s)</string>
+    <string name="h_9c6c3d16" formatted="false">✓ %1$s done: adClass=%2$s, methodBlank=%3$s%4$s%5$s%6$s%7$s (%8$sms, %9$s→%10$s)</string>
+    <string name="h_9d60567b">Rimozione dei controlli della firma disattivata</string>
+    <string name="h_9d838569" formatted="false">  %1$s: %2$s classi</string>
+    <string name="h_9d8fca31">In runtime, cleanAdSdkAssets() di core/AdRemover.kt\ elimina i file corrispondenti per parola chiave.</string>
+    <string name="h_9d99f2d3">· Suggerimento: l\'APK potrebbe essere troppo grande, chiudi altre app e riprova</string>
+    <string name="h_9e1acb3b">Verifica aggiornamenti fallito</string>
+    <string name="h_9e363bc7">In tempo reale, letti da core/DexPatcher.kt (riconoscimento classi DEX), core/AxmlAdRemover.kt (rimozione manifest component) e core/AdRemover.kt (pulizia nativa lib).</string>
+    <string name="h_9eb6d057">Cluster di classi</string>
+    <string name="h_9ebb023e">    - Fonte dell\'idea: team tecnico LSP (pacchetto sovrafirmato + reindirizzamento IO contro verifica dell\'intero pacchetto)\n</string>
+    <string name="h_9f4a2d63">Svuota i metodi pubblicitari / sblocca VIP</string>
+    <string name="h_9fa3cca0">Tocca \&quot;Gestisci\&quot; -&gt; inserisci dominio pubblicitario o frammento URL -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_9fce216a">Il contenuto incollato non è valido per configurazione di modello AD JSON, verifica e riprova</string>
+    <string name="h_9fd2d8c2">Il nome del metodo deve corrispondere esattamente al codice decompilato (incluso il caso), altrimenti non verrà corrisposto.</string>
+    <string name="h_9fd3da28">    - Specifica: https://m3.material.io/\n</string>
+    <string name="h_9fe0ce82">I file di configurazione residui dell\'AD SDK, i file marker, ecc. possono rimanere nella directory radice dopo lo sblocco APK (stessa directory di class.dex). I file i cui nomi contengono queste parole chiave vengono eliminati, per pulire i residui pubblicitari non presenti nelle directory lib / assets.</string>
+    <string name="h_a092d8f0">Servizio pubblicitario</string>
+    <string name="h_a0a5e60f">percorso original-package / percorso di estrazione original-package / nome SO iniettato</string>
+    <string name="h_a17816fd">Tocca \&quot;Gestisci&quot; -&gt; inserisci il nome o la parola chiave della classe del servizio -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_a2d56d37" formatted="false">✓ Packed | %1$s</string>
+    <string name="h_a36b1457" formatted="false">SDK lib %1$s</string>
+    <string name="h_a3e07f53">Tocca \&quot;Manage\&quot; -&gt; inserisci la parola chiave .so nome della libreria -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_a445d6b9" formatted="false">⚠ Cancellazione fallita: %1$s</string>
+    <string name="h_a4adb67a">1. Schema di patching diretto DEX (basato su dexlib2)</string>
+    <string name="h_a4c8a5bb">· Firma standard v1+v2</string>
+    <string name="h_a4eff923">→ inserire il nome del metodo checker per forzare il ritorno falso → tap </string>
+    <string name="h_a5290e50">Nomi dei pacchetti AdSDK</string>
+    <string name="h_a549a63d">Questa app segue il principio della raccolta minima e attribuisce grande importanza alla protezione della tua privacy:\n\n</string>
+    <string name="h_a56fd984">6. Se hai domande, suggerimenti o dubbi sulla privacy, ti preghiamo di contattarci tramite i contatti dell\'autore; Faremo del nostro meglio per rispondere.\n</string>
+    <string name="h_a5bdf592">In runtime, core/DexPatcher.kt fa il matching delle classi ad .</string>
+    <string name="h_a674a27a">Componente AXML</string>
+    <string name="h_a6775ccc">Tocca \&quot;Gestisci\&quot; -&gt; inserisci annuncio Attività nome della classe o parola chiave -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_a6d8b350">)} (include 12 classi interne)</string>
+    <string name="h_a73cec14">→ inserire una parola chiave → toccare </string>
+    <string name="h_a773cd7d">⚠ Nessun pattern pubblicitario Flutter utilizzabile (servono stringhe ASCII di lunghezza&gt;=2), solo spacco, nessuna modifica apportata</string>
+    <string name="h_a7bf85e5">In runtime, cleanAdSdkLibs() di core/AdRemover.kt\ cammina con lib/*/ ed elimina i file .so corrispondenti.</string>
+    <string name="h_a7c027a6" formatted="false">I %1$s non ha trovato schemi pubblicitari, ho saltato automaticamente (%2$sms)</string>
+    <string name="h_aa1a5948" formatted="false">Multiplexing dati: riutilizza i segmenti dati originali dei pacchetti resigned (ad esempio output LSPatch) per ridurre la dimensione fino al ~50%</string>
+    <string name="h_aa223402">Stringhe pubblicitarie bianche corrispondenti nel DEX</string>
+    <string name="h_aa5da2f6" formatted="false">✓ Rimozione controllo firma completata: KillerApplication hook iniettato (%1$s), coinvolgendo %2$s DEX (%3$sms)</string>
+    <string name="h_aacf7dd2">Ritorno forzato vero</string>
+    <string name="h_ab71b49d" formatted="false">✗ Classe applicazione personalizzata %1$s non trovata in DEX, riscrittura genitore fallita</string>
+    <string name="h_ab94e2c3">Inizializzazione fallita</string>
+    <string name="h_abefa2cf">La fase di firma apksig si allinea automaticamente</string>
+    <string name="h_ac0e6cda">· Nessun percorso di file e asset configurato, salto</string>
+    <string name="h_aca03acb" formatted="false">dimensione: %1$s byte</string>
+    <string name="h_acd3e0fc">▶ Processazione fallita</string>
+    <string name="h_acd5cb84">Fallito</string>
+    <string name="h_ad125423" formatted="false">file radice %1$s</string>
+    <string name="h_ad3146c4">Questa caratteristica è indipendente dalle caratteristiche DEX. Quando impostato, è preferito per l\'elaborazione del Flutter; se lasciato vuoto, eredita automaticamente i pattern URL/nome-pacchetto/nome classe nelle categorie \&quot;Ad feature categories\&quot; qui sottostanti.</string>
+    <string name="h_ad4097b5">Rimozione normale</string>
+    <string name="h_ad9c82ac" formatted="false">link blanking %1$s</string>
+    <string name="h_ae3222f3" formatted="false">· Parametri di injection: original=%1$s, extract=%2$s, So=%3$s</string>
+    <string name="h_ae4e6627" formatted="false">%.2f s</string>
+    <string name="h_ae67a4cd">rimuovi i file AD SDK</string>
+    <string name="h_af7dfb03">Scritto nel campo \&quot;class_keywords\&quot; di $HELP_CONFIG_NAME.\nIn tempo reale viene utilizzato da core/DexPatcher.kt per l\'abbinamento delle classi di annunci e anche da core/AxmlAdRemover.kt per il matching dei componenti manifesti.</string>
+    <string name="h_afb873ee" formatted="false">Scaricato %1$s / %2$s</string>
+    <string name="h_b13822ab">    - Casa: https://github.com/Gameye98/DTL-X\n</string>
+    <string name="h_b13d11bf">Annuncio importante</string>
+    <string name="h_b189550a">Aggiunto</string>
+    <string name="h_b1b762e6">Download completato, apertura installatori...</string>
+    <string name="h_b1e919bb">1. Restrizione per uso legale: Questa app è destinata esclusivamente all\'apprendimento, alla ricerca e all\'uso personale e legale. Non modificare o distribuire app di cui non possiedi il copyright, non autorizzate o che sono legalmente protette.\n\n</string>
+    <string name="h_b3a0d18e" formatted="false">· In %1$s, il genitore %2$s è %3$s, saltando la riscrittura</string>
+    <string name="h_b3c9c976">Tocca \&quot;Gestisci&quot; -&gt; inserisci la parola chiave chiave nome metodo -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_b4cbd6e5">    Riferimento all\'approccio di iniezione hook ApkSignatureKillerEx di MT Manager:\n</string>
+    <string name="h_b4ea6ec8">Link vuoti per richieste pubblicitarie</string>
+    <string name="h_b549dbe0">sovrascrittura a lunghezza uguale</string>
+    <string name="h_b588b1bd" formatted="false">✓ Cambiato la classe madre %1$s classe hook (%2$s)</string>
+    <string name="h_b5b02676">5. APK Firma e allineamento v1 / v2</string>
+    <string name="h_b5e4a114">Il pacchetto è invalido o incompleto</string>
+    <string name="h_b5f40c44">Consiglio</string>
+    <string name="h_b60f14f9" formatted="false">✓ Firma V2 | %1$s</string>
+    <string name="h_b6d8f56d" formatted="false">Blanking delle stringhe %1$s</string>
+    <string name="h_b6e9c971">compresso</string>
+    <string name="h_b7089816" formatted="false">forzare la verità %1$s</string>
+    <string name="h_b723808a" formatted="false">✓ Cambiato la classe madre %1$s classe hook (%2$s)</string>
+    <string name="h_b76ce9e7">· Nessun modello pubblicitario corrispondente, nessun cambiamento necessario</string>
+    <string name="h_b7a517ca">Scritto nel campo \&quot;ad_receivers\&quot; di $HELP_CONFIG_NAME.\nViene letto da core/DexPatcher.kt (identificazione classe) e core/AxmlAdRemover.kt (rimozione manifest component).</string>
+    <string name="h_b7a6bc95">2. Parsing in formato binario AXML (Android Asset Packaging)</string>
+    <string name="h_b7aba98e">Pulisce automaticamente le libs native dell\'SDK ad (.so), asset ad resource e file root per semplificare il pacchetto</string>
+    <string name="h_b82698e4">Scritto nel campo \&quot;method_patterns\&quot; di $HELP_CONFIG_NAME.\nA runtime core/DexPatcher.kt esegue l\'abbinamento esatto dei nomi dei metodi e svuota i corpi dei metodi.</string>
+    <string name="h_b86b62e5" formatted="false">⚠ Generazione report fallita: %1$s</string>
+    <string name="h_b8884134" formatted="false">Visualizzazione della scheda non trovata: cardId=%1$s</string>
+    <string name="h_b8ed0364" formatted="false">· In %1$s, %2$s è già un genitore di classe hook</string>
+    <string name="h_b8fa7cb1">Path originale / estratto path / .so nome / nome della classe hook non può essere vuoto</string>
+    <string name="h_b914ff03">Che l\'annuncio sia caricato, sia visualizzato o abbia annunci</string>
+    <string name="h_b93b4fec">▶ Elaborazione fallita: annidamento troppo profondo</string>
+    <string name="h_b9ca883a">Le parole chiave vengono abbinate come sottostringhe (ad esempio ttad matches libttad.so); Per favore, non scrivere percorsi completi.</string>
+    <string name="h_b9f0ee4f">Nessun link APK diretto catturato, tocca il pulsante download sulla pagina e riprova</string>
+    <string name="h_ba5f8360" formatted="false">Scaricato %1$s</string>
+    <string name="h_ba6a6863" formatted="false">✗ Fuori memoria: %1$s</string>
+    <string name="h_ba6e91fa">Permesso</string>
+    <string name="h_ba715cf4">· La rimozione del controllo della firma non abilitata (può essere abilitata nelle Impostazioni)</string>
+    <string name="h_bafd49a7">Ad string patterns</string>
+    <string name="h_bb543276" formatted="false">- **Elaborato a**: %1$s</string>
+    <string name="h_bbe82bbc">Non è possibile aprire le impostazioni dei permessi di installazione</string>
+    <string name="h_bc0957da">Leggere e calcolare al volo</string>
+    <string name="h_bc1b6e2e" formatted="false">· Disabilitate %1$s categorie: </string>
+    <string name="h_bc77dbf8">URL pubblicitario / domini</string>
+    <string name="h_bc9facfc">Identificare le classi di ricevitori di trasmissione pubblicitaria</string>
+    <string name="h_bcde615b">3. Privilegio minimo: questa app non legge, memorizza né accede ai tuoi contatti, gallerie, posizione, SMS, cronologia delle chiamate o altre informazioni sensibili.\n\n</string>
+    <string name="h_bcf5f2e1">Spacca</string>
+    <string name="h_bd3f0cc3">    Linguaggio di programmazione Kotlin e libreria standard\n</string>
+    <string name="h_bde178a7">Gli Ad SDK spesso dichiarano permessi personalizzati in AndroidManifest.xml (come com.lineone.connecter.openadsdk.permission.TT_PANGOLIN, com.lineone.connecter.permission.KW_SDK_BROADCAST, ecc.) per proteggere i loro componenti pubblicitari. &lt;uses-permission&gt; Le dichiarazioni che corrispondono a questi permessi vengono rimosse dal manifesto.</string>
+    <string name="h_be5de496" formatted="false">Configurazione della sottoscrizione parse fallita: %1$s</string>
+    <string name="h_beac550d">→ inserire una parola chiave con un nome file → toccare </string>
+    <string name="h_bece4178">· Nessuna parola chiave di file root configurata, salto</string>
+    <string name="h_bed1b443">▶ Fase 5 Pulizia della directory root</string>
+    <string name="h_bee26e5d">QQ copiato su appunti</string>
+    <string name="h_beea3b77">Attività pubblicitaria / Servizio / Ricevitore </string>
+    <string name="h_bf82a4bf">AdReceiver\nBootReceiver\nInstallReceiver</string>
+    <string name="h_bfd50952">Nessun registro dei posti di blocco.</string>
+    <string name="h_bffae154">Scritto nel campo \&quot;ad_view_names\&quot; di $HELP_CONFIG_NAME.\nA runtime core/DexPatcher.kt esegue il matching delle classi ad .</string>
+    <string name="h_c0a05071">Hook di firma integrato (KillerApplication) rinominato tramite dexlib2 DexRewriter, inclusi 12 classi interne</string>
+    <string name="h_c11c4e64" formatted="false">- **APK di Fonte**: \'%1$s\'</string>
+    <string name="h_c15415d3">Non si può leggere il file selezionato</string>
+    <string name="h_c19bce70">Sistema / Sistema di seguimento</string>
+    <string name="h_c1ca70de">Tocca \&quot;Manage\&quot; -&gt; inserisci la stringa pubblicitaria da cancellare in libapp.so (ASCII stampabile di lunghezza &gt;= 2) -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_c20905d1" formatted="false">Impostazioni in fase di init fallite: %1$s</string>
+    <string name="h_c2501d73">Token di abbonamento alla condivisione</string>
+    <string name="h_c3744c61">    Libreria di cifratura/decrittazione Java e generazione certificati, utilizzata per generare certificati di firma\n</string>
+    <string name="h_c393daa8">com.google.android.gms.ads\ngoogleads.g.doubleclick.net\npangle\nadview\nadmob\ncom.bytedance.sdk</string>
+    <string name="h_c4114463">Conferma eliminazione della fonte dell\'abbonamento </string>
+    <string name="h_c4726818" formatted="false">Sostituiti gli spot %1$s</string>
+    <string name="h_c49c1ee6" formatted="false">%.1f sec</string>
+    <string name="h_c4daf443">sblocca VIP / abbonamento / edizione pro</string>
+    <string name="h_c4ed42f4">Parole chiave delle librerie native dell\'Ad SDK</string>
+    <string name="h_c5bb1a82"># Strumento: ApkAdRemoverEditor · Disimballa Flutter</string>
+    <string name="h_c6439a1a">Il contenuto del link non è una configurazione valida di ad-pattern</string>
+    <string name="h_c65d2600">⚠ Riscrittura del manifesto fallita (la classe hook potrebbe non avere effetto)</string>
+    <string name="h_c6af077e">Reset alla directory di output predefinita</string>
+    <string name="h_c6e12265">## Prima vs Dopo</string>
+    <string name="h_c71a303c" formatted="false">Oggetti %1$s</string>
+    <string name="h_c725db16">    Ottimizzazione per il riutilizzo dei dati APK: riutilizza il segmento dati originale del pacchetto tramite offset dati della directory centrale, rimuovendo segmenti duplicati,\n</string>
+    <string name="h_c743b4fe">Svuota il metodo del checker</string>
+    <string name="h_c7612287">Dimensione valida + all\'interno dell\'intervallo file</string>
+    <string name="h_c7fdb835">Tutti gli abbonamenti disattivati, configurazione predefinita ripristinata</string>
+    <string name="h_c8049515">Letti da core/DexPatcher.kt (riconoscimento classi) e core/AxmlAdRemover.kt (rimozione dei componenti manifesti).</string>
+    <string name="h_c807c057" formatted="false">· APK lib target rilevato ABI: %1$s</string>
+    <string name="h_c82adf9a">Compressione intelligente e allineamento ZIP assicurano che l\'APK riconfezionato si installi e si avvii correttamente</string>
+    <string name="h_c84eabb9">Nomi dei metodi per forzare il ritorno false</string>
+    <string name="h_c9300931">Ad SDK parole chiave nativi della lib </string>
+    <string name="h_c975dbf1">· L\'APK originale dichiarava nessuna applicazione personalizzata; Obiettivo di iniezione scelto dalla politica</string>
+    <string name="h_c97b70ed">→ inserire un annuncio: Attività o parola chiave → toccare </string>
+    <string name="h_ca6ddf1c">Modelli pubblicitari</string>
+    <string name="h_cab966b6">Parole chiave per il nome della classe di servizio pubblicitario (servizio in background), usate per identificare le classi di servizio in background degli annunci. Durante l\'elaborazione, i loro metodi ad vengono bloccati e i componenti corrispondenti vengono rimossi dal manifesto.</string>
+    <string name="h_cb00b355" formatted="false">✓ Riscritto application.android:name in %1$s</string>
+    <string name="h_cc8469a8">Scritto nel campo \&quot;string_patterns\&quot; di $HELP_CONFIG_NAME.\nIn runtime core/DexPatcher.kt scansiona le istruzioni e i blank delle stringhe di conststringa che corrispondono alle stringhe di annunci.</string>
+    <string name="h_ccbc6e46" formatted="false">  ✗ Ottimizzazione per riutilizzo dei dati fallita: %1$s</string>
+    <string name="h_cd0f41eb">    - Casa: https://mt2.cn/\n</string>
+    <string name="h_cd369de4">| ABI | Prima di | Dopo | Istantanee | Corde | Sostituisce | Successi del modello | Tempo | Stato |</string>
+    <string name="h_cd394527">    - Utilizzato per localizzare l\'header snapshot Dart in libapp.so ed estrarre/cancellare stringhe di annunci\n\n</string>
+    <string name="h_cd4fc2cd">Confine di parole</string>
+    <string name="h_cd984ab2">Spesso funziona con \&quot;Ad SDK package names\&quot;, \&quot;Ad view class names\&quot; e \&quot;Ad class name keywords&quot;: le parole chiave di queste categorie vengono usate insieme per il matching degli elementi del layout, e gli elementi abbinati sono nascosti.</string>
+    <string name="h_cdb8ce5c">Genera token</string>
+    <string name="h_cddb60a3" formatted="false">· Trovato %1$s (%2$s), riscrivendo il suo genitore</string>
+    <string name="h_ce5f4cc6" formatted="false">Scaricato 0 B / %1$s</string>
+    <string name="h_ce6d7c18"> richiede informazioni sulla versione; nel resto del tempo non si connette, non raccoglie né carica alcuna informazione personale in background.\n\n</string>
+    <string name="h_ceefa2cd">Rimuovi le dichiarazioni di permesso dell\'AD SDK dal manifesto</string>
+    <string name="h_cf431781">In tempo reale, gestito dalla logica force-return-false di core/DexPatcher.kt\ (solo tipi di ritorno boolean/int).</string>
+    <string name="h_cf9a62ca">Scansione sicura a bassa memoria per grandi DEX; anche i grandi file DEX vengono processati in modo stabile senza bloccarsi</string>
+    <string name="h_cfd21cdc">Tocca \&quot;Gestisci\&quot; -&gt; inserisci annuncio Nome o parola chiave della classe ricevitore -&gt; tocca \&quot;Aggiungi\&quot;.</string>
+    <string name="h_d086cb5b">▶ Passo 3/5 Rimuovere le pubblicità</string>
+    <string name="h_d0997ec0">Nomi dei metodi Ad</string>
+    <string name="h_d0f51307">Modifica schema</string>
+    <string name="h_d236f750">· Layout Res ad Visualizza la categoria disattivata, salto il nascondimento del layout</string>
+    <string name="h_d38458da" formatted="false">· Unpack fatto: %1$s snapshot, %2$s stringhe → %3$s</string>
+    <string name="h_d3ed5e25">    - Componenti: https://github.com/material-components/material-components-android\n</string>
+    <string name="h_d44f69ea" formatted="false">✗ %1$s patching fallito: %2$s</string>
+    <string name="h_d4a0d6cb">→ inserire una parola chiave del nome del metodo → toccare </string>
+    <string name="h_d4c58d3d" formatted="false">✓ Libreria nativa incorporata: lib/%1$s/lib%2$s.so (%3$s)</string>
+    <string name="h_d4cdf611">    - Solo per riferimento alle caratteristiche e apprendimento, i suoi binari non vengono modificati\n\n</string>
+    <string name="h_d54ac91c">Non è possibile aprire il link esterno</string>
+    <string name="h_d64d53e1" formatted="false">Output build del DEX del hook mancante classe %1$s, abortita</string>
+    <string name="h_d6c3b08e">→ inserire il nome del metodo a controllo per sbloccare → tocco </string>
+    <string name="h_d6fab15d" formatted="false">✓ Rapporto: %1$s</string>
+    <string name="h_d7c66a32">Dual v1 + v2 signing, compatibile con dispositivi più vecchi; I risultati vengono installati direttamente</string>
+    <string name="h_d7d0599f">Autore QQ</string>
+    <string name="h_d7d6523f">▶ Tronco svuotato</string>
+    <string name="h_d8328f57">Percorso completo del file, ad esempio:\n/storage/emulato/0/APKEditor/ad_patterns.json</string>
+    <string name="h_d8a58722">Reset al percorso di configurazione predefinito</string>
+    <string name="h_d8db6779">Non sono riuscito a controllare gli aggiornamenti</string>
+    <string name="h_d9cbc4b0">Per favore, concedi </string>
+    <string name="h_d9da8cfd">Istantanea dei dati</string>
+    <string name="h_d9f1a2ee"># Rapporto di elaborazione della rimozione degli annunci APK</string>
+    <string name="h_da32f742">    - Casa: https://github.com/material-components/material-components-android\n</string>
+    <string name="h_da946dfc">→ inserisci un annuncio Visualizza nome di classe o parola chiave → tocca </string>
+    <string name="h_daea0bf6" formatted="false">, stringa svuotata a %1$s punti</string>
+    <string name="h_daef5388">    - Casa: https://developer.android.com/tools/aapt2\n</string>
+    <string name="h_db0dc430">Pulizia dei file di risorse</string>
+    <string name="h_db41810b" formatted="false">, forceTrue=%1$s</string>
+    <string name="h_db72862a" formatted="false">Apertura fallita: %1$s</string>
+    <string name="h_dd0a7c93">Pattern pubblicitari di stringhe DEX definiti dall\'utente (come ID di unità pubblicitarie, stringhe di caratteristiche SDK, parole chiave di report statistiche, ecc.). Durante l\'elaborazione, tutte le istruzioni const-string / const-string/jumbo nei corpi dei metodi vengono scansionate; qualsiasi valore di stringa (minuscolo) corrispondente a qualsiasi pattern viene svuotato a una stringa vuota, rompendo i riferimenti dell\'AD SDK alle stringhe rilevanti e bloccando la logica ad logica.</string>
+    <string name="h_dd6c571b">Scritto nel campo \&quot;force_false_methods\&quot; di $HELP_CONFIG_NAME.\nIn tempo reale viene gestito dalla logica force-return-false di core/DexPatcher.kt\ (solo tipi di ritorno booleano/int).</string>
+    <string name="h_ddafe46f">Rimozione della verifica della firma: le modalità Normale + Original-Package rimuovono automaticamente i controlli della firma dopo il riconfezionamento per evitare rifiuti</string>
+    <string name="h_ddc38ea1">Si sovrappone con \&quot;Ad class name keywords\&quot;; puoi mantenere uno dei due.</string>
+    <string name="h_de0412d9">Configurazione dell\'abbonamento vuota, nessuna modifica apportata</string>
+    <string name="h_de0bbf00" formatted="false">Blanking della classe %1$s</string>
+    <string name="h_de139607">18 categorie di modelli pubblicitari coprono lib SDK / permessi / classi / metodi / risorse / URL, completamente personalizzabili con aggiungi, eliminazione, modifica e reset</string>
+    <string name="h_de184846">Tutti i dialoghi si adattano alla dimensione dello schermo e scorrono automaticamente quando il contenuto è lungo, senza mai traboccare</string>
+    <string name="h_de6aac40"> In combinazione: questa categoria è costituita da percorsi esatti, la seconda è parola chiave fuzzy.</string>
+    <string name="h_de979268">    - Licenza: non specificata, solo per riferimento all\'apprendimento\n\n</string>
+    <string name="h_deb3721e">8. Libreria standard Kotlin (JetBrains)</string>
+    <string name="h_deb381d0" formatted="false">✓ Uncini firmati %1$s | %2$s DEX | %3$s</string>
+    <string name="h_e00d1d26">sotto-pacchetto APK annidato che può riutilizzare i dati</string>
+    <string name="h_e02f104a" formatted="false">]} resources=%1$s</string>
+    <string name="h_e03c4e1e" formatted="false">Sottovisualizzazione della carta non trovata: %1$s</string>
+    <string name="h_e0aa11ae">Funziona con \&quot;Ad SDK package names\&quot; (i nomi dei pacchetti derivano automaticamente alcune parole chiave per i nomi delle librerie).</string>
+    <string name="h_e0e88403">In tempo reale, core/DexPatcher.kt scansiona le istruzioni const-string e gli blank che corrispondono ai link pubblicitari.</string>
+    <string name="h_e17b0b80">Fai ritornare i metodi di determinazione dell\'annuncio false</string>
+    <string name="h_e21ed9e7" formatted="false">    -&gt; %1$s: ho bloccato %2$s i metodi pubblicitari, salto %3$s i metodi non-ad%4$s</string>
+    <string name="h_e25ab6b8">Tocca \&quot;Gestisci\&quot; -&gt; inserisci la parola chiave nome file -&gt; tocca \&quot;Aggiungi\&quot;. L\'abbinamento avviene su sottostringhe a runtime (insensibile alla maiuscolagem).</string>
+    <string name="h_e2dc63b4" formatted="false">· In %1$s, %2$s è già un genitore di classe hook</string>
+    <string name="h_e2dca2bb">    Implementazione della firma APK v1 / v2 / v3, garantendo che i risultati elaborati siano installabili\n</string>
+    <string name="h_e2e27a87">Grave</string>
+    <string name="h_e313c9e9" formatted="false">Dimensione file: %1$s byte</string>
+    <string name="h_e4090eb7">Scaricamento</string>
+    <string name="h_e4100029">4. Organizzazione delle regole delle funzionalità pubblicitarie</string>
+    <string name="h_e430c849" formatted="false">  ✓ Le classi Hook rinominate %1$s</string>
+    <string name="h_e5029582">## Flutter libapp.so Elaborazione (Smonta / De-Adetta / Recompila)</string>
+    <string name="h_e52286ce" formatted="false">i Ottimizzazione per il riutilizzo dei dati su: identificato %1$s sotto-pacchetti APK incorporati</string>
+    <string name="h_e55011c4">allo stesso livello di class.dex</string>
+    <string name="h_e58abe16">Parole chiave del file di directory di APK</string>
+    <string name="h_e5a42c92">da dietro verso davanti</string>
+    <string name="h_e5bea172">Rimozione manifesti AXML</string>
+    <string name="h_e63572b7" formatted="false">· Stack: %1$s</string>
+    <string name="h_e63572b7b" formatted="false">  · stack: %1$s</string>
+    <string name="h_e655531f">File Smali salvato</string>
+    <string name="h_e71aba5e">3. Parsing snapshot AOT Dart (Flutter libapp.so)</string>
+    <string name="h_e7425f76">· Nessuna parola chiave per il nome della libreria AD SDK, salto</string>
+    <string name="h_e75ba18c">showad\nloadad\nonadloaded\nadclick</string>
+    <string name="h_e77ef5d2">Parole chiave per il nome della classe componente della visualizzazione pubblicitaria, usate per identificare le classi di visualizzazione pubblicitaria (come Visualizzazioni per banner, interstiziali e video premiati). Quando il nome di una classe corrisponde, viene trattato come una classe ad e i suoi metodi ad vengono svuotati.</string>
+    <string name="h_e785557e">Scritto nel campo \&quot;ad_asset_paths\&quot; di $HELP_NOME_CONFIGURAZIONE.\nA runtime core/AdRemover.kt\'s cleanAdSdkAssets() elimina i percorsi corrispondenti.</string>
+    <string name="h_e870ac19">TT_PANGOLIN\nKW_SDK\ncom.bytedance\ncom.qq.e\ncom.mbridge.msdk\ncom.kwad.sdk</string>
+    <string name="h_e88520b7">2. Utilizzare a proprio rischio e pericolo: qualsiasi conseguenza derivante dall\'utilizzo di questa app per elaborare APK (inclusi ma non limitati a: mancata installazione, crash, malfunzionamento, rischio account, perdita di dati, ecc.) sono sostenute dall\'utente.\n\n</string>
+    <string name="h_e93cb7ad">Layout di Res e parole chiave per la visualizzazione dell\'annuncio</string>
+    <string name="h_e9472910">Configurazione salvata</string>
+    <string name="h_e98ea42f">1. Elaborazione offline locale: dispaccheggio, rimozione degli annunci, riconfezionamento e firma di tutti gli APK vengono effettuati localmente sul dispositivo; l\'app non carica file APK o dati interni su nessun server.\n\n</string>
+    <string name="h_e9a0b582">tocca il </string>
+    <string name="h_e9ef00eb">Contenuto dell\'annuncio...</string>
+    <string name="h_e9ef6fc2" formatted="false">]} libs=%1$s</string>
+    <string name="h_ea8aef83" formatted="false">✗ %1$s Processing fallito: %2$s</string>
+    <string name="h_eaa67708" formatted="false">· Leggi la firma originale: %1$s...</string>
+    <string name="h_eb057b11">▶ Pulizia della libreria SDK di Fase 3</string>
+    <string name="h_eb46cd7f" formatted="false">· Ho trovato classi che estendono android.app. Applicazione: %1$s (%2$s)</string>
+    <string name="h_eb83ed6d">I modelli pubblicitari supportano l\'importazione e la condivisione degli abbonamenti per una rapida sincronizzazione di più regole</string>
+    <string name="h_ec07479c">Scritto nel campo \&quot;root_file_keywords\&quot; di $HELP_CONFIG_NAME.\nA runtime core/cleanRootFiles() di AdRemover.kt scansiona la directory root APK (solo a livello superiore, non ricorsivo) ed elimina i file corrispondenti.</string>
+    <string name="h_ec3b529d">Nessuna descrizione dettagliata ancora</string>
+    <string name="h_ec3f26fa">· Rilevamento basato sul formato reale del file (contenitore ZIP), non sull\'estensione; Vengono inoltre rilevati sottopacchetti rinominati (base/base.dat, ecc.)</string>
+    <string name="h_ec83d6b2">· Nessun file DEX trovati, salto</string>
+    <string name="h_eca9a205">Non si può aprire il centro download</string>
+    <string name="h_ed310a00">Ottimizzazione delle dimensioni DEX su</string>
+    <string name="h_eded2e15">    - Casa: https://kotlinlang.org/\n</string>
+    <string name="h_edf6faf2">Salta se la lista è vuota</string>
+    <string name="h_ee0a3ba0">Token copiato sulla cartellina</string>
+    <string name="h_ee4d78ba">⏭ Saltato (nessuna pubblicità)</string>
+    <string name="h_ee4e2a27">Abbonamento inserito manualmente aggiunto</string>
+    <string name="h_ee7d1dad">Elimina file SDK pubblicitari</string>
+    <string name="h_eec19ff3">Percorsi dei file pubblicitari degli asset</string>
+    <string name="h_eed66a8d">, quindi l\'app pensa che l\'annuncio non sia mai stato caricato o mostrato, saltando la logica di visualizzazione dell\'annuncio.</string>
+    <string name="h_eedf995a" formatted="false">· Principio: iniettare %1$s hook, riscrivere il padre applicazione, sovrascrivere la firma originale a runtime</string>
+    <string name="h_efb1a358">è membro / sbloccato / acquistato</string>
+    <string name="h_f08c72bc">Attività pubblicitaria</string>
+    <string name="h_f0b2a7b1" formatted="false">Abbonamenti applicati %1$s (%2$s pattern totale)</string>
+    <string name="h_f0b77403" formatted="false">· Uso del nome di voce personalizzato: %1$s</string>
+    <string name="h_f16e570f">· L\'APK di destinazione non ha un dir, scrivendo tutte le ABI (inclusi x86 / x86_64)</string>
+    <string name="h_f1936c65">Attività pubblicitaria </string>
+    <string name="h_f235618a">▶ Passo 5/5 Esportazione</string>
+    <string name="h_f26b60e4">L\'indirizzo di aggiornamento è un collegamento web; il browser integrato si aprirà per il download da Lanzou Cloud</string>
+    <string name="h_f2765b03">Questo schema esiste già</string>
+    <string name="h_f389c2d9">· Nessuna directory degli asset trovata, salto la pulizia dei file pubblicitari</string>
+    <string name="h_f3a25b4b">ad_unit_id\nplacementid\nrewarded_video_id\nbanner_pos_id</string>
+    <string name="h_f42a751f" formatted="false">· Configurazione pattern: SDK=%1$s class=%2$s metodo=%3$s total=%4$s</string>
+    <string name="h_f4f76ad4">Invia email</string>
+    <string name="h_f506fec2">→ inserire un percorso relativo (con o senza asset/prefisso) → toccare </string>
+    <string name="h_f57b7d67">Inserisci il contenuto del pattern</string>
+    <string name="h_f5d25035">▶ Nascondiglio della disposizione della Fase 6</string>
+    <string name="h_f5f084be">Recupero della configurazione dell\'abbonamento...</string>
+    <string name="h_f66c3cc8">Funziona con \&quot;Asset, percorsi di file ad ad&quot;.</string>
+    <string name="h_f6c7ffc7">· Nessuna directory di risoluzione trovata, salto</string>
+    <string name="h_f6f23d2d">    Fonte delle classi hook per la verifica della firma (bin.mt.signature.KillerApplication) e dell\'approccio nativo di lib\n</string>
+    <string name="h_f73090dc">⚠ Configurazione del modello ad vuoto, saltando l\'elaborazione della rimozione degli annunci</string>
+    <string name="h_f744e671">Applica l\'abbonamento fallito, controlla il permesso di archiviazione</string>
+    <string name="h_f77dad26">    - Origine: https://android.googlesource.com/platform/frameworks/base\n</string>
+    <string name="h_f7aabc54" formatted="false">I Struttura del pacchetto Oversignat, abilitando l\'ottimizzazione del riutilizzo dei dati (host: %1$s)</string>
+    <string name="h_f7d28e75">Percorsi di file/directory dell\'SDK pubblicitario sotto asset da eliminare. Corrispondenza esatta; Quando viene abbinata, l\'intera voce (file o directory) viene eliminata, usata per rimuovere plugin ad e layer di incolla incorporati negli asset.</string>
+    <string name="h_f7da955e">▶ Inizia a elaborare APK</string>
+    <string name="h_f9bb4128">⚠️ Fallito</string>
+    <string name="h_f9f03d96">. In tempo reale corrisponde per sottostringa (insensibile alla maiuscole); puoi utilizzare prefissi di nome del pacchetto AD SDK o parole di autorizzazione.</string>
+    <string name="h_f9f6e3e6">In runtime, hideAdLayoutViews() di core/AxmlAdRemover.kt\ riscrive la larghezza/altezza degli elementi corrispondenti a 0dp nei layout AXML sotto res/layout e res/layout-*.</string>
+    <string name="h_fa4706ec">Le parole chiave sono abbinate come sottostringhe e coprono un\'ampia superficie; Evita parole troppo generiche per evitare cancellazioni accidentali.</string>
+    <string name="h_fa59ee8d">Parole chiave pubblicitarie di risorse</string>
+    <string name="h_fa8a0296">Scritto nel campo \&quot;url_patterns\&quot; di $HELP_CONFIG_NAME.\nIn runtime core/DexPatcher.kt scansiona le istruzioni const-string e gli blank che corrispondono ai link ad .</string>
+    <string name="h_faecff27" formatted="false">i Saltato i file APK incorporati %1$s sotto asset (ad esempio base.apk); per favore di eliminarli </string>
+    <string name="h_fbc9e271">· Questi sottopacchetti venivano riutilizzati così com\'è (STORED) per evitare il gonfiore delle dimensioni dovuto alla ri-compressione degli APK annidati già compressi</string>
+    <string name="h_fbfccfde" formatted="false">✓ %1$s file | %2$s DEX | %3$s</string>
+    <string name="h_fc2459c8">Scritto nel campo \&quot;lib_file_keywords\&quot; di $HELP_NOME_CONFIGURAZIONE.\nA runtime core/AdRemover.kt\'s cleanAdSdkLibs() cammina lib/*/ ed elimina i file .so corrispondenti.</string>
+    <string name="h_fc69844a" formatted="false">Totale dei modelli %1$s</string>
+    <string name="h_fc69844a2" formatted="false">Total %1$s features</string>
+    <string name="h_fd5e5b52">. Puoi anche modificare direttamente il file di configurazione con un gestore file.</string>
+    <string name="h_fe1aa884">| Fase | Dettaglio | Tempo |</string>
+    <string name="h_fe77d47f" formatted="false">✓ Originale incorporato: %1$s (%2$s)</string>
+    <string name="h_fe97b23b">URL o domini delle richieste di annunci. Durante l\'elaborazione, le stringhe di link pubblicitario presenti come conststringa nel DEX vengono svuotate a stringhe vuote, bloccando le richieste pubblicitarie.</string>
+    <string name="h_fea9a093">Lavora con</string>
+    <string name="h_ff4c2138" formatted="false">· Uso delle informazioni personalizzate della firma (%1$s caratteri)</string>
+    <string name="h_ff8a316f">    - Riferimento al suo approccio adloader / lista nera di dominio / parole chiave metodo, combinato con gli SDK pubblicitari mainstream e organizzato da noi stessi\n\n</string>
+    <string name="h_ff94e7df">3. Responsabilità sull\'uso commerciale: se APK modificati vengono utilizzati commercialmente o distribuiti, assicurarsi di rispettare le leggi e i regolamenti pertinenti riguardanti proprietà, copyright, marchi e paese/regione; La responsabilità legale risultante è a carico dell\'utilizzatore.\n\n</string>
+    <string name="h_ffdeee21">Funziona con \&quot;Ad SDK package names\&quot;.</string>
+    <string name="h_ffe745b5" formatted="false">· Parole chiave %1$s</string>
+    <string name="h_ffe745b5d" formatted="false">  · Parole chiave: %1$s</string>
+    <string name="lang_default">Cinese semplificato</string>
+    <string name="lang_desc">Scegli la lingua dell\'app. Effetto immediato e salvato.</string>
+    <string name="lang_dialog_title">Scegli la lingua</string>
+    <string name="lang_title">Lingua</string>
+    <string name="s_01769a6e">URL config remota (https://...)</string>
+    <string name="s_02d9819d">Avviso</string>
+    <string name="s_02daf71f">Abbonamenti</string>
+    <string name="s_04d7d88e">Nome categoria</string>
+    <string name="s_settings_back">Indietro</string>
+    <string name="s_068d0c44">Info autore</string>
+    <string name="s_07ee07e4">Modifica sorgente</string>
+    <string name="s_089e87fe">Attiva rimozione firma</string>
+    <string name="s_08b55fea">Gestisci</string>
+    <string name="s_09bbf66d">Modalità verifica</string>
+    <string name="s_09d71337">Attiva/disattiva abbonamento</string>
+    <string name="s_0baadd9e">Genera un token dalla config attuale da condividere</string>
+    <string name="s_0c7d604b">Sorgente</string>
+    <string name="s_0eb3c700">v2.0</string>
+    <string name="s_0f60c989">È disponibile una nuova versione. Aggiorna!</string>
+    <string name="s_10445608">Come funziona</string>
+    <string name="s_12121846">Tocca \'Gestisci\' per modificare / aggiungere / eliminare</string>
+    <string name="s_140a0464">Tocca \'Aggiungi abbonamento\' per inserire un token\no \'Condividi config\' per generarlo</string>
+    <string name="s_148c7b02">Senza server; il token contiene tutta la config</string>
+    <string name="s_15c64aa0">File di configurazione</string>
+    <string name="s_1605701e">Sostituisci con</string>
+    <string name="s_17a8bc26">Categorie pattern pub</string>
+    <string name="s_18068ed1">Nessun pattern. Aggiungine uno sopra.</string>
+    <string name="s_18c63459">Predefinito</string>
+    <string name="s_1b4a7056">Tre modi:\n① Token: inizia con ADSUB:\n② Link diretto: URL JSON con http(s)://\n③ Contenuto: incolla il JSON di config (inizia con {)</string>
+    <string name="s_1fc1da7d">Aggiungi / modifica / elimina / condividi abbonamenti. La configurazione può essere condivisa come token.</string>
+    <string name="s_224e2ccd">Configurazione</string>
+    <string name="s_23f849fb">Decomprimi · Rimuovi pub DEX · Ripacchetta e firma\nRimuovi le pub con un tocco, completamente offline</string>
+    <string name="s_240bf022">Schema</string>
+    <string name="s_2541ca48">Aggiorna ora</string>
+    <string name="s_25488ce0">Rimozione verifica firma</string>
+    <string name="s_2a813bc3">Scarica ora</string>
+    <string name="s_2c3f3245">Abbonamento URL</string>
+    <string name="s_2f4aaddd">Elimina</string>
+    <string name="s_309a9e7f">Gestione abbonamenti</string>
+    <string name="s_30ea6464">Cerca</string>
+    <string name="s_30fe4dbb">Offline · Pattern personalizzabili</string>
+    <string name="s_31d05b73">Firma (certificato Base64; vuoto legge dall\'originale)</string>
+    <string name="s_31da0a7b">Cambia nome o URL remota</string>
+    <string name="s_3243e935">Nome .so iniettato (corrisponde a lib/&lt;abi&gt;/&lt;name&gt;lib.so)</string>
+    <string name="s_32ac152b">Aggiorna</string>
+    <string name="s_3615f734">Copia registro</string>
+    <string name="s_3629f42b">Icona categoria</string>
+    <string name="s_38cf16f2">OK</string>
+    <string name="s_39388352">QQ di contatto</string>
+    <string name="s_39928582">Pronti. Tocca \'Avvia elaborazione\' e scegli un APK per iniziare.</string>
+    <string name="s_3ac820e0">0 pattern</string>
+    <string name="s_3b481a8e">Nessun abbonamento</string>
+    <string name="s_3bc5e602">E-mail</string>
+    <string name="s_3c00064c">URL catturata, download in corso</string>
+    <string name="s_4006f452">Impostazioni</string>
+    <string name="s_45470663">Aggiungi un token o una config condivisa; attiva per applicare</string>
+    <string name="s_456d29ef">Registro</string>
+    <string name="s_462f7422">Modifica abbonamento</string>
+    <string name="s_469de3c4">Ottimizza DEX</string>
+    <string name="s_48ab146a">Funzionalità</string>
+    <string name="s_498f1d06">Aggiungi sorgente</string>
+    <string name="s_4cc541a3">Tocca il pulsante di download; l\'app cattura l\'URL dell\'APK e lo scarica internamente.</string>
+    <string name="s_4d96525d">Predefinito (SignatureKiIIer)</string>
+    <string name="s_4ed52bef">Chiaro</string>
+    <string name="s_4f356348">Percorso personalizzato</string>
+    <string name="s_4f35e80d">Percorso</string>
+    <string name="s_4ff13370">Controlla aggiornamenti</string>
+    <string name="s_50388292">Leggi attentamente</string>
+    <string name="s_50ef9a92">Usa sempre un\'interfaccia chiara</string>
+    <string name="s_55e69200">Rimuove le info di debug per ridurre l\'APK</string>
+    <string name="s_56a0606b">Inserisci un nuovo pattern</string>
+    <string name="s_58125852">Disclaimer</string>
+    <string name="s_598d34f0">Personalizza parametri di iniezione</string>
+    <string name="s_5ad1196f">Attiva questa categoria</string>
+    <string name="s_5ef69f62">Icona</string>
+    <string name="s_5f535b47">Condividi config come token</string>
+    <string name="s_5f7707b4">Cerca e sostituisci</string>
+    <string name="s_60bf6001">Riferimenti e fonti</string>
+    <string name="s_625fb26b">Annulla</string>
+    <string name="s_62cea749">Autore</string>
+    <string name="s_636c1a42">Rimozione firma normale</string>
+    <string name="s_67113ed9">0 elementi</string>
+    <string name="s_6763431e">Segui automaticamente il tema di sistema</string>
+    <string name="s_68084d53">Apri nel browser</string>
+    <string name="s_68fa3dbb">Posizione di esportazione</string>
+    <string name="s_6b7bcdcd">Dimensione finale</string>
+    <string name="s_6ff3d989">Scegli modalità di visualizzazione</string>
+    <string name="s_71938084" formatted="false">Elaborando il DEX vengono rimosse le info di debug (numeri di riga/variabili/parametri), riducendo l\'APK del 5%~15% senza compromettere il funzionamento; solo le tracce di errore perdono i numeri di riga.</string>
+    <string name="s_skip_signing_title" formatted="false">Ri-firmare durante il confezionamento</string>
+    <string name="s_skip_signing_desc" formatted="false">Se attivata, l\'APK viene ri-firmata automaticamente dopo il confezionamento; se disattivata, viene generata un\'APK non firmata, adatta per ri-firma / protezione / certificato proprio successivi.</string>
+    <string name="s_skip_signing_cd" formatted="false">Ri-firmare o no dopo il confezionamento</string>
+    <string name="s_71bbc726">Segui sistema</string>
+    <string name="s_728ee208">Pattern pub Flutter</string>
+    <string name="s_7295f03c">Nome</string>
+    <string name="s_73d906b6">Tipo di condivisione</string>
+    <string name="s_74fda23d">Ottimizzazione dimensioni DEX</string>
+    <string name="s_767f6a2d">Pattern Flutter</string>
+    <string name="s_769d88e4">Fatto</string>
+    <string name="s_78f2095f">Trovata nuova versione</string>
+    <string name="s_7a5db88b">Rimuove la verifica firma dopo il ripacchettamento</string>
+    <string name="s_7be39baf">Elaborazione completata</string>
+    <string name="s_7bf54e28">Selezionato</string>
+    <string name="s_7e56035a">QQ</string>
+    <string name="s_7f68b9ad">Abbonamento URL</string>
+    <string name="s_8347a927">Modifica</string>
+    <string name="s_84fad3a4">Come aggiungere · Scopo · Modifiche</string>
+    <string name="s_86a6d929">Parametri di iniezione</string>
+    <string name="s_87e4d9ef">Più tardi</string>
+    <string name="s_8a2aa3c6">Novità</string>
+    <string name="s_8a2cba4b">Inserisci un percorso completo e assicurati che sia scrivibile</string>
+    <string name="s_8ba7c3a7">Produzione</string>
+    <string name="s_8c8b1d0c">Spazio risparmiato</string>
+    <string name="s_8c993f30">Vuoto</string>
+    <string name="s_8d89dabd">Rimuovi pub con un tocco</string>
+    <string name="s_9078dfc1">I primi tre valori sono scritti nelle &lt;clinit&gt; stringhe di const dell\'hook (v0 original path / v2 unzip path / v3 .so name); la classe hook rinomina la classe KillerApplication iniettata.</string>
+    <string name="s_928e0c3e">Cartella di output APK</string>
+    <string name="s_929660ae">Si applica in modalità Pacchetto originale, equivalente a \'percorso originale / percorso decompressione / nome .so / classe hook / firma / voce\' di MT</string>
+    <string name="s_93964033">0 abbonamenti</string>
+    <string name="s_95b351c8">Modifica</string>
+    <string name="s_9819b267">Dove salvare l\'APK dopo la rimozione delle pub</string>
+    <string name="s_98ea2a77">Registro di elaborazione</string>
+    <string name="s_9b601b8e">Versione attuale</string>
+    <string name="s_9e23cf09">/storage/emulated/0/APKEditor</string>
+    <string name="s_9ee20a30">Ultima versione</string>
+    <string name="s_9f1ef078" formatted="false">0%</string>
+    <string name="s_a05128ed">Tempo totale</string>
+    <string name="s_a15a9ef1">Svuota registro</string>
+    <string name="s_a18f884e">Inizia</string>
+    <string name="s_a1b863fa">Avviso ufficiale</string>
+    <string name="s_a51ef595">Modalità scura</string>
+    <string name="s_a56d1fbd">Disclaimer: la rimozione firma è solo per studio, ricerca e uso legale personale. Non modificare né distribuire app di cui non possiedi i diritti o protette dalla legge. La responsabilità è dell\'utente.</string>
+    <string name="s_a6695e34">Email di contatto</string>
+    <string name="s_a6fe5ea4">Scegli la modalità: Segui sistema / Chiaro / Scuro. Effetto immediato e salvato.</string>
+    <string name="s_ab1a82f0">Dimensione originale</string>
+    <string name="s_ab6eb4cc">Open Source</string>
+    <string name="s_afcde261">Aspetto</string>
+    <string name="s_b15d9127">Chiudi</string>
+    <string name="s_b3d8be49">URL config remota (solo tipo URL)</string>
+    <string name="s_b58c7549">Aggiungi</string>
+    <string name="s_b6572571">Percorso pacchetto originale (assets nell\'APK)</string>
+    <string name="s_b7a331b9">Token / Link diretto / Contenuto</string>
+    <string name="s_b9d96e86">Modalità chiara</string>
+    <string name="s_bcea107d">Nome voce (pacchetto; vuoto legge dal manifest)</string>
+    <string name="s_be5fbbe3">Salva</string>
+    <string name="s_bec7e4d6">Cambia</string>
+    <string name="s_c09d811a">/storage/emulated/0/APKEditor/ad_patterns.json</string>
+    <string name="s_c10c6741">Info</string>
+    <string name="s_c31f48f8">Condividi</string>
+    <string name="s_c666ad11">Pattern</string>
+    <string name="s_c6828f99">Scuro</string>
+    <string name="s_c6973b8d">Attiva pattern Flutter</string>
+    <string name="s_ce26955a">Capito</string>
+    <string name="s_d106afb1">Non chiedere più</string>
+    <string name="s_d395eb69">Effetto immediato, salvato</string>
+    <string name="s_d5932fe6">Attiva ottimizzazione DEX</string>
+    <string name="s_d78b7b9b">Integrato</string>
+    <string name="s_d94cc5ea">Aggiungi abbonamento</string>
+    <string name="s_dc831d4e">Rimozione pub completata con successo</string>
+    <string name="s_dc91b561">Vedi info</string>
+    <string name="s_dd8d0881">Attivandola, la verifica firma viene rimossa perché l\'app accetti la nuova firma. La modalità normale copre la maggior parte delle app; la modalità Pacchetto originale confronta la firma originale per una copertura più ampia.</string>
+    <string name="s_de12e68b">Rapporto di elaborazione</string>
+    <string name="s_de763e1a">Privacy</string>
+    <string name="s_e01c6b70">Seleziona un APK e tutto è automatico: decompressione → rimozione pub DEX → pulizia risorse → ripacchettamento → firma → esportazione. Tutto in locale.</string>
+    <string name="s_e27bfdd7">Icona app</string>
+    <string name="s_e35b0fb4">Il token contiene un URL remota; serve un server</string>
+    <string name="s_e5a091b7">Aggiorna a</string>
+    <string name="s_e5f05079">Nome classe hook (personalizzabile)</string>
+    <string name="s_e616aaeb">0 B / 0 B</string>
+    <string name="s_e9c9b9a0">Usa sempre un\'interfaccia scura</string>
+    <string name="s_efc6ceba">Personalizza i pattern in libapp.so di Flutter. Hanno priorità sui pattern DEX; vuoto = categorie sotto.</string>
+    <string name="s_f1d4ff50">Personalizzato</string>
+    <string name="s_f23e5d34">Percorso decompressione (relativo alla cartella privata)</string>
+    <string name="s_f26ef914">Scarica</string>
+    <string name="s_f411d0f1">Informazioni</string>
+    <string name="s_f5f3fb1a">Condividi configurazione</string>
+    <string name="s_f801c69d">Inserisci un token, un link diretto o incolla la configurazione</string>
+    <string name="s_fa86f1a5">Avviso</string>
+    <string name="s_fe5cc438">Versione 1.7</string>
+    <string name="s_fe60ed78">Gli abbonamenti integrati non possono cambiare la config, solo il nome</string>
+    <string name="s_ff3e568a">v1.0</string>
+    <string name="perm_all_files_access" formatted="false">Concedi l\'autorizzazione \"Accesso a tutti i file\"</string>
+    <string name="log_apkinfo" formatted="false">  ✓ %1$s | %2$s | DEX=%3$s res=%4$s lib=%5$s | %6$s</string>
+    <string name="log_dexmultiplex_done" formatted="false">  I Ottimizzazione per multiplexing dati completa: %1$s -&gt; %2$s</string>
+    <string name="log_dexmultiplex_reuse" formatted="false">  · Segmento dati originale riutilizzato (%1$s), salvato %2$s (%3$s%%)</string>
+    <string name="log_dexmultiplex_fail" formatted="false">  ✗ Ottimizzazione del multiplexing dati fallita: %1$s</string>
+    <string name="dexinfo_file" formatted="false">File: %1$s</string>
+    <string name="dexinfo_size" formatted="false">Size: %1$d bytes</string>
+    <string name="dexinfo_classes" formatted="false">Classes: %1$d</string>
+    <string name="dexinfo_methods" formatted="false">Methods: %1$d</string>
+    <string name="dexinfo_fields" formatted="false">Fields: %1$d</string>
+    <string name="dexinfo_packages" formatted="false">
+Package distribution:</string>
+    <string name="dexinfo_pkg_line" formatted="false">  %1$s: %2$d classes</string>
+    <string name="sigrem_inject_hook" formatted="false">  ▶ Iniettare un hook signature in stile MT (%1$s)...</string>
+    <string name="sigrem_class_renamed" formatted="false">  ✓ Classe Hook rinominata in %1$s (inclusi 12 classi interne)</string>
+    <string name="dexpatcher_link_neutral" formatted="false">, %1$d URL(s) blanked</string>
+    <string name="dexpatcher_neutral" formatted="false">    -&gt; %1$s: ha bloccato %2$d metodi ad , salto %3$d metodi non-ad%4$s%5$s</string>
+</resources>

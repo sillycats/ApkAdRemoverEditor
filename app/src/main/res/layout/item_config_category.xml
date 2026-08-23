@@ -14,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="10dp">
 
+        <!-- 第一行：图标 + 标题（标题独占剩余宽度，自动换行完整显示，不用省略号）+ 帮助 + 开关 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,43 +26,36 @@
             <!-- 分类图标 -->
             <ImageView
                 android:id="@+id/ivCategoryIcon"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:background="@drawable/bg_icon_round"
                 android:contentDescription="@string/s_3629f42b"
-                android:padding="9dp"
+                android:padding="8dp"
                 app:tint="@color/primary" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvCategoryName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ellipsize="none"
+                    android:breakStrategy="high_quality"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textColor="?attr/colorOnSurface"
                     android:text="@string/s_04d7d88e" />
-
-                <TextView
-                    android:id="@+id/tvCategoryCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/accent"
-                    android:text="@string/s_67113ed9" />
             </LinearLayout>
 
             <ImageButton
                 android:id="@+id/btnCategoryHelp"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/s_dc91b561"
@@ -74,20 +68,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="2dp"
                 android:checked="true"
                 android:contentDescription="@string/s_5ad1196f"
                 app:thumbTint="@color/primary"
                 app:trackTint="@color/primary_light" />
+        </LinearLayout>
+
+        <!-- 第二行：统计信息 + 管理按钮（靠右） -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvCategoryCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:textColor="@color/accent"
+                android:text="@string/s_67113ed9" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnManage"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minWidth="0dp"
+                android:maxLines="1"
                 android:text="@string/s_08b55fea"
                 android:textSize="13sp"
-                android:textColor="@color/primary_dark" />
+                android:textColor="@color/primary_dark"
+                app:autoSizeMinTextSize="9sp"
+                app:autoSizeMaxTextSize="13sp"
+                app:autoSizeStepGranularity="0.5sp"
+                app:autoSizeTextType="uniform" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

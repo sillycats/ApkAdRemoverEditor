@@ -1,6 +1,8 @@
 package com.shinegirls.apkadremovereditor.core
 
 import android.content.Context
+import androidx.annotation.StringRes
+import com.shinegirls.apkadremovereditor.R
 import com.shinegirls.apkadremovereditor.utils.Format
 import com.shinegirls.apkadremovereditor.utils.PathPreferences
 import org.json.JSONArray
@@ -116,26 +118,26 @@ object AdPatternConfig {
     /**
      * 配置分类信息（用于 UI 显示）。
      */
-    enum class Category(val key: String, val displayName: String) {
-        SDK_PACKAGES(KEY_SDK_PACKAGES, "广告SDK包名"),
-        CLASS_KEYWORDS(KEY_CLASS_KEYWORDS, "广告类名关键词"),
-        METHOD_PATTERNS(KEY_METHOD_PATTERNS, "广告方法名"),
-        URL_PATTERNS(KEY_URL_PATTERNS, "广告URL/域名"),
-        AD_VIEW_NAMES(KEY_AD_VIEW_NAMES, "广告View类名"),
-        AD_ACTIVITIES(KEY_AD_ACTIVITIES, "广告Activity"),
-        AD_SERVICES(KEY_AD_SERVICES, "广告Service"),
-        AD_RECEIVERS(KEY_AD_RECEIVERS, "广告Receiver"),
-        FORCE_TRUE_METHODS(KEY_FORCE_TRUE_METHODS, "强制返回true的方法名"),
-        FORCE_FALSE_METHODS(KEY_FORCE_FALSE_METHODS, "强制返回false的方法名"),
-        AD_ASSET_PATHS(KEY_AD_ASSET_PATHS, "assets广告文件路径"),
-        LIB_FILE_KEYWORDS(KEY_LIB_FILE_KEYWORDS, "广告SDK原生库关键词"),
-        ASSET_KEYWORDS(KEY_ASSET_KEYWORDS, "assets广告关键词"),
-        METHOD_NEUTRALIZE_KEYWORDS(KEY_METHOD_NEUTRALIZE_KEYWORDS, "广告方法置空关键词"),
-        AD_PERMISSIONS(KEY_AD_PERMISSIONS, "广告权限特征"),
-        ROOT_FILE_KEYWORDS(KEY_ROOT_FILE_KEYWORDS, "APK根目录文件关键词"),
-        RES_LAYOUT_KEYWORDS(KEY_RES_LAYOUT_KEYWORDS, "Res布局广告View关键词"),
-        STRING_PATTERNS(KEY_STRING_PATTERNS, "DEX字符串广告特征"),
-        FLUTTER_PATTERNS(KEY_FLUTTER_PATTERNS, "Flutter 字符串特征")
+    enum class Category(val key: String, @StringRes val titleRes: Int) {
+        SDK_PACKAGES(KEY_SDK_PACKAGES, R.string.h_a5290e50),
+        CLASS_KEYWORDS(KEY_CLASS_KEYWORDS, R.string.h_32b1989c),
+        METHOD_PATTERNS(KEY_METHOD_PATTERNS, R.string.h_d0997ec0),
+        URL_PATTERNS(KEY_URL_PATTERNS, R.string.h_57c12e61),
+        AD_VIEW_NAMES(KEY_AD_VIEW_NAMES, R.string.h_3ce7dc91),
+        AD_ACTIVITIES(KEY_AD_ACTIVITIES, R.string.h_523f7b8b),
+        AD_SERVICES(KEY_AD_SERVICES, R.string.h_86f7a22f),
+        AD_RECEIVERS(KEY_AD_RECEIVERS, R.string.h_4a92250e),
+        FORCE_TRUE_METHODS(KEY_FORCE_TRUE_METHODS, R.string.h_63751f8a),
+        FORCE_FALSE_METHODS(KEY_FORCE_FALSE_METHODS, R.string.h_69de4f41),
+        AD_ASSET_PATHS(KEY_AD_ASSET_PATHS, R.string.h_eec19ff3),
+        LIB_FILE_KEYWORDS(KEY_LIB_FILE_KEYWORDS, R.string.h_88a98dc6),
+        ASSET_KEYWORDS(KEY_ASSET_KEYWORDS, R.string.h_fa59ee8d),
+        METHOD_NEUTRALIZE_KEYWORDS(KEY_METHOD_NEUTRALIZE_KEYWORDS, R.string.h_7c6a17aa),
+        AD_PERMISSIONS(KEY_AD_PERMISSIONS, R.string.h_7de4534e),
+        ROOT_FILE_KEYWORDS(KEY_ROOT_FILE_KEYWORDS, R.string.h_97160028),
+        RES_LAYOUT_KEYWORDS(KEY_RES_LAYOUT_KEYWORDS, R.string.h_05112730),
+        STRING_PATTERNS(KEY_STRING_PATTERNS, R.string.h_7bb30f32),
+        FLUTTER_PATTERNS(KEY_FLUTTER_PATTERNS, R.string.h_566859e2)
     }
 
     /**

@@ -55,15 +55,15 @@ class EditorActivity : AppCompatActivity() {
             val text = withContext(Dispatchers.IO) { buildBinaryPreview(file) }
             editText.setText(text)
             editText.isEnabled = false
-            UiUtils.info(this@EditorActivity, "二进制文件仅支持查看")
+            UiUtils.info(this@EditorActivity, getString(R.string.h_75baf427))
         }
     }
 
     private fun buildBinaryPreview(file: File): String {
         val bytes = file.readBytes()
         val sb = StringBuilder()
-        sb.appendLine("文件大小: ${bytes.size} bytes")
-        sb.appendLine("\n十六进制预览 (前512字节):\n")
+        sb.appendLine(getString(R.string.h_e313c9e9, bytes.size))
+        sb.appendLine(getString(R.string.h_65963a23))
 
         val limit = minOf(bytes.size, 512)
         for (i in 0 until limit step 16) {
@@ -88,7 +88,7 @@ class EditorActivity : AppCompatActivity() {
         }
 
         if (bytes.size > 512) {
-            sb.appendLine("\n... (${bytes.size - 512} bytes 未显示)")
+            sb.appendLine(getString(R.string.h_2b8b4e3c, bytes.size - 512))
         }
         return sb.toString()
     }
@@ -105,7 +105,7 @@ class EditorActivity : AppCompatActivity() {
                     false
                 }
             }
-            val msg = if (ok) "保存成功" else "保存失败: ${File(path).let { it.name }}"
+            val msg = if (ok) getString(R.string.h_3b108349) else getString(R.string.h_9094d392, File(path).let { it.name })
             if (ok) UiUtils.success(this@EditorActivity, msg)
             else UiUtils.error(this@EditorActivity, msg)
         }
@@ -117,9 +117,9 @@ class EditorActivity : AppCompatActivity() {
         val replaceEdit = dialogView.findViewById<EditText>(R.id.editReplace)
 
         val frDialog = AlertDialog.Builder(this)
-            .setTitle("查找替换")
+            .setTitle(getString(R.string.s_5f7707b4))
             .setView(dialogView)
-            .setPositiveButton("替换全部") { _, _ ->
+            .setPositiveButton(getString(R.string.h_0502db8e)) { _, _ ->
                 val find = findEdit.text.toString()
                 val replace = replaceEdit.text.toString()
                 if (find.isNotEmpty()) {
@@ -128,10 +128,10 @@ class EditorActivity : AppCompatActivity() {
                     val count = content.split(find).size - 1
                     val newContent = content.replace(find, replace)
                     editText.setText(newContent)
-                    UiUtils.success(this, "替换了 $count 处")
+                    UiUtils.success(this, getString(R.string.h_c4726818, count))
                 }
             }
-            .setNegativeButton("取消", null)
+            .setNegativeButton(getString(R.string.s_625fb26b), null)
             .create()
         frDialog.show()
         // 自适应屏幕：内容过长时限制高度并滚动，避免溢出屏幕

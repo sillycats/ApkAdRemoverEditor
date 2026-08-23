@@ -98,7 +98,7 @@ class WebViewActivity : AppCompatActivity() {
                 if (looksLikeApk(reqUrl)) {
                     if (!downloadHandled) {
                         downloadHandled = true
-                        UiUtils.info(this@WebViewActivity, "检测到下载地址，正在使用应用内下载…")
+                        UiUtils.info(this@WebViewActivity, getString(R.string.h_802412e0))
                         UpdateChecker.downloadApkFromUrl(this@WebViewActivity, reqUrl)
                         // 已转交应用内下载，拦截原始请求
                     }
@@ -118,7 +118,7 @@ class WebViewActivity : AppCompatActivity() {
                 if (looksLikeApk(reqUrl)) {
                     if (!downloadHandled) {
                         downloadHandled = true
-                        UiUtils.info(this@WebViewActivity, "检测到下载地址，正在使用应用内下载…")
+                        UiUtils.info(this@WebViewActivity, getString(R.string.h_802412e0))
                         UpdateChecker.downloadApkFromUrl(this@WebViewActivity, reqUrl)
                     }
                     return true
@@ -167,12 +167,12 @@ class WebViewActivity : AppCompatActivity() {
                     try {
                         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                     } catch (_: Exception) {
-                        UiUtils.warning(this@WebViewActivity, "无法打开外部链接")
+                        UiUtils.warning(this@WebViewActivity, getString(R.string.h_d54ac91c))
                     }
                     return
                 }
                 downloadHandled = true
-                UiUtils.info(this@WebViewActivity, "检测到下载地址，正在使用应用内下载…")
+                UiUtils.info(this@WebViewActivity, getString(R.string.h_802412e0))
                 UpdateChecker.downloadApkFromUrl(this@WebViewActivity, url, fileSize = contentLength)
             }
         })

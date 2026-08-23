@@ -2,6 +2,7 @@ package com.shinegirls.apkadremovereditor.core
 
 import android.content.Context
 import android.util.Base64
+import com.shinegirls.apkadremovereditor.R
 import com.shinegirls.apkadremovereditor.utils.Format
 import com.shinegirls.apkadremovereditor.utils.PathPreferences
 import org.json.JSONObject
@@ -107,7 +108,7 @@ object SubscriptionManager {
                 result.add(
                     Subscription(
                         id = obj.optString("id", UUID.randomUUID().toString()),
-                        name = obj.optString("name", "未命名订阅"),
+                        name = obj.optString("name", context.getString(R.string.h_0fc61704)),
                         type = if (obj.optString("type") == "url") Type.URL else Type.CONTENT,
                         url = obj.optString("url", ""),
                         contentJson = obj.optString("content", ""),
@@ -237,7 +238,7 @@ object SubscriptionManager {
             val base64 = trimmed.removePrefix(TOKEN_PREFIX)
             val jsonBytes = Base64.decode(base64, Base64.NO_WRAP or Base64.NO_PADDING)
             val json = JSONObject(String(jsonBytes, StandardCharsets.UTF_8))
-            val name = json.optString("name", "未命名订阅")
+            val name = json.optString("name", LanguageManager.str(R.string.h_0fc61704))
             val type = if (json.optString("type") == "url") Type.URL else Type.CONTENT
             val url = json.optString("url", "")
             val contentJson = if (json.has("content")) json.getJSONObject("content").toString() else ""

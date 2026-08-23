@@ -7,11 +7,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -34,13 +34,11 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        // 自定义头部：返回按钮
+        findViewById<ImageButton>(R.id.btnAboutBack)?.setOnClickListener { finish() }
 
         // 版本号
-        findViewById<TextView>(R.id.tvVersion).text = "版本 ${getVersionName()}"
+        findViewById<TextView>(R.id.tvVersion).text = getString(R.string.h_45020f68, getVersionName())
 
         // 检查更新
         findViewById<MaterialButton>(R.id.btnCheckUpdate)
@@ -51,20 +49,20 @@ class AboutActivity : AppCompatActivity() {
             .setOnClickListener { openLanZouDownload() }
 
         // 开源项目信息
-        findViewById<TextView>(R.id.tvOpenSource).text = OPEN_SOURCE_TEXT
+        findViewById<TextView>(R.id.tvOpenSource).text = getString(R.string.about_open_source)
         findViewById<TextView>(R.id.tvOpenSource).movementMethod = LinkMovementMethod.getInstance()
 
         // 参考内容与代码出处
-        findViewById<TextView>(R.id.tvReference).text = REFERENCE_TEXT
+        findViewById<TextView>(R.id.tvReference).text = getString(R.string.about_reference)
 
         // 隐私声明
-        findViewById<TextView>(R.id.tvPrivacy).text = PRIVACY_TEXT
+        findViewById<TextView>(R.id.tvPrivacy).text = getString(R.string.about_privacy)
 
         // 免责声明
-        findViewById<TextView>(R.id.tvDisclaimer).text = DISCLAIMER_TEXT
+        findViewById<TextView>(R.id.tvDisclaimer).text = getString(R.string.about_disclaimer)
 
         // 版权信息
-        findViewById<TextView>(R.id.tvCopyright).text = COPYRIGHT_TEXT
+        findViewById<TextView>(R.id.tvCopyright).text = getString(R.string.about_copyright)
 
         // 功能特性
         bindFeatures()
@@ -82,12 +80,10 @@ class AboutActivity : AppCompatActivity() {
 
         for (feature in FEATURES) {
             val row = layoutInflater.inflate(R.layout.item_about_feature, container, false)
-            row.findViewById<ImageView>(R.id.ivFeatureIcon).setImageResource(
-                if (feature.first) R.drawable.ic_check else R.drawable.ic_info
-            )
+            row.findViewById<ImageView>(R.id.ivFeatureIcon).setImageResource(R.drawable.ic_check)
             row.findViewById<ImageView>(R.id.ivFeatureIcon)
                 .setColorFilter(ContextCompat.getColor(this, R.color.accent))
-            row.findViewById<TextView>(R.id.tvFeatureText).text = feature.second
+            row.findViewById<TextView>(R.id.tvFeatureText).text = getString(feature)
             container.addView(row)
         }
     }
@@ -99,9 +95,9 @@ class AboutActivity : AppCompatActivity() {
         // 点击 QQ 复制
         tvQq.setOnClickListener {
             val qq = getString(R.string.author_qq_note)
-            val clip = ClipData.newPlainText("作者QQ", qq)
+            val clip = ClipData.newPlainText(getString(R.string.h_d7d0599f), qq)
             (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(clip)
-            UiUtils.success(this, "QQ已复制到剪贴板")
+            UiUtils.success(this, getString(R.string.h_bee26e5d))
         }
 
         // 点击邮箱发邮件
@@ -109,11 +105,11 @@ class AboutActivity : AppCompatActivity() {
             try {
                 val intent = Intent(Intent.ACTION_SENDTO).apply {
                     data = Uri.parse("mailto:${getString(R.string.author_email)}")
-                    putExtra(Intent.EXTRA_SUBJECT, "APK去广告编辑器反馈")
+                    putExtra(Intent.EXTRA_SUBJECT, getString(R.string.h_97beeaf3))
                 }
-                startActivity(Intent.createChooser(intent, "发送邮件"))
+                startActivity(Intent.createChooser(intent, getString(R.string.h_f4f76ad4)))
             } catch (_: Exception) {
-                UiUtils.warning(this, "未找到邮件客户端")
+                UiUtils.warning(this, getString(R.string.h_380de9a9))
             }
         }
     }
@@ -141,31 +137,31 @@ class AboutActivity : AppCompatActivity() {
          * 功能特性列表。Pair.first 用于选择图标（true=check，false=info）。
          */
         private val FEATURES = listOf(
-            true to "一键解包、去广告、打包、签名，全程本地离线处理，无需网络",
-            true to "基于 dexlib2 直接修补 DEX 字节码，处理速度远超传统 smali 流程",
-            true to "18 类广告特征覆盖 SDK 库 / 权限 / 类 / 方法 / 资源 / URL 等，可自定义增删改查与重置",
-            true to "AXML 深度处理：移除广告组件、广告权限声明、隐藏 Res 布局广告 View",
-            true to "广告类方法置空、广告链接置空、View 几何置空、强制返回 true/false 解锁会员并屏蔽广告判定",
-            true to "自动清理广告 SDK 原生库 (.so)、assets 广告资源与根目录广告文件，精简包体",
-            true to "Flutter 应用适配：解析 Dart AOT 快照并抹除 libapp.so 中的广告字符串特征",
-            true to "数据复用优化：过签包（如 LSPatch 产物）复用原包数据段，最多减小约 50% 体积",
-            true to "识别重命名嵌套 APK：无后缀或任意后缀的原包子包也能准确识别并复用优化",
-            true to "DEX 体积优化：移除调试信息（行号/局部变量表），再减小 5%~15% 体积",
-            true to "智能压缩策略与 ZIP 对齐，保证打包后 APK 可正常安装启动",
-            true to "v1 + v2 双签名，兼容低版本设备，处理结果可直接安装",
-            true to "DEX 崩溃防护：备份保护 + 原子写入 + 异常自动恢复，杜绝 DEX 损坏",
-            true to "大 DEX 低内存安全扫描，超大 DEX 也能稳定处理不卡死",
-            true to "实时彩色处理日志，支持一键复制 / 清空，进度可视化",
-            true to "处理完成自动导出到原包目录，并自动清理缓存，不占存储",
-            true to "自动生成 Markdown 处理报告，记录各阶段处理明细与体积对比",
-            true to "广告特征支持订阅导入与分享，快速同步更多去广告规则",
-            true to "内置专业更新弹窗，含进度条、百分比、版本号与文件大小",
-            true to "明暗双主题，支持跟随系统、白天、夜间三种模式自由切换",
-            true to "签名效验去除：普通模式 + 原包模式，重打包后自动去除签名校验，避免换签后拒绝运行",
-            true to "过签 SO 按 ABI 智能注入：仅写入目标 APK 已存在的架构目录，无 lib 目录则全架构写入",
-            true to "钩子类名 / 签名信息 / 入口名称 / 注入参数全部可自定义，内置 DEX 类名自动重命名",
-            true to "内置签名效验钩子（KillerApplication）基于 dexlib2 DexRewriter 重命名，含 12 个内部类",
-            true to "所有弹窗自适应屏幕大小，内容过多时自动滚动，不溢出屏幕"
+            R.string.h_97349354,
+            R.string.h_7ff042ba,
+            R.string.h_de139607,
+            R.string.h_2c72ee88,
+            R.string.h_15c99f22,
+            R.string.h_b7aba98e,
+            R.string.h_4e63334a,
+            R.string.h_aa1a5948,
+            R.string.h_3e32cd6d,
+            R.string.h_2065c465,
+            R.string.h_c82adf9a,
+            R.string.h_d7c66a32,
+            R.string.h_437a2008,
+            R.string.h_cf9a62ca,
+            R.string.h_687f7144,
+            R.string.h_4e20a9f5,
+            R.string.h_7be1d8e4,
+            R.string.h_eb83ed6d,
+            R.string.h_65ffcf5a,
+            R.string.h_8859e393,
+            R.string.h_ddafe46f,
+            R.string.h_0cad3ba2,
+            R.string.h_26f0c819,
+            R.string.h_c0a05071,
+            R.string.h_de184846
         )
 
         private const val OPEN_SOURCE_TEXT = "本应用基于以下开源项目构建并调用，在此向各位作者表示诚挚感谢与敬意：\n\n" +

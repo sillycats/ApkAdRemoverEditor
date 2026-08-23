@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
-        android:maxLines="3"
+        android:maxWidth="280dp"
+        android:breakStrategy="high_quality"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold" />

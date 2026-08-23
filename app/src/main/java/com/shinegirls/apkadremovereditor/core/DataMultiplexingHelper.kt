@@ -2,6 +2,7 @@ package com.shinegirls.apkadremovereditor.core
 
 import bin.zip.ZipFile
 import bin.zip.ZipMaker
+import com.shinegirls.apkadremovereditor.R
 import com.shinegirls.apkadremovereditor.utils.Format
 import java.io.BufferedInputStream
 import java.io.File
@@ -98,14 +99,14 @@ object DataMultiplexingHelper {
             bin.zip.DataMultiplexing.optimize(input, output, hostPath, false)
             val after = output.length()
             val saved = before - after
-            logger("  ℹ 数据复用优化完成: ${Format.formatSize(before)} -> ${Format.formatSize(after)}")
+            logger(LanguageManager.str(R.string.log_dexmultiplex_done, Format.formatSize(before), Format.formatSize(after)))
             if (before > 0) {
-                logger("  · 复用原包($hostPath)数据段，节省 ${Format.formatSize(saved)} " +
-                        "(${String.format(Locale.US, "%.1f", saved * 100.0 / before)}%)")
+                logger(LanguageManager.str(R.string.log_dexmultiplex_reuse, hostPath, Format.formatSize(saved) ?: "",
+                        String.format(Locale.US, "%.1f", saved * 100.0 / before)))
             }
             after
         } catch (e: Exception) {
-            logger("  ✗ 数据复用优化失败: ${e.message}")
+            logger(LanguageManager.str(R.string.log_dexmultiplex_fail, e.message ?: ""))
             null
         }
     }

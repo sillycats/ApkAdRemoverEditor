@@ -8,6 +8,7 @@ import org.jf.dexlib2.DexFileFactory
 import org.jf.dexlib2.Opcodes
 import org.jf.dexlib2.iface.DexFile
 import org.jf.dexlib2.dexbacked.DexBackedDexFile
+import com.shinegirls.apkadremovereditor.R
 import java.io.File
 
 /**
@@ -79,11 +80,11 @@ object DexHandler {
         val dex: DexFile = DexFileFactory.loadDexFile(dexFile, Opcodes.getDefault())
 
         val sb = StringBuilder()
-        sb.appendLine("文件: ${dexFile.name}")
-        sb.appendLine("大小: ${dexFile.length()} bytes")
+        sb.appendLine(LanguageManager.str(R.string.dexinfo_file, dexFile.name))
+        sb.appendLine(LanguageManager.str(R.string.dexinfo_size, dexFile.length()))
 
         val classes = dex.classes
-        sb.appendLine("类数量: ${classes.size}")
+        sb.appendLine(LanguageManager.str(R.string.dexinfo_classes, classes.size))
 
         var methodCount = 0
         var fieldCount = 0
@@ -91,8 +92,8 @@ object DexHandler {
             methodCount += classDef.methods.count()
             fieldCount += classDef.fields.count()
         }
-        sb.appendLine("方法数量: $methodCount")
-        sb.appendLine("字段数量: $fieldCount")
+        sb.appendLine(LanguageManager.str(R.string.dexinfo_methods, methodCount))
+        sb.appendLine(LanguageManager.str(R.string.dexinfo_fields, fieldCount))
 
         val packageMap = mutableMapOf<String, Int>()
         for (classDef in classes) {
@@ -102,9 +103,9 @@ object DexHandler {
             packageMap[packageName] = packageMap.getOrDefault(packageName, 0) + 1
         }
 
-        sb.appendLine("\n包分布:")
+        sb.appendLine(LanguageManager.str(R.string.dexinfo_packages))
         packageMap.entries.sortedByDescending { it.value }.take(10).forEach {
-            sb.appendLine("  ${it.key}: ${it.value} 个类")
+            sb.appendLine(LanguageManager.str(R.string.dexinfo_pkg_line, it.key, it.value))
         }
 
         return sb.toString()

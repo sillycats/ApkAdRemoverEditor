@@ -88,6 +88,13 @@
     <string name="s_6b7bcdcd">处理后大小</string>
     <string name="s_6ff3d989">选择显示模式</string>
     <string name="s_71938084" formatted="false">处理含广告的 DEX 时移除调试信息（行号/局部变量表/参数名），可减小 APK 体积 5%~15%，不影响运行功能，仅崩溃堆栈不再显示行号。</string>
+    <string name="s_skip_signing_title">打包时重签名</string>
+    <string name="s_skip_signing_desc" formatted="false">开启后打包完成自动重签名；关闭后输出未签名 APK，适合需要二次签名 / 加固 / 自有证书等后续处理场景。</string>
+    <string name="s_skip_signing_cd">打包完成后是否重签名</string>
+    <string name="h_7fc2a18e">打包完成，输出未签名 APK</string>
+    <string name="h_53d2a9b1">已开启「重签名」，打包将自动重签名</string>
+    <string name="h_8c9f1e7b">已关闭「重签名」，打包将输出未签名 APK</string>
+    <string name="s_settings_back">返回</string>
     <string name="s_71bbc726">跟随系统</string>
     <string name="s_728ee208">Flutter 广告特征</string>
     <string name="s_7295f03c">订阅源名称</string>
@@ -185,4 +192,981 @@
     <string name="lang_desc">选择应用显示语言，切换后立即生效并保存。</string>
     <string name="lang_default">简体中文</string>
     <string name="lang_dialog_title">选择界面语言</string>
+
+<!-- ===== 硬编码串本地化 (auto-generated) ===== -->
+    <string name="h_daef5388">    - 主页: https://developer.android.com/tools/aapt2
+</string>
+    <string name="h_01213463">    - 主页: https://github.com/JesusFreke/smali
+</string>
+    <string name="h_cd0f41eb">    - 主页: https://mt2.cn/
+</string>
+    <string name="h_21773eee">    - 仅供学习参考，钩子类与原生库为样本内置资源，未修改其二进制
+
+</string>
+    <string name="h_08dc0848">    - 协议: Apache License 2.0
+
+</string>
+    <string name="h_4797fecd">    - 协议: BSD 3-Clause
+
+</string>
+    <string name="h_3ae2b7d3" formatted="false">    -&gt; %1$s: 强制返回 false %2$s 个方法</string>
+    <string name="h_9140b5bf" formatted="false">    -&gt; %1$s: 强制返回 true %2$s 个方法</string>
+    <string name="h_e21ed9e7" formatted="false">    -&gt; %1$s: 置空 %2$s 个广告方法, 跳过 %3$s 个非广告方法%4$s</string>
+    <string name="h_11ca9ed7" formatted="false">    -&gt; %1$s: 链接置空 %2$s 处%3$s</string>
+    <string name="h_225efc14">    Android 资源编译与打包工具，用于 AXML / 资源处理
+</string>
+    <string name="h_6f532ea1">    基于 RewriterModule / TypeRewriter 的 DEX 类重命名方案，用于自定义钩子类名
+</string>
+    <string name="h_f6f23d2d">    签名效验去除钩子类（bin.mt.signature.KillerApplication）与原生库思路来源
+</string>
+    <string name="h_3155992e">   - dexlib2 主页: https://github.com/JesusFreke/smali
+</string>
+    <string name="h_0c01c591">   - snapshot.h 出处: https://github.com/dart-lang/sdk/blob/main/runtime/vm/snapshot.h
+</string>
+    <string name="h_14543bce">   - 主页: https://android.googlesource.com/platform/tools/apksig
+</string>
+    <string name="h_2925d260">   - 主页: https://developer.android.com/jetpack
+</string>
+    <string name="h_b13822ab">   - 主页: https://github.com/Gameye98/DTL-X
+</string>
+    <string name="h_2706339d">   - 主页: https://github.com/JesusFreke/smali
+</string>
+    <string name="h_87f4dbb8">   - 主页: https://github.com/L-JINBIN/ApkDataMultiplexing
+</string>
+    <string name="h_441e7040">   - 主页: https://github.com/google/guava
+</string>
+    <string name="h_da32f742">   - 主页: https://github.com/material-components/material-components-android
+</string>
+    <string name="h_eded2e15">   - 主页: https://kotlinlang.org/
+</string>
+    <string name="h_10286b03">   - 主页: https://www.bouncycastle.org/
+</string>
+    <string name="h_d4cdf611">   - 仅供特征参考与学习，未修改其二进制
+
+</string>
+    <string name="h_1d0da9e5">   - 依据 AXML chunk 头、资源表 StringPool/ResourceMap 结构与公共逆向资料编写
+
+</string>
+    <string name="h_87646ce3">   - 依据类型描述符前缀匹配重写，兼容点号 / 斜杠 / L...; 三种输入写法
+
+</string>
+    <string name="h_0f5b9aec">   - 借鉴其 API 文档与示例用法，自行实现广告类/方法/字符串的定位与改写
+
+</string>
+    <string name="h_f77dad26">   - 出处: https://android.googlesource.com/platform/frameworks/base/ (core/res)
+</string>
+    <string name="h_07f8a374">   - 出处: https://github.com/JesusFreke/smali
+</string>
+    <string name="h_64a506cb">   - 出处: https://mt2.cn/ （仅供学习参考）
+
+</string>
+    <string name="h_69438ee5">   - 协议: Apache License 2.0
+
+</string>
+    <string name="h_0594e658">   - 协议: BSD 3-Clause
+
+</string>
+    <string name="h_23fa5ce2">   - 协议: MIT License
+
+</string>
+    <string name="h_de979268">   - 协议: 未标注许可证，仅供学习参考
+
+</string>
+    <string name="h_225b72f5">   - 原包模式：嵌入原始 APK 与过签 SO，读取原始签名参与匹配，覆盖更广
+</string>
+    <string name="h_8bb73728">   - 原理: 通过中央目录数据偏移复用原包数据段，删除重复数据段实现体积优化
+</string>
+    <string name="h_ff8a316f">   - 参考其 adloader / 域名黑名单 / 方法关键词思路，结合主流广告 SDK 自行整理
+
+</string>
+    <string name="h_44c58696">   - 已移植其 DataMultiplexing / ZipMaker / ZipFile / V2V3SchemeSigner 实现
+
+</string>
+    <string name="h_9ebb023e">   - 思路来源: LSP 技术团队（过签包 + IO 重定向对抗整包校验）
+</string>
+    <string name="h_101f062b">   - 注入 KillerApplication 钩子类并改写 manifest 的 Application 指向
+</string>
+    <string name="h_cd394527">   - 用于定位 libapp.so 内 Dart 快照头并提取/抹除广告字符串
+
+</string>
+    <string name="h_d3ed5e25">   - 组件: https://github.com/material-components/material-components-android
+
+</string>
+    <string name="h_9fd3da28">   - 规范: https://m3.material.io/
+</string>
+    <string name="h_0d05061e">   - 钩子 &lt;clinit&gt; 中通过 PackageManager 读取签名并缓存，覆盖 getPackageInfo / 原生校验
+</string>
+    <string name="h_e2dca2bb">   APK v1 / v2 / v3 签名实现，保证处理结果可安装
+</string>
+    <string name="h_c725db16">   APK 数据复用优化：通过中央目录数据偏移复用原包数据段，删除重复数据段，
+</string>
+    <string name="h_8f331a4b">   Android 官方 Jetpack 支持库
+</string>
+    <string name="h_93be8614">   DEX 文件读写与 smali 反汇编 / 汇编工具链，去广告核心引擎
+</string>
+    <string name="h_c3744c61">   Java 加解密与证书生成库，用于生成签名证书
+</string>
+    <string name="h_0189f54f">   Java 集合与工具库，提供 dexlib2 所需的不可变集合
+</string>
+    <string name="h_bd3f0cc3">   Kotlin 编程语言与标准库
+</string>
+    <string name="h_474fe5eb">   Material Design 组件库，提供卡片、按钮、对话框等 UI 组件
+</string>
+    <string name="h_4839e21f">   参考 AOSP 的 XmlPullParser 与 AXML 二进制格式说明
+</string>
+    <string name="h_88369617">   参考 Dart VM 源码 snapshot.h 与社区 Flutter 逆向资料
+</string>
+    <string name="h_80d72d4c">   参考 Facebook 曾开源的 android-dexdump 思路，以及 dexlib2 官方示例
+</string>
+    <string name="h_7b83ea7b">   参考 L-JINBIN 的 ApkDataMultiplexing 项目与 LSPatch 过签包结构
+</string>
+    <string name="h_b4cbd6e5">   参考 MT 管理器 ApkSignatureKillerEx 的钩子注入思路：
+</string>
+    <string name="h_483c1454">   参考 apksig 官方实现与 Android 文档中关于 ZIP alignment 的说明
+</string>
+    <string name="h_29767300">   参考 dexlib2 官方 RewriterModule / TypeRewriter 示例，实现类定义与全部引用的一并改写
+</string>
+    <string name="h_695163f8">   基于 Material Design 规范与 Material Components 组件库示例编写
+</string>
+    <string name="h_594b988c">   广告 SDK 包名 / 域名 / 类名关键词参考开源项目 DTL-X 的规则整理扩充
+</string>
+    <string name="h_3020d50a">   广告类名 / 方法名 / URL 特征规则参考来源
+</string>
+    <string name="h_7b9a3cc4" formatted="false">   显著减小过签包体积（最多约 50%），并配套 V2V3SchemeSigner 签名方案
+</string>
+    <string name="h_9d838569" formatted="false">  %1$s: %2$s 个类</string>
+    <string name="h_b8ed0364" formatted="false">  · %1$s 中 %2$s 已是钩子类父类</string>
+    <string name="h_b3a0d18e" formatted="false">  · %1$s 中 %2$s 父类为 %3$s，跳过改写</string>
+    <string name="h_e2dc63b4" formatted="false">  · %1$s 中 %2$s 已是钩子类父类</string>
+    <string name="h_7f604c7a">  · Flutter 处理已关闭（可在设置中开启）</string>
+    <string name="h_990ae7e6" formatted="false">  · Flutter 特征 %1$s 条（URL/包名/类名等 ASCII 字符串）</string>
+    <string name="h_11b8b2c9">  · 优化失败，回退常规 v1+v2 签名</string>
+    <string name="h_f0b77403" formatted="false">  · 使用自定义入口名称: %1$s</string>
+    <string name="h_ff4c2138" formatted="false">  · 使用自定义签名信息（%1$s 字符）</string>
+    <string name="h_6a2eb85f" formatted="false">  · 共发现 %1$s 个 res 布局 xml 文件（含 %2$s 个 res 根目录混淆 xml）</string>
+    <string name="h_ffe745b5" formatted="false">  · 关键词 %1$s 个</string>
+    <string name="h_ffe745b5d" formatted="false">  · 关键词 %1$s 个</string>
+    <string name="h_66b947eb" formatted="false">  · 压缩率: %1$s</string>
+    <string name="h_c975dbf1">  · 原包未声明自定义 Application，将按策略选择注入目标</string>
+    <string name="h_64e1f491" formatted="false">  · 原包自定义 Application: %1$s</string>
+    <string name="h_eedf995a" formatted="false">  · 原理: 注入 %1$s 钩子, 改写 Application 父类, 运行时覆盖原包签名</string>
+    <string name="h_ba715cf4">  · 去签名效验未开启（可在设置中开启）</string>
+    <string name="h_90f6a26a">  · 命中特征: </string>
+    <string name="h_e63572b7" formatted="false">  · 堆栈: %1$s</string>
+    <string name="h_e63572b7b" formatted="false">  · 堆栈: %1$s</string>
+    <string name="h_3942f40c" formatted="false">  · 复用原包(%1$s)数据段，节省 %2$s </string>
+    <string name="h_bc1b6e2e" formatted="false">  · 已关闭 %1$s 个分类: </string>
+    <string name="h_d236f750">  · 已关闭 Res 布局广告 View 分类，跳过布局隐藏</string>
+    <string name="h_fbc9e271">  · 已对这些子包按原字节直接复用(STORED)，避免对已压缩嵌套 APK 重复压缩导致的体积膨胀</string>
+    <string name="h_eaa67708" formatted="false">  · 已读取原包签名: %1$s…</string>
+    <string name="h_a4c8a5bb">  · 常规 v1+v2 签名</string>
+    <string name="h_6c5f734b">  · 建议: 减少同时处理的DEX大小或关闭其他应用后重试</string>
+    <string name="h_9d99f2d3">  · 建议: 该APK可能过大，请尝试关闭其他应用后重试</string>
+    <string name="h_7b5257b5" formatted="false">  · 打包后大小: %1$s</string>
+    <string name="h_cddb60a3" formatted="false">  · 找到 %1$s (%2$s)，改写其父类</string>
+    <string name="h_94b16984" formatted="false">  · 找到 %1$s 个 DEX 文件</string>
+    <string name="h_eb46cd7f" formatted="false">  · 找到继承 android.app.Application 的类: %1$s (%2$s)</string>
+    <string name="h_e7425f76">  · 无广告SDK库名关键词，跳过</string>
+    <string name="h_22c8b46e" formatted="false">  · 未压缩大小: %1$s</string>
+    <string name="h_92c7d2cc">  · 未发现需移除的广告权限</string>
+    <string name="h_568e50df">  · 未发现需移除的广告组件</string>
+    <string name="h_b76ce9e7">  · 未命中广告特征，无需修改</string>
+    <string name="h_0046342a">  · 未找到 DEX 文件</string>
+    <string name="h_ec83d6b2">  · 未找到 DEX 文件，跳过</string>
+    <string name="h_f389c2d9">  · 未找到 assets 目录，跳过广告文件清理</string>
+    <string name="h_2364780e">  · 未找到 lib 目录，Flutter 处理跳过</string>
+    <string name="h_9a7e99e6">  · 未找到 lib 目录，跳过原生库清理</string>
+    <string name="h_f6c7ffc7">  · 未找到 res 目录，跳过</string>
+    <string name="h_5c286b32">  · 未找到任何 res 布局 xml 文件，跳过</string>
+    <string name="h_976e27bc">  · 未检测到 libapp.so，该应用可能不是 Flutter（或为 AAB 拆分包），Flutter 处理跳过</string>
+    <string name="h_5df66715">  · 未配置 Res 布局关键词，跳过</string>
+    <string name="h_ac0e6cda">  · 未配置 assets 广告文件路径，跳过</string>
+    <string name="h_bece4178">  · 未配置根目录文件关键词，跳过</string>
+    <string name="h_c807c057" formatted="false">  · 检测到目标 APK lib 目录 ABI: %1$s</string>
+    <string name="h_23cc02a1" formatted="false">  · 模式: %1$s</string>
+    <string name="h_ae3222f3" formatted="false">  · 注入参数: 原包=%1$s, 解压=%2$s, So=%3$s</string>
+    <string name="h_f42a751f" formatted="false">  · 特征配置: SDK=%1$s 类=%2$s 方法=%3$s 总计=%4$s 条</string>
+    <string name="h_f16e570f">  · 目标 APK 无 lib 目录，写入全部 ABI（含 x86 / x86_64）</string>
+    <string name="h_7d8a5387">  · 签名效验去除已关闭，跳过</string>
+    <string name="h_47903a91" formatted="false">  · 自定义钩子类名: %1$s</string>
+    <string name="h_d38458da" formatted="false">  · 解包完成: %1$s 个快照, %2$s 条字符串 → %3$s</string>
+    <string name="h_132ae845">  · 解包：未找到 Dart 快照</string>
+    <string name="h_ec3f26fa">  · 识别依据为文件真实格式(ZIP 容器)，不依赖后缀名，重命名的子包(base/base.dat 等)也能被识别</string>
+    <string name="h_9a618818" formatted="false">  · 路径 %1$s 个</string>
+    <string name="h_a7c027a6" formatted="false">  ℹ %1$s 未发现广告特征，自动跳过 (%2$sms)</string>
+    <string name="h_42a1235e" formatted="false">  ℹ %1$s 识别到广告特征但无实际修改，跳过写回 (%2$sms)</string>
+    <string name="h_653e26a7" formatted="false">  ℹ %1$s 未命中任何广告特征，保留原样</string>
+    <string name="h_413880fa">  ℹ DEX 体积优化已开启：移除调试信息，进一步减小 APK 体积</string>
+    <string name="h_faecff27" formatted="false">  ℹ 已跳过 %1$s 个 assets 内置 APK 文件（如 base.apk），如需删除请在\</string>
+    <string name="h_2405c1bf" formatted="false">  ℹ 数据复用优化完成: %1$s -&gt; %2$s</string>
+    <string name="h_e52286ce" formatted="false">  ℹ 数据复用优化已启用：识别出 %1$s 个内置 APK 子包</string>
+    <string name="h_32ae4cdd">  ℹ 该 DEX 较大，已启用低内存安全扫描，请耐心等待...</string>
+    <string name="h_f7aabc54" formatted="false">  ℹ 过签包结构，启用数据复用优化 (host: %1$s)</string>
+    <string name="h_606a0ed7" formatted="false">  ⏱ %1$s 耗时: %2$sms</string>
+    <string name="h_0e3149dd" formatted="false">  ▶ 处理 %1$s (%2$s, %3$s)</string>
+    <string name="h_7bee061a" formatted="false">  ▶ 正在处理: %1$s (%2$s)</string>
+    <string name="h_50420f6e" formatted="false">  ▶ 注入 MT 式签名钩子 (%1$s</string>
+    <string name="h_7dcda328" formatted="false">  ⚠ %1$s/%2$s 处理失败: %3$s</string>
+    <string name="h_75403159" formatted="false">  ⚠ %1$s 个类处理失败已跳过</string>
+    <string name="h_042f6c6a" formatted="false">  ⚠ 删除失败: %1$s/%2$s</string>
+    <string name="h_a445d6b9" formatted="false">  ⚠ 删除失败: %1$s</string>
+    <string name="h_92d0ff18">  ⚠ 原包缺失，无法嵌入 origin.apk</string>
+    <string name="h_73801f75" formatted="false">  ⚠ 原生库资源缺失: %1$s</string>
+    <string name="h_9beb1005" formatted="false">  ⚠ 处理 %1$s 失败: %2$s</string>
+    <string name="h_b86b62e5" formatted="false">  ⚠ 处理报告生成失败: %1$s</string>
+    <string name="h_f73090dc">  ⚠ 广告特征配置为空，跳过去广告处理</string>
+    <string name="h_c65d2600">  ⚠ 改写清单失败（钩子类可能不生效）</string>
+    <string name="h_a773cd7d">  ⚠ 无可用于 Flutter 的广告特征（需为 length&gt;=2 的 ASCII 字符串），仅执行解包，不做修改</string>
+    <string name="h_01f0ed64" formatted="false">  ⚠ 清理 Flutter 缓存失败: %1$s</string>
+    <string name="h_1f2ebce9">  ⚠ 目标 APK 已存在的 ABI 均无对应原生库资源，未嵌入 so</string>
+    <string name="h_4e308cd8" formatted="false">  ⚠ 解包 %1$s 失败: %2$s</string>
+    <string name="h_618d3deb" formatted="false">  ✓ %1$s | 总耗时 %2$s</string>
+    <string name="h_fbfccfde" formatted="false">  ✓ %1$s 文件 | %2$s DEX | %3$s</string>
+    <string name="h_9c6c3d16" formatted="false">  ✓ %1$s 完成: 广告类=%2$s, 方法置空=%3$s%4$s%5$s%6$s%7$s (%8$sms, %9$s→%10$s)</string>
+    <string name="h_8d698916" formatted="false">  ✓ %1$s 个 libapp.so | 替换 %2$s 处 | %3$s</string>
+    <string name="h_01ad6b8a" formatted="false">  ✓ %1$s 回编译完成: 快照=%2$s, </string>
+    <string name="h_5a9cf305" formatted="false">  ✓ Res 广告布局隐藏完成: %1$s 个布局文件, %2$s 个元素, 耗时 %3$sms</string>
+    <string name="h_60a5152a" formatted="false">  ✓ V1 签名 | %1$s</string>
+    <string name="h_b60f14f9" formatted="false">  ✓ V2 签名 | %1$s</string>
+    <string name="h_4267eb34" formatted="false">  ✓ 已导出: %1$s</string>
+    <string name="h_b588b1bd" formatted="false">  ✓ 已将 %1$s 的父类改为钩子类 (%2$s)</string>
+    <string name="h_9c446657" formatted="false">  ✓ 已将 %1$s 的父类改为钩子类 (%2$s)</string>
+    <string name="h_b723808a" formatted="false">  ✓ 已将 %1$s 的父类改为钩子类 (%2$s)</string>
+    <string name="h_fe77d47f" formatted="false">  ✓ 已嵌入原包: %1$s (%2$s)</string>
+    <string name="h_d4c58d3d" formatted="false">  ✓ 已嵌入原生库: lib/%1$s/lib%2$s.so (%3$s)</string>
+    <string name="h_cb00b355" formatted="false">  ✓ 已改写 application.android:name 指向 %1$s</string>
+    <string name="h_23af2edf" formatted="false">  ✓ 已清理 Flutter 缓存: 删除 %1$s 个文件，仅保留 strings.txt</string>
+    <string name="h_5af3990c" formatted="false">  ✓ 已移除 %1$s 个广告组件</string>
+    <string name="h_2dee860f" formatted="false">  ✓ 已移除 %1$s 个广告权限声明</string>
+    <string name="h_a2d56d37" formatted="false">  ✓ 打包 | %1$s</string>
+    <string name="h_4f20bc64" formatted="false">  ✓ 打包完成: %1$s 个条目</string>
+    <string name="h_d6fab15d" formatted="false">  ✓ 报告: %1$s</string>
+    <string name="h_9bd51829" formatted="false">  ✓ 检测到 %1$s 个 libapp.so: </string>
+    <string name="h_deb381d0" formatted="false">  ✓ 注入 %1$s 个签名钩子 | %2$s DEX | %3$s</string>
+    <string name="h_863f7b7a" formatted="false">  ✓ 清理 %1$s 个 SDK 库 | %2$sms</string>
+    <string name="h_31186ba1" formatted="false">  ✓ 清理 %1$s 个 assets 条目 | %2$sms</string>
+    <string name="h_7a291fbf" formatted="false">  ✓ 清理 %1$s 个根目录文件 | %2$sms</string>
+    <string name="h_02cd9acd" formatted="false">  ✓ 签名 | %1$s | %2$s</string>
+    <string name="h_aa5da2f6" formatted="false">  ✓ 签名效验去除完成: 已注入 KillerApplication 钩子(%1$s), 涉及 %2$s 个 DEX (%3$sms)</string>
+    <string name="h_6b9c9749" formatted="false">  ✓ 签名钩子已写入独立 DEX: %1$s (%2$s, %3$sms)</string>
+    <string name="h_6b9c9749d" formatted="false">  ✓ 签名钩子已写入独立 DEX: %1$s (%2$s, %3$sms)</string>
+    <string name="h_e430c849" formatted="false">  ✓ 钩子类已重命名为 %1$s</string>
+    <string name="h_d44f69ea" formatted="false">  ✗ %1$s 修补失败: %2$s</string>
+    <string name="h_1901ab4f" formatted="false">  ✗ %1$s 内存不足: %2$s</string>
+    <string name="h_ea8aef83" formatted="false">  ✗ %1$s 处理失败: %2$s</string>
+    <string name="h_7fcc9f20" formatted="false">  ✗ AXML 权限解析失败: %1$s</string>
+    <string name="h_490a3d52" formatted="false">  ✗ AXML 解析失败: %1$s</string>
+    <string name="h_ba6a6863" formatted="false">  ✗ 内存不足: %1$s</string>
+    <string name="h_04f51da8" formatted="false">  ✗ 原包模式资源嵌入失败: %1$s</string>
+    <string name="h_09306e74" formatted="false">  ✗ 去广告处理异常: %1$s</string>
+    <string name="h_298ae83f" formatted="false">  ✗ 处理 %1$s 失败: %2$s</string>
+    <string name="h_ccbc6e46" formatted="false">  ✗ 数据复用优化失败: %1$s</string>
+    <string name="h_44057142" formatted="false">  ✗ 无法加载 %1$s: %2$s</string>
+    <string name="h_3738dcca">  ✗ 无法读取原包签名（原包缺失或未签名），无法注入钩子</string>
+    <string name="h_1cb37f65" formatted="false">  ✗ 未在 %1$s 中找到 Dart 快照，跳过</string>
+    <string name="h_ab71b49d" formatted="false">  ✗ 未在 DEX 中找到自定义 Application 类 %1$s，父类改写失败</string>
+    <string name="h_4a060eb9" formatted="false">  ✗ 签名钩子注入失败: %1$s</string>
+    <string name="h_1b5de080" formatted="false"> (%1$s 条)</string>
+    <string name="h_7ae275b3"> 字段。
+</string>
+    <string name="h_88bac515"> 而非 android:visibility=</string>
+    <string name="h_d9f1a2ee"># APK 广告移除处理报告</string>
+    <string name="h_97474ffc"># libapp.so Dart 快照字符串导出</string>
+    <string name="h_3bab674a" formatted="false"># 字符串总数(去重): %1$s</string>
+    <string name="h_c5bb1a82"># 工具: ApkAdRemoverEditor · Flutter 解包</string>
+    <string name="h_46c45c70" formatted="false"># 快照数: %1$s</string>
+    <string name="h_e5029582">## Flutter libapp.so 处理（解包 / 去广告 / 回编译）</string>
+    <string name="h_7d0b10f4">## 各 DEX 处理明细</string>
+    <string name="h_c6e12265">## 处理前后对比</string>
+    <string name="h_0b849763">## 处理检查点（断点续传基础设施）</string>
+    <string name="h_72444798">## 处理汇总</string>
+    <string name="h_71a40f61" formatted="false">%1$s 项</string>
+    <string name="h_62d0f9f8" formatted="false">%1$s 条</string>
+    <string name="h_66c23c1c" formatted="false">%1$s已关闭</string>
+    <string name="h_8ae1f6e1" formatted="false">%1$s已启用</string>
+    <string name="h_4f305d7d" formatted="false">%1$s → %2$s (节省 %3$s)</string>
+    <string name="h_c71a303c" formatted="false">%1$s 条</string>
+    <string name="h_c49c1ee6" formatted="false">%.1f 秒</string>
+    <string name="h_ae4e6627" formatted="false">%.2f秒</string>
+    <string name="h_a6d8b350">)} (含 12 个内部类)</string>
+    <string name="h_12f7aee0">,             // 公告唯一 ID（用于</string>
+    <string name="h_daea0bf6" formatted="false">, 字符串置空 %1$s 处</string>
+    <string name="h_327c8914" formatted="false">, 字符串置空=%1$s</string>
+    <string name="h_1da8eee1" formatted="false">, 强制false=%1$s</string>
+    <string name="h_db41810b" formatted="false">, 强制true=%1$s</string>
+    <string name="h_7db41333" formatted="false">, 链接置空=%1$s</string>
+    <string name="h_bb543276" formatted="false">- **处理时间**: %1$s</string>
+    <string name="h_c11c4e64" formatted="false">- **源 APK**: `%1$s`</string>
+    <string name="h_8fa638b6" formatted="false">- **特征配置文件**: `%1$s`</string>
+    <string name="h_a4adb67a">1. DEX 直接修补方案 (基于 dexlib2)
+</string>
+    <string name="h_b1e919bb">1. 合法用途限制：本应用仅供学习、研究与个人合法用途使用。请勿对您不拥有版权、未获授权或受法律保护的应用进行修改与分发。
+
+</string>
+    <string name="h_e98ea42f">1. 本地离线处理：所有 APK 的解包、去广告、打包、签名均在您的设备本地完成，应用不会上传任何 APK 文件或内部数据到服务器。
+
+</string>
+    <string name="h_43e71a0b">11. MT 管理器 ApkSignatureKillerEx 样本 (Bin.MT)
+</string>
+    <string name="h_de139607">18 类广告特征覆盖 SDK 库 / 权限 / 类 / 方法 / 资源 / URL 等，可自定义增删改查与重置</string>
+    <string name="h_b7a6bc95">2. AXML 二进制格式解析 (Android Asset Packaging)
+</string>
+    <string name="h_e88520b7">2. 使用风险自担：使用本应用处理 APK 所产生的任何后果（包括但不限于：应用无法安装、闪退、功能异常、账号风险、数据丢失等）均由使用者自行承担。
+
+</string>
+    <string name="h_8ea5613c">2. 联网行为透明：本应用仅在您主动点击\</string>
+    <string name="h_e71aba5e">3. Dart AOT 快照解析 (Flutter libapp.so)
+</string>
+    <string name="h_ff94e7df">3. 商业使用责任：修改后的 APK 若用于商业用途或对外分发，请确保遵守相关应用的所有权、版权、商标及所在国家或地区的法律法规，由此产生的法律责任由使用者自担。
+
+</string>
+    <string name="h_bcde615b">3. 权限最小化：本应用不读取、不存储、不访问您的通讯录、相册、定位、短信、通话记录等敏感信息。
+
+</string>
+    <string name="h_e4100029">4. 广告特征规则整理
+</string>
+    <string name="h_7e666c8f">4. 数据本地存储：应用的配置、处理特征等数据仅保存在您的设备本地，应用卸载后即被清除，不会留存任何云端记录。
+
+</string>
+    <string name="h_0ed17ae5">4. 无担保声明：本应用按其现状提供，不附带任何形式的明示或默示担保。作者不对因使用或无法使用本应用而造成的任何直接或间接损失承担责任。
+
+</string>
+    <string name="h_b5b02676">5. APK v1 / v2 签名与对齐
+</string>
+    <string name="h_7831e844">5. 第三方内容：本应用引用的开源项目与广告特征规则均来自公开渠道，仅供技术参考，其版权归原作者所有。
+
+</string>
+    <string name="h_42cffbac">5. 第三方链接：关于与更新页面可能包含外部链接，点击后由第三方平台处理您的访问行为，建议您查阅相关第三方的隐私政策。
+
+</string>
+    <string name="h_59e52cbd">6. 数据复用优化（过签包体积优化）
+</string>
+    <string name="h_7b59301c">6. 条款变更：作者保留随时修改本免责声明的权利，更新后的内容将在新版本中生效。
+
+</string>
+    <string name="h_a56fd984">6. 若您在使用过程中有任何隐私疑问、建议或顾虑，欢迎通过作者联系方式与我们沟通，我们将尽力解答。</string>
+    <string name="h_94beebcb">7. 使用本应用即视为您已阅读、理解并同意以上全部条款。若不同意，请停止使用本应用。</string>
+    <string name="h_7784e35e">7. 界面主题与排版
+</string>
+    <string name="h_deb3721e">8. Kotlin 标准库 (JetBrains)
+</string>
+    <string name="h_1dc6377b">8. 签名效验去除（过签）
+</string>
+    <string name="h_4dbf184b">9. DEX 类重命名（自定义钩子类名）
+</string>
+    <string name="h_e58abe16">APK 根目录文件关键词</string>
+    <string name="h_04cc78d8">APK 的 res/layout 布局文件中，广告 SDK 常以自定义 View 形式嵌入（如 com.meishu.sdk.meishu_ad.view.MeishuVideoCahceTextureView、AdView 等）。元素类名包含该关键词时，处理后会把该元素的 layout_width / layout_height 改为 0dp，将广告区域压缩为 0 尺寸隐藏，而不移除其在布局中的位置与引用，避免破坏布局结构。</string>
+    <string name="h_9fe0ce82">APK 解包后根目录（与 classes.dex 同目录）中可能残留的广告 SDK 配置文件、标识文件等。文件名包含该关键词即被删除，用于清理不在 lib / assets 目录里的广告残留。</string>
+    <string name="h_97beeaf3">APK去广告编辑器反馈</string>
+    <string name="h_97160028">APK根目录文件关键词</string>
+    <string name="h_2c72ee88">AXML 深度处理：移除广告组件、广告权限声明、隐藏 Res 布局广告 View</string>
+    <string name="h_8959b0a7">AXML权限</string>
+    <string name="h_166a8328" formatted="false">AXML权限 %1$s</string>
+    <string name="h_669acb71">AXML权限移除</string>
+    <string name="h_e5bea172">AXML清单移除</string>
+    <string name="h_a674a27a">AXML组件</string>
+    <string name="h_645b8198" formatted="false">AXML组件 %1$s</string>
+    <string name="h_42f52a63">DEX 代码处理</string>
+    <string name="h_31e413e3">DEX 体积优化已关闭</string>
+    <string name="h_ed310a00">DEX 体积优化已启用</string>
+    <string name="h_2065c465" formatted="false">DEX 体积优化：移除调试信息（行号/局部变量表），再减小 5%~15% 体积</string>
+    <string name="h_369a31f0">DEX 字符串广告特征</string>
+    <string name="h_437a2008">DEX 崩溃防护：备份保护 + 原子写入 + 异常自动恢复，杜绝 DEX 损坏</string>
+    <string name="h_3dd3492b">DEX修补</string>
+    <string name="h_362944cf" formatted="false">DEX写入内存不足: %1$s</string>
+    <string name="h_7bb30f32">DEX字符串广告特征</string>
+    <string name="h_566859e2">Flutter 字符串特征</string>
+    <string name="h_844bbd8d">Flutter 广告特征已关闭</string>
+    <string name="h_02317889">Flutter 广告特征已启用</string>
+    <string name="h_4e63334a">Flutter 应用适配：解析 Dart AOT 快照并抹除 libapp.so 中的广告字符串特征</string>
+    <string name="h_0dd640d5">Flutter 应用（AOT）的 libapp.so 内嵌 Dart 快照，以原始 ASCII 字节保存了广告 SDK 包名、广告 URL/域名、广告类名等字符串。此处维护在快照中要抹除的字符串特征：命中后会在 libapp.so 解包/去广告/回编译时做等长 NUL 覆盖，使广告字符串内容失效。</string>
+    <string name="h_bee26e5d">QQ已复制到剪贴板</string>
+    <string name="h_e93cb7ad">Res 布局广告 View 关键词</string>
+    <string name="h_05112730">Res布局广告View关键词</string>
+    <string name="h_a36b1457" formatted="false">SDK库 %1$s</string>
+    <string name="h_e655531f">Smali文件已保存</string>
+    <string name="h_2b8b4e3c" formatted="false">
+... (%1$s bytes 未显示)</string>
+    <string name="h_8ad3c4b2">
+包分布:</string>
+    <string name="h_65963a23">
+十六进制预览 (前512字节):
+</string>
+    <string name="h_e9ef6fc2" formatted="false">]} 库=%1$s</string>
+    <string name="h_e02f104a" formatted="false">]} 资源=%1$s</string>
+    <string name="h_abefa2cf">apksig 签名阶段会自动对齐</string>
+    <string name="h_757b3361">assets 广告关键词</string>
+    <string name="h_5c5b99c0">assets 广告文件关键词。assets 内路径或文件名包含该关键词即删除，用于覆盖已知路径之外的同类广告资产。</string>
+    <string name="h_69000422">assets 广告文件路径</string>
+    <string name="h_fa59ee8d">assets广告关键词</string>
+    <string name="h_eec19ff3">assets广告文件路径</string>
+    <string name="h_122f1ca8">lib 目录下要删除的 .so 原生库名关键词。用于删除广告 SDK 的动态库文件（如确保 lib 目录里的广告 so 被移除）。</string>
+    <string name="h_38e6644d">targetSdkVersion &gt;= 30 的 APK 必须使用 v2 或更高签名方案</string>
+    <string name="h_d7c66a32">v1 + v2 双签名，兼容低版本设备，处理结果可直接安装</string>
+    <string name="h_cd369de4">| ABI | 处理前 | 处理后 | 快照数 | 字符串 | 替换次数 | 命中特征 | 耗时 | 状态 |</string>
+    <string name="h_0078e971" formatted="false">| APK 体积 | %1$s | %2$s | %3$s |</string>
+    <string name="h_9a0ee6cf" formatted="false">| AXML 广告权限移除 | %1$s |</string>
+    <string name="h_0c374516" formatted="false">| AXML 广告组件移除 | %1$s |</string>
+    <string name="h_78e42143">| DEX | 处理前 | 处理后 | 广告类 | 方法置空 | 链接置空 | 强制true | 强制false | 耗时 | 状态 |</string>
+    <string name="h_34e480ea" formatted="false">| Flutter libapp.so 处理 | %1$s 个库, 替换 %2$s 处 |</string>
+    <string name="h_0c258295" formatted="false">| Res 广告布局隐藏 | %1$s |</string>
+    <string name="h_7c417117" formatted="false">| assets 广告文件清理 | %1$s |</string>
+    <string name="h_99f18050" formatted="false">| 原包签名指纹 | %1$s… |</string>
+    <string name="h_16a1939f" formatted="false">| 失败 DEX 数 | %1$s |</string>
+    <string name="h_7336558f" formatted="false">| 广告 SDK 库文件清理 | %1$s |</string>
+    <string name="h_6dedd2e5" formatted="false">| 广告 SDK 类置空 | %1$s |</string>
+    <string name="h_41d17685" formatted="false">| 广告字符串置空 | %1$s |</string>
+    <string name="h_0e655b36" formatted="false">| 广告方法置空 | %1$s |</string>
+    <string name="h_4a804b6d" formatted="false">| 广告链接置空 | %1$s |</string>
+    <string name="h_1d9b17d9" formatted="false">| 强制返回 false | %1$s |</string>
+    <string name="h_6d2ef53d" formatted="false">| 强制返回 true | %1$s |</string>
+    <string name="h_0148e9c3" formatted="false">| 总耗时 | - | %1$s | - |</string>
+    <string name="h_941cd4b5" formatted="false">| 根目录广告文件清理 | %1$s |</string>
+    <string name="h_6e1073d7" formatted="false">| 签名效验去除 | %1$s (MT式注入), 注入 %2$s 个签名钩子, 涉及 %3$s 个 DEX |</string>
+    <string name="h_6af466b2">| 统计项 | 数量 |</string>
+    <string name="h_01ee9186" formatted="false">| 跳过 DEX 数 | %1$s |</string>
+    <string name="h_fe1aa884">| 阶段 | 明细 | 耗时 |</string>
+    <string name="h_74f74cf4">| 项目 | 原始 | 处理后 | 变化 |</string>
+    <string name="h_81cbed17">© 2026 小奶瓶 · 保留所有权利
+Powered by dexlib2 / apksig / AndroidX</string>
+    <string name="h_1cdb9d2e">→ 在输入框输入广告 SDK 的完整包名 → 点\</string>
+    <string name="h_51c8f936">→ 输入 .so 库名关键词 → 点\</string>
+    <string name="h_3b98359d">→ 输入与代码中完全一致的方法名 → 点\</string>
+    <string name="h_a73cec14">→ 输入关键词 → 点\</string>
+    <string name="h_c97b70ed">→ 输入广告 Activity 类名或关键词 → 点\</string>
+    <string name="h_4aed3358">→ 输入广告 Receiver 类名或关键词 → 点\</string>
+    <string name="h_68004de2">→ 输入广告 Service 类名或关键词 → 点\</string>
+    <string name="h_da946dfc">→ 输入广告 View 类名或关键词 → 点\</string>
+    <string name="h_9031f10f">→ 输入广告 View 类名或关键词片段 → 点\</string>
+    <string name="h_51a3142b">→ 输入广告域名或 URL 片段 → 点\</string>
+    <string name="h_937cb142">→ 输入广告字符串特征（可只写片段）→ 点\</string>
+    <string name="h_9316d02c">→ 输入广告类名关键词（可只写片段）→ 点\</string>
+    <string name="h_beac550d">→ 输入文件名词关键词 → 点\</string>
+    <string name="h_d4a0d6cb">→ 输入方法名关键词 → 点\</string>
+    <string name="h_803d2ae8">→ 输入权限名或权限关键词 → 点\</string>
+    <string name="h_f506fec2">→ 输入相对路径（可写 assets/ 前缀，也可省略）→ 点\</string>
+    <string name="h_85bc04b3">→ 输入要在 libapp.so 中抹除的广告字符串（长度≥2 的可打印 ASCII）→ 点\</string>
+    <string name="h_a4eff923">→ 输入要强制返回 false 的判定方法名 → 点\</string>
+    <string name="h_d6c3b08e">→ 输入要解锁的判定方法名 → 点\</string>
+    <string name="h_ee4d78ba">⏭ 无广告跳过</string>
+    <string name="h_1716f0ff">⏭ 零修改</string>
+    <string name="h_542664ea">⏭ 零修改跳过</string>
+    <string name="h_acd3e0fc">▶ 处理失败</string>
+    <string name="h_6a80c39a">▶ 处理失败: 内存不足</string>
+    <string name="h_b93b4fec">▶ 处理失败: 嵌套过深</string>
+    <string name="h_5a046f71">▶ 处理完成</string>
+    <string name="h_f7da955e">▶ 开始处理 APK</string>
+    <string name="h_d7d6523f">▶ 日志已清空</string>
+    <string name="h_9380d8c8">▶ 步骤 1/5 读取 APK</string>
+    <string name="h_5503edc4">▶ 步骤 2/5 解包</string>
+    <string name="h_9b708f36">▶ 步骤 3.4/5 去签名效验</string>
+    <string name="h_7dfeadd0">▶ 步骤 3.5/5 Flutter 处理</string>
+    <string name="h_d086cb5b">▶ 步骤 3/5 去广告</string>
+    <string name="h_348519cb">▶ 步骤 4/5 打包签名</string>
+    <string name="h_f235618a">▶ 步骤 5/5 导出</string>
+    <string name="h_50e67da4" formatted="false">▶ 签名效验去除 · %1$s</string>
+    <string name="h_6b9a5016">▶ 阶段 1 DEX 修补</string>
+    <string name="h_7bfda754">▶ 阶段 2 AXML 清单移除</string>
+    <string name="h_19071f26">▶ 阶段 2.5 AXML 权限移除</string>
+    <string name="h_eb057b11">▶ 阶段 3 SDK 库清理</string>
+    <string name="h_575bd6a0">▶ 阶段 4 assets 清理</string>
+    <string name="h_bed1b443">▶ 阶段 5 根目录清理</string>
+    <string name="h_f5d25035">▶ 阶段 6 布局隐藏</string>
+    <string name="h_f9bb4128">⚠️ 失败</string>
+    <string name="h_21be04bc">✅ 已修改</string>
+    <string name="h_fd5e5b52">。也可用手机文件管理器直接编辑配置文件。</string>
+    <string name="h_3ce15ae3">。运行时会按子串匹配（不区分大小写）。</string>
+    <string name="h_f9f03d96">。运行时会按子串匹配（不区分大小写），可用广告 SDK 包名前缀或权限特征词。</string>
+    <string name="h_97349354">一键解包、去广告、打包、签名，全程本地离线处理，无需网络</string>
+    <string name="h_2d455ce5">下载中</string>
+    <string name="h_1d9e668b" formatted="false">下载失败: %1$s</string>
+    <string name="h_4357855b">下载失败，点击重试</string>
+    <string name="h_b1b762e6">下载完成，正在打开安装器...</string>
+    <string name="h_7a8af100">下载完成，正在打开安装器…</string>
+    <string name="h_839ae19b">下载的更新包无效，请重试</string>
+    <string name="h_36fc3fb9">不再提示 / 只显示一次</string>
+    <string name="h_e55011c4">与 classes.dex 平级</string>
+    <string name="h_946f83e6">与\</string>
+    <string name="h_e2e27a87">严重</string>
+    <string name="h_61d7146b">中的 URL/包名/类名等特征。</string>
+    <string name="h_6b3b93c7">中精确指定</string>
+    <string name="h_424670d9">为了安装新版本，请允许本应用安装未知来源应用。</string>
+    <string name="h_75baf427">二进制文件仅支持查看</string>
+    <string name="h_288979b3">互补：true 用于解锁 VIP，false 用于屏蔽广告展示判定。</string>
+    <string name="h_69f3d080">仅影响返回类型为 boolean(Z) 或 int(I) 的方法；其他类型自动跳过，避免生成非法指令。</string>
+    <string name="h_94d2d961">仅支持可打印 ASCII 字符串（长度≥2）。请填写和广告 SDK 强相关的唯一字符串，避免过于通用导致误伤正常功能。</string>
+    <string name="h_67914606">仅移除命中特征的权限声明，不影响 INTERNET / CAMERA 等正常功能权限；请勿把正常功能权限加入特征以免影响应用运行。</string>
+    <string name="h_e5a42c92">从后往前</string>
+    <string name="h_746dc334">从磁盘 APK 重新读取签名</string>
+    <string name="h_1d11c240">以上内容仅作技术学习参考，最终实现均为本项目自研；涉及版权归原作者与作者所属机构所有。</string>
+    <string name="h_48399cb4">以上项目的完整版权与许可文本，请访问对应主页查看。</string>
+    <string name="h_d7d0599f">作者QQ</string>
+    <string name="h_6c59c767">你可以通过手机浏览器访问蓝奏云网盘，手动下载最新版本：
+
+</string>
+    <string name="h_9094d392" formatted="false">保存失败: %1$s</string>
+    <string name="h_9094d3923" formatted="false">保存失败: %1$s</string>
+    <string name="h_01d3d9f4">保存失败，请检查存储权限</string>
+    <string name="h_3b108349">保存成功</string>
+    <string name="h_351683da">修改 APK 输出目录</string>
+    <string name="h_710378a3">修改的文件 / 代码</string>
+    <string name="h_1e52f7a3">修改配置文件路径</string>
+    <string name="h_e9ef00eb">公告内容...</string>
+    <string name="h_54d484f4" formatted="false">共 %1$s 个订阅源，已开启 %2$s 个</string>
+    <string name="h_fc69844a" formatted="false">共 %1$s 条特征</string>
+    <string name="h_fc69844a2" formatted="false">共 %1$s 条特征</string>
+    <string name="h_b9ca883a">关键词为子串匹配（如 ttad 可命中 libttad.so），请勿写完整路径。</string>
+    <string name="h_fa4706ec">关键词为子串匹配，覆盖面广，请避免使用过于通用的词以防误删。</string>
+    <string name="h_3a3bf3f6">内存不足，处理失败</string>
+    <string name="h_9140cf96">内嵌配置</string>
+    <string name="h_65ffcf5a">内置专业更新弹窗，含进度条、百分比、版本号与文件大小</string>
+    <string name="h_91d57778">内置了大量默认关键词（_ad_、showad、loadad 等），此分类主要用于补充自定义关键词。</string>
+    <string name="h_c0a05071">内置签名效验钩子（KillerApplication）基于 dexlib2 DexRewriter 重命名，含 12 个内部类</string>
+    <string name="h_8efae575" formatted="false">内置钩子 DEX 资源缺失: %1$s</string>
+    <string name="h_2a6fc8f0" formatted="false">写入 %1$s 的 \</string>
+    <string name="h_4abbcecf">写入 zip</string>
+    <string name="h_16a9197c" formatted="false">写入外部配置文件 %1$s 的 \</string>
+    <string name="h_c2501d73">分享订阅源口令</string>
+    <string name="h_edf6faf2">列表为空则跳过</string>
+    <string name="h_ab94e2c3">初始化失败</string>
+    <string name="h_41994826">删除包文件根目录的广告残留文件</string>
+    <string name="h_ee7d1dad">删除广告 SDK 文件</string>
+    <string name="h_85a0ed61">删除广告 so 原生库</string>
+    <string name="h_5d4aa133">删除指定广告资源路径</string>
+    <string name="h_8f7f9a61">删除特征</string>
+    <string name="h_7c64bdce">删除订阅源</string>
+    <string name="h_21888ee3">前往浏览器下载</string>
+    <string name="h_327638c1">加载配置失败，使用默认配置</string>
+    <string name="h_36427794">包名用点号格式（如 com.x.y），处理时自动转为斜杠格式匹配 DEX 类名。</string>
+    <string name="h_cd4fc2cd">单词边界</string>
+    <string name="h_e03c4e1e" formatted="false">卡片子视图未找到: %1$s</string>
+    <string name="h_b8884134" formatted="false">卡片视图未找到: cardId=%1$s</string>
+    <string name="h_6b3f9d20">原包 host</string>
+    <string name="h_8e8a7f64">原包去除</string>
+    <string name="h_530b0af0">原包去除(增强)</string>
+    <string name="h_15286e90">原包去除签名效验</string>
+    <string name="h_681186f0">原包是否自定义 Application</string>
+    <string name="h_b8fa7cb1">原包路径 / 解压路径 / So库名 / 钩子类名均不能为空</string>
+    <string name="h_5e213ddb">去开启</string>
+    <string name="h_f4f76ad4">发送邮件</string>
+    <string name="h_ee0a3ba0">口令已复制到剪贴板</string>
+    <string name="h_05ade75d">口令已生成，可复制或分享给他人。</string>
+    <string name="h_8b98d772">只删除 assets 目录内的内容，不影响 lib 与 res 目录。</string>
+    <string name="h_166c2b0d">只影响形如网址的字符串（含 ://、www、.com 等），避免误伤普通文本。</string>
+    <string name="h_6591496b">只扫描 APK 根目录一层文件，不含子目录；classes.dex 等核心文件不会被删除。</string>
+    <string name="h_85286168">只显示一次</string>
+    <string name="h_e00d1d26">可数据复用的嵌套 APK 子包</string>
+    <string name="h_68ea25aa">命中</string>
+    <string name="h_6c39cca5">回编译</string>
+    <string name="h_7ff042ba">基于 dexlib2 直接修补 DEX 字节码，处理速度远超传统 smali 流程</string>
+    <string name="h_75c2bbcb">堆栈</string>
+    <string name="h_70bbbe57">声明要识别/移除的广告 SDK 的 Java 包名。这是最核心的分类：处理时用它识别广告类、广告清单组件，并自动推导 lib 目录里的 .so 原生库名。</string>
+    <string name="h_328bae35">处理卡死</string>
+    <string name="h_9bec2ff2" formatted="false">处理失败: %1$s</string>
+    <string name="h_8eaa86c7">处理失败: 文件结构异常</string>
+    <string name="h_4e20a9f5">处理完成自动导出到原包目录，并自动清理缓存，不占存储</string>
+    <string name="h_79d3abe9">复制</string>
+    <string name="h_cf9a62ca">大 DEX 低内存安全扫描，超大 DEX 也能稳定处理不卡死</string>
+    <string name="h_aca03acb" formatted="false">大小: %1$s bytes</string>
+    <string name="h_c7612287">大小合法 + 范围在文件内</string>
+    <string name="h_acd5cb84">失败</string>
+    <string name="h_71424776" formatted="false">字段数量: %1$s</string>
+    <string name="h_785d24a8" formatted="false">字符串=%1$s, 广告特征替换=%2$s 处</string>
+    <string name="h_b6d8f56d" formatted="false">字符串置空 %1$s</string>
+    <string name="h_6e43bc9c">安装未知来源应用</string>
+    <string name="h_d8328f57">完整文件路径，例如：
+/storage/emulated/0/APKEditor/ad_patterns.json</string>
+    <string name="h_687f7144">实时彩色处理日志，支持一键复制 / 清空，进度可视化</string>
+    <string name="h_1fdd9c8d">对高熵数据再压缩</string>
+    <string name="h_b5f40c44">小贴士</string>
+    <string name="h_ba5f8360" formatted="false">已下载 %1$s</string>
+    <string name="h_afb873ee" formatted="false">已下载 %1$s / %2$s</string>
+    <string name="h_98601d36">已下载 0 B</string>
+    <string name="h_ce5f4cc6" formatted="false">已下载 0 B / %1$s</string>
+    <string name="h_7e82b085">已下载/总大小 + 百分比</string>
+    <string name="h_432ecd96">已保存订阅源</string>
+    <string name="h_c7fdb835">已关闭所有订阅，恢复默认配置</string>
+    <string name="h_b6e9c971">已压缩</string>
+    <string name="h_f0b2a7b1" formatted="false">已应用 %1$s 个订阅源（共 %2$s 条特征）</string>
+    <string name="h_08430702" formatted="false">已是最新版本 (%1$s)</string>
+    <string name="h_80928937">已检测到 Flutter 应用，但未生成处理明细。</string>
+    <string name="h_b189550a">已添加</string>
+    <string name="h_ee4e2a27">已添加手动输入的订阅源</string>
+    <string name="h_92d2d9c6" formatted="false">已添加订阅源：%1$s</string>
+    <string name="h_975cc249" formatted="false">已添加订阅源：%1$s</string>
+    <string name="h_720380b4" formatted="false">已自定义（%1$s / %2$s）</string>
+    <string name="h_c6af077e">已重置为默认输出目录</string>
+    <string name="h_0fd47041">已重置为默认配置</string>
+    <string name="h_d8a58722">已重置为默认配置路径</string>
+    <string name="h_06b81d3d">布局加载失败</string>
+    <string name="h_8623ecbf" formatted="false">布局隐藏 %1$s</string>
+    <string name="h_08badd62">常与\</string>
+    <string name="h_f08c72bc">广告 Activity</string>
+    <string name="h_beea3b77">广告 Activity / Service / Receiver\</string>
+    <string name="h_f1936c65">广告 Activity\</string>
+    <string name="h_284f10db">广告 Activity（页面）类名关键词，用于识别广告页面类，处理时置空其广告方法，并在清单中移除对应组件。</string>
+    <string name="h_840399bf">广告 Receiver</string>
+    <string name="h_7e235a0c">广告 SDK 包名</string>
+    <string name="h_c4ed42f4">广告 SDK 原生库关键词</string>
+    <string name="h_c9300931">广告 SDK 原生库关键词\</string>
+    <string name="h_bde178a7">广告 SDK 常在 AndroidManifest.xml 中声明自定义权限（如 com.lineone.connecter.openadsdk.permission.TT_PANGOLIN、com.lineone.connecter.permission.KW_SDK_BROADCAST 等），用于保护其广告组件。命中这些权限的 &lt;uses-permission&gt; 声明会被从清单中移除。</string>
+    <string name="h_a092d8f0">广告 Service</string>
+    <string name="h_cab966b6">广告 Service（后台服务）类名关键词，用于识别广告后台服务类，处理时置空其广告方法，并在清单中移除对应组件。</string>
+    <string name="h_bc77dbf8">广告 URL / 域名</string>
+    <string name="h_02be3cd1">广告 View 类名</string>
+    <string name="h_04ea27ce">广告 View 类名\</string>
+    <string name="h_e77ef5d2">广告 View 组件类名关键词，用于识别广告视图类（如横幅、插屏、激励视频的 View）。类名命中即按广告类处理并置空其广告方法。</string>
+    <string name="h_523f7b8b">广告Activity</string>
+    <string name="h_4a92250e">广告Receiver</string>
+    <string name="h_a5290e50">广告SDK包名</string>
+    <string name="h_88a98dc6">广告SDK原生库关键词</string>
+    <string name="h_86f7a22f">广告Service</string>
+    <string name="h_57c12e61">广告URL/域名</string>
+    <string name="h_3ce7dc91">广告View类名</string>
+    <string name="h_bafd49a7">广告字符串特征</string>
+    <string name="h_0a855e59">广告广播接收器（Receiver）类名关键词，用于识别广告广播组件，处理时置空其广告方法，并在清单中移除对应组件。</string>
+    <string name="h_d0997ec0">广告方法名</string>
+    <string name="h_9bc8a038">广告方法名\</string>
+    <string name="h_7c6a17aa">广告方法置空关键词</string>
+    <string name="h_430b3928">广告方法置空关键词（模糊匹配）。命中广告类后，只置空方法名包含这些关键词的方法，避免过度置空导致程序崩溃（如保留构造方法、生命周期方法等）。</string>
+    <string name="h_b914ff03">广告是否已加载 / 是否正在展示 / 是否有广告</string>
+    <string name="h_5781c4c1">广告是否已加载/展示/有广告</string>
+    <string name="h_7de4534e">广告权限特征</string>
+    <string name="h_ca6ddf1c">广告特征</string>
+    <string name="h_eb83ed6d">广告特征支持订阅导入与分享，快速同步更多去广告规则</string>
+    <string name="h_32b1989c">广告类名关键词</string>
+    <string name="h_1136c248">广告类名关键词\</string>
+    <string name="h_6ab5a0e9">广告类名的关键词片段。类名命中即判定为广告类，将其广告方法体替换为返回默认值（置空），从而屏蔽广告展示逻辑。</string>
+    <string name="h_15c99f22">广告类方法置空、广告链接置空、View 几何置空、强制返回 true/false 解锁会员并屏蔽广告判定</string>
+    <string name="h_fe97b23b">广告请求 URL 或域名。处理时会把 DEX 中以 const-string 形式存在的广告链接字符串置空为空字符串，阻断广告请求。</string>
+    <string name="h_8dce58af" formatted="false">应为 %1$s，已中止</string>
+    <string name="h_f744e671">应用订阅失败，请检查存储权限</string>
+    <string name="h_1e8d2df8">建议写通用片段而非完整路径，命中率更高；关键词越多误伤可能性越大，请谨慎。</string>
+    <string name="h_1d0592d0" formatted="false">强制false %1$s</string>
+    <string name="h_b7089816" formatted="false">强制true %1$s</string>
+    <string name="h_118b2282">强制更新 且 当前版本低于最新版本</string>
+    <string name="h_c84eabb9">强制返回 false 的方法名</string>
+    <string name="h_3c1862f0">强制返回 true 的方法名</string>
+    <string name="h_85fc05ee">强制返回false</string>
+    <string name="h_69de4f41">强制返回false的方法名</string>
+    <string name="h_aacf7dd2">强制返回true</string>
+    <string name="h_63751f8a">强制返回true的方法名</string>
+    <string name="h_7ee53eea">归类于 Res 布局</string>
+    <string name="h_4e835a62">截断/改长度</string>
+    <string name="h_de184846">所有弹窗自适应屏幕大小，内容过多时自动滚动，不溢出屏幕</string>
+    <string name="h_299bd8c9">手动输入配置</string>
+    <string name="h_db72862a" formatted="false">打开失败: %1$s</string>
+    <string name="h_2fcb517d">拉取失败，请检查链接是否有效</string>
+    <string name="h_33b16185">持平</string>
+    <string name="h_1394b002">按关键词删除广告资源</string>
+    <string name="h_599cc493">按关键词识别广告类</string>
+    <string name="h_06265e81">改写清单失败</string>
+    <string name="h_aa1a5948" formatted="false">数据复用优化：过签包（如 LSPatch 产物）复用原包数据段，最多减小约 50% 体积</string>
+    <string name="h_d9da8cfd">数据快照</string>
+    <string name="h_416e6b73">数据起始偏移</string>
+    <string name="h_1233c111" formatted="false">文件: %1$s</string>
+    <string name="h_e313c9e9" formatted="false">文件大小: %1$s bytes</string>
+    <string name="h_9fd2d8c2">方法名需与反编译后的代码完全一致（含大小写），否则无法命中。</string>
+    <string name="h_17393ab7" formatted="false">方法数量: %1$s</string>
+    <string name="h_72ab6230" formatted="false">方法置空 %1$s</string>
+    <string name="h_2f5132d0">无条件为每个方法复制全部指令</string>
+    <string name="h_bfd50952">无检查点记录。</string>
+    <string name="h_eca9a205">无法打开下载中心</string>
+    <string name="h_d54ac91c">无法打开外部链接</string>
+    <string name="h_bbe82bbc">无法打开安装权限设置</string>
+    <string name="h_8afaf028">无法打开浏览器，请手动访问蓝奏云下载</string>
+    <string name="h_6dfefe33">无法打开系统安装器，请手动安装更新包</string>
+    <string name="h_c15415d3">无法读取所选文件</string>
+    <string name="h_8cab5dde">日志为空</string>
+    <string name="h_7babe509">日志已复制到剪贴板</string>
+    <string name="h_00110af8">日本語</string>
+    <string name="h_ce6d7c18">时联网请求版本信息，其余时间不会在后台联网、收集或上传任何个人信息。
+
+</string>
+    <string name="h_8859e393">明暗双主题，支持跟随系统、白天、夜间三种模式自由切换</string>
+    <string name="h_efb1a358">是会员/已解锁/已购买</string>
+    <string name="h_ad4097b5">普通去除</string>
+    <string name="h_c82adf9a">智能压缩策略与 ZIP 对齐，保证打包后 APK 可正常安装启动</string>
+    <string name="h_ec3b529d">暂无详细说明</string>
+    <string name="h_7822f13f">暂时无法连接更新服务器。
+
+</string>
+    <string name="h_98f6c908">更新内容...</string>
+    <string name="h_f26b60e4">更新地址为网页链接，将打开内置浏览器前往蓝奏云下载</string>
+    <string name="h_c4726818" formatted="false">替换了 %1$s 处</string>
+    <string name="h_0502db8e">替换全部</string>
+    <string name="h_5418bedc">最佳 host</string>
+    <string name="h_8669676f" formatted="false">服务器响应异常 (HTTP %1$s)</string>
+    <string name="h_364d2bba">未发现 DEX 文件或未处理。</string>
+    <string name="h_0b1609fb">未启用（点击修改选择模式）</string>
+    <string name="h_0fc61704">未命名订阅</string>
+    <string name="h_8ccf2963" formatted="false">未找到 %1$s</string>
+    <string name="h_40d44b02">未找到 Dart 快照</string>
+    <string name="h_380de9a9">未找到邮件客户端</string>
+    <string name="h_b9f0ee4f">未捕获到 APK 直链，请在页面内点击下载按钮后重试</string>
+    <string name="h_790b1641">未捕获到有效的下载地址</string>
+    <string name="h_02b610da">未检测到 Flutter 应用（无 libapp.so），本项不适用。</string>
+    <string name="h_43a8f757">本应用基于以下开源项目构建并调用，在此向各位作者表示诚挚感谢与敬意：
+
+</string>
+    <string name="h_0c94389e">本应用的实现过程中参考了以下公开的技术文档、开源教程与社区逆向资料，在此一并致谢，并说明出处：
+
+</string>
+    <string name="h_a549a63d">本应用遵守最小化收集原则，高度重视并保护您的个人隐私：
+
+</string>
+    <string name="h_ba6e91fa">权限</string>
+    <string name="h_ad125423" formatted="false">根文件 %1$s</string>
+    <string name="h_9e1acb3b">检查更新失败</string>
+    <string name="h_802412e0">检测到下载地址，正在使用应用内下载…</string>
+    <string name="h_d8db6779">检测更新失败</string>
+    <string name="h_7ba901d8">模糊匹配置空广告方法</string>
+    <string name="h_e4090eb7">正在下载</string>
+    <string name="h_420b8289">正在处理 → 处理完成</string>
+    <string name="h_f5f084be">正在拉取订阅源配置...</string>
+    <string name="h_583bde12">正在拉取远程配置...</string>
+    <string name="h_037647ef">正在检查更新…</string>
+    <string name="h_37f14a6c">此关键词用于匹配布局元素类名，覆盖面广，请避免使用过于通用的词（如 ad）以防隐藏正常控件；建议使用 .ad.、具体 SDK 名或完整类名。</string>
+    <string name="h_4df76273">此特征独立于 DEX 特征。设置后优先用于 Flutter 处理；留空则自动沿用下方\</string>
+    <string name="h_52b36576">步骤</string>
+    <string name="h_679b5837">每条日志都 runOnUiThread + fullScroll</string>
+    <string name="h_a0a5e60f">注入原包路径/原包解压路径/注入So库名</string>
+    <string name="h_582b60a3" formatted="false">注入参数已保存：%1$s / %2$s</string>
+    <string name="h_1897b7f5">添加方式</string>
+    <string name="h_52279c25">清单中匹配的 &lt;activity&gt; 会被整体移除，删除前请确认该 Activity 确为广告用途。</string>
+    <string name="h_1c397bbb">清单中匹配的 &lt;receiver&gt; 会被整体移除。</string>
+    <string name="h_430a8d97">清单中匹配的 &lt;service&gt; 会被整体移除。</string>
+    <string name="h_91337ff2">清单权限</string>
+    <string name="h_763264b4">点击\</string>
+    <string name="h_e9a0b582">点击右侧\</string>
+    <string name="h_45020f68" formatted="false">版本 %1$s</string>
+    <string name="h_130a118a">独立功能，作用于所有类、所有方法，不依赖其他分类。</string>
+    <string name="h_cdb8ce5c">生成口令</string>
+    <string name="h_114cfdd0">用于\</string>
+    <string name="h_5c65f54a">用于解锁 VIP/会员/专业版等付费判定方法。方法名精确命中且返回类型为 boolean 或 int 时，方法体被替换为\</string>
+    <string name="h_dd0a7c93">用户自定义的 DEX 字符串广告特征（如广告位 ID、SDK 特征串、统计上报关键字等）。处理时会扫描所有方法体内的 const-string / const-string/jumbo 指令，字符串值（小写化后）命中任一特征即被置空为空字符串，从而破坏广告 SDK 对相关字符串的引用，阻断广告逻辑。</string>
+    <string name="h_98ba9357">由 core/DexPatcher.kt（类识别）与 core/AxmlAdRemover.kt（AndroidManifest 组件移除）读取。</string>
+    <string name="h_c8049515">由 core/DexPatcher.kt（类识别）与 core/AxmlAdRemover.kt（清单组件移除）读取。</string>
+    <string name="h_44fd089f">的作用有重叠，可任选其一维护。</string>
+    <string name="h_7258ddc9">目录路径，例如：
+/storage/emulated/0/APKEditor</string>
+    <string name="h_7b695da8">直链订阅源</string>
+    <string name="h_30d2a6e2">确定删除 \</string>
+    <string name="h_c4114463">确定删除订阅源 \</string>
+    <string name="h_0e13f623">确定要恢复所有广告特征为内置默认值？
+当前自定义修改将丢失。</string>
+    <string name="h_1a63ac23">示例</string>
+    <string name="h_66b00047" formatted="false">移除 %1$s 个</string>
+    <string name="h_66b000471" formatted="false">移除 %1$s 个</string>
+    <string name="h_702948c7">移除元素</string>
+    <string name="h_ae67a4cd">移除广告SDK文件</string>
+    <string name="h_92fab849">移除广告权限声明</string>
+    <string name="h_ceefa2cd">移除清单中的广告 SDK 权限声明</string>
+    <string name="h_40d55c2d">等判定方法。方法名精确命中且返回类型为 boolean 或 int 时，方法体被替换为\</string>
+    <string name="h_b549dbe0">等长覆盖</string>
+    <string name="h_9d60567b">签名效验去除已关闭</string>
+    <string name="h_3bd446d8">签名效验去除已启用</string>
+    <string name="h_ddafe46f">签名效验去除：普通模式 + 原包模式，重打包后自动去除签名校验，避免换签后拒绝运行</string>
+    <string name="h_05360de7" formatted="false">签名效验模式已设为：%1$s</string>
+    <string name="h_59b8b3f0">算 CRC</string>
+    <string name="h_8963ea3f" formatted="false">类数量: %1$s</string>
+    <string name="h_9eb6d057">类簇(cluster)</string>
+    <string name="h_de0bbf00" formatted="false">类置空 %1$s</string>
+    <string name="h_9fce216a">粘贴内容不是有效的广告特征配置 JSON，请检查后重试</string>
+    <string name="h_6ac37232">精确置空指定方法</string>
+    <string name="h_8f6495fd">系统分享</string>
+    <string name="h_46c49965">繁體中文</string>
+    <string name="h_0d2d462b" formatted="false">绑定分类卡片失败: %1$s</string>
+    <string name="h_d0f51307">编辑特征</string>
+    <string name="h_aa223402">置空 DEX 中命中的广告字符串</string>
+    <string name="h_9f4a2d63">置空广告方法 / 解锁 VIP</string>
+    <string name="h_b4ea6ec8">置空广告请求链接</string>
+    <string name="h_c743b4fe">置空校验方法</string>
+    <string name="h_b7aba98e">自动清理广告 SDK 原生库 (.so)、assets 广告资源与根目录广告文件，精简包体</string>
+    <string name="h_7be1d8e4">自动生成 Markdown 处理报告，记录各阶段处理明细与体积对比</string>
+    <string name="h_9a5a28fd">自定义 libapp.so 中去广告的字符串</string>
+    <string name="h_f7d28e75">要删除的 assets 目录下的广告 SDK 文件/目录路径。精确匹配，命中即整条（文件或目录）删除，用于移除打进 assets 的广告插件、胶水层等。</string>
+    <string name="h_90af539a">要精确置空的广告方法名。方法名与该列表项完全一致时，方法体被替换为返回默认值，从而取消广告加载/展示调用。</string>
+    <string name="h_bcf5f2e1">解包</string>
+    <string name="h_be5de496" formatted="false">解析订阅配置失败: %1$s</string>
+    <string name="h_c4daf443">解锁 VIP / 会员 / 专业版</string>
+    <string name="h_6bfa92c8">解锁 VIP / 会员 / 专业版判定</string>
+    <string name="h_63d55e8f">订阅源口令</string>
+    <string name="h_956dd267">订阅管理对话框打开失败</string>
+    <string name="h_de0412d9">订阅配置为空，未做更改</string>
+    <string name="h_e17b0b80">让广告判定方法返回 false</string>
+    <string name="h_c20905d1" formatted="false">设置初始化失败: %1$s</string>
+    <string name="h_23348314" formatted="false">设置界面加载失败: %1$s</string>
+    <string name="h_6e8ddbbd">识别并移除广告 SDK 的根包名</string>
+    <string name="h_324f699a">识别广告后台服务类</string>
+    <string name="h_bc9facfc">识别广告广播接收类</string>
+    <string name="h_0094af95">识别广告视图组件类</string>
+    <string name="h_53cb60e6">识别广告页面类</string>
+    <string name="h_3e32cd6d">识别重命名嵌套 APK：无后缀或任意后缀的原包子包也能准确识别并复用优化</string>
+    <string name="h_b5e4a114">该安装包无效或不完整</string>
+    <string name="h_f2765b03">该特征已存在</string>
+    <string name="h_d9cbc4b0">请先授予\</string>
+    <string name="h_6517e1ca">请在使用本应用前仔细阅读以下免责声明：
+
+</string>
+    <string name="h_2664f5c6">请填写和广告 SDK 强相关的唯一字符串（如广告位 ID、SDK 特征串），避免过于通用导致误伤正常功能字符串。</string>
+    <string name="h_f57b7d67">请输入特征内容</string>
+    <string name="h_1b92ede8">请输入订阅源口令、直链链接或粘贴配置内容</string>
+    <string name="h_0b34e814">请输入订阅源名称</string>
+    <string name="h_4b30694f">请输入远程配置 URL</string>
+    <string name="h_db0dc430">资源文件清理</string>
+    <string name="h_c19bce70">跟随系统 / System</string>
+    <string name="h_60aa379b">路径不能为空</string>
+    <string name="h_73468857">路径已更新</string>
+    <string name="h_2fe6efbe">路径设置失败，请检查权限</string>
+    <string name="h_5a8cb987">输入内容无效：既不是口令也不是有效配置 JSON，请检查后重试</string>
+    <string name="h_bc0957da">边读边算</string>
+    <string name="h_0cad3ba2">过签 SO 按 ABI 智能注入：仅写入目标 APK 已存在的架构目录，无 lib 目录则全架构写入</string>
+    <string name="h_2d96df70">过签包</string>
+    <string name="h_7703af63">运行时由 core/AdRemover.kt 的 cleanAdSdkAssets() 删除对应路径。</string>
+    <string name="h_9d8fca31">运行时由 core/AdRemover.kt 的 cleanAdSdkAssets() 按关键词匹配删除。</string>
+    <string name="h_a7bf85e5">运行时由 core/AdRemover.kt 的 cleanAdSdkLibs() 遍历 lib/*/ 并删除匹配的 .so 文件。</string>
+    <string name="h_1fcaf3a3">运行时由 core/AdRemover.kt 的 cleanRootFiles() 遍历 APK 根目录（仅一层，不递归）并删除匹配文件。</string>
+    <string name="h_f9f6e3e6">运行时由 core/AxmlAdRemover.kt 的 hideAdLayoutViews() 改写 res/layout 及 res/layout-* 下 AXML 布局中命中元素宽高为 0dp。</string>
+    <string name="h_7a8cb281">运行时由 core/AxmlAdRemover.kt 的 removeAdPermissions() 匹配并移除 AndroidManifest.xml 中的 &lt;uses-permission&gt; 声明。</string>
+    <string name="h_a5bdf592">运行时由 core/DexPatcher.kt 做广告类匹配。</string>
+    <string name="h_4193d899">运行时由 core/DexPatcher.kt 做广告类匹配，也由 core/AxmlAdRemover.kt 匹配清单组件。</string>
+    <string name="h_2c7d15eb">运行时由 core/DexPatcher.kt 做方法名精确匹配并置空方法体。</string>
+    <string name="h_19c4ff08">运行时由 core/DexPatcher.kt 扫描 const-string 指令并置空匹配的广告字符串。</string>
+    <string name="h_e0e88403">运行时由 core/DexPatcher.kt 扫描 const-string 指令并置空匹配的广告链接。</string>
+    <string name="h_cf431781">运行时由 core/DexPatcher.kt 的强制返回 false 逻辑处理（仅 boolean/int 返回类型）。</string>
+    <string name="h_8286533b">运行时由 core/DexPatcher.kt 的强制返回 true 逻辑处理（仅 boolean/int 返回类型）。</string>
+    <string name="h_00db9073">运行时由 core/DexPatcher.kt 的方法置空筛选逻辑（带单词边界感知）读取。</string>
+    <string name="h_9e363bc7">运行时由 core/DexPatcher.kt（DEX 类识别）、core/AxmlAdRemover.kt（清单组件移除）、core/AdRemover.kt（lib 原生库清理）读取。</string>
+    <string name="h_645d0193">运行时由 core/LibappSoPatcher.kt 在 Dart 快照内做等长 NUL 覆盖；core/FlutterAdRemover.kt 负责解包/回编译与自动保存。</string>
+    <string name="h_73da9b6d">选择APK文件</string>
+    <string name="h_158dee5e">选择签名效验去除模式</string>
+    <string name="h_0253b8cd">通常独立使用，也可与\</string>
+    <string name="h_50542d9e" formatted="false">部分订阅拉取失败：%1$s</string>
+    <string name="h_fea9a093">配合使用</string>
+    <string name="h_1eaa01fa">配合使用。</string>
+    <string name="h_1f8edce8">配合使用（包名会自动推导部分库名关键词）。</string>
+    <string name="h_2e352520">配合使用：本分类为精确匹配，后者为模糊关键词匹配。</string>
+    <string name="h_74c4b77f">配合增强屏蔽效果。</string>
+    <string name="h_0d110ed8">配合效果最佳，也常与\</string>
+    <string name="h_672dcd46">配合，可同时清理清单中的相关 Activity。</string>
+    <string name="h_3ab3b29b">配合：一个模糊关键词、一个精确方法名；常与\</string>
+    <string name="h_de6aac40">配合：本分类为精确路径，后者为模糊关键词。</string>
+    <string name="h_e9472910">配置已保存</string>
+    <string name="h_599c01d1">配置文件路径需以 .json 结尾</string>
+    <string name="h_56ef97b2">重建/重签</string>
+    <string name="h_4b9c3271">重置</string>
+    <string name="h_300739f4">重置默认配置</string>
+    <string name="h_b13d11bf">重要公告</string>
+    <string name="h_0b1b3420" formatted="false">钩子 DEX 构建产物中 %1$s 父类异常: %2$s，</string>
+    <string name="h_d64d53e1" formatted="false">钩子 DEX 构建产物缺少 %1$s 类，已中止</string>
+    <string name="h_26f0c819">钩子类名 / 签名信息 / 入口名称 / 注入参数全部可自定义，内置 DEX 类名自动重命名</string>
+    <string name="h_c6439a1a">链接内容不是有效的广告特征配置</string>
+    <string name="h_ad9c82ac" formatted="false">链接置空 %1$s</string>
+    <string name="h_7030ff64">错误</string>
+    <string name="h_827cfb79">隐藏布局文件中的广告视图区域</string>
+    <string name="h_4d002649">需要安装权限</string>
+    <string name="h_42b0752f">，直接绕过付费校验。</string>
+    <string name="h_eed66a8d">，让应用认为广告从未加载或展示，从而跳过广告展示逻辑。</string>
+
+<!-- about 大段落 -->
+    <string name="about_open_source" formatted="false">本应用基于以下开源项目构建并调用，在此向各位作者表示诚挚感谢与敬意：\n\n1. ApkDataMultiplexing (L-JINBIN)\n   APK 数据复用优化：通过中央目录数据偏移复用原包数据段，删除重复数据段，\n   显著减小过签包体积（最多约 50%），并配套 V2V3SchemeSigner 签名方案\n   - 主页: https://github.com/L-JINBIN/ApkDataMultiplexing\n   - 协议: 未标注许可证，仅供学习参考\n\n2. dexlib2 / smali / baksmali (JesusFreke)\n   DEX 文件读写与 smali 反汇编 / 汇编工具链，去广告核心引擎\n   - 主页: https://github.com/JesusFreke/smali\n   - 协议: BSD 3-Clause\n\n3. apksig (Android Open Source Project)\n   APK v1 / v2 / v3 签名实现，保证处理结果可安装\n   - 主页: https://android.googlesource.com/platform/tools/apksig\n   - 协议: Apache License 2.0\n\n4. BouncyCastle : bcprov / bcpkix\n   Java 加解密与证书生成库，用于生成签名证书\n   - 主页: https://www.bouncycastle.org/\n   - 协议: MIT License\n\n5. Guava (Google)\n   Java 集合与工具库，提供 dexlib2 所需的不可变集合\n   - 主页: https://github.com/google/guava\n   - 协议: Apache License 2.0\n\n6. AndroidX (Android Open Source Project)\n   core-ktx / appcompat / constraintlayout / recyclerview / lifecycle / coordinatorlayout\n   Android 官方 Jetpack 支持库\n   - 主页: https://developer.android.com/jetpack\n   - 协议: Apache License 2.0\n\n7. Material Components (Google)\n   Material Design 组件库，提供卡片、按钮、对话框等 UI 组件\n   - 主页: https://github.com/material-components/material-components-android\n   - 协议: Apache License 2.0\n\n8. Kotlin 标准库 (JetBrains)\n   Kotlin 编程语言与标准库\n   - 主页: https://kotlinlang.org/\n   - 协议: Apache License 2.0\n\n9. DTL-X (Gameye98)\n   广告类名 / 方法名 / URL 特征规则参考来源\n   - 主页: https://github.com/Gameye98/DTL-X\n   - 仅供特征参考与学习，未修改其二进制\n\n10. Android Asset Packaging Tool (AAPT2)\n    Android 资源编译与打包工具，用于 AXML / 资源处理\n    - 主页: https://developer.android.com/tools/aapt2\n    - 协议: Apache License 2.0\n\n11. MT 管理器 ApkSignatureKillerEx 样本 (Bin.MT)\n    签名效验去除钩子类（bin.mt.signature.KillerApplication）与原生库思路来源\n    - 主页: https://mt2.cn/\n    - 仅供学习参考，钩子类与原生库为样本内置资源，未修改其二进制\n\n12. dexlib2 DexRewriter (JesusFreke)\n    基于 RewriterModule / TypeRewriter 的 DEX 类重命名方案，用于自定义钩子类名\n    - 主页: https://github.com/JesusFreke/smali\n    - 协议: BSD 3-Clause\n\n以上项目的完整版权与许可文本，请访问对应主页查看。</string>
+    <string name="about_reference" formatted="false">本应用的实现过程中参考了以下公开的技术文档、开源教程与社区逆向资料，在此一并致谢，并说明出处：\n\n1. DEX 直接修补方案 (基于 dexlib2)\n   参考 Facebook 曾开源的 android-dexdump 思路，以及 dexlib2 官方示例\n   - dexlib2 主页: https://github.com/JesusFreke/smali\n   - 借鉴其 API 文档与示例用法，自行实现广告类/方法/字符串的定位与改写\n\n2. AXML 二进制格式解析 (Android Asset Packaging)\n   参考 AOSP 的 XmlPullParser 与 AXML 二进制格式说明\n   - 出处: https://android.googlesource.com/platform/frameworks/base/ (core/res)\n   - 依据 AXML chunk 头、资源表 StringPool/ResourceMap 结构与公共逆向资料编写\n\n3. Dart AOT 快照解析 (Flutter libapp.so)\n   参考 Dart VM 源码 snapshot.h 与社区 Flutter 逆向资料\n   - snapshot.h 出处: https://github.com/dart-lang/sdk/blob/main/runtime/vm/snapshot.h\n   - 用于定位 libapp.so 内 Dart 快照头并提取/抹除广告字符串\n\n4. 广告特征规则整理\n   广告 SDK 包名 / 域名 / 类名关键词参考开源项目 DTL-X 的规则整理扩充\n   - 主页: https://github.com/Gameye98/DTL-X\n   - 参考其 adloader / 域名黑名单 / 方法关键词思路，结合主流广告 SDK 自行整理\n\n5. APK v1 / v2 签名与对齐\n   参考 apksig 官方实现与 Android 文档中关于 ZIP alignment 的说明\n   - apksig: https://android.googlesource.com/platform/tools/apksig\n   - ZIP alignment: https://developer.android.com/studio/command-line/zipalign\n\n6. 数据复用优化（过签包体积优化）\n   参考 L-JINBIN 的 ApkDataMultiplexing 项目与 LSPatch 过签包结构\n   - 主页: https://github.com/L-JINBIN/ApkDataMultiplexing\n   - 思路来源: LSP 技术团队（过签包 + IO 重定向对抗整包校验）\n   - 原理: 通过中央目录数据偏移复用原包数据段，删除重复数据段实现体积优化\n   - 已移植其 DataMultiplexing / ZipMaker / ZipFile / V2V3SchemeSigner 实现\n\n7. 界面主题与排版\n   基于 Material Design 规范与 Material Components 组件库示例编写\n   - 规范: https://m3.material.io/\n   - 组件: https://github.com/material-components/material-components-android\n\n8. 签名效验去除（过签）\n   参考 MT 管理器 ApkSignatureKillerEx 的钩子注入思路：\n   - 注入 KillerApplication 钩子类并改写 manifest 的 Application 指向\n   - 钩子 &lt;clinit&gt; 中通过 PackageManager 读取签名并缓存，覆盖 getPackageInfo / 原生校验\n   - 原包模式：嵌入原始 APK 与过签 SO，读取原始签名参与匹配，覆盖更广\n   - 出处: https://mt2.cn/ （仅供学习参考）\n\n9. DEX 类重命名（自定义钩子类名）\n   参考 dexlib2 官方 RewriterModule / TypeRewriter 示例，实现类定义与全部引用的一并改写\n   - 出处: https://github.com/JesusFreke/smali\n   - 依据类型描述符前缀匹配重写，兼容点号 / 斜杠 / L...; 三种输入写法\n\n以上内容仅作技术学习参考，最终实现均为本项目自研；涉及版权归原作者与作者所属机构所有。</string>
+    <string name="about_privacy" formatted="false">本应用遵守最小化收集原则，高度重视并保护您的个人隐私：\n\n1. 本地离线处理：所有 APK 的解包、去广告、打包、签名均在您的设备本地完成，应用不会上传任何 APK 文件或内部数据到服务器。\n\n2. 联网行为透明：本应用仅在您主动点击&quot;检查更新&quot;时联网请求版本信息，其余时间不会在后台联网、收集或上传任何个人信息。\n\n3. 权限最小化：本应用不读取、不存储、不访问您的通讯录、相册、定位、短信、通话记录等敏感信息。\n\n4. 数据本地存储：应用的配置、处理特征等数据仅保存在您的设备本地，应用卸载后即被清除，不会留存任何云端记录。\n\n5. 第三方链接：关于与更新页面可能包含外部链接，点击后由第三方平台处理您的访问行为，建议您查阅相关第三方的隐私政策。\n\n6. 若您在使用过程中有任何隐私疑问、建议或顾虑，欢迎通过作者联系方式与我们沟通，我们将尽力解答。</string>
+    <string name="about_disclaimer" formatted="false">请在使用本应用前仔细阅读以下免责声明：\n\n1. 合法用途限制：本应用仅供学习、研究与个人合法用途使用。请勿对您不拥有版权、未获授权或受法律保护的应用进行修改与分发。\n\n2. 使用风险自担：使用本应用处理 APK 所产生的任何后果（包括但不限于：应用无法安装、闪退、功能异常、账号风险、数据丢失等）均由使用者自行承担。\n\n3. 商业使用责任：修改后的 APK 若用于商业用途或对外分发，请确保遵守相关应用的所有权、版权、商标及所在国家或地区的法律法规，由此产生的法律责任由使用者自担。\n\n4. 无担保声明：本应用按其现状提供，不附带任何形式的明示或默示担保。作者不对因使用或无法使用本应用而造成的任何直接或间接损失承担责任。\n\n5. 第三方内容：本应用引用的开源项目与广告特征规则均来自公开渠道，仅供技术参考，其版权归原作者所有。\n\n6. 条款变更：作者保留随时修改本免责声明的权利，更新后的内容将在新版本中生效。\n\n7. 使用本应用即视为您已阅读、理解并同意以上全部条款。若不同意，请停止使用本应用。</string>
+    <string name="about_copyright" formatted="false">© 2026 小奶瓶 · 保留所有权利\nPowered by dexlib2 / apksig / AndroidX</string>
+    <string name="h_00a68483">com.google.android.gms.ads\ncom.bytedance.sdk.openadsdk\ncom.qq.e.ads\ncom.mbridge.msdk</string>
+    <string name="h_01be0fd6">与&quot;广告 SDK 包名&quot;&quot;广告 Activity / Service / Receiver&quot;配合使用，用于清理广告 SDK 在清单中的权限声明。</string>
+    <string name="h_03277167">isVip\nisPro\nisPremium\nisMember\nisPaid</string>
+    <string name="h_0456832d">点击&quot;管理&quot;→ 输入关键词 → 点&quot;添加&quot;。</string>
+    <string name="h_04cd3cff">AdView\nAdActivity\nBannerAd\nInterstitialAd</string>
+    <string name="h_0b1c5479">通常独立使用，也可与&quot;广告 SDK 包名&quot;配合增强屏蔽效果。</string>
+    <string name="h_0d37a3a3">点击&quot;管理&quot;→ 输入要解锁的判定方法名 → 点&quot;添加&quot;。</string>
+    <string name="h_0d3ea6cb">写入 $HELP_CONFIG_NAME 的 &quot;res_layout_keywords&quot; 字段。\n运行时由 core/AxmlAdRemover.kt 的 hideAdLayoutViews() 改写 res/layout 及 res/layout-* 下 AXML 布局中命中元素宽高为 0dp。</string>
+    <string name="h_0f8a3b32">点击&quot;管理&quot;→ 输入广告字符串特征（可只写片段）→ 点&quot;添加&quot;。运行时会按子串匹配（不区分大小写）。</string>
+    <string name="h_14e50afa">与&quot;广告 SDK 包名&quot;&quot;广告类名关键词&quot;配合，同属类名识别体系。</string>
+    <string name="h_1516029a">ttad\ngdt\npangle\nadmob\nbaiduad</string>
+    <string name="h_16753bc3">loadAd\nshowAd\nloadInterstitialAd\nshowRewardedVideo</string>
+    <string name="h_17ac7253">AdActivity\nInterstitialAdActivity\nSplashActivity</string>
+    <string name="h_18374fbf">tt_version\nstartup_config\noaid\nuuid\ndevice_id\noa_sdk</string>
+    <string name="h_21806150">点击&quot;管理&quot;→ 输入与代码中完全一致的方法名 → 点&quot;添加&quot;。</string>
+    <string name="h_21d3c920">写入 $HELP_CONFIG_NAME 的 &quot;ad_activities&quot; 字段。\n由 core/DexPatcher.kt（类识别）与 core/AxmlAdRemover.kt（AndroidManifest 组件移除）读取。</string>
+    <string name="h_271e5d10">与&quot;广告 URL / 域名&quot;&quot;广告方法名&quot;配合：本分类置空任意命中的字符串，覆盖面更广。</string>
+    <string name="h_2be69e45">写入 $HELP_CONFIG_NAME 的 &quot;force_true_methods&quot; 字段。\n运行时由 core/DexPatcher.kt 的强制返回 true 逻辑处理（仅 boolean/int 返回类型）。</string>
+    <string name="h_2d8e8ed2">常与&quot;广告类名关键词&quot;&quot;广告 SDK 原生库关键词&quot;配合；包名会自动推导 lib 目录 .so 库名关键词。</string>
+    <string name="h_3141af8c">AdService\nDownloadService\nUpdateService</string>
+    <string name="h_3c1e4f2e">点击&quot;管理&quot;→ 输入广告 View 类名或关键词 → 点&quot;添加&quot;。</string>
+    <string name="h_3db4cd4d">gdt\noneway\nbdxadsdk\nqumeng</string>
+    <string name="h_4222e5fa">与&quot;广告 SDK 包名&quot;配合，可同时清理清单中的相关 Activity。</string>
+    <string name="h_46137025">点击&quot;管理&quot;→ 输入要强制返回 false 的判定方法名 → 点&quot;添加&quot;。</string>
+    <string name="h_481170fc">用于&quot;广告是否已加载 / 是否正在展示 / 是否有广告&quot;等判定方法。方法名精确命中且返回类型为 boolean 或 int 时，方法体被替换为&quot;返回 false / 0&quot;，让应用认为广告从未加载或展示，从而跳过广告展示逻辑。</string>
+    <string name="h_48574fbe">写入 $HELP_CONFIG_NAME 的 &quot;asset_keywords&quot; 字段。\n运行时由 core/AdRemover.kt 的 cleanAdSdkAssets() 按关键词匹配删除。</string>
+    <string name="h_4f5a392d">点击&quot;管理&quot;→ 输入广告 View 类名或关键词片段 → 点&quot;添加&quot;。运行时会按子串匹配（不区分大小写）。</string>
+    <string name="h_521147e7">写入 $HELP_CONFIG_NAME 的 &quot;method_neutralize_keywords&quot; 字段。\n运行时由 core/DexPatcher.kt 的方法置空筛选逻辑（带单词边界感知）读取。</string>
+    <string name="h_52aa344f">点击&quot;管理&quot;→ 输入相对路径（可写 assets/ 前缀，也可省略）→ 点&quot;添加&quot;。</string>
+    <string name="h_556c8e96">isAdLoaded\nhasAd\nisAdShowing\nisAdReady\nisInterstitialLoaded</string>
+    <string name="h_5c244e39">点击&quot;管理&quot;→ 输入权限名或权限关键词 → 点&quot;添加&quot;。运行时会按子串匹配（不区分大小写），可用广告 SDK 包名前缀或权限特征词。</string>
+    <string name="h_6303de15">点击&quot;管理&quot;→ 输入广告类名关键词（可只写片段）→ 点&quot;添加&quot;。</string>
+    <string name="h_67fac552">与&quot;强制返回 true&quot;互补：true 用于解锁 VIP，false 用于屏蔽广告展示判定。</string>
+    <string name="h_68c89932">与&quot;广告方法名&quot;配合：一个模糊关键词、一个精确方法名；常与&quot;广告 SDK 包名&quot;&quot;广告类名关键词&quot;搭配。</string>
+    <string name="h_6a3c653f">点击右侧&quot;管理&quot;→ 在输入框输入广告 SDK 的完整包名 → 点&quot;添加&quot;。也可用手机文件管理器直接编辑配置文件。</string>
+    <string name="h_6c1094f9">写入外部配置文件 $HELP_CONFIG_NAME 的 &quot;sdk_packages&quot; 字段。\n运行时由 core/DexPatcher.kt（DEX 类识别）、core/AxmlAdRemover.kt（清单组件移除）、core/AdRemover.kt（lib 原生库清理）读取。</string>
+    <string name="h_6d79cd1c">与&quot;广告方法置空关键词&quot;配合使用：本分类为精确匹配，后者为模糊关键词匹配。</string>
+    <string name="h_73a8f02e">.ad.\nmeishu_ad\nadview\nadcontainer\nbannerad\nsplashad\nadmob</string>
+    <string name="h_7b58f794">写入 $HELP_CONFIG_NAME 的 &quot;ad_permissions&quot; 字段。\n运行时由 core/AxmlAdRemover.kt 的 removeAdPermissions() 匹配并移除 AndroidManifest.xml 中的 &lt;uses-permission&gt; 声明。</string>
+    <string name="h_7d2579cf">与&quot;assets 广告关键词&quot;&quot;广告 SDK 原生库关键词&quot;配合，分别覆盖 assets、lib、以及根目录三处广告残留。</string>
+    <string name="h_7dda6d57">assets/gdt_plugin/gdtadv2.jar\nassets/qumeng\nassets/bdxadsdk</string>
+    <string name="h_7f86257a">与&quot;广告 SDK 包名&quot;配合效果最佳，也常与&quot;广告 View 类名&quot;&quot;广告 Activity&quot;等用途重叠。</string>
+    <string name="h_80943b1f">写入 $HELP_CONFIG_NAME 的 &quot;ad_services&quot; 字段。\n由 core/DexPatcher.kt（类识别）与 core/AxmlAdRemover.kt（清单组件移除）读取。</string>
+    <string name="h_857a16c4">写入 $HELP_CONFIG_NAME 的 &quot;flutter_string_patterns&quot; 字段。\n运行时由 core/LibappSoPatcher.kt 在 Dart 快照内做等长 NUL 覆盖；core/FlutterAdRemover.kt 负责解包/回编译与自动保存。</string>
+    <string name="h_87ae9335">googleads.g.doubleclick.net\nadmob.com\nadview.cn\nca-app-pub-</string>
+    <string name="h_8c6fb706">与&quot;assets 广告关键词&quot;配合：本分类为精确路径，后者为模糊关键词。</string>
+    <string name="h_8d7ba09c">用于解锁 VIP/会员/专业版等付费判定方法。方法名精确命中且返回类型为 boolean 或 int 时，方法体被替换为&quot;返回 true / 1&quot;，直接绕过付费校验。</string>
+    <string name="h_98d11213">AdView\nBannerAd\nNativeAdView\nSplashView</string>
+    <string name="h_9fa3cca0">点击&quot;管理&quot;→ 输入广告域名或 URL 片段 → 点&quot;添加&quot;。</string>
+    <string name="h_a17816fd">点击&quot;管理&quot;→ 输入广告 Service 类名或关键词 → 点&quot;添加&quot;。</string>
+    <string name="h_a3e07f53">点击&quot;管理&quot;→ 输入 .so 库名关键词 → 点&quot;添加&quot;。</string>
+    <string name="h_a6775ccc">点击&quot;管理&quot;→ 输入广告 Activity 类名或关键词 → 点&quot;添加&quot;。</string>
+    <string name="h_ad3146c4">此特征独立于 DEX 特征。设置后优先用于 Flutter 处理；留空则自动沿用下方&quot;广告特征分类&quot;中的 URL/包名/类名等特征。</string>
+    <string name="h_af7dfb03">写入 $HELP_CONFIG_NAME 的 &quot;class_keywords&quot; 字段。\n运行时由 core/DexPatcher.kt 做广告类匹配，也由 core/AxmlAdRemover.kt 匹配清单组件。</string>
+    <string name="h_b3c9c976">点击&quot;管理&quot;→ 输入方法名关键词 → 点&quot;添加&quot;。</string>
+    <string name="h_b7a517ca">写入 $HELP_CONFIG_NAME 的 &quot;ad_receivers&quot; 字段。\n由 core/DexPatcher.kt（类识别）与 core/AxmlAdRemover.kt（清单组件移除）读取。</string>
+    <string name="h_b82698e4">写入 $HELP_CONFIG_NAME 的 &quot;method_patterns&quot; 字段。\n运行时由 core/DexPatcher.kt 做方法名精确匹配并置空方法体。</string>
+    <string name="h_bf82a4bf">AdReceiver\nBootReceiver\nInstallReceiver</string>
+    <string name="h_bffae154">写入 $HELP_CONFIG_NAME 的 &quot;ad_view_names&quot; 字段。\n运行时由 core/DexPatcher.kt 做广告类匹配。</string>
+    <string name="h_c1ca70de">点击&quot;管理&quot;→ 输入要在 libapp.so 中抹除的广告字符串（长度≥2 的可打印 ASCII）→ 点&quot;添加&quot;。</string>
+    <string name="h_c393daa8">com.google.android.gms.ads\ngoogleads.g.doubleclick.net\npangle\nadview\nadmob\ncom.bytedance.sdk</string>
+    <string name="h_cc8469a8">写入 $HELP_CONFIG_NAME 的 &quot;string_patterns&quot; 字段。\n运行时由 core/DexPatcher.kt 扫描 const-string 指令并置空匹配的广告字符串。</string>
+    <string name="h_cd984ab2">常与&quot;广告 SDK 包名&quot;&quot;广告 View 类名&quot;&quot;广告类名关键词&quot;配合：这些分类的关键词也会被一起用于布局元素匹配，命中即隐藏。</string>
+    <string name="h_cfd21cdc">点击&quot;管理&quot;→ 输入广告 Receiver 类名或关键词 → 点&quot;添加&quot;。</string>
+    <string name="h_dd6c571b">写入 $HELP_CONFIG_NAME 的 &quot;force_false_methods&quot; 字段。\n运行时由 core/DexPatcher.kt 的强制返回 false 逻辑处理（仅 boolean/int 返回类型）。</string>
+    <string name="h_ddc38ea1">与&quot;广告类名关键词&quot;的作用有重叠，可任选其一维护。</string>
+    <string name="h_e0aa11ae">与&quot;广告 SDK 包名&quot;配合使用（包名会自动推导部分库名关键词）。</string>
+    <string name="h_e25ab6b8">点击&quot;管理&quot;→ 输入文件名词关键词 → 点&quot;添加&quot;。运行时会按子串匹配（不区分大小写）。</string>
+    <string name="h_e75ba18c">showad\nloadad\nonadloaded\nadclick</string>
+    <string name="h_e785557e">写入 $HELP_CONFIG_NAME 的 &quot;ad_asset_paths&quot; 字段。\n运行时由 core/AdRemover.kt 的 cleanAdSdkAssets() 删除对应路径。</string>
+    <string name="h_e870ac19">TT_PANGOLIN\nKW_SDK\ncom.bytedance\ncom.qq.e\ncom.mbridge.msdk\ncom.kwad.sdk</string>
+    <string name="h_ec07479c">写入 $HELP_CONFIG_NAME 的 &quot;root_file_keywords&quot; 字段。\n运行时由 core/AdRemover.kt 的 cleanRootFiles() 遍历 APK 根目录（仅一层，不递归）并删除匹配文件。</string>
+    <string name="h_f3a25b4b">ad_unit_id\nplacementid\nrewarded_video_id\nbanner_pos_id</string>
+    <string name="h_f66c3cc8">与&quot;assets 广告文件路径&quot;配合使用。</string>
+    <string name="h_fa8a0296">写入 $HELP_CONFIG_NAME 的 &quot;url_patterns&quot; 字段。\n运行时由 core/DexPatcher.kt 扫描 const-string 指令并置空匹配的广告链接。</string>
+    <string name="h_fc2459c8">写入 $HELP_CONFIG_NAME 的 &quot;lib_file_keywords&quot; 字段。\n运行时由 core/AdRemover.kt 的 cleanAdSdkLibs() 遍历 lib/*/ 并删除匹配的 .so 文件。</string>
+    <string name="h_ffdeee21">与&quot;广告 SDK 包名&quot;配合使用。</string>
+    <string name="perm_all_files_access" formatted="false">请先授予\"所有文件访问\"权限</string>
+    <string name="log_apkinfo" formatted="false">  ✓ %1$s | %2$s | DEX=%3$s 资源=%4$s 库=%5$s | %6$s</string>
+    <string name="log_dexmultiplex_done" formatted="false">  ℹ 数据复用优化完成: %1$s -&gt; %2$s</string>
+    <string name="log_dexmultiplex_reuse" formatted="false">  · 复用原包(%1$s)数据段，节省 %2$s (%3$s%%)</string>
+    <string name="log_dexmultiplex_fail" formatted="false">  ✗ 数据复用优化失败: %1$s</string>
+    <string name="dexinfo_file" formatted="false">文件: %1$s</string>
+    <string name="dexinfo_size" formatted="false">大小: %1$d bytes</string>
+    <string name="dexinfo_classes" formatted="false">类数量: %1$d</string>
+    <string name="dexinfo_methods" formatted="false">方法数量: %1$d</string>
+    <string name="dexinfo_fields" formatted="false">字段数量: %1$d</string>
+    <string name="dexinfo_packages" formatted="false">
+包分布:</string>
+    <string name="dexinfo_pkg_line" formatted="false">  %1$s: %2$d 个类</string>
+    <string name="sigrem_inject_hook" formatted="false">  ▶ 注入 MT 式签名钩子 (%1$s)…</string>
+    <string name="sigrem_class_renamed" formatted="false">  ✓ 钩子类已重命名为 %1$s (含 12 个内部类)</string>
+    <string name="dexpatcher_link_neutral" formatted="false">, 链接置空 %1$d 处</string>
+    <string name="dexpatcher_neutral" formatted="false">    -&gt; %1$s: 置空 %2$d 个广告方法, 跳过 %3$d 个非广告方法%4$s%5$s</string>
 </resources>

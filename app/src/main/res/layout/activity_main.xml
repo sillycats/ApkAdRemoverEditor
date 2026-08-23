@@ -20,11 +20,40 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:title="@string/app_name"
-                app:titleTextColor="@color/white"
-                app:subtitle="@string/app_title_local"
-                app:subtitleTextColor="@color/primary_light" />
+                android:layout_height="wrap_content"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                app:contentInsetStart="16dp"
+                app:title=""
+                app:titleMarginStart="16dp">
+
+                <!-- 自定义可换行标题栏：主标题 + 副标题，长文本自动换行完整显示，不用省略号 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="56dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:breakStrategy="high_quality" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="@string/app_title_local"
+                        android:textColor="@color/primary_light"
+                        android:textSize="12sp"
+                        android:breakStrategy="high_quality" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progressBar"
@@ -76,7 +105,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/s_8d89dabd"
                             android:textColor="@color/text_primary"
@@ -84,29 +113,33 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/s_30fe4dbb"
                             android:textColor="@color/text_secondary"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:breakStrategy="high_quality"
+                            android:lineSpacingExtra="2dp" />
                     </LinearLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnStart"
-                        style="@style/Widget.MaterialComponents.Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/s_a18f884e"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:minWidth="0dp"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
-                        app:cornerRadius="22dp"
-                        app:icon="@android:drawable/ic_media_play"
-                        app:iconSize="18dp" />
                 </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStart"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/s_a18f884e"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:minWidth="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    app:cornerRadius="22dp"
+                    app:icon="@android:drawable/ic_media_play"
+                    app:iconGravity="textStart"
+                    app:iconSize="18dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -115,6 +148,7 @@
                     android:text="@string/s_e01c6b70"
                     android:textColor="@color/text_hint"
                     android:textSize="12sp"
+                    android:breakStrategy="high_quality"
                     android:lineSpacingExtra="2dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

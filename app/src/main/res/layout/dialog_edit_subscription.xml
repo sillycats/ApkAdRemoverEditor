@@ -71,14 +71,26 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- URL 输入框（仅 URL 型显示） -->
+    <TextView
+        android:id="@+id/tvEditUrlLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/s_b3d8be49"
+        android:textColor="@color/text_primary"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:breakStrategy="high_quality" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEditUrl"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="@string/s_b3d8be49"
+        android:layout_marginTop="4dp"
         android:visibility="gone"
+        app:hintEnabled="false"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"

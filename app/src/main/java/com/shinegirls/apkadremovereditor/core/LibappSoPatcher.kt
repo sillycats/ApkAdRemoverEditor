@@ -1,5 +1,7 @@
 package com.shinegirls.apkadremovereditor.core
 
+import com.shinegirls.apkadremovereditor.R
+import android.content.Context
 import java.io.File
 import java.nio.charset.StandardCharsets
 
@@ -88,6 +90,7 @@ object LibappSoPatcher {
         input: File,
         output: File,
         patterns: List<ByteArray>,
+        context: Context,
         logger: Logger? = null
     ): PatchOutcome {
         val log = logger ?: {}
@@ -97,10 +100,10 @@ object LibappSoPatcher {
             val data = input.readBytes()
             val blobs = DartSnapshot.findBlobs(data)
             if (blobs.isEmpty()) {
-                log("  ✗ 未在 ${input.name} 中找到 Dart 快照，跳过")
+                log(context.getString(R.string.h_1cb37f65, input.name))
                 return PatchOutcome(
                     originalSize, originalSize, failed = true,
-                    error = "未找到 Dart 快照", elapsedMs = System.currentTimeMillis() - start
+                    error = context.getString(R.string.h_40d44b02), elapsedMs = System.currentTimeMillis() - start
                 )
             }
 
@@ -126,7 +129,7 @@ object LibappSoPatcher {
                 elapsedMs = System.currentTimeMillis() - start
             )
         } catch (e: Exception) {
-            log("  ✗ 处理 ${input.name} 失败: ${e.message}")
+            log(context.getString(R.string.h_298ae83f, input.name, e.message))
             PatchOutcome(
                 originalSize, originalSize, failed = true,
                 error = e.message, elapsedMs = System.currentTimeMillis() - start

@@ -28,8 +28,7 @@
             android:textSize="14sp"
             android:textColor="@color/text_primary"
             android:fontFamily="monospace"
-            android:singleLine="true"
-            android:ellipsize="middle"
+            android:breakStrategy="high_quality"
             android:text="@string/s_240bf022" />
 
         <ImageButton

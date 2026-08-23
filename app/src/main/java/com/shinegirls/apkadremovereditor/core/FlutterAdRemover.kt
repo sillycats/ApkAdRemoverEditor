@@ -1,5 +1,7 @@
 package com.shinegirls.apkadremovereditor.core
 
+import com.shinegirls.apkadremovereditor.R
+import android.content.Context
 import com.shinegirls.apkadremovereditor.utils.Format
 import java.io.File
 import java.nio.charset.StandardCharsets
@@ -36,6 +38,7 @@ object FlutterAdRemover {
         extractDir: File,
         config: AdPatternConfig.AdPatterns,
         exportDir: File,
+        context: Context,
         logger: Logger? = null
     ): FlutterResult {
         val log = logger ?: {}
@@ -43,26 +46,26 @@ object FlutterAdRemover {
 
         val libDir = File(extractDir, "lib")
         if (!libDir.isDirectory) {
-            log("  · 未找到 lib 目录，Flutter 处理跳过")
+            log(context.getString(R.string.h_2364780e))
             return result
         }
         val libappFiles = libDir.walkTopDown()
             .filter { it.isFile && it.name.equals("libapp.so", ignoreCase = true) }
             .toList()
         if (libappFiles.isEmpty()) {
-            log("  · 未检测到 libapp.so，该应用可能不是 Flutter（或为 AAB 拆分包），Flutter 处理跳过")
+            log(context.getString(R.string.h_976e27bc))
             return result
         }
 
         result.detected = true
-        log("  ✓ 检测到 ${libappFiles.size} 个 libapp.so: " +
+        log(context.getString(R.string.h_9bd51829, libappFiles.size) +
             libappFiles.joinToString { it.parentFile?.name ?: "?" })
 
         val patterns = LibappSoPatcher.buildPatterns(buildPatternList(config))
         if (patterns.isEmpty()) {
-            log("  ⚠ 无可用于 Flutter 的广告特征（需为 length>=2 的 ASCII 字符串），仅执行解包，不做修改")
+            log(context.getString(R.string.h_a773cd7d))
         } else {
-            log("  · Flutter 特征 ${patterns.size} 条（URL/包名/类名等 ASCII 字符串）")
+            log(context.getString(R.string.h_990ae7e6, patterns.size))
         }
 
         val flutterExportDir = File(exportDir, "flutter")
@@ -70,42 +73,42 @@ object FlutterAdRemover {
             val abi = libapp.parentFile?.name ?: "lib"
             val relative = libDir.toURI().relativize(libapp.toURI()).path
             val bitness = detectBitness(libapp)
-            log("  ▶ 处理 ${relative} (${Format.formatSize(libapp.length())}, ${bitness})")
+            log(context.getString(R.string.h_0e3149dd, relative, Format.formatSize(libapp.length()), bitness))
 
             // 1. 解包：导出快照原始文件与字符串清单（含去广告前的特征视图）
             val abiExport = File(flutterExportDir, abi)
-            extractForInspection(libapp, abiExport, log)
+            extractForInspection(libapp, abiExport, context, log)
 
             // 2+3. 去广告 + 回编译：就地等长打补丁并写回临时文件
             val tmp = File(libapp.parentFile, "libapp_patched.so")
-            val r = LibappSoPatcher.processLibapp(libapp, tmp, patterns, log)
+            val r = LibappSoPatcher.processLibapp(libapp, tmp, patterns, context, log)
 
             // 4. 自动保存：写回 APK 解包目录（随 APK 重打包）
             if (!r.failed && r.changed) {
                 tmp.copyTo(libapp, overwrite = true)
-                log("  ✓ ${relative} 回编译完成: 快照=${r.snapshotCount}, " +
-                    "字符串=${r.stringsFound}, 广告特征替换=${r.replacedCount} 处")
+                log(context.getString(R.string.h_01ad6b8a, relative, r.snapshotCount) +
+                    context.getString(R.string.h_785d24a8, r.stringsFound, r.replacedCount))
                 if (r.matchedPatterns.isNotEmpty()) {
                     val top = r.matchedPatterns.entries.sortedByDescending { it.value }.take(5)
-                    log("  · 命中特征: " + top.joinToString(" | ") { "${it.key}×${it.value}" })
+                    log(context.getString(R.string.h_90f6a26a) + top.joinToString(" | ") { "${it.key}×${it.value}" })
                 }
             } else if (r.failed) {
-                log("  ✗ ${relative} 处理失败: ${r.error}")
+                log(context.getString(R.string.h_ea8aef83, relative, r.error))
             } else {
                 tmp.delete()
-                log("  ℹ ${relative} 未命中任何广告特征，保留原样")
+                log(context.getString(R.string.h_653e26a7, relative))
             }
 
             result.stats.add(r.toReportStats(abi, relative))
         }
 
         // 5. 清理 Flutter 快照缓存（导出的 .snapshot 原始快照文件）
-        cleanupSnapshotCache(flutterExportDir, log)
+        cleanupSnapshotCache(flutterExportDir, context, log)
         return result
     }
 
     /** 处理完成后清理 Flutter 产物缓存，仅保留 strings.txt（字符串清单），删除快照与回编译副本。 */
-    private fun cleanupSnapshotCache(flutterExportDir: File, log: Logger) {
+    private fun cleanupSnapshotCache(flutterExportDir: File, context: Context, log: Logger) {
         if (!flutterExportDir.isDirectory) return
         var removed = 0
         try {
@@ -122,10 +125,10 @@ object FlutterAdRemover {
                 }
             }
             if (removed > 0) {
-                log("  ✓ 已清理 Flutter 缓存: 删除 $removed 个文件，仅保留 strings.txt")
+                log(context.getString(R.string.h_23af2edf, removed))
             }
         } catch (e: Exception) {
-            log("  ⚠ 清理 Flutter 缓存失败: ${e.message}")
+            log(context.getString(R.string.h_01f0ed64, e.message))
         }
     }
 
@@ -168,12 +171,12 @@ object FlutterAdRemover {
     }
 
     /** 解包：导出快照原始文件（.snapshot）与字符串清单（strings.txt）到导出目录。 */
-    private fun extractForInspection(libapp: File, outDir: File, log: Logger) {
+    private fun extractForInspection(libapp: File, outDir: File, context: Context, log: Logger) {
         try {
             val data = libapp.readBytes()
             val blobs = DartSnapshot.findBlobs(data)
             if (blobs.isEmpty()) {
-                log("  · 解包：未找到 Dart 快照")
+                log(context.getString(R.string.h_132ae845))
                 return
             }
             outDir.mkdirs()
@@ -183,17 +186,17 @@ object FlutterAdRemover {
             }
             val strings = blobs.flatMap { DartSnapshot.extractStrings(data, it) }.distinct()
             val sb = StringBuilder()
-            sb.appendLine("# libapp.so Dart 快照字符串导出")
-            sb.appendLine("# 工具: ApkAdRemoverEditor · Flutter 解包")
-            sb.appendLine("# 快照数: ${blobs.size}")
-            sb.appendLine("# 字符串总数(去重): ${strings.size}")
+            sb.appendLine(context.getString(R.string.h_97474ffc))
+            sb.appendLine(context.getString(R.string.h_c5bb1a82))
+            sb.appendLine(context.getString(R.string.h_46c45c70, blobs.size))
+            sb.appendLine(context.getString(R.string.h_3bab674a, strings.size))
             sb.appendLine()
             strings.forEach { sb.appendLine(it) }
             val stringsOut = File(outDir, "strings.txt")
             stringsOut.writeText(sb.toString(), StandardCharsets.UTF_8)
-            log("  · 解包完成: ${blobs.size} 个快照, ${strings.size} 条字符串 → ${outDir.absolutePath}")
+            log(context.getString(R.string.h_d38458da, blobs.size, strings.size, outDir.absolutePath))
         } catch (e: Exception) {
-            log("  ⚠ 解包 ${libapp.name} 失败: ${e.message}")
+            log(context.getString(R.string.h_4e308cd8, libapp.name, e.message))
         }
     }
 }

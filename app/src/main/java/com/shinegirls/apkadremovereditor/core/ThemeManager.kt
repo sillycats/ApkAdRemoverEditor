@@ -2,7 +2,9 @@ package com.shinegirls.apkadremovereditor.core
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
+import com.shinegirls.apkadremovereditor.R
 
 /**
  * 主题模式管理器。
@@ -61,12 +63,13 @@ object ThemeManager {
     }
 
     /**
-     * 主题模式显示名称。
+     * 主题模式显示名称对应的字符串资源 ID。
      */
-    fun modeDisplayName(mode: Int): String =
+    @StringRes
+    fun modeDisplayNameRes(mode: Int): Int =
         when (mode) {
-            MODE_LIGHT -> "白天"
-            MODE_DARK -> "夜间"
-            else -> "跟随系统"
+            MODE_LIGHT -> R.string.s_4ed52bef
+            MODE_DARK -> R.string.s_c6828f99
+            else -> R.string.s_71bbc726
         }
 }

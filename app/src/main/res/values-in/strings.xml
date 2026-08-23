@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_copyright" formatted="false">© 2026 XiaoNaiPing · Seluruh hak cipta dilindungi\nDidukung oleh dexlib2 / apksig / AndroidX</string>
+    <string name="about_disclaimer" formatted="false">Harap baca disclaimer berikut dengan seksama sebelum menggunakan aplikasi ini:\n\n1. Pembatasan penggunaan yang sah: aplikasi ini hanya untuk pembelajaran, penelitian, dan penggunaan pribadi yang sah. Jangan mengubah atau mendistribusikan ulang aplikasi yang bukan milik Anda, tidak Anda izinkan, atau yang dilindungi secara hukum.\n\n2. Gunakan atas risiko Anda sendiri: setiap konsekuensi dari pemrosesan APK dengan aplikasi ini (termasuk namun tidak terbatas pada aplikasi yang gagal terinstal, crash, malfungsi, risiko akun, kehilangan data, dll.) ditanggung oleh pengguna.\n\n3. Tanggung jawab penggunaan komersial: jika APK yang dimodifikasi digunakan secara komersial atau didistribusikan, pastikan kepatuhan terhadap kepemilikan, hak cipta, merek dagang, dan hukum lokal yang relevan. Seluruh tanggung jawab hukum berada pada pengguna.\n\n4. Tidak ada garansi: aplikasi ini disediakan apa adanya tanpa jaminan eksplisit maupun tersirat. Penulis tidak bertanggung jawab atas kerugian langsung maupun tidak langsung yang timbul dari penggunaan atau ketidakmampuan menggunakan aplikasi ini.\n\n5. Konten pihak ketiga: proyek sumber terbuka dan aturan pola iklan yang dirujuk oleh aplikasi ini berasal dari saluran publik hanya untuk referensi teknis; hak cipta mereka dimiliki oleh penulis asli.\n\n6. Perubahan syarat: penulis berhak mengubah penyangkalan ini kapan saja; Syarat yang diperbarui berlaku pada versi baru.\n\n7. Menggunakan aplikasi ini berarti Anda telah membaca, memahami, dan menyetujui semua syarat di atas. Jika Anda tidak setuju, mohon hentikan penggunaan aplikasi ini.</string>
+    <string name="about_open_source" formatted="false">Aplikasi ini dibangun di atas dan memanggil proyek-proyek open-source berikut; Terima kasih dan rasa hormat yang tulus kepada para penulisnya:\n\n1. ApkDataMultiplexing (L-JINBIN)\n   Menggunakan kembali segmen data paket asli melalui offset direktori pusat dan menghapus data duplikat, secara signifikan mengurangi paket yang ditandatangani (hingga ~50%), dengan skema penandatanganan V2V3SchemeSigner\n   - Beranda: https://github.com/L-JINBIN/ApkDataMultiplexing\n   - Lisensi: tidak disebutkan, hanya untuk pembelajaran\n\n2. dexlib2 / smali / baksmali (JesusFreke)\n   DEX membaca/menulis dan rantai alat pembongkaran/perakitan smali, mesin inti penghilang iklan\n   - Beranda: https://github.com/JesusFreke/smali\n   - Lisensi: BSD 3-Clause\n\n3. apksig (Proyek Sumber Terbuka Android)\n   Penandatanganan APK v1 / v2 / v3 agar hasil instalasi berhasil\n   - Beranda: https://android.googlesource.com/platform/tools/apksig\n   - Lisensi: Lisensi Apache 2.0\n\n4. BouncyCastle : bcprov / bcpkix\n   Pustaka pembuatan kripto Java dan sertifikat untuk menandatangani sertifikat\n   - Beranda: https://www.bouncycastle.org/\n   - Lisensi: Lisensi MIT\n\n5. Jambu biji (Google)\n   Koleksi dan utilitas Java yang menyediakan koleksi immutable yang dibutuhkan dexlib2\n   - Beranda: https://github.com/google/guava\n   - Lisensi: Lisensi Apache 2.0\n\n6. AndroidX (Proyek Sumber Terbuka Android)\n   core-ktx / appcompat / constraintlayout / recyclerview / lifecycle / coordinatorlayout\n   Pustaka dukungan resmi Jetpack Android\n   - Beranda: https://developer.android.com/jetpack\n   - Lisensi: Lisensi Apache 2.0\n\n7. Komponen Material (Google)\n   Perpustakaan komponen Material Design menyediakan kartu, tombol, dialog, dan komponen UI lainnya\n   - Beranda: https://github.com/material-components/material-components-android\n   - Lisensi: Lisensi Apache 2.0\n\n8. Perpustakaan Standar Kotlin (JetBrains)\n   Bahasa pemrograman Kotlin dan perpustakaan standar\n   - Beranda: https://kotlinlang.org/\n   - Lisensi: Lisensi Apache 2.0\n\n9. DTL-X (Gameye98)\n   Referensi untuk aturan kelas iklan / metode / pola URL\n   - Beranda: https://github.com/Gameye98/DTL-X\n   - Hanya untuk referensi pola dan pembelajaran; binernya tidak dimodifikasi\n\n10. Alat Pengemasan Aset Android (AAPT2)\n    Alat kompilasi dan pengemasan sumber daya Android untuk AXML / pemrosesan sumber daya\n    - Beranda: https://developer.android.com/tools/aapt2\n    - Lisensi: Lisensi Apache 2.0\n\n11. Sampel MT Manager ApkSignatureKillerEx (Bin.MT)\n    Sumber kelas hook signature-verification-removal (bin.mt.signature.KillerApplication) dan ide pustaka asli\n    - Beranda: https://mt2.cn/\n    - Hanya untuk pembelajaran; kelas hook dan pustaka native adalah sumber daya bawaan dari sampel, tidak dimodifikasi\n\n12. dexlib2 DexRewriter (JesusFreke)\n    Skema penamaan ulang kelas DEX berbasis RewriterModule / TypeRewriter untuk nama kelas hook kustom\n    - Beranda: https://github.com/JesusFreke/smali\n    - Lisensi: BSD 3-Clause\n\nUntuk melihat teks hak cipta dan lisensi lengkap dari proyek-proyek di atas, silakan kunjungi beranda mereka.</string>
+    <string name="about_privacy" formatted="false">Aplikasi ini mengikuti prinsip pengumpulan minimal dan sangat menghargai serta melindungi privasi Anda:\n\n1. Sepenuhnya offline: semua pembukaan APK, penghapusan iklan, pengemasan ulang, dan penandatanganan dilakukan secara lokal di perangkat Anda. Aplikasi ini tidak pernah mengunggah file APK atau data internal ke server.\n\n2. Jaringan transparan: aplikasi hanya menghubungi jaringan untuk meminta info versi saat Anda mengetuk &quot;Periksa Pembaruan&quot;; Aplikasi ini tidak pernah menjaringankan, mengumpulkan, atau mengunggah informasi pribadi di latar belakang pada waktu lain.\n\n3. Izin minimal: aplikasi tidak membaca, menyimpan, atau mengakses data sensitif seperti kontak, galeri, lokasi, SMS, atau log panggilan Anda.\n\n4. Penyimpanan data lokal: konfigurasi dan pola hanya disimpan di perangkat Anda dan dihapus saat aplikasi dihapus, tanpa catatan cloud yang tersimpan.\n\n5. Tautan pihak ketiga: halaman Tentang dan pembaruan mungkin berisi tautan eksternal; Mengklik mereka memungkinkan platform pihak ketiga memproses akses Anda, jadi harap tinjau kebijakan privasi mereka.\n\n6. Jika Anda memiliki pertanyaan, saran, atau kekhawatiran tentang privasi, jangan ragu untuk menghubungi kami melalui info kontak penulis dan kami akan berusaha membantu sebaik mungkin.</string>
+    <string name="about_reference" formatted="false">Selama pengembangan, aplikasi ini merujuk pada dokumen teknis publik berikut, tutorial sumber terbuka, dan materi rekayasa balik komunitas. Kami mengucapkan terima kasih kepada para penulis dan menyatakan sumber-sumbernya di sini:\n\n1. Patch DEX langsung (berdasarkan dexlib2)\n    Merujuk pada ide android-dexdump Facebook sebelumnya dan contoh resmi dexlib2\n   - beranda dexlib2: https://github.com/JesusFreke/smali\n   - Menggunakan dokumen API dan contoh untuk menemukan dan menulis ulang kelas/metode/string iklan sendiri\n\n2. Parsing format biner AXML (Android Asset Packaging)\n    Dokumentasi format biner XmlPullParser dan AXML AOSP yang direferensikan\n   - Sumber: https://android.googlesource.com/platform/frameworks/base/ (core/res)\n   - Ditulis berdasarkan header chunk AXML, struktur sumber daya StringPool/ResourceMap, dan materi rekayasa balik publik\n\n3. Penguraian snapshot AOT Dart (Flutter libapp.so)\n    Merujuk pada sumber snapshot.h dari Dart VM dan komunitas Flutter yang melakukan rekayasa balik material\n   - snapshot.h: https://github.com/dart-lang/sdk/blob/main/runtime/vm/snapshot.h\n   - Digunakan untuk menemukan header snapshot Dart di dalam libapp.so dan mengekstrak/menetralkan string iklan\n\n4. Organisasi aturan pola iklan\n    Nama paket / domain / kata kunci kelas Ad SDK yang direferensikan dan diperluas dari proyek open-source DTL-X\n   - Beranda: https://github.com/Gameye98/DTL-X\n   - Merujuk pada ide kata kunci adloader / daftar hitam domain / metode dan mengaturnya dengan SDK iklan mainstream\n\nPenandatanganan dan penyelarasan 5. APK v1 / v2\n    Referensi implementasi resmi apksig dan dokumentasi penyelarasan ZIP Android\n   - APKSIG: https://android.googlesource.com/platform/tools/apksig\n   - ZIP alignment: https://developer.android.com/studio/command-line/zipalign\n\n6. Multiplexing data (optimasi ukuran paket yang sudah ditandatangani)\n    Referensi proyek ApkDataMultiplexing L-JINBIN dan struktur paket resigned-package LSPatch\n   - Beranda: https://github.com/L-JINBIN/ApkDataMultiplexing\n   - Sumber ide: tim LSP (paket yang mengundurkan diri + pengalihan IO terhadap pemeriksaan paket keseluruhan)\n   - Prinsip: gunakan kembali segmen data paket asli melalui offset direktori pusat dan hapus data duplikat untuk optimasi ukuran\n   - Memporting implementasi DataMultiplexing / ZipMaker / ZipFile / V2V3SchemeSigner\n\n7. Tema dan tata letak UI\n    Ditulis berdasarkan spesifikasi Material Design dan contoh pustaka Material Components\n   - Spesifikasi: https://m3.material.io/\n   - Komponen: https://github.com/material-components/material-components-android\n\n8. Penghapusan verifikasi tanda tangan (mengundurkan diri)\n    Ide injeksi hook dari MT Manager ApkSignatureKillerEx\:\n   - Menyuntikkan kelas hook KillerApplication dan mengubah referensi Application dalam manifest\n   - Hook membaca dan menyimpan tanda tangan melalui PackageManager di &lt;clinit&gt;, mencakup getPackageInfo / pemeriksaan native\n   - Mode Paket Asli: menyematkan APK asli dan pustaka asli yang sudah ditandatangani, membaca tanda tangan asli untuk cakupan yang lebih luas\n   - Sumber: https://mt2.cn/ (hanya untuk pembelajaran)\n\n9. Penggantian nama kelas DEX (nama kelas hook khusus)\n    Referensi contoh RewriterModule / TypeRewriter resmi dexlib2\ untuk menulis ulang definisi kelas dan semua referensi\n   - Sumber: https://github.com/JesusFreke/smali\n   - Penulisan ulang dengan pencocokan awalan type-descriptor, kompatibel dengan dot / slash / L...; formulir input\n\nKonten di atas hanya untuk referensi pembelajaran teknis; Semua implementasi akhir dikembangkan sendiri oleh proyek ini. Hak cipta milik penulis asli dan organisasi mereka.</string>
+    <string name="app_name">Editor Penghapus Iklan APK</string>
+    <string name="app_subtitle_about">Tentang · Versi dan pernyataan</string>
+    <string name="app_subtitle_settings">Sesuaikan pola iklan</string>
+    <string name="app_title_download">Pusat unduhan</string>
+    <string name="app_title_local">Hapus iklan sekali sentuh · Bongkar / Patch / Paket / Tanda tangan</string>
+    <string name="author_email">3679265780@qq.com</string>
+    <string name="author_name">XiaoNaiPing</string>
+    <string name="author_qq_note">3679265780</string>
+    <string name="file_item_icon">Ikon file</string>
+    <string name="h_00110af8">日本語</string>
+    <string name="h_0046342a">· Tidak ditemukan file DEX</string>
+    <string name="h_0078e971" formatted="false">| Ukuran APK | %1$s | %2$s | %3$s |</string>
+    <string name="h_0094af95">Mengidentifikasi kelas komponen tampilan iklan</string>
+    <string name="h_00a68483">com.google.android.gms.ads\ncom.bytedance.sdk.openadsdk\ncom.qq.e.ads\ncom.mbridge.msdk</string>
+    <string name="h_00db9073">Saat runtime, baca dengan metode core/DexPatcher.kt\ untuk menghapus logika filter (dengan kesadaran batas kata).</string>
+    <string name="h_01213463">    - Beranda: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_0148e9c3" formatted="false">| Total Waktu | - | %1$s | - |</string>
+    <string name="h_0189f54f">    Koleksi Java dan perpustakaan utilitas, menyediakan koleksi immutable yang dibutuhkan oleh dexlib2\n</string>
+    <string name="h_01ad6b8a" formatted="false">✓ %1$s rekompilasi selesai: snapshot=%2$s, </string>
+    <string name="h_01be0fd6">Bekerja dengan \&quot;Nama paket Ad SDK\&quot;, \&quot;Ad Activity / Service / Receiver\&quot; untuk membersihkan deklarasi izin ad SDK di manifest.</string>
+    <string name="h_01d3d9f4">Menyimpan gagal, periksa izin penyimpanan</string>
+    <string name="h_01ee9186" formatted="false">| Jumlah DEX yang Dilewati | %1$s |</string>
+    <string name="h_01f0ed64" formatted="false">⚠ Pembersihan cache Flutter gagal: %1$s</string>
+    <string name="h_02317889">Pola iklan Flutter diaktifkan</string>
+    <string name="h_0253b8cd">biasanya digunakan secara mandiri, atau dengan </string>
+    <string name="h_02b610da">Tidak ada aplikasi Flutter terdeteksi (tidak ada libapp.so); Bagian ini tidak berlaku.</string>
+    <string name="h_02be3cd1">Nama kelas tampilan iklan</string>
+    <string name="h_02cd9acd" formatted="false">✓ Tanda | %1$s | %2$s</string>
+    <string name="h_03277167">isVip\nisPro\nisPremium\nisMember\nisPaid</string>
+    <string name="h_037647ef">Memeriksa pembaruan...</string>
+    <string name="h_042f6c6a" formatted="false">⚠ Gagal penghapusan: %1$s/%2$s</string>
+    <string name="h_0456832d">Ketuk \&quot;Kelola\&quot; -&gt; masukkan kata kunci -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_04cc78d8">Dalam file tata letak resolusi/tata letak APK, ad SDK sering disematkan sebagai Tampilan kustom (e.g. com.meishu.sdk.meishu_ad.view.MeishuVideoCahceTextureView, AdView, dll.). Ketika nama kelas suatu elemen mengandung kata kunci ini, layout_width / layout_height elemen tersebut diubah menjadi 0dp setelah diproses, sehingga area iklan menjadi nol untuk menyembunyikannya, tanpa menghilangkan posisi atau referensinya dalam tata letak, sehingga struktur tata letak tidak terpecah.</string>
+    <string name="h_04cd3cff">AdView\nAdActivity\nBannerAd\nInterstitialAd</string>
+    <string name="h_04ea27ce">iklan Lihat nama kelas </string>
+    <string name="h_04f51da8" formatted="false">✗ Penyematan sumber daya paket asli gagal: %1$s</string>
+    <string name="h_0502db8e">Ganti semua</string>
+    <string name="h_05112730">Kata kunci tampilan iklan tata letak resolusi</string>
+    <string name="h_05360de7" formatted="false">Mode verifikasi tanda tangan diatur ke: %1$s</string>
+    <string name="h_0594e658">    - Lisensi: BSD 3-Clause\n\n</string>
+    <string name="h_05ade75d">Token dihasilkan; Salin atau bagikan kepada orang lain.</string>
+    <string name="h_06265e81">Penulisan ulang manifest gagal</string>
+    <string name="h_06b81d3d">Pemuatan tata letak gagal</string>
+    <string name="h_07f8a374">    - Asal: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_08430702" formatted="false">Sudah ada versi terbaru (%1$s)</string>
+    <string name="h_08badd62"> umumnya dengan </string>
+    <string name="h_08dc0848">    - Lisensi: Lisensi Apache 2.0\n\n</string>
+    <string name="h_09306e74" formatted="false">✗ Kesalahan pemrosesan penghapusan iklan: %1$s</string>
+    <string name="h_0a855e59">Kata kunci nama kelas Ad broadcast receiver (Receiver), digunakan untuk mengidentifikasi komponen siaran iklan. Saat memproses, metode iklan mereka dikosongkan dan komponen yang sesuai dihapus dari manifest.</string>
+    <string name="h_0b1609fb">Tidak diaktifkan (ketuk untuk mengubah mode)</string>
+    <string name="h_0b1b3420" formatted="false">Output build hook DEX %1$s kesalahan kelas induk: %2$s, </string>
+    <string name="h_0b1c5479">Biasanya digunakan secara mandiri; juga dapat bekerja dengan \&quot;Nama paket Ad SDK\&quot; untuk memperkuat efek pemblokiran.</string>
+    <string name="h_0b34e814">Masukkan nama langganan</string>
+    <string name="h_0b849763">## Memproses Checkpoint (Infrastruktur yang Dapat Dilanjutkan)</string>
+    <string name="h_0c01c591">    - Asal snapshot.h: https://github.com/dart-lang/sdk/blob/master/runtime/vm/snapshot.h\n</string>
+    <string name="h_0c258295" formatted="false">| Tata Letak Iklan Res Tersembunyi | %1$s |</string>
+    <string name="h_0c374516" formatted="false">| Komponen Iklan AXML Dihapus | %1$s |</string>
+    <string name="h_0c94389e">Dokumen teknis publik berikut, tutorial sumber terbuka, dan materi rekayasa balik komunitas dirujuk selama pengembangan; Terima kasih dan pengakuan berikut ini, dengan sumber yang dicatat:\n\n</string>
+    <string name="h_0cad3ba2">Smart ABI-native injection: menulis native libs hanya ke ABI yang sudah ada di APK target; menulis semua ABI ketika tidak ada pengarah lib</string>
+    <string name="h_0d05061e">    - Di hook, &lt;clinit&gt;membaca dan menyimpan tanda tangan melalui PackageManager, mencakup getPackageInfo / verifikasi native\n</string>
+    <string name="h_0d110ed8"> bersama, terbaik bersama </string>
+    <string name="h_0d2d462b" formatted="false">Gagal mengikat kartu kategori: %1$s</string>
+    <string name="h_0d37a3a3">Ketuk \&quot;Kelola\&quot; -&gt; masukkan nama metode penentuan untuk membuka kunci -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_0d3ea6cb">Ditulis ke bidang \&quot;res_layout_keywords\&quot; pada $HELP_CONFIG_NAME.\nSaat runtime, dibaca oleh hideAdLayoutViews() dari core/AxmlAdRemover.kt\ untuk menulis ulang lebar/tinggi menjadi 0dp agar elemen yang sesuai dalam layout AXML di bawah res/layout dan res/layout-*.</string>
+    <string name="h_0dd640d5">Aplikasi Flutter (AOT) menyematkan snapshot Dart di libapp.so, yang menyimpan string seperti nama paket ad SDK, URL/domain iklan, dan nama kelas ad sebagai byte ASCII mentah. Ini menjaga pola string tetap dihapus dari snapshot: ketika dicocokkan, pola tersebut ditimpa dengan byte NUL dengan panjang sama selama libapp.so unpack/remove-ad/repack, sehingga konten string iklan menjadi tidak efektif.</string>
+    <string name="h_0e13f623">Mengatur ulang semua pola iklan ke default bawaan?\nPerubahan kustom Anda akan hilang.</string>
+    <string name="h_0e3149dd" formatted="false">▶ Memproses %1$s (%2$s, %3$s)</string>
+    <string name="h_0e655b36" formatted="false">| Metode Iklan Dibatalkan | %1$s |</string>
+    <string name="h_0ed17ae5">4. Pernyataan tanpa garansi: aplikasi ini disediakan \&quot;apa adanya\&quot;, tanpa jaminan eksplisit maupun tersirat. Penulis tidak bertanggung jawab atas kerugian langsung maupun tidak langsung yang disebabkan oleh penggunaan atau ketidakmampuan menggunakan aplikasi ini.\n\n</string>
+    <string name="h_0f5b9aec">    Meminjam dokumen API dan contoh-contohnya, implementasi kami sendiri dalam pencarian dan penulisan ulang ad class/metode/string\n\n</string>
+    <string name="h_0f8a3b32">Ketuk \&quot;Kelola\&quot; -&gt; masukkan pola string iklan (satu fragmen sudah cukup) -&gt; ketuk \&quot;Tambah\&quot;. Pencocokan berbasis substring saat runtime (tidak sensitif huruf besar/kecil).</string>
+    <string name="h_0fc61704">Langganan tanpa judul</string>
+    <string name="h_0fd47041">Reset ke konfigurasi default</string>
+    <string name="h_101f062b">    - Menyuntikkan kelas hook KillerApplication dan menulis ulang referensi manifest Application\n</string>
+    <string name="h_10286b03">    - Beranda: https://www.bouncycastle.org/\n</string>
+    <string name="h_1136c248">kata kunci nama kelas ad </string>
+    <string name="h_114cfdd0">digunakan untuk </string>
+    <string name="h_118b2282">paksa pembaruan DAN versi saat ini lebih rendah dari yang terbaru</string>
+    <string name="h_11b8b2c9">· Optimasi gagal, kembali ke penandatanganan standar v1+v2</string>
+    <string name="h_11ca9ed7" formatted="false">-&gt; %1$s: tautan kosong di %2$s spot%3$s</string>
+    <string name="h_122f1ca8">Kata kunci dari nama pustaka asli di bawah direktori lib yang akan dihapus. Digunakan untuk menghapus file dynamic library ad SDK (untuk memastikan file ad .so di direktori lib dihapus).</string>
+    <string name="h_1233c111" formatted="false">file: %1$s</string>
+    <string name="h_12f7aee0">, // pengumuman ID unik (untuk </string>
+    <string name="h_130a118a">Fitur mandiri; berlaku untuk semua kelas dan semua metode, tanpa ketergantungan pada kategori lain.</string>
+    <string name="h_132ae845">· Bongkar: Snapshot Dart tidak ditemukan</string>
+    <string name="h_1394b002">Hapus sumber daya iklan berdasarkan kata kunci</string>
+    <string name="h_14543bce">    - Beranda: https://android.googlesource.com/platform/tools/apkzlib\n</string>
+    <string name="h_14e50afa">Bekerja dengan \&quot;Nama paket Ad SDK\&quot; dan \&quot;Kata kunci nama kelas iklan\&quot;; semuanya merupakan bagian dari sistem identifikasi nama kelas.</string>
+    <string name="h_1516029a">ttad\ngdt\npangle\nadmob\nbaiduad</string>
+    <string name="h_15286e90">Hapus pemeriksaan tanda tangan dari versi asli</string>
+    <string name="h_158dee5e">Pilih mode penghapusan pemeriksaan tanda tangan</string>
+    <string name="h_15c99f22">Null out metode dan tautan ad-class, melihat geometri zero, dan memaksa pengembalian true/false untuk membuka keanggotaan dan memblokir ad check</string>
+    <string name="h_166a8328" formatted="false">Izin AXML %1$s</string>
+    <string name="h_166c2b0d">Hanya memengaruhi string yang terlihat seperti URL (berisi ://, www, .com, dll.) untuk menghindari kerusakan teks biasa.</string>
+    <string name="h_16753bc3">loadAd\nshowAd\nloadInterstitialAd\nshowRewardedVideo</string>
+    <string name="h_16a1939f" formatted="false">| Gagal Menghitung DEX | %1$s |</string>
+    <string name="h_16a9197c" formatted="false">Ditulis ke file konfigurasi eksternal %1$s\'s </string>
+    <string name="h_1716f0ff">⏭ Tidak ada perubahan</string>
+    <string name="h_17393ab7" formatted="false">jumlah metode: %1$s</string>
+    <string name="h_17ac7253">AdActivity\nInterstitialAdActivity\nAktivitas Splash</string>
+    <string name="h_18374fbf">tt_version\nstartup_config\noaid\nuuid\ndevice_id\noa_sdk</string>
+    <string name="h_1897b7f5">Cara menambahkan</string>
+    <string name="h_1901ab4f" formatted="false">✗ %1$s hilang ingatan: %2$s</string>
+    <string name="h_19071f26">▶ Penghapusan izin AXML tahap 2.5</string>
+    <string name="h_19c4ff08">Pada runtime, core/DexPatcher.kt memindai instruksi string konstansi dan mengosongkan string yang sesuai dengan string iklan.</string>
+    <string name="h_1a63ac23">Contoh</string>
+    <string name="h_1b5de080" formatted="false"> (%1$s item)</string>
+    <string name="h_1b92ede8">Masukkan token langganan, tautan langsung, atau tempel konten konfigurasi</string>
+    <string name="h_1c397bbb">&lt;receiver&gt; Entri yang cocok dalam manifest sepenuhnya dihapus.</string>
+    <string name="h_1cb37f65" formatted="false">✗ Snapshot Dart tidak ditemukan di %1$s, dilewati</string>
+    <string name="h_1cdb9d2e">→ masukkan nama paket lengkap ad SDK di kotak input → ketuk </string>
+    <string name="h_1d0592d0" formatted="false">paksa false %1$s</string>
+    <string name="h_1d0da9e5">    Ditulis berdasarkan header chunk AXML, struktur tabel sumber daya StringPool/ResourceMap, dan materi rekayasa balik publik\n</string>
+    <string name="h_1d11c240">Konten di atas hanya untuk referensi pembelajaran teknis; Implementasi akhir semuanya dikembangkan sendiri untuk proyek ini; Hak cipta yang terlibat menjadi milik penulis asli dan organisasi mereka.\n</string>
+    <string name="h_1d9b17d9" formatted="false">| Force-return false | %1$s |</string>
+    <string name="h_1d9e668b" formatted="false">Unduhan gagal: %1$s</string>
+    <string name="h_1da8eee1" formatted="false">, forceFalse=%1$s</string>
+    <string name="h_1dc6377b">8. Penghapusan verifikasi tanda tangan (over-signing)</string>
+    <string name="h_1e52f7a3">Ubah jalur file konfigurasi</string>
+    <string name="h_1e8d2df8">Disarankan untuk menulis fragmen umum daripada jalur penuh agar tingkat kesanggupan lebih tinggi; Semakin banyak kata kunci, semakin tinggi kemungkinan positif palsu, jadi berhati-hatilah.</string>
+    <string name="h_1eaa01fa"> secara kombinasi.</string>
+    <string name="h_1f2ebce9">⚠ Tidak ada sumber daya pustaka asli yang cocok untuk ABI APK target yang sudah ada, tidak ada .so embedded</string>
+    <string name="h_1f8edce8"> secara kombinasi (nama paket secara otomatis menurunkan beberapa kata kunci nama perpustakaan).</string>
+    <string name="h_1fcaf3a3">Saat runtime, cleanRootFiles() dari core/AdRemover.kt\ berjalan di direktori root APK (hanya satu level, bukan rekursif) dan menghapus file yang cocok.</string>
+    <string name="h_1fdd9c8d">Kompresi ulang data dengan entropi tinggi</string>
+    <string name="h_2065c465" formatted="false">Optimasi ukuran DEX: menghapus info debug (nomor baris / tabel variabel lokal) untuk mengurangi tambahan 5%~15%</string>
+    <string name="h_21773eee">    - Hanya untuk referensi pembelajaran; kelas hook dan lib native adalah sumber sampel yang dibundel, binernya tidak dimodifikasi\n\n</string>
+    <string name="h_21806150">Ketuk \&quot;Kelola\&quot; -&gt; masukkan nama metode yang persis identik dengan kode -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_21888ee3">Buka browser untuk mengunduh</string>
+    <string name="h_21be04bc">✅ Dimodifikasi</string>
+    <string name="h_21d3c920">Ditulis ke bidang \&quot;ad_activities\&quot; pada $HELP_CONFIG_NAME.\nFitur ini dibaca saat runtime oleh core/DexPatcher.kt (identifikasi kelas) dan core/AxmlAdRemover.kt (penghapusan komponen AndroidManifest).</string>
+    <string name="h_225b72f5">    - Mode paket asli: menyematkan APK asli dan SO yang ditandatangani lebih, membaca tanda tangan asli untuk pencocokan, mencakup lebih banyak kasus\n</string>
+    <string name="h_225efc14">    Alat kompilasi dan pengemasan sumber daya Android, digunakan untuk AXML / penanganan sumber daya\n</string>
+    <string name="h_22c8b46e" formatted="false">· Ukuran tidak terkompresi: %1$s</string>
+    <string name="h_23348314" formatted="false">Pengaturan UI gagal muat: %1$s</string>
+    <string name="h_2364780e">· direktori lib tidak ditemukan, pemrosesan Flutter dilewati</string>
+    <string name="h_23af2edf" formatted="false">✓ Flutter cache dibersihkan: menghapus file %1$s, hanya disimpan strings.txt</string>
+    <string name="h_23cc02a1" formatted="false">· Mode: %1$s</string>
+    <string name="h_23fa5ce2">    - Lisensi: Lisensi MIT\n\n</string>
+    <string name="h_2405c1bf" formatted="false">  i Optimasi penggunaan ulang data selesai: %1$s -&gt; %2$s</string>
+    <string name="h_2664f5c6">Harap isi string unik yang sangat terkait dengan ad SDK (seperti ID unit iklan, string fitur SDK) dan hindari string yang terlalu generik yang dapat merusak string fungsi normal.</string>
+    <string name="h_26f0c819">Nama kelas hook / info tanda tangan / nama entri / parameter injeksi sepenuhnya dapat disesuaikan, dengan penggantian nama otomatis kelas DEX bawaan</string>
+    <string name="h_2706339d">    - Beranda: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_271e5d10">Bekerja dengan \&quot;Ad URL / domains\&quot; dan \&quot;Ad method names\&quot;: kategori ini mengosongkan string yang cocok, sehingga mencakup lebih banyak area.</string>
+    <string name="h_284f10db">Kata kunci nama kelas Aktivitas Iklan (halaman), digunakan untuk mengidentifikasi kelas halaman iklan. Saat memproses, metode iklan mereka dikosongkan dan komponen yang sesuai dihapus dari manifest.</string>
+    <string name="h_288979b3">komplementer: true membuka kunci VIP, false memblokir pemeriksaan tampilan iklan.</string>
+    <string name="h_2925d260">    - Beranda: https://developer.android.com/jetpack\n</string>
+    <string name="h_29767300">    Merujuk contoh resmi dexlib2 RewriterModule / TypeRewriter untuk menulis ulang definisi kelas dan semua referensi secara bersama-sama\n</string>
+    <string name="h_298ae83f" formatted="false">✗ Pemrosesan %1$s gagal: %2$s</string>
+    <string name="h_299bd8c9">Masukkan konfigurasi secara manual</string>
+    <string name="h_2a6fc8f0" formatted="false">Ditulis ke %1$s\'s </string>
+    <string name="h_2b8b4e3c" formatted="false">\n... (%1$s byte tidak ditampilkan)</string>
+    <string name="h_2be69e45">Ditulis ke bidang \&quot;force_true_methods\&quot; pada $HELP_CONFIG_NAME.\nSaat runtime, ini ditangani oleh logika force-return-true core/DexPatcher.kt\ (hanya tipe return boolean/int).</string>
+    <string name="h_2c72ee88">Pemrosesan AXML mendalam: menghapus komponen iklan, deklarasi izin iklan, dan menyembunyikan tampilan iklan Res-layout</string>
+    <string name="h_2c7d15eb">Saat runtime, core/DexPatcher.kt melakukan pencocokan nama metode secara tepat dan mengosongkan badan metode.</string>
+    <string name="h_2d455ce5">Mengunduh</string>
+    <string name="h_2d8e8ed2">Sering bekerja dengan \&quot;Kata kunci nama kelas Ad\&quot; dan \&quot;Kata kunci pustaka asli Ad SDK\&quot;; Nama paket secara otomatis menurunkan kata kunci nama pustaka .so di direktori lib.</string>
+    <string name="h_2d96df70">paket bertanda tangan lebih</string>
+    <string name="h_2dee860f" formatted="false">✓ Menghapus deklarasi izin iklan %1$s</string>
+    <string name="h_2e352520"> Dalam kombinasi: kategori ini adalah pencocokan tepat, kategori terakhir adalah pencocokan kata kunci fuzzy.</string>
+    <string name="h_2f5132d0">salin tanpa syarat semua instruksi untuk setiap metode</string>
+    <string name="h_2fcb517d">Pengambilan gagal, periksa apakah tautan valid</string>
+    <string name="h_2fe6efbe">Pengaturan jalur gagal, periksa izin</string>
+    <string name="h_300739f4">Reset konfigurasi default</string>
+    <string name="h_3020d50a">    Sumber aturan fitur kelas iklan / nama metode / URL\n</string>
+    <string name="h_30d2a6e2">Konfirmasi hapus </string>
+    <string name="h_31186ba1" formatted="false">✓ Entri aset %1$s telah dibersihkan | %2$sms</string>
+    <string name="h_3141af8c">AdService\nDownloadService\nUpdateService</string>
+    <string name="h_3155992e">    - beranda dexlib2: https://github.com/JesusFreke/smali\n</string>
+    <string name="h_31e413e3">Optimasi ukuran DEX dimatikan</string>
+    <string name="h_324f699a">Mengidentifikasi kelas layanan latar belakang iklan</string>
+    <string name="h_327638c1">Konfigurasi muat gagal, menggunakan konfigurasi default</string>
+    <string name="h_327c8914" formatted="false">, stringBlank=%1$s</string>
+    <string name="h_328bae35">gantungan pemrosesan</string>
+    <string name="h_32ae4cdd">i DEX ini diaktifkan untuk pemindaian besar dan aman dengan memori rendah, mohon tunggu...</string>
+    <string name="h_32b1989c">Kata kunci nama kelas iklan</string>
+    <string name="h_33b16185">tidak ada perubahan</string>
+    <string name="h_348519cb">▶ Langkah 4/5 Paket &amp; tanda tangan</string>
+    <string name="h_34e480ea" formatted="false">| Pemrosesan libapp.so Flutter | %1$s libs, %2$s pengganti |</string>
+    <string name="h_351683da">Ubah direktori output APK</string>
+    <string name="h_362944cf" formatted="false">Tulis DEX keluar dari memori: %1$s</string>
+    <string name="h_36427794">Nama paket menggunakan format putus-putus (e.g. com.x.y) dan secara otomatis dikonversi ke format garis miring saat diproses agar sesuai dengan nama kelas DEX.</string>
+    <string name="h_364d2bba">Tidak ditemukan file DEX, atau tidak ada yang diproses.</string>
+    <string name="h_369a31f0">Pola iklan string DEX</string>
+    <string name="h_36fc3fb9">Jangan ingatkan lagi / tunjukkan hanya sekali</string>
+    <string name="h_3738dcca">✗ Tidak dapat membaca tanda tangan asli (hilang atau tidak ditandatangani), tidak dapat menyuntikkan hook</string>
+    <string name="h_37f14a6c">Kata kunci ini digunakan untuk mencocokkan nama kelas elemen layout dan mencakup permukaan yang luas; hindari kata-kata yang terlalu umum (misalnya AD) untuk mencegah penyembunyian kontrol normal; disarankan menggunakan .ad., nama SDK spesifik, atau nama kelas lengkap.</string>
+    <string name="h_380de9a9">Tidak ditemukan klien email</string>
+    <string name="h_38e6644d">APK dengan targetSdkVersion &gt;= 30 harus menggunakan skema penandatanganan v2 atau lebih tinggi</string>
+    <string name="h_3942f40c" formatted="false">  · menggunakan kembali segmen data paket asli (%1$s), menghemat %2$s</string>
+    <string name="h_3a3bf3f6">Kehilangan memori, pemrosesan gagal</string>
+    <string name="h_3ab3b29b"> dalam kombinasi: satu kata kunci fuzzy, satu nama metode yang tepat; sering dengan </string>
+    <string name="h_3ae2b7d3" formatted="false">-&gt; %1$s: force-return false untuk %2$s metode</string>
+    <string name="h_3b108349">Berhasil disimpan</string>
+    <string name="h_3b98359d">→ masukkan nama metode yang persis sesuai dengan kode → ketuk </string>
+    <string name="h_3bab674a" formatted="false"># Total string (dideduped): %1$s</string>
+    <string name="h_3bd446d8">Penghapusan pemeriksaan tanda tangan diaktifkan</string>
+    <string name="h_3c1862f0">Nama metode untuk memaksa pengembalian true</string>
+    <string name="h_3c1e4f2e">Ketuk \&quot;Kelola\&quot; -&gt; masukkan nama kelas atau kata kunci tampilan iklan -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_3ce15ae3">. Saat runtime, ini cocok berdasarkan substring (tidak sensitif huruf besar).</string>
+    <string name="h_3ce7dc91">Nama kelas tampilan iklan</string>
+    <string name="h_3db4cd4d">gdt\nsatu arah\nbdxadsdk\nQumeng</string>
+    <string name="h_3dd3492b">Patching DEX</string>
+    <string name="h_3e32cd6d">Mendeteksi APK bersarang yang berganti nama: sub-paket asli tanpa atau tanpa ekstensi diakui dan dioptimalkan</string>
+    <string name="h_40d44b02">Snapshot Dart tidak ditemukan</string>
+    <string name="h_40d55c2d">metode pemeriksa seperti itu. Ketika nama metode persis cocok dan tipe return-nya boolean atau int, badan metode diganti menjadi </string>
+    <string name="h_413880fa">i Optimasi ukuran DEX pada: menghapus info debug untuk memperkecil APK lebih lanjut</string>
+    <string name="h_416e6b73">offset mulai data</string>
+    <string name="h_4193d899">Saat runtime, core/DexPatcher.kt melakukan pencocokan kelas iklan, dan core/AxmlAdRemover.kt juga mencocokkan komponen manifest.</string>
+    <string name="h_41994826">Hapus file residual iklan di direktori root paket</string>
+    <string name="h_41d17685" formatted="false">| String Iklan Nulled | %1$s |</string>
+    <string name="h_420b8289">pemrosesan → selesai</string>
+    <string name="h_4222e5fa">Bekerja dengan \&quot;Ad SDK package names\&quot; untuk juga membersihkan Aktivitas terkait di manifest.</string>
+    <string name="h_424670d9">Untuk menginstal versi baru, harap izinkan aplikasi ini menginstal aplikasi dari sumber yang tidak dikenal.</string>
+    <string name="h_4267eb34" formatted="false">✓ Ekspor: %1$s</string>
+    <string name="h_42a1235e" formatted="false">i %1$s mendeteksi pola iklan tetapi tidak melakukan perubahan nyata, melewati write-back (%2$sms)</string>
+    <string name="h_42b0752f">, melewati cek yang dibayar secara langsung.</string>
+    <string name="h_42cffbac">5. Tautan pihak ketiga: halaman Tentang dan Pembaruan dapat berisi tautan eksternal; Mengetuknya memungkinkan platform pihak ketiga menangani akses Anda, jadi harap tinjau kebijakan privasi pihak ketiga yang relevan.\n\n</string>
+    <string name="h_42f52a63">Pemrosesan kode DEX</string>
+    <string name="h_430a8d97">&lt;service&gt; Entri yang cocok dalam manifest sepenuhnya dihapus.</string>
+    <string name="h_430b3928">Kata kunci blank-out metode iklan (pencocokan fuzzy). Setelah kelas iklan dipadai, hanya metode yang namanya mengandung kata kunci ini yang dikosongkan, menghindari pengolahan berlebihan yang dapat menyebabkan aplikasi crash (misalnya mempertahankan konstruktor, metode siklus hidup, dll.).</string>
+    <string name="h_432ecd96">Langganan disimpan</string>
+    <string name="h_4357855b">Unduhan gagal, ketuk untuk mencoba ulang</string>
+    <string name="h_437a2008">Perlindungan crash DEX: backup, penulisan atomik, dan auto-recovery mencegah kerusakan DEX</string>
+    <string name="h_43a8f757">Aplikasi ini dibangun di atas dan memanggil proyek-proyek open-source berikut; Terima kasih dan rasa hormat yang tulus kepada para penulisnya:\n\n</string>
+    <string name="h_43e71a0b">11. Sampel MT Manager ApkSignatureKillerEx (Bin.MT)</string>
+    <string name="h_44057142" formatted="false">✗ Tidak dapat memuat %1$s: %2$s</string>
+    <string name="h_441e7040">    - Beranda: https://github.com/google/guava\n</string>
+    <string name="h_44c58696">    - Memporting implementasi DataMultiplexing / ZipMaker / ZipFile / V2V3SchemeSigner\n</string>
+    <string name="h_44fd089f"> memiliki tujuan yang tumpang tindih, jadi Anda bisa mempertahankan salah satu dari keduanya.</string>
+    <string name="h_45020f68" formatted="false">Versi %1$s</string>
+    <string name="h_46137025">Ketuk \&quot;Kelola\&quot; -&gt; masukkan nama metode penentuan untuk memaksa pengembalian false -&gt; ketuk \&quot;Add\&quot;.</string>
+    <string name="h_46c45c70" formatted="false"># Jumlah snapshot: %1$s</string>
+    <string name="h_46c49965">繁體中文</string>
+    <string name="h_474fe5eb">    Perpustakaan komponen Material Design, menyediakan kartu, tombol, dialog, dan komponen UI lainnya\n</string>
+    <string name="h_47903a91" formatted="false">· Nama kelas hook khusus: %1$s</string>
+    <string name="h_4797fecd">    - Lisensi: BSD 3-Clause\n\n</string>
+    <string name="h_481170fc">Digunakan untuk metode penentuan seperti \&quot;apakah iklan dimuat / sedang menampilkan / memiliki iklan\&quot;. Ketika nama metode sama persis dan tipe return adalah boolean atau int, badan metode diganti dengan \&quot;return false / 0\&quot;, membuat aplikasi percaya iklan tidak pernah dimuat atau ditampilkan, sehingga logika tampilan iklan dilewati.</string>
+    <string name="h_48399cb4">Untuk teks hak cipta dan lisensi lengkap dari proyek-proyek di atas, silakan kunjungi halaman utama masing-masing.\n</string>
+    <string name="h_4839e21f">    Merujuk pada XmlPullParser AOSP dan spesifikasi format biner AXML\n</string>
+    <string name="h_483c1454">    Merujuk pada implementasi resmi apksig dan dokumentasi Android tentang penyelarasan ZIP\n</string>
+    <string name="h_48574fbe">Ditulis ke bidang \&quot;asset_keywords\&quot; pada $HELP_CONFIG_NAME.\nPada runtime core/AdRemover.kt\, cleanAdSdkAssets() menghapus entri yang sesuai berdasarkan kata kunci.</string>
+    <string name="h_490a3d52" formatted="false">✗ Pemparse AXML gagal: %1$s</string>
+    <string name="h_4a060eb9" formatted="false">✗ Injeksi kait tanda tangan gagal: %1$s</string>
+    <string name="h_4a804b6d" formatted="false">| Tautan Iklan Dibatalkan | %1$s |</string>
+    <string name="h_4a92250e">penerima iklan</string>
+    <string name="h_4abbcecf">sangat jelas</string>
+    <string name="h_4aed3358">→ memasukkan nama kelas atau kata kunci Receiver iklan → ketuk </string>
+    <string name="h_4b30694f">Masukkan URL konfigurasi jarak jauh</string>
+    <string name="h_4b9c3271">Reset</string>
+    <string name="h_4d002649">Izin instalasi diperlukan</string>
+    <string name="h_4dbf184b">9. Penggantian nama kelas DEX (nama kelas hook khusus)</string>
+    <string name="h_4df76273">Pola ini independen dari pola DEX. Ketika disetel, digunakan terlebih dahulu untuk pemrosesan Flutter; biarkan kosong secara otomatis kembali ke </string>
+    <string name="h_4e20a9f5">Hasil secara otomatis mengekspor ke direktori sumber dan membersihkan cache, menghemat penyimpanan</string>
+    <string name="h_4e308cd8" formatted="false">⚠ Membongkar %1$s gagal: %2$s</string>
+    <string name="h_4e63334a">Dukungan Flutter: mengurai snapshot AOT Dart dan menetralkan pola string iklan di dalam libapp.so</string>
+    <string name="h_4e835a62">Potong / ubah panjang</string>
+    <string name="h_4f20bc64" formatted="false">✓ Pengemasan selesai: %1$s entri</string>
+    <string name="h_4f305d7d" formatted="false">%1$s → %2$s (disimpan %3$s)</string>
+    <string name="h_4f5a392d">Ketuk \&quot;Kelola\&quot; -&gt; masukkan nama kelas atau fragmen kata kunci tampilan iklan -&gt; ketuk \&quot;Tambah\&quot;. Pencocokan berbasis substring saat runtime (tidak sensitif huruf besar/kecil).</string>
+    <string name="h_50420f6e" formatted="false">  ▶ Menyuntikkan hook tanda tangan gaya MT (%1$s</string>
+    <string name="h_50542d9e" formatted="false">Beberapa langganan gagal diambil: %1$s</string>
+    <string name="h_50e67da4" formatted="false">▶ Penghapusan pemeriksaan tanda tangan · %1$s</string>
+    <string name="h_51a3142b">→ memasukkan domain iklan atau fragmen URL → ketuk </string>
+    <string name="h_51c8f936">→ memasukkan kata kunci nama pustaka .so → ketuk </string>
+    <string name="h_521147e7">Ditulis ke bidang \&quot;method_neutralize_keywords\&quot; pada $HELP_CONFIG_NAME.\nSaat runtime, metode ini dibaca oleh logika filter blank-out metode core/DexPatcher.kt\ (dengan kesadaran batas kata).</string>
+    <string name="h_52279c25">&lt;activity&gt; Entri yang cocok dalam manifest sepenuhnya dihapus; harap konfirmasi bahwa Aktivitas memang untuk iklan sebelum dihapus.</string>
+    <string name="h_523f7b8b">Aktivitas Iklan</string>
+    <string name="h_52aa344f">Ketuk \&quot;Kelola\&quot; -&gt; masukkan jalur relatif (dapat menyertakan aset/ awalan atau menghilangkannya) -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_52b36576">Step</string>
+    <string name="h_530b0af0">Penghapusan paket asli (ditingkatkan)</string>
+    <string name="h_53cb60e6">Mengidentifikasi kelas halaman iklan</string>
+    <string name="h_5418bedc">tuan rumah terbaik</string>
+    <string name="h_542664ea">⏭ Dilewati (nol perubahan)</string>
+    <string name="h_54d484f4" formatted="false">%1$s langganan total, %2$s diaktifkan</string>
+    <string name="h_5503edc4">▶ Langkah 2/5 Buka</string>
+    <string name="h_556c8e96">isAdLoaded\nhasAd\nisAdShowing\nisAdReady\nisInterstitialLoaded</string>
+    <string name="h_566859e2">Pola senar flutter</string>
+    <string name="h_568e50df">· Tidak ditemukan komponen iklan yang harus dihapus</string>
+    <string name="h_56ef97b2">membangun kembali / menandatangani ulang</string>
+    <string name="h_575bd6a0">▶ Pembersihan aset tahap 4</string>
+    <string name="h_5781c4c1">apakah iklan dimuat/menampilkan/memiliki iklan</string>
+    <string name="h_57c12e61">URL iklan / domain</string>
+    <string name="h_582b60a3" formatted="false">Parameter injeksi disimpan: %1$s / %2$s</string>
+    <string name="h_583bde12">Mengambil konfigurasi jarak jauh...</string>
+    <string name="h_594b988c">    Kata kunci nama paket / domain / kelas Ad SDK diperluas dari aturan proyek open-source DTL-X\n</string>
+    <string name="h_599c01d1">Jalur file konfigurasi harus diakhiri dengan .json</string>
+    <string name="h_599cc493">Identifikasi kelas iklan berdasarkan kata kunci</string>
+    <string name="h_59b8b3f0">menghitung CRC</string>
+    <string name="h_59e52cbd">6. Optimasi penggunaan ulang data (pengurangan ukuran paket over-signed)</string>
+    <string name="h_5a046f71">▶ Proses selesai</string>
+    <string name="h_5a8cb987">Input tidak valid: ini bukan token maupun JSON konfigurasi yang valid, cek dan coba ulang</string>
+    <string name="h_5a9cf305" formatted="false">✓ Tata letak iklan resolusi selesai: %1$s file tata letak, %2$s elemen, %3$sms</string>
+    <string name="h_5af3990c" formatted="false">✓ Komponen iklan %1$s dihapus</string>
+    <string name="h_5c244e39">Ketuk \&quot;Kelola\&quot; -&gt; masukkan nama izin atau kata kunci izin -&gt; ketuk \&quot;Tambah\&quot;. Pencocokan berbasis substring saat runtime (tidak sensitif huruf besar/kecil); Anda dapat menggunakan kata fitur fitur prefix paket AD SDK atau izin.</string>
+    <string name="h_5c286b32">· Tidak ditemukan file xml tata letak resolusi, melewati</string>
+    <string name="h_5c5b99c0">Kata kunci file iklan aset. Jalur atau nama file di bawah aset yang mengandung kata kunci ini dihapus, mencakup aset iklan serupa di luar jalur yang diketahui.</string>
+    <string name="h_5c65f54a">Digunakan untuk membuka cek berbayar untuk edisi VIP / keanggotaan / pro. Ketika nama metode persis cocok dan tipe return-nya boolean atau int, badan metode diganti menjadi </string>
+    <string name="h_5d4aa133">Hapus jalur sumber daya iklan yang ditentukan</string>
+    <string name="h_5df66715">· Kata kunci tata letak tanpa resolusi dikonfigurasi, melewati</string>
+    <string name="h_5e213ddb">Untuk mengaktifkan</string>
+    <string name="h_606a0ed7" formatted="false">⏱ %1$s waktu: %2$sms</string>
+    <string name="h_60a5152a" formatted="false">✓ Tanda tangan V1 | %1$s</string>
+    <string name="h_60aa379b">Path tidak boleh kosong</string>
+    <string name="h_618d3deb" formatted="false">✓ %1$s | total waktu %2$s</string>
+    <string name="h_61d7146b"> fitur seperti URL / paket / nama kelas.</string>
+    <string name="h_62d0f9f8" formatted="false">%1$s item</string>
+    <string name="h_6303de15">Ketuk \&quot;Kelola\&quot; -&gt; masukkan kata kunci nama kelas iklan (fragmen sudah cukup) -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_63751f8a">Nama metode untuk memaksa pengembalian true</string>
+    <string name="h_63d55e8f">Token langganan</string>
+    <string name="h_645b8198" formatted="false">Komponen AXML %1$s</string>
+    <string name="h_645d0193">Saat runtime, core/LibappSoPatcher.kt melakukan penimpaan NUL dengan panjang sama di dalam snapshot Dart; core/FlutterAdRemover.kt menangani pembukaan/kompilasi ulang dan penyimpanan otomatis.</string>
+    <string name="h_64a506cb">    - Asal: https://mt2.cn/ (hanya untuk referensi pembelajaran)\n\n</string>
+    <string name="h_64e1f491" formatted="false">· Aplikasi kustom asli: %1$s</string>
+    <string name="h_6517e1ca">Harap baca disclaimer berikut dengan seksama sebelum menggunakan aplikasi ini:\n\n</string>
+    <string name="h_653e26a7" formatted="false">i %1$s tidak cocok tanpa pola iklan, tetap seperti adanya</string>
+    <string name="h_6591496b">Hanya memindai file di tingkat atas direktori root APK, bukan subdirektori; File inti seperti Classes.dex tidak pernah dihapus.</string>
+    <string name="h_65963a23">\nPratinjau hex (512 byte pertama):\n</string>
+    <string name="h_65ffcf5a">Dialog pembaruan profesional bawaan dengan bilah kemajuan, persentase, versi, dan ukuran file</string>
+    <string name="h_669acb71">Penghapusan izin AXML</string>
+    <string name="h_66b00047" formatted="false">Hapus %1$s</string>
+    <string name="h_66b000471" formatted="false">Hapus %1$s</string>
+    <string name="h_66b947eb" formatted="false">· Rasio kompresi: %1$s</string>
+    <string name="h_66c23c1c" formatted="false">Diskon %1$s</string>
+    <string name="h_672dcd46"> secara kombinasi, sehingga aktivitas terkait dalam manifest juga dibersihkan.</string>
+    <string name="h_67914606">Hanya menghapus deklarasi izin yang sesuai dengan pola dan tidak memengaruhi izin fungsional normal seperti INTERNET / KAMERA; Harap jangan menambahkan izin fungsional normal untuk menghindari memengaruhi operasi aplikasi.</string>
+    <string name="h_679b5837">setiap baris log berjalan runOnUiThread + fullScroll</string>
+    <string name="h_67fac552">Pelengkap \&quot;Force return true\&quot;: true untuk membuka kunci VIP, false untuk memblokir penentuan tampilan iklan.</string>
+    <string name="h_68004de2">→ masukkan nama kelas atau kata kunci Layanan iklan → ketuk </string>
+    <string name="h_681186f0">apakah paket asli memiliki Aplikasi khusus</string>
+    <string name="h_687f7144">Log proses berwarna waktu nyata dengan salinan satu ketukan / visualisasi hapus dan kemajuan</string>
+    <string name="h_68c89932">Bekerja dengan \&quot;Ad method names\&quot;: satu adalah kata kunci fuzzy, yang lain adalah nama metode yang tepat; sering dipasangkan dengan \&quot;Nama paket Ad SDK\&quot; dan \&quot;Kata kunci nama kelas iklan\&quot;.</string>
+    <string name="h_68ea25aa">mengenai</string>
+    <string name="h_69000422">Jalur file iklan aset</string>
+    <string name="h_69438ee5">    - Lisensi: Lisensi Apache 2.0\n\n</string>
+    <string name="h_695163f8">    Ditulis berdasarkan spesifikasi Material Design dan contoh pustaka Material Components\n</string>
+    <string name="h_69de4f41">Nama metode untuk memaksa pengembalian false</string>
+    <string name="h_69f3d080">Hanya memengaruhi metode yang tipe return-nya boolean(Z) atau int(I); Tipe lain dilewati secara otomatis untuk menghindari menghasilkan instruksi yang tidak valid.</string>
+    <string name="h_6a2eb85f" formatted="false">· Ditemukan file XML tata letak %1$s res (termasuk %2$s xml yang disamarkan dalam root res)</string>
+    <string name="h_6a3c653f">Ketuk \&quot;Kelola\&quot; di sebelah kanan -&gt; masukkan nama paket lengkap dari SDK iklan -&gt; ketuk \&quot;Tambah\&quot;. Anda juga dapat mengedit file konfigurasi langsung dengan manajer file.</string>
+    <string name="h_6a80c39a">▶ Pemrosesan gagal: kehabisan memori</string>
+    <string name="h_6ab5a0e9">Fragmen kata kunci dari nama kelas iklan. Ketika nama kelas disesuaikan, kelas tersebut diperlakukan sebagai kelas iklan dan badan metode iklannya diganti dengan nilai pengembalian default (dikosongkan), sehingga memblokir logika tampilan iklan.</string>
+    <string name="h_6ac37232">Kosongkan metode yang ditentukan secara tepat</string>
+    <string name="h_6af466b2">| Statistik | Hitung |</string>
+    <string name="h_6b3b93c7">untuk menentukan secara tepat</string>
+    <string name="h_6b3f9d20">host paket asli</string>
+    <string name="h_6b9a5016">▶ Patching DEX tahap 1</string>
+    <string name="h_6b9c9749" formatted="false">✓ Hook tanda tangan ditulis untuk DEX terpisah: %1$s (%2$s, %3$sms)</string>
+    <string name="h_6b9c9749d" formatted="false">  ✓ Signature hook ditulis ke DEX mandiri: %1$s (%2$s, %3$sms)</string>
+    <string name="h_6bfa92c8">Buka kunci penentuan VIP / anggota / pro</string>
+    <string name="h_6c1094f9">Ditulis ke bidang \&quot;sdk_packages\&quot; pada file konfigurasi eksternal $HELP_CONFIG_NAME.\nSaat runtime, dibaca oleh core/DexPatcher.kt (identifikasi kelas DEX), core/AxmlAdRemover.kt (penghapusan komponen manifest), dan core/AdRemover.kt (pembersihan pustaka native lib).</string>
+    <string name="h_6c39cca5">mengompilasi ulang</string>
+    <string name="h_6c59c767">Anda dapat menggunakan browser ponsel Anda untuk mengunjungi Lanzou Cloud dan mengunduh versi terbaru secara manual:\n\n</string>
+    <string name="h_6c5f734b">· Saran: kurangi ukuran DEX yang sedang diproses sekaligus atau tutup aplikasi lain dan coba lagi</string>
+    <string name="h_6d2ef53d" formatted="false">| Force-return true | %1$s |</string>
+    <string name="h_6d79cd1c">Bekerja dengan \&quot;Ad method blank-out keywords\&quot;: kategori ini adalah pencocokan tepat, sedangkan kategori terakhir adalah pencocokan kata kunci fuzzy.</string>
+    <string name="h_6dedd2e5" formatted="false">| Kelas Ad SDK Ter-Null | %1$s |</string>
+    <string name="h_6dfefe33">Tidak dapat membuka installer sistem, instal pembaruan secara manual</string>
+    <string name="h_6e1073d7" formatted="false">| Penghapusan Verifikasi Tanda Tangan | %1$s (injeksi gaya MT), %2$s hook tanda tangan disuntikkan, %3$s file DEX terdampak |</string>
+    <string name="h_6e43bc9c">Instal aplikasi dari sumber yang tidak dikenal</string>
+    <string name="h_6e8ddbbd">Mengidentifikasi dan menghapus paket root dari ad SDK</string>
+    <string name="h_6f532ea1">    Skema penamaan ulang kelas DEX berdasarkan RewriterModule / TypeRewriter, digunakan untuk nama kelas hook kustom\n</string>
+    <string name="h_702948c7">menghapus elemen</string>
+    <string name="h_7030ff64">Kesalahan</string>
+    <string name="h_70bbbe57">Mendeklarasikan nama paket Java dari ad SDK untuk diidentifikasi/dihapus. Ini adalah kategori inti: pemrosesan menggunakannya untuk mengidentifikasi kelas ad dan komponen manifest, serta secara otomatis menurunkan nama pustaka asli .so di direktori lib.</string>
+    <string name="h_710378a3">File / kode dimodifikasi</string>
+    <string name="h_71424776" formatted="false">jumlah lapangan: %1$s</string>
+    <string name="h_71a40f61" formatted="false">%1$s item</string>
+    <string name="h_720380b4" formatted="false">Kustom (%1$s / %2$s)</string>
+    <string name="h_72444798">## Ringkasan Pemrosesan</string>
+    <string name="h_7258ddc9">Jalur direktori, misalnya:\n/penyimpanan/emulasi/0/APKEditor</string>
+    <string name="h_72ab6230" formatted="false">metode iklan menghapus %1$s</string>
+    <string name="h_7336558f" formatted="false">| File Perpustakaan Ad SDK Dibersihkan | %1$s |</string>
+    <string name="h_73468857">Jalur diperbarui</string>
+    <string name="h_73801f75" formatted="false">⚠ Sumber daya perpustakaan asli hilang: %1$s</string>
+    <string name="h_73a8f02e">.ad.\nmeishu_ad\nadview\nwadah iklan\nbannerad\nsplashad\nadmob</string>
+    <string name="h_73da9b6d">Pilih file APK</string>
+    <string name="h_746dc334">membaca ulang tanda tangan dari APK di disk</string>
+    <string name="h_74c4b77f"> bersama-sama untuk meningkatkan efek blocking.</string>
+    <string name="h_74f74cf4">| Item | Asli | Setelah | Perubahan |</string>
+    <string name="h_75403159" formatted="false">⚠ %1$s kelas gagal dan dilewati</string>
+    <string name="h_757b3361">Kata kunci iklan aset</string>
+    <string name="h_75baf427">File biner hanya mendukung tampilan</string>
+    <string name="h_75c2bbcb">tumpuk</string>
+    <string name="h_763264b4">ketuk </string>
+    <string name="h_7703af63">Saat runtime, cleanAdSdkAssets() dari core/AdRemover.kt\ menghapus jalur yang cocok.</string>
+    <string name="h_7784e35e">7. Tema dan tata letak UI</string>
+    <string name="h_7822f13f">Sementara tidak dapat mengakses server pembaruan.\n\n</string>
+    <string name="h_7831e844">5. Konten pihak ketiga: proyek sumber terbuka dan aturan fitur iklan yang dirujuk oleh aplikasi ini berasal dari saluran publik, hanya untuk referensi teknis, dan hak ciptanya milik penulis asli.\n\n</string>
+    <string name="h_785d24a8" formatted="false">string=%1$s, penggantian pola iklan=%2$s</string>
+    <string name="h_78e42143">| DEX | Sebelum | Setelah | Kelas Iklan | Metode | Tautan | Force-true | Force-false | Waktu | Status |</string>
+    <string name="h_790b1641">Tidak ada URL unduhan yang valid yang ditangkap</string>
+    <string name="h_79d3abe9">Salin</string>
+    <string name="h_7a291fbf" formatted="false">✓ File root %1$s telah dibersihkan | %2$sms</string>
+    <string name="h_7a8af100">Unduh selesai, membuka installer...</string>
+    <string name="h_7a8cb281">Pada runtime, removeAdPermissions() dari core/AxmlAdRemover.kt\ mencocokkan dan menghapus &lt;uses-permission&gt; deklarasi di AndroidManifest.xml.</string>
+    <string name="h_7ae275b3"> lapangan.</string>
+    <string name="h_7b5257b5" formatted="false">· Ukuran pasca-kemasan: %1$s</string>
+    <string name="h_7b58f794">Ditulis ke bidang \&quot;ad_permissions\&quot; pada $HELP_CONFIG_NAME.\nPada runtime core/AxmlAdRemover.kt\, removeAdPermissions() cocok dan menghapus &lt;uses-permission&gt; deklarasi di AndroidManifest.xml.</string>
+    <string name="h_7b59301c">6. Perubahan syarat: penulis berhak mengubah penyangkalan ini kapan saja; Konten yang diperbarui berlaku pada versi baru.\n\n</string>
+    <string name="h_7b695da8">Langganan tautan langsung</string>
+    <string name="h_7b83ea7b">    Merujuk pada proyek ApkDataMultiplexing L-JINBIN dan struktur paket over-signed LSPatch\n</string>
+    <string name="h_7b9a3cc4" formatted="false">    Secara signifikan mengurangi ukuran paket yang over-signed (hingga ~50%), dengan skema penandatanganan V2V3SchemeSigner\n</string>
+    <string name="h_7ba901d8">Metode pencocokan fuzzy ke iklan kosong</string>
+    <string name="h_7babe509">Log disalin ke clipboard</string>
+    <string name="h_7bb30f32">Pola iklan string DEX</string>
+    <string name="h_7be1d8e4">Secara otomatis menghasilkan laporan Markdown yang mencakup setiap tahap dan perbandingan ukuran</string>
+    <string name="h_7bee061a" formatted="false">▶ Pemrosesan: %1$s (%2$s)</string>
+    <string name="h_7bfda754">▶ Penghapusan manifest AXML tahap 2</string>
+    <string name="h_7c417117" formatted="false">| aset File Iklan Dibersihkan | %1$s |</string>
+    <string name="h_7c64bdce">Hapus langganan</string>
+    <string name="h_7c6a17aa">Kata kunci blank-out metode iklan</string>
+    <string name="h_7d0b10f4">## Detail Pemrosesan Per-DEX</string>
+    <string name="h_7d2579cf">Bekerja dengan \&quot;Assets ad keywords\&quot; dan \&quot;Ad SDK native library keywords\&quot; untuk mencakup residual iklan di tiga lokasi: assets, lib, dan direktori root.</string>
+    <string name="h_7d8a5387">· Penghapusan tanda tangan dimatikan, dilewati</string>
+    <string name="h_7db41333" formatted="false">, linkBlank=%1$s</string>
+    <string name="h_7dcda328" formatted="false">⚠ %1$s/%2$s pemrosesan gagal: %3$s</string>
+    <string name="h_7dda6d57">aset/gdt_plugin/gdtadv2.jar\naset/Qumeng\naset/bdxadsdk</string>
+    <string name="h_7de4534e">Pola izin iklan</string>
+    <string name="h_7dfeadd0">▶ Langkah 3.5/5 Pemrosesan Flutter</string>
+    <string name="h_7e235a0c">Nama paket Ad SDK</string>
+    <string name="h_7e666c8f">4. Penyimpanan data lokal: konfigurasi, fitur pemrosesan, dan data lain hanya disimpan secara lokal di perangkat Anda, dan akan dihapus saat aplikasi dihapus; tidak ada catatan awan yang tersisa.\n\n</string>
+    <string name="h_7e82b085">diunduh/ukuran total + persentase</string>
+    <string name="h_7ee53eea">dikategorikan di bawah Tata Letak Resolusi</string>
+    <string name="h_7f604c7a">· Pemrosesan flutter dimatikan (dapat diaktifkan di Pengaturan)</string>
+    <string name="h_7f86257a">Bekerja paling baik dengan \&quot;Nama paket Ad SDK\&quot;; juga sering tumpang tindih dengan \&quot;Ad view class names\&quot; dan \&quot;Ad Activity\&quot;.</string>
+    <string name="h_7fcc9f20" formatted="false">✗ Penguraian izin AXML gagal: %1$s</string>
+    <string name="h_7ff042ba">Langsung melakukan patch bytecode DEX melalui dexlib2, jauh lebih cepat daripada pipeline smali tradisional</string>
+    <string name="h_53d2a9b1">Tanda tangan ulang aktif; APK akan ditandatangani ulang otomatis</string>
+    <string name="h_7fc2a18e">Pengemasan selesai, APK tanpa tanda tangan dihasilkan</string>
+    <string name="h_8c9f1e7b">Tanda tangan ulang nonaktif; APK tanpa tanda tangan akan dihasilkan</string>
+    <string name="h_802412e0">URL unduhan terdeteksi, menggunakan unduhan dalam aplikasi...</string>
+    <string name="h_803d2ae8">→ masukkan nama izin atau kata kunci izin → ketuk </string>
+    <string name="h_80928937">Aplikasi Flutter terdeteksi, tetapi tidak ada detail pemrosesan yang dihasilkan.</string>
+    <string name="h_80943b1f">Ditulis ke bidang \&quot;ad_services\&quot; pada $HELP_CONFIG_NAME.\nFitur ini dibaca oleh core/DexPatcher.kt (identifikasi kelas) dan core/AxmlAdRemover.kt (penghapusan komponen manifest).</string>
+    <string name="h_80d72d4c">    Merujuk pada pendekatan android-dexdump Facebook yang open-source dan contoh resmi dexlib2\n</string>
+    <string name="h_81cbed17">© 2026 XiaoNaiPing · Seluruh hak cipta dilindungi\nDidukung oleh dexlib2 / apksig / AndroidX</string>
+    <string name="h_827cfb79">Sembunyikan wilayah tampilan iklan dalam file tata letak</string>
+    <string name="h_8286533b">Saat runtime, ditangani oleh logika force-return-true core/DexPatcher.kt\ (hanya tipe return boolean/int).</string>
+    <string name="h_839ae19b">Paket pembaruan yang diunduh tidak valid, coba ulang</string>
+    <string name="h_840399bf">penerima iklan</string>
+    <string name="h_844bbd8d">Hapus pola iklan flutter</string>
+    <string name="h_85286168">tampilkan hanya sekali</string>
+    <string name="h_857a16c4">Ditulis ke bidang \&quot;flutter_string_patterns\&quot; pada $HELP_CONFIG_NAME.\nPada runtime core/LibappSoPatcher.kt melakukan penimpaan NUL dengan panjang sama dalam snapshot Dart; core/FlutterAdRemover.kt menangani pembukaan/repack dan penyimpanan otomatis.</string>
+    <string name="h_85a0ed61">Hapus pustaka asli ad .so</string>
+    <string name="h_85bc04b3">→ memasukkan string iklan untuk dihapus di libapp.so (ASCII cetak, panjang ≥ 2) → ketuk </string>
+    <string name="h_85fc05ee">pengembalian paksa palsu</string>
+    <string name="h_8623ecbf" formatted="false">tata letak menyembunyikan %1$s</string>
+    <string name="h_863f7b7a" formatted="false">✓ Libs SDK %1$s dibersihkan | %2$s</string>
+    <string name="h_8669676f" formatted="false">Server merespons secara abnormal (HTTP %1$s)</string>
+    <string name="h_86f7a22f">Layanan Iklan</string>
+    <string name="h_87646ce3">    Menulis ulang dengan mencocokkan awalan deskriptor tipe, kompatibel dengan titik / garis miring / L...; tiga format input\n\n</string>
+    <string name="h_87ae9335">googleads.g.doubleclick.net\nadmob.com\nadview.cn\nca-app-pub-</string>
+    <string name="h_87f4dbb8">    - Beranda: https://github.com/L-JINBIN/ApkDataMultiplexing\n</string>
+    <string name="h_88369617">    Merujuk pada sumber snapshot.h dari Dart VM dan komunitas Flutter melakukan rekayasa balik material\n</string>
+    <string name="h_8859e393">Tema Terang &amp;amp; gelap dengan Sistem Ikuti / Terang / Gelap, dapat diganti secara bebas</string>
+    <string name="h_88a98dc6">Kata kunci pustaka asli Ad SDK</string>
+    <string name="h_88bac515"> alih-alih android:visibility=</string>
+    <string name="h_8959b0a7">Izin AXML</string>
+    <string name="h_8963ea3f" formatted="false">jumlah kelas: %1$s</string>
+    <string name="h_8ad3c4b2">\nDistribusi paket:\n</string>
+    <string name="h_8ae1f6e1" formatted="false">%1$s on</string>
+    <string name="h_8afaf028">Tidak dapat membuka browser, kunjungi Lanzou Cloud secara manual untuk mengunduh</string>
+    <string name="h_8b98d772">Hanya menghapus konten dalam direktori aset; tidak memengaruhi direktori lib atau res.</string>
+    <string name="h_8bb73728">    - Prinsip: gunakan kembali segmen data paket asli melalui offset data direktori pusat, menghilangkan potongan data duplikat untuk mengurangi ukuran\n</string>
+    <string name="h_8c6fb706">Bekerja dengan \&quot;Assets ad file paths\&quot;: kategori ini adalah path eksak, sedangkan kategori terakhir adalah kata kunci fuzzy.</string>
+    <string name="h_8cab5dde">Log kosong</string>
+    <string name="h_8ccf2963" formatted="false">%1$s tidak ditemukan</string>
+    <string name="h_8d698916" formatted="false">✓ %1$s libapp.so | Penggantian %2$s | %3$s</string>
+    <string name="h_8d7ba09c">Digunakan untuk membuka metode penentuan berbayar seperti VIP/member/pro. Ketika nama metode sama persis dan tipe pengembalian adalah boolean atau int, badan metode diganti dengan \&quot;return true / 1\&quot;, melewati cek pembayaran secara langsung.</string>
+    <string name="h_8dce58af" formatted="false">diharapkan %1$s, dibatalkan</string>
+    <string name="h_8e8a7f64">Penghapusan paket asli</string>
+    <string name="h_8ea5613c">2. Jaringan transparan: aplikasi ini hanya membuat permintaan informasi versi jaringan saat Anda aktif mengetuk </string>
+    <string name="h_8eaa86c7">Pemrosesan gagal: struktur file abnormal</string>
+    <string name="h_8efae575" formatted="false">Sumber daya DEX hook bawaan hilang: %1$s</string>
+    <string name="h_8f331a4b">    Perpustakaan dukungan resmi Jetpack Android\n</string>
+    <string name="h_8f6495fd">Berbagi sistem</string>
+    <string name="h_8f7f9a61">Hapus pola</string>
+    <string name="h_8fa638b6" formatted="false">- **File Konfigurasi Fitur**: \'%1$s\'</string>
+    <string name="h_9031f10f">→ memasukkan iklan Lihat nama kelas atau fragmen kata kunci → ketuk </string>
+    <string name="h_9094d392" formatted="false">Penyimpanan gagal: %1$s</string>
+    <string name="h_9094d3923" formatted="false">Penyimpanan gagal: %1$s</string>
+    <string name="h_90af539a">Nama metode iklan harus dihapus secara tepat. Ketika nama metode benar-benar cocok dengan item daftar ini, isinya diganti dengan nilai pengembalian default, membatalkan pemuatan iklan/panggilan tampilan.</string>
+    <string name="h_90f6a26a">· Pola yang cocok:</string>
+    <string name="h_91337ff2">Izin manifest</string>
+    <string name="h_9140b5bf" formatted="false">-&gt; %1$s: force-return true untuk %2$s metode</string>
+    <string name="h_9140cf96">Konfigurasi tertanam</string>
+    <string name="h_91d57778">Banyak kata kunci default sudah terintegrasi (_ad_, showad, loadad, dll.); Kategori ini terutama digunakan untuk menambahkan kata kunci kustom.</string>
+    <string name="h_92c7d2cc">· Tidak ditemukan izin iklan yang harus dihapus</string>
+    <string name="h_92d0ff18">⚠ APK asli hilang, tidak dapat disisipkan origin.apk</string>
+    <string name="h_92d2d9c6" formatted="false">Langganan ditambahkan: %1$s</string>
+    <string name="h_92fab849">Hapus deklarasi izin iklan</string>
+    <string name="h_9316d02c">→ masukkan kata kunci nama kelas iklan (bisa hanya fragmen) → ketuk </string>
+    <string name="h_937cb142">→ memasukkan pola string iklan (bisa hanya berupa fragmen) → ketuk </string>
+    <string name="h_9380d8c8">▶ Langkah 1/5 Baca APK</string>
+    <string name="h_93be8614">    Rantai alat DEX file read/write dan pembongkaran/perakitan smali, mesin inti penghilang iklan\n</string>
+    <string name="h_941cd4b5" formatted="false">| File Iklan Direktori Root Dibersihkan | %1$s |</string>
+    <string name="h_946f83e6"> dengan </string>
+    <string name="h_94b16984" formatted="false">· Ditemukan file DEX %1$s</string>
+    <string name="h_94beebcb">7. Menggunakan aplikasi ini berarti Anda telah membaca, memahami, dan menyetujui semua syarat di atas. Jika Anda tidak setuju, tolong berhenti menggunakannya.\n</string>
+    <string name="h_94d2d961">Hanya string ASCII yang dapat dicetak (panjang &gt;= 2) yang didukung. Silakan isi string unik yang sangat terkait dengan ad SDK untuk menghindari kerusakan fungsi normal.</string>
+    <string name="h_956dd267">Dialog langganan dibuka gagal</string>
+    <string name="h_97160028">Kata kunci file direktori root APK</string>
+    <string name="h_97349354">Satu klik membuka kemas, menghapus iklan, mengemas ulang, dan menandatangani, sepenuhnya offline tanpa perlu jaringan</string>
+    <string name="h_97474ffc"># libapp.so Ekspor string snapshot Dart</string>
+    <string name="h_975cc249" formatted="false">Langganan ditambahkan: %1$s</string>
+    <string name="h_976e27bc">· Tidak ada libapp.so terdeteksi, aplikasi mungkin bukan Flutter (atau merupakan AAB split), pemrosesan Flutter dilewati</string>
+    <string name="h_97beeaf3">Umpan balik dari APK Ad Remover Editor</string>
+    <string name="h_98601d36">Diunduh 0 B</string>
+    <string name="h_98ba9357">Dibaca oleh core/DexPatcher.kt (pengenalan kelas) dan core/AxmlAdRemover.kt (penghapusan komponen AndroidManifest).</string>
+    <string name="h_98d11213">AdView\nBannerAd\nNativeAdView\nSplashView</string>
+    <string name="h_98f6c908">Perbarui konten...</string>
+    <string name="h_990ae7e6" formatted="false">· Pola flutter %1$s (string ASCII seperti URL/paket/kelas)</string>
+    <string name="h_99f18050" formatted="false">| Sidik Tangan Asli | %1$s... |</string>
+    <string name="h_9a0ee6cf" formatted="false">| Izin Iklan AXML Dihapus | %1$s |</string>
+    <string name="h_9a5a28fd">String khusus untuk penghapusan iklan di libapp.so</string>
+    <string name="h_9a618818" formatted="false">· Jalur %1$s</string>
+    <string name="h_9a7e99e6">· Direktori lib tidak ditemukan, melewati pembersihan pustaka asli</string>
+    <string name="h_9b708f36">▶ Langkah 3.4/5 Hapus pemeriksaan tanda tangan</string>
+    <string name="h_9bc8a038">Nama metode iklan </string>
+    <string name="h_9bd51829" formatted="false">✓ Terdeteksi %1$s libapp.so file: </string>
+    <string name="h_9beb1005" formatted="false">⚠ Pemrosesan %1$s gagal: %2$s</string>
+    <string name="h_9bec2ff2" formatted="false">Pemrosesan gagal: %1$s</string>
+    <string name="h_9c446657" formatted="false">✓ Mengubah kelas induk %1$s menjadi kelas hook (%2$s)</string>
+    <string name="h_9c6c3d16" formatted="false">✓ %1$s selesai: adClass=%2$s, methodBlank=%3$s%4$s%5$s%6$s%7$s (%8$sms, %9$s→%10$s)</string>
+    <string name="h_9d60567b">Penghapusan tanda tangan</string>
+    <string name="h_9d838569" formatted="false">  %1$s: %2$s kelas</string>
+    <string name="h_9d8fca31">Saat runtime, cleanAdSdkAssets() dari core/AdRemover.kt\ menghapus file yang sesuai berdasarkan kata kunci.</string>
+    <string name="h_9d99f2d3">· Saran: APK mungkin terlalu besar, tutup aplikasi lain dan coba lagi</string>
+    <string name="h_9e1acb3b">Pemeriksaan pembaruan gagal</string>
+    <string name="h_9e363bc7">Saat runtime, dibaca oleh core/DexPatcher.kt (pengenalan kelas DEX), core/AxmlAdRemover.kt (penghapusan komponen manifest) dan core/AdRemover.kt (pembersihan lib native lib).</string>
+    <string name="h_9eb6d057">klaster kelas</string>
+    <string name="h_9ebb023e">    - Sumber ide: Tim teknis LSP (paket over-signed + pengalihan IO terhadap verifikasi seluruh paket)\n</string>
+    <string name="h_9f4a2d63">Menghapus metode iklan / membuka kunci VIP</string>
+    <string name="h_9fa3cca0">Ketuk \&quot;Kelola\&quot; -&gt; masukkan domain iklan atau fragmen URL -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_9fce216a">Konten yang ditempel tidak valid konfigurasi pola iklan JSON, periksa dan coba ulang</string>
+    <string name="h_9fd2d8c2">Nama metode harus persis sesuai dengan kode yang telah didekompilasi (termasuk huruf kecil) atau tidak akan disesuaikan.</string>
+    <string name="h_9fd3da28">    - Spesifikasi: https://m3.material.io/\n</string>
+    <string name="h_9fe0ce82">File konfigurasi AD SDK yang tersisa, file marker, dll. mungkin tetap berada di direktori root setelah APK dibongkar (direktori yang sama dengan classes.dex). File yang namanya mengandung kata kunci ini akan dihapus, untuk membersihkan residual iklan yang tidak ada di direktori lib / aset.</string>
+    <string name="h_a092d8f0">Layanan Iklan</string>
+    <string name="h_a0a5e60f">jalur paket asli / jalur ekstraksi paket asli / nama SO yang disuntikkan</string>
+    <string name="h_a17816fd">Ketuk \&quot;Kelola\&quot; -&gt; masukkan nama atau kata kunci kelas layanan iklan -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_a2d56d37" formatted="false">✓ Dikemas | %1$s</string>
+    <string name="h_a36b1457" formatted="false">SDK lib %1$s</string>
+    <string name="h_a3e07f53">Ketuk \&quot;Kelola\&quot; -&gt; masukkan kata kunci nama pustaka .so -&gt; ketuk \&quot;Add\&quot;.</string>
+    <string name="h_a445d6b9" formatted="false">⚠ Penghapusan gagal: %1$s</string>
+    <string name="h_a4adb67a">1. Skema patch langsung DEX (berdasarkan dexlib2)</string>
+    <string name="h_a4c8a5bb">· Penandatanganan standar v1+v2</string>
+    <string name="h_a4eff923">→ masukkan nama metode pemeriksa untuk memaksa pengembalian false → ketuk </string>
+    <string name="h_a5290e50">Nama paket Ad SDK</string>
+    <string name="h_a549a63d">Aplikasi ini mengikuti prinsip pengumpulan minimal dan sangat menekankan pentingnya melindungi privasi Anda:\n\n</string>
+    <string name="h_a56fd984">6. Jika Anda memiliki pertanyaan, saran, atau kekhawatiran tentang privasi, silakan hubungi kami melalui info kontak penulis; Kami akan berusaha sebaik mungkin untuk menjawab.\n</string>
+    <string name="h_a5bdf592">Saat runtime, core/DexPatcher.kt melakukan pencocokan kelas iklan.</string>
+    <string name="h_a674a27a">Komponen AXML</string>
+    <string name="h_a6775ccc">Ketuk \&quot;Kelola\&quot; -&gt; masukkan nama atau kata kunci kelas aktivitas iklan -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_a6d8b350">)} (mencakup 12 kelas dalam)</string>
+    <string name="h_a73cec14">→ memasukkan kata kunci → ketuk </string>
+    <string name="h_a773cd7d">⚠ Tidak ada pola iklan Flutter yang dapat digunakan (perlu string ASCII dengan panjang&gt;=2), hanya unpacking, tidak ada perubahan</string>
+    <string name="h_a7bf85e5">Saat runtime, cleanAdSdkLibs() dari core/AdRemover.kt\ berjalan di lib/*/ dan menghapus file .so yang cocok.</string>
+    <string name="h_a7c027a6" formatted="false">i %1$s tidak menemukan pola iklan, auto-skip (%2$sms)</string>
+    <string name="h_aa1a5948" formatted="false">Multiplexing data: menggunakan kembali segmen data asli dari paket yang ditandatangani (misalnya output LSPatch) untuk mengurangi ukuran hingga ~50%</string>
+    <string name="h_aa223402">String iklan yang cocok kosong di DEX</string>
+    <string name="h_aa5da2f6" formatted="false">✓ Penghapusan pemeriksaan tanda tangan selesai: hook KillerApplication yang disuntikkan (%1$s), melibatkan %2$s DEX (%3$sms)</string>
+    <string name="h_aacf7dd2">kebetulan paksa</string>
+    <string name="h_ab71b49d" formatted="false">✗ Kelas Custom Application %1$s tidak ditemukan di DEX, penukaran ulang induk gagal</string>
+    <string name="h_ab94e2c3">Inisialisasi gagal</string>
+    <string name="h_abefa2cf">tahap penandatanganan apksig menyelaraskan secara otomatis</string>
+    <string name="h_ac0e6cda">· Tidak ada aset dan jalur file yang dikonfigurasi, melewati</string>
+    <string name="h_aca03acb" formatted="false">Ukuran: %1$s bytes</string>
+    <string name="h_acd3e0fc">▶ Pemrosesan gagal</string>
+    <string name="h_acd5cb84">Gagal</string>
+    <string name="h_ad125423" formatted="false">file root %1$s</string>
+    <string name="h_ad3146c4">Fitur ini independen dari fitur DEX. Jika diatur, ini lebih disukai untuk pemrosesan Flutter; jika dibiarkan kosong, secara otomatis mewarisi pola URL/package-name/class-name di \&quot;Ad feature categories\&quot; di bawah ini.</string>
+    <string name="h_ad4097b5">Pengangkatan normal</string>
+    <string name="h_ad9c82ac" formatted="false">pengolahan tautan %1$s</string>
+    <string name="h_ae3222f3" formatted="false">· Parameter injeksi: asli=%1$s, ekstrak=%2$s, Jadi=%3$s</string>
+    <string name="h_ae4e6627" formatted="false">%.2f s</string>
+    <string name="h_ae67a4cd">hapus file ad SDK</string>
+    <string name="h_af7dfb03">Ditulis ke bidang \&quot;class_keywords\&quot; pada $HELP_CONFIG_NAME.\nSaat runtime, digunakan oleh core/DexPatcher.kt untuk pencocokan kelas iklan dan juga oleh core/AxmlAdRemover.kt untuk pencocokan komponen manifest.</string>
+    <string name="h_afb873ee" formatted="false">Diunduh %1$s / %2$s</string>
+    <string name="h_b13822ab">    - Beranda: https://github.com/Gameye98/DTL-X\n</string>
+    <string name="h_b13d11bf">Pengumuman penting</string>
+    <string name="h_b189550a">Ditambahkan</string>
+    <string name="h_b1b762e6">Unduh selesai, membuka installer...</string>
+    <string name="h_b1e919bb">1. Pembatasan penggunaan legal: Aplikasi ini hanya untuk pembelajaran, penelitian, dan penggunaan pribadi yang sah. Jangan mengubah atau mendistribusikan aplikasi yang tidak Anda miliki hak ciptanya, tidak memiliki otorisasi, atau yang dilindungi secara hukum.\n\n</string>
+    <string name="h_b3a0d18e" formatted="false">· Di %1$s, induk %2$s adalah %3$s, melewati penulisan ulang</string>
+    <string name="h_b3c9c976">Ketuk \&quot;Kelola\&quot; -&gt; masukkan kata kunci nama metode -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_b4cbd6e5">    Merujuk pada pendekatan injeksi hook ApkSignatureKillerEx dari MT Manager:\n</string>
+    <string name="h_b4ea6ec8">Tautan permintaan iklan kosong</string>
+    <string name="h_b549dbe0">timpa panjang sama</string>
+    <string name="h_b588b1bd" formatted="false">✓ Mengubah kelas induk %1$s menjadi kelas hook (%2$s)</string>
+    <string name="h_b5b02676">Penandatanganan dan penyelarasan 5. APK v1 / v2</string>
+    <string name="h_b5e4a114">Paket tidak valid atau tidak lengkap</string>
+    <string name="h_b5f40c44">Tip</string>
+    <string name="h_b60f14f9" formatted="false">✓ Tanda tangan V2 | %1$s</string>
+    <string name="h_b6d8f56d" formatted="false">pengolahan string %1$s</string>
+    <string name="h_b6e9c971">terkompresi</string>
+    <string name="h_b7089816" formatted="false">Paksa true %1$s</string>
+    <string name="h_b723808a" formatted="false">✓ Mengubah kelas induk %1$s menjadi kelas hook (%2$s)</string>
+    <string name="h_b76ce9e7">· Tidak ada pola iklan yang cocok, tidak perlu perubahan</string>
+    <string name="h_b7a517ca">Ditulis ke bidang \&quot;ad_receivers\&quot; pada $HELP_CONFIG_NAME.\nFitur ini dibaca oleh core/DexPatcher.kt (identifikasi kelas) dan core/AxmlAdRemover.kt (penghapusan komponen manifest).</string>
+    <string name="h_b7a6bc95">2. Parsing format biner AXML (Android Asset Packaging)</string>
+    <string name="h_b7aba98e">Secara otomatis membersihkan lib asli ad SDK (.so), aset sumber daya iklan, dan file iklan root untuk mempersempit paket</string>
+    <string name="h_b82698e4">Ditulis ke bidang \&quot;method_patterns\&quot; pada $HELP_CONFIG_NAME.\nPada runtime core/DexPatcher.kt melakukan pencocokan nama metode secara tepat dan mengosongkan badan metode.</string>
+    <string name="h_b86b62e5" formatted="false">⚠ Pembuatan laporan gagal: %1$s</string>
+    <string name="h_b8884134" formatted="false">Tampilan kartu tidak ditemukan: cardId=%1$s</string>
+    <string name="h_b8ed0364" formatted="false">· Di %1$s, %2$s sudah menjadi induk kelas hook</string>
+    <string name="h_b8fa7cb1">Jalur asli / jalur ekstrak / .so nama / nama kelas hook tidak boleh kosong</string>
+    <string name="h_b914ff03">apakah iklan sudah dimuat / sedang menampilkan / memiliki iklan</string>
+    <string name="h_b93b4fec">▶ Proses gagal: bersarang terlalu dalam</string>
+    <string name="h_b9ca883a">Kata kunci dicocokkan sebagai substring (misalnya kecocokan ttad libttad.so); Mohon jangan menulis jalur lengkap.</string>
+    <string name="h_b9f0ee4f">Tidak ada tautan APK langsung yang tertangkap, ketuk tombol unduh di halaman dan coba lagi</string>
+    <string name="h_ba5f8360" formatted="false">Diunduh %1$s</string>
+    <string name="h_ba6a6863" formatted="false">✗ Keluar dari ingatan: %1$s</string>
+    <string name="h_ba6e91fa">izin</string>
+    <string name="h_ba715cf4">· Penghapusan pemeriksaan tanda tangan tidak diaktifkan (dapat diaktifkan di Pengaturan)</string>
+    <string name="h_bafd49a7">pola string iklan</string>
+    <string name="h_bb543276" formatted="false">- **Diproses di**: %1$s</string>
+    <string name="h_bbe82bbc">Tidak dapat membuka pengaturan izin instalasi</string>
+    <string name="h_bc0957da">membaca dan menghitung secara langsung</string>
+    <string name="h_bc1b6e2e" formatted="false">· Kategori %1$s yang dinonaktifkan: </string>
+    <string name="h_bc77dbf8">URL iklan / domain</string>
+    <string name="h_bc9facfc">Mengidentifikasi kelas penerima siaran iklan</string>
+    <string name="h_bcde615b">3. Hak istimewa terkecil: aplikasi ini tidak membaca, menyimpan, atau mengakses kontak, galeri, lokasi, SMS, riwayat panggilan, atau informasi sensitif lainnya.\n\n</string>
+    <string name="h_bcf5f2e1">membongkar</string>
+    <string name="h_bd3f0cc3">    Bahasa pemrograman Kotlin dan perpustakaan standar\n</string>
+    <string name="h_bde178a7">Ad SDK sering menyatakan izin khusus dalam AndroidManifest.xml (seperti com.lineone.connecter.openadsdk.permission.TT_PANGOLIN, com.lineone.connecter.permission.KW_SDK_BROADCAST, dll.) untuk melindungi komponen iklan mereka. &lt;uses-permission&gt; Deklarasi yang sesuai dengan izin ini akan dihapus dari manifest.</string>
+    <string name="h_be5de496" formatted="false">Konfigurasi langganan parse gagal: %1$s</string>
+    <string name="h_beac550d">→ memasukkan kata kunci nama file → ketuk </string>
+    <string name="h_bece4178">· Tidak ada kata kunci file root yang dikonfigurasi, melewati</string>
+    <string name="h_bed1b443">▶ Pembersihan direktori Root Tahap 5</string>
+    <string name="h_bee26e5d">QQ disalin ke clipboard</string>
+    <string name="h_beea3b77">Aktivitas iklan / Layanan / Penerima </string>
+    <string name="h_bf82a4bf">AdReceiver\nBootReceiver\nInstallReceiver</string>
+    <string name="h_bfd50952">Tidak ada catatan pos pemeriksaan.</string>
+    <string name="h_bffae154">Ditulis ke bidang \&quot;ad_view_names\&quot; pada $HELP_CONFIG_NAME.\nPada runtime core/DexPatcher.kt melakukan pencocokan ad class.</string>
+    <string name="h_c0a05071">Hook tanda tangan bawaan (KillerApplication) berganti nama melalui dexlib2 DexRewriter, termasuk 12 kelas dalam</string>
+    <string name="h_c11c4e64" formatted="false">- **APK Sumber**: \'%1$s\'</string>
+    <string name="h_c15415d3">Tidak dapat membaca file yang dipilih</string>
+    <string name="h_c19bce70">Ikuti Sistem / Sistem</string>
+    <string name="h_c1ca70de">Ketuk \&quot;Kelola\&quot; -&gt; masukkan string iklan untuk menghapus di libapp.so (ASCII cetak dengan panjang &gt;= 2) -&gt; ketuk \&quot;Tambah\&quot;.</string>
+    <string name="h_c20905d1" formatted="false">Pengaturan init gagal: %1$s</string>
+    <string name="h_c2501d73">Token langganan bagikan</string>
+    <string name="h_c3744c61">    Perpustakaan enkripsi/dekripsi Java dan pembuatan sertifikat, digunakan untuk menghasilkan sertifikat penandatanganan\n</string>
+    <string name="h_c393daa8">com.google.android.gms.ads\ngoogleads.g.doubleclick.net\npangle\nadview\nadmob\ncom.bytedance.sdk</string>
+    <string name="h_c4114463">Konfirmasi penghapusan sumber langganan </string>
+    <string name="h_c4726818" formatted="false">mengganti slot %1$s</string>
+    <string name="h_c49c1ee6" formatted="false">%.1f sec</string>
+    <string name="h_c4daf443">buka kunci VIP / keanggotaan / edisi pro</string>
+    <string name="h_c4ed42f4">Kata kunci pustaka asli Ad SDK</string>
+    <string name="h_c5bb1a82"># Alat: ApkAdRemoverEditor · Flutter membuka kemasan</string>
+    <string name="h_c6439a1a">Konten tautan bukan konfigurasi pola iklan yang valid</string>
+    <string name="h_c65d2600">⚠ Penulisan ulang manifest gagal (kelas hook mungkin tidak berlaku)</string>
+    <string name="h_c6af077e">Reset ke direktori output default</string>
+    <string name="h_c6e12265">## Sebelum vs Sesudahnya</string>
+    <string name="h_c71a303c" formatted="false">%1$s item</string>
+    <string name="h_c725db16">    Optimasi penggunaan ulang data APK: menggunakan kembali segmen data paket asli melalui offset data direktori pusat, menghilangkan segmen data duplikat,\n</string>
+    <string name="h_c743b4fe">kosongkan metode pemeriksa</string>
+    <string name="h_c7612287">ukuran valid + dalam rentang file</string>
+    <string name="h_c7fdb835">Semua langganan dimatikan, konfigurasi default dipulihkan</string>
+    <string name="h_c8049515">Dibaca oleh core/DexPatcher.kt (pengenalan kelas) dan core/AxmlAdRemover.kt (penghapusan komponen manifest).</string>
+    <string name="h_c807c057" formatted="false">· Abi lib APK target terdeteksi: %1$s</string>
+    <string name="h_c82adf9a">Kompresi pintar dan penyelarasan ZIP memastikan APK yang telah dikemas ulang terpasang dan diluncurkan dengan benar</string>
+    <string name="h_c84eabb9">Nama metode untuk memaksa pengembalian false</string>
+    <string name="h_c9300931">kata kunci lib asli ad SDK </string>
+    <string name="h_c975dbf1">· APK asli menyatakan tidak ada Aplikasi kustom; target injeksi dipilih berdasarkan kebijakan</string>
+    <string name="h_c97b70ed">→ memasukkan nama atau kata kunci kelas aktivitas iklan → ketuk </string>
+    <string name="h_ca6ddf1c">pola iklan</string>
+    <string name="h_cab966b6">Kata kunci nama kelas Ad Service (layanan latar belakang), digunakan untuk mengidentifikasi kelas layanan latar belakang iklan. Saat memproses, metode iklan mereka dikosongkan dan komponen yang sesuai dihapus dari manifest.</string>
+    <string name="h_cb00b355" formatted="false">✓ Menulis ulang application.android:name menjadi %1$s</string>
+    <string name="h_cc8469a8">Ditulis ke bidang \&quot;string_patterns\&quot; pada $HELP_CONFIG_NAME.\nPada runtime core/DexPatcher.kt memindai instruksi string konstruksi dan mengosongkan string iklan yang sesuai.</string>
+    <string name="h_ccbc6e46" formatted="false">  ✗ Optimasi penggunaan ulang data gagal: %1$s</string>
+    <string name="h_cd0f41eb">    - Beranda: https://mt2.cn/\n</string>
+    <string name="h_cd369de4">| ABI | Sebelum | Setelah | Snapshot | Senar | Mengganti | Pola Hit | Waktu | Status |</string>
+    <string name="h_cd394527">    - Digunakan untuk menemukan header snapshot Dart di libapp.so dan mengekstrak/menghapus string iklan\n\n</string>
+    <string name="h_cd4fc2cd">batas kata</string>
+    <string name="h_cd984ab2">Sering bekerja dengan \&quot;Nama paket Ad SDK\&quot;, \&quot;Nama kelas tampilan iklan\&quot;, dan \&quot;Kata kunci nama kelas Iklan\&quot;: kata kunci dari kategori-kategori ini juga digunakan bersama untuk pencocokan elemen tata letak, dan elemen yang dicocokkan disembunyikan.</string>
+    <string name="h_cdb8ce5c">Buat token</string>
+    <string name="h_cddb60a3" formatted="false">· Ditemukan %1$s (%2$s), menulis ulang induknya</string>
+    <string name="h_ce5f4cc6" formatted="false">Diunduh 0 B / %1$s</string>
+    <string name="h_ce6d7c18"> meminta info versi; Sisanya tidak terhubung, dikumpulkan, atau diunggah informasi pribadi di latar belakang.\n\n</string>
+    <string name="h_ceefa2cd">Hapus deklarasi izin ad SDK dari manifest</string>
+    <string name="h_cf431781">Saat runtime, ditangani oleh logika force-return-false core/DexPatcher.kt\ (hanya tipe pengembalian boolean/int).</string>
+    <string name="h_cf9a62ca">Pemindaian aman dengan memori rendah untuk DEX besar; bahkan file DEX besar pun diproses secara stabil tanpa tergantung</string>
+    <string name="h_cfd21cdc">Ketuk \&quot;Kelola\&quot; -&gt; masukkan nama atau kata kunci kelas Receiver -&gt; ketuk \&quot;Add\&quot;.</string>
+    <string name="h_d086cb5b">▶ Langkah 3/5 Hapus iklan</string>
+    <string name="h_d0997ec0">Nama metode iklan</string>
+    <string name="h_d0f51307">Pola edit</string>
+    <string name="h_d236f750">· Resolusi tata letak iklan Lihat kategori dimatikan, melewati tata letak menyembunyikan</string>
+    <string name="h_d38458da" formatted="false">· Selesai dibuka: %1$s snapshot, %2$s string → %3$s</string>
+    <string name="h_d3ed5e25">    - Komponen: https://github.com/material-components/material-components-android\n</string>
+    <string name="h_d44f69ea" formatted="false">✗ %1$s patching gagal: %2$s</string>
+    <string name="h_d4a0d6cb">→ masukkan kata kunci nama metode → ketuk </string>
+    <string name="h_d4c58d3d" formatted="false">✓ Perpustakaan native tertanam: lib/%1$s/lib%2$s.so (%3$s)</string>
+    <string name="h_d4cdf611">    - Untuk referensi fitur dan pembelajaran saja, binernya tidak dimodifikasi\n\n</string>
+    <string name="h_d54ac91c">Tidak dapat membuka tautan eksternal</string>
+    <string name="h_d64d53e1" formatted="false">Output build hook DEX yang hilang kelas %1$s, dibatalkan</string>
+    <string name="h_d6c3b08e">→ masukkan nama metode pemeriksa untuk membuka kunci → ketuk </string>
+    <string name="h_d6fab15d" formatted="false">✓ Laporan: %1$s</string>
+    <string name="h_d7c66a32">Penandatanganan ganda v1 + v2, kompatibel dengan perangkat lama; hasil terpasang langsung</string>
+    <string name="h_d7d0599f">Penulis QQ</string>
+    <string name="h_d7d6523f">▶ Log sudah dibersihkan</string>
+    <string name="h_d8328f57">Jalur file lengkap, misalnya:\n/penyimpanan/emulasi/0/APKEditor/ad_patterns.json</string>
+    <string name="h_d8a58722">Reset ke jalur konfigurasi default</string>
+    <string name="h_d8db6779">Gagal memeriksa pembaruan</string>
+    <string name="h_d9cbc4b0">Tolong berikan </string>
+    <string name="h_d9da8cfd">snapshot data</string>
+    <string name="h_d9f1a2ee"># Laporan Penghapusan Iklan APK</string>
+    <string name="h_da32f742">    - Beranda: https://github.com/material-components/material-components-android\n</string>
+    <string name="h_da946dfc">→ memasukkan iklan Lihat nama kelas atau kata kunci → ketuk </string>
+    <string name="h_daea0bf6" formatted="false">, string dikosongkan di %1$s spot</string>
+    <string name="h_daef5388">    - Beranda: https://developer.android.com/tools/aapt2\n</string>
+    <string name="h_db0dc430">Pembersihan file sumber daya</string>
+    <string name="h_db41810b" formatted="false">, forceTrue=%1$s</string>
+    <string name="h_db72862a" formatted="false">Pembukaan gagal: %1$s</string>
+    <string name="h_dd0a7c93">Pola iklan string DEX yang ditentukan pengguna (seperti ID unit iklan, string fitur SDK, kata kunci pelaporan statistik, dll.). Saat memproses, semua instruksi const-string / const-string / jumbo dalam badan metode dipindai; Setiap nilai string (huruf kecil) yang cocok dengan pola apa pun akan dikosongkan menjadi string kosong, sehingga referensi AD SDK ke string relevan dan menghalangi logika AD.</string>
+    <string name="h_dd6c571b">Ditulis ke bidang \&quot;force_false_methods\&quot; pada $HELP_CONFIG_NAME.\nSaat runtime, ini ditangani oleh logika force-return-false core/DexPatcher.kt\ (hanya tipe return boolean/int).</string>
+    <string name="h_ddafe46f">Penghapusan verifikasi tanda tangan: Mode Normal + Paket Asli secara otomatis menghapus pemeriksaan tanda tangan setelah pengemasan ulang untuk menghindari penolakan</string>
+    <string name="h_ddc38ea1">Tumpang tindih dengan \&quot;Kata kunci nama kelas iklan\&quot;; Anda dapat mempertahankan salah satu dari keduanya.</string>
+    <string name="h_de0412d9">Konfigurasi langganan kosong, tidak ada perubahan</string>
+    <string name="h_de0bbf00" formatted="false">pengolahan kelas %1$s</string>
+    <string name="h_de139607">18 kategori pola iklan mencakup lib SDK / izin / kelas / metode / sumber daya / URL, sepenuhnya dapat disesuaikan dengan menambah, menghapus, mengedit, dan mengatur ulang</string>
+    <string name="h_de184846">Semua dialog menyesuaikan ukuran layar dan menggulir otomatis saat konten panjang, tidak pernah meluap</string>
+    <string name="h_de6aac40"> Dalam kombinasi: kategori ini adalah jalur eksak, yang terakhir adalah kata kunci fuzzy.</string>
+    <string name="h_de979268">    - Lisensi: tidak disebutkan, hanya untuk referensi pembelajaran\n\n</string>
+    <string name="h_deb3721e">8. Perpustakaan standar Kotlin (JetBrains)</string>
+    <string name="h_deb381d0" formatted="false">✓ Hook tanda tangan yang disuntikkan %1$s | %2$s DEX | %3$s</string>
+    <string name="h_e00d1d26">sub-paket APK bersarang yang dapat menggunakan ulang data</string>
+    <string name="h_e02f104a" formatted="false">]} resources=%1$s</string>
+    <string name="h_e03c4e1e" formatted="false">Subview kartu tidak ditemukan: %1$s</string>
+    <string name="h_e0aa11ae">Bekerja dengan \&quot;Ad SDK package names\&quot; (nama paket secara otomatis menurunkan beberapa kata kunci nama perpustakaan).</string>
+    <string name="h_e0e88403">Saat runtime, core/DexPatcher.kt memindai instruksi string konstruksi dan mengosongkan tautan iklan yang sesuai.</string>
+    <string name="h_e17b0b80">Buat metode penentuan iklan mengembalikan false</string>
+    <string name="h_e21ed9e7" formatted="false">    -&gt; %1$s: mengosongkan %2$s metode iklan, melewati %3$s metode non-iklan%4$s</string>
+    <string name="h_e25ab6b8">Ketuk \&quot;Kelola\&quot; -&gt; masukkan kata kunci nama file -&gt; ketuk \&quot;Tambah\&quot;. Pencocokan berbasis substring saat runtime (tidak sensitif huruf besar/kecil).</string>
+    <string name="h_e2dc63b4" formatted="false">· Di %1$s, %2$s sudah menjadi induk kelas hook</string>
+    <string name="h_e2dca2bb">    Implementasi tanda tangan APK v1 / v2 / v3, memastikan hasil yang diproses dapat diinstal\n</string>
+    <string name="h_e2e27a87">Parah</string>
+    <string name="h_e313c9e9" formatted="false">Ukuran file: %1$s byte</string>
+    <string name="h_e4090eb7">Mengunduh</string>
+    <string name="h_e4100029">4. Organisasi aturan fitur iklan</string>
+    <string name="h_e430c849" formatted="false">  ✓ Kelas Hook berganti nama menjadi %1$s</string>
+    <string name="h_e5029582">## Pemrosesan Flutter libapp.so (Buka / De-Ad / Recompile)</string>
+    <string name="h_e52286ce" formatted="false">i Optimasi penggunaan ulang data pada: sub-paket APK tertanam %1$s yang teridentifikasi</string>
+    <string name="h_e55011c4">pada level yang sama dengan classes.dex</string>
+    <string name="h_e58abe16">Kata kunci file direktori root APK</string>
+    <string name="h_e5a42c92">dari belakang ke depan</string>
+    <string name="h_e5bea172">Penghapusan manifest AXML</string>
+    <string name="h_e63572b7" formatted="false">· Tumpukan: %1$s</string>
+    <string name="h_e63572b7b" formatted="false">  · tumpukan: %1$s</string>
+    <string name="h_e655531f">File Smali disimpan</string>
+    <string name="h_e71aba5e">3. Penguraian snapshot AOT Dart (Flutter libapp.so)</string>
+    <string name="h_e7425f76">· Tidak ada kata kunci nama pustaka ad SDK, melewati</string>
+    <string name="h_e75ba18c">pamer\nloadad\nsarat dengan penuh\nklik iklan</string>
+    <string name="h_e77ef5d2">Kata kunci nama kelas komponen tampilan iklan, digunakan untuk mengidentifikasi kelas tampilan iklan (seperti Tampilan untuk banner, interstisial, dan video yang diberi hadiah). Ketika nama kelas dimatchkan, kelas tersebut diperlakukan sebagai kelas iklan dan metode iklannya dikosongkan.</string>
+    <string name="h_e785557e">Ditulis ke bidang \&quot;ad_asset_paths\&quot; pada $HELP_CONFIG_NAME.\nPada waktu runtime, cleanAdSdkAssets() dari AdRemover.kt\ menghapus jalur yang sesuai.</string>
+    <string name="h_e870ac19">TT_PANGOLIN\nKW_SDK\ncom.bytedance\ncom.qq.e\ncom.mbridge.msdk\ncom.kwad.sdk</string>
+    <string name="h_e88520b7">2. Gunakan atas risiko Anda sendiri: setiap konsekuensi yang timbul dari penggunaan aplikasi ini untuk memproses APK (termasuk namun tidak terbatas pada: kegagalan instalasi, crash, kerusakan, risiko akun, kehilangan data, dll.) ditanggung oleh pengguna.\n\n</string>
+    <string name="h_e93cb7ad">Kata kunci tampilan iklan tata letak resolusi</string>
+    <string name="h_e9472910">Konfigurasi tersimpan</string>
+    <string name="h_e98ea42f">1. Pemrosesan offline lokal: pembukaan, penghapusan iklan, pengemasan ulang, dan penandatanganan semua APK dilakukan secara lokal di perangkat Anda; aplikasi tidak mengunggah file APK atau data internal ke server manapun.\n\n</string>
+    <string name="h_e9a0b582">ketuk </string>
+    <string name="h_e9ef00eb">Konten pengumuman...</string>
+    <string name="h_e9ef6fc2" formatted="false">]} libs=%1$s</string>
+    <string name="h_ea8aef83" formatted="false">✗ %1$s pemrosesan gagal: %2$s</string>
+    <string name="h_eaa67708" formatted="false">· Baca tanda tangan asli: %1$s...</string>
+    <string name="h_eb057b11">▶ Pembersihan pustaka SDK tahap 3</string>
+    <string name="h_eb46cd7f" formatted="false">· Kelas yang ditemukan memperpanjang android.app.Aplikasi: %1$s (%2$s)</string>
+    <string name="h_eb83ed6d">Pola iklan mendukung impor dan berbagi langganan untuk sinkronisasi cepat lebih banyak aturan</string>
+    <string name="h_ec07479c">Ditulis ke bidang \&quot;root_file_keywords\&quot; pada $HELP_CONFIG_NAME.\nPada runtime core/AdRemover.kt\ cleanRootFiles() memindai direktori root APK (hanya tingkat atas, bukan rekursif) dan menghapus file yang cocok.</string>
+    <string name="h_ec3b529d">Belum ada deskripsi rinci</string>
+    <string name="h_ec3f26fa">· Deteksi berdasarkan format asli file (kontainer ZIP), bukan ekstensi; sub-paket yang diganti namanya (dasar/base.dat, dll.) juga terdeteksi</string>
+    <string name="h_ec83d6b2">· Tidak ditemukan file DEX, dilewati</string>
+    <string name="h_eca9a205">Tidak dapat membuka pusat unduhan</string>
+    <string name="h_ed310a00">Optimasi ukuran DEX pada</string>
+    <string name="h_eded2e15">    - Beranda: https://kotlinlang.org/\n</string>
+    <string name="h_edf6faf2">lewati jika daftar kosong</string>
+    <string name="h_ee0a3ba0">Token disalin ke clipboard</string>
+    <string name="h_ee4d78ba">⏭ Dilewati (tanpa iklan)</string>
+    <string name="h_ee4e2a27">Langganan yang dimasukkan secara manual ditambahkan</string>
+    <string name="h_ee7d1dad">Hapus file ad SDK</string>
+    <string name="h_eec19ff3">Jalur file iklan aset</string>
+    <string name="h_eed66a8d">, jadi aplikasi mengira iklan tidak pernah dimuat atau ditampilkan, sehingga logika tampilan iklan tidak dihitung.</string>
+    <string name="h_eedf995a" formatted="false">· Prinsip: menyuntikkan %1$s hook, menulis ulang induk aplikasi, menimpa tanda tangan asli saat runtime</string>
+    <string name="h_efb1a358">adalah anggota / terbuka / dibeli</string>
+    <string name="h_f08c72bc">Aktivitas Iklan</string>
+    <string name="h_f0b2a7b1" formatted="false">Menerapkan langganan %1$s (pola total %2$s)</string>
+    <string name="h_f0b77403" formatted="false">· Menggunakan nama entri kustom: %1$s</string>
+    <string name="h_f16e570f">· Target APK tidak memiliki lib dir, menulis semua ABI (termasuk x86 / x86_64)</string>
+    <string name="h_f1936c65">Aktivitas iklan </string>
+    <string name="h_f235618a">▶ Langkah 5/5 Ekspor</string>
+    <string name="h_f26b60e4">Alamat pembaruan adalah tautan web; browser bawaan akan terbuka untuk diunduh dari Lanzou Cloud</string>
+    <string name="h_f2765b03">Pola ini sudah ada</string>
+    <string name="h_f389c2d9">· Tidak ditemukan direktori aset, melewati pembersihan file iklan</string>
+    <string name="h_f3a25b4b">ad_unit_id\npenempatiID\nrewarded_video_id\nbanner_pos_id</string>
+    <string name="h_f42a751f" formatted="false">· Konfigurasi pola: SDK=%1$s class=%2$s metode=%3$s total=%4$s</string>
+    <string name="h_f4f76ad4">Kirim email</string>
+    <string name="h_f506fec2">→ memasukkan jalur relatif (dengan atau tanpa aset/awalan) → ketuk </string>
+    <string name="h_f57b7d67">Masukkan konten pola</string>
+    <string name="h_f5d25035">▶ Tata letak Tahap 6 menyembunyikan</string>
+    <string name="h_f5f084be">Mengambil konfigurasi langganan...</string>
+    <string name="h_f66c3cc8">Bekerja dengan \&quot;Assets ad file paths\&quot;.</string>
+    <string name="h_f6c7ffc7">· Tidak ditemukan direktori resolusi, dilewati</string>
+    <string name="h_f6f23d2d">    Sumber kelas hook penghapusan verifikasi tanda tangan (bin.mt.signature.KillerApplication) dan pendekatan lib native\n</string>
+    <string name="h_f73090dc">⚠ Konfigurasi pola iklan kosong, melewati proses penghapusan iklan</string>
+    <string name="h_f744e671">Terapkan langganan gagal, periksa izin penyimpanan</string>
+    <string name="h_f77dad26">    - Asal: https://android.googlesource.com/platform/frameworks/base\n</string>
+    <string name="h_f7aabc54" formatted="false">i Struktur paket Oversigned, mengaktifkan optimasi penggunaan ulang data (host: %1$s)</string>
+    <string name="h_f7d28e75">Jalur file/direktori ad SDK di bawah aset yang akan dihapus. Pencocokan yang tepat; Ketika dicocokkan, seluruh entri (file atau direktori) dihapus, digunakan untuk menghapus plugin iklan dan menempelkan layer yang tertanam di aset.</string>
+    <string name="h_f7da955e">▶ Mulai memproses APK</string>
+    <string name="h_f9bb4128">⚠️ Gagal</string>
+    <string name="h_f9f03d96">. Saat runtime, ia cocok berdasarkan substring (tidak sensitif huruf besar/kecil); Anda dapat menggunakan awalan nama paket ad SDK atau kata fitur izin.</string>
+    <string name="h_f9f6e3e6">Saat runtime, hideAdLayoutViews() dari core/AxmlAdRemover.kt\ menulis ulang lebar/tinggi elemen yang sesuai menjadi 0dp di layout AXML di bawah res/layout dan res/layout-*.</string>
+    <string name="h_fa4706ec">Kata kunci dicocokkan sebagai substring dan menutupi permukaan yang luas; Hindari kata-kata yang terlalu umum untuk mencegah penghapusan secara tidak sengaja.</string>
+    <string name="h_fa59ee8d">Kata kunci iklan aset</string>
+    <string name="h_fa8a0296">Ditulis ke bidang \&quot;url_patterns\&quot; pada $HELP_CONFIG_NAME.\nPada runtime core/DexPatcher.kt memindai instruksi string konstansi dan mengosongkan tautan iklan yang sesuai.</string>
+    <string name="h_faecff27" formatted="false">i Melewati file APK tertanam %1$s di bawah aset (misalnya base.apk); untuk menghapusnya </string>
+    <string name="h_fbc9e271">· Sub-paket ini digunakan kembali seperti adanya (STORED) untuk menghindari pembesaran ukuran akibat kompresi ulang APK bersarang yang sudah terkompresi</string>
+    <string name="h_fbfccfde" formatted="false">✓ %1$s file | %2$s DEX | %3$s</string>
+    <string name="h_fc2459c8">Ditulis ke bidang \&quot;lib_file_keywords\&quot; pada $HELP_CONFIG_NAME.\nPada runtime core/AdRemover.kt\'s cleanAdSdkLibs() berjalan di lib/*/ dan menghapus file .so yang cocok.</string>
+    <string name="h_fc69844a" formatted="false">%1$s pola total</string>
+    <string name="h_fc69844a2" formatted="false">Total fitur %1$s</string>
+    <string name="h_fd5e5b52">. Anda juga dapat mengedit file konfigurasi langsung dengan manajer file.</string>
+    <string name="h_fe1aa884">| Fase | Detail | Waktu |</string>
+    <string name="h_fe77d47f" formatted="false">✓ Asli tertanam: %1$s (%2$s)</string>
+    <string name="h_fe97b23b">URL atau domain permintaan iklan. Saat memproses, string tautan iklan yang ada sebagai string konsts di DEX dikosongkan menjadi string kosong, sehingga memblokir permintaan iklan.</string>
+    <string name="h_fea9a093">Bekerja dengan</string>
+    <string name="h_ff4c2138" formatted="false">· Menggunakan info tanda tangan khusus (%1$s karakter)</string>
+    <string name="h_ff8a316f">    - Merujuk pada pendekatan adloader / daftar hitam domain / kata kunci metode, dikombinasikan dengan SDK iklan mainstream dan diorganisir oleh kami sendiri\n\n</string>
+    <string name="h_ff94e7df">3. Tanggung jawab penggunaan komersial: jika APK yang dimodifikasi digunakan secara komersial atau didistribusikan, pastikan untuk mematuhi hukum dan peraturan yang berlaku mengenai kepemilikan, hak cipta, merek dagang, dan negara/wilayah; Tanggung jawab hukum yang dihasilkan ditanggung oleh Pengguna.\n\n</string>
+    <string name="h_ffdeee21">Bekerja dengan \&quot;Nama paket Ad SDK\&quot;.</string>
+    <string name="h_ffe745b5" formatted="false">· Kata kunci %1$s</string>
+    <string name="h_ffe745b5d" formatted="false">  · kata kunci: %1$s</string>
+    <string name="lang_default">Tionghoa Sederhana</string>
+    <string name="lang_desc">Pilih bahasa aplikasi. Berpengaruh langsung dan disimpan.</string>
+    <string name="lang_dialog_title">Pilih bahasa</string>
+    <string name="lang_title">Bahasa</string>
+    <string name="s_01769a6e">URL konfigurasi jarak jauh (https://...)</string>
+    <string name="s_02d9819d">Notifikasi</string>
+    <string name="s_02daf71f">Langganan</string>
+    <string name="s_04d7d88e">Nama kategori</string>
+    <string name="s_settings_back">Kembali</string>
+    <string name="s_068d0c44">Info penulis</string>
+    <string name="s_07ee07e4">Edit sumber</string>
+    <string name="s_089e87fe">Aktifkan hapus tanda tangan</string>
+    <string name="s_08b55fea">Kelola</string>
+    <string name="s_09bbf66d">Mode verifikasi</string>
+    <string name="s_09d71337">Aktif/nonaktif langganan</string>
+    <string name="s_0baadd9e">Buat token dari konfigurasi saat ini untuk dibagikan</string>
+    <string name="s_0c7d604b">Sumber</string>
+    <string name="s_0eb3c700">v2.0</string>
+    <string name="s_0f60c989">Versi baru telah rilis. Perbarui sekarang!</string>
+    <string name="s_10445608">Cara kerja</string>
+    <string name="s_12121846">Sentuh \'Kelola\' untuk edit / tambah / hapus</string>
+    <string name="s_140a0464">Sentuh \'Tambah langganan\' untuk memasukkan token\natau \'Bagikan konfigurasi\' untuk membuatnya</string>
+    <string name="s_148c7b02">Tanpa server; token berisi konfigurasi lengkap</string>
+    <string name="s_15c64aa0">File konfigurasi</string>
+    <string name="s_1605701e">Ganti dengan</string>
+    <string name="s_17a8bc26">Kategori pola iklan</string>
+    <string name="s_18068ed1">Belum ada pola. Tambahkan di atas.</string>
+    <string name="s_18c63459">Gagal bayar</string>
+    <string name="s_1b4a7056">Tiga cara:\n① Token: berawalan ADSUB:\n② Tautan langsung: URL JSON dengan http(s)://\n③ Konten: tempel JSON konfigurasi (berawalan {)</string>
+    <string name="s_1fc1da7d">Tambahkan / edit / hapus / bagikan langganan. Konfigurasi dapat dibagikan sebagai token.</string>
+    <string name="s_224e2ccd">Konfigurasi</string>
+    <string name="s_23f849fb">Bongkar · Hapus iklan DEX · Repaket dan tanda tangan\nHapus iklan sekali sentuh, sepenuhnya offline</string>
+    <string name="s_240bf022">pola</string>
+    <string name="s_2541ca48">Perbarui sekarang</string>
+    <string name="s_25488ce0">Hapus verifikasi tanda tangan</string>
+    <string name="s_2a813bc3">Unduh sekarang</string>
+    <string name="s_2c3f3245">Langganan URL</string>
+    <string name="s_2f4aaddd">Hapus</string>
+    <string name="s_309a9e7f">Kelola langganan</string>
+    <string name="s_30ea6464">Temukan</string>
+    <string name="s_30fe4dbb">Offline · Pola dapat disesuaikan</string>
+    <string name="s_31d05b73">Tanda tangan (sertifikat Base64; kosong = baca dari asli)</string>
+    <string name="s_31da0a7b">Ubah nama atau URL jarak jauh</string>
+    <string name="s_3243e935">Nama .so yang disuntikkan (cocok dengan lib/&lt;abi&gt;/&lt;name&gt;lib.so)</string>
+    <string name="s_32ac152b">Perbarui</string>
+    <string name="s_3615f734">Salin log</string>
+    <string name="s_3629f42b">Ikon kategori</string>
+    <string name="s_38cf16f2">Oke</string>
+    <string name="s_39388352">QQ kontak</string>
+    <string name="s_39928582">Siap. Ketuk \'Mulai Proses\' dan pilih APK untuk memulai.</string>
+    <string name="s_3ac820e0">0 pola</string>
+    <string name="s_3b481a8e">Belum ada langganan</string>
+    <string name="s_3bc5e602">Email</string>
+    <string name="s_3c00064c">URL tertangkap, sedang mengunduh</string>
+    <string name="s_4006f452">Pengaturan</string>
+    <string name="s_45470663">Tambahkan token atau konfigurasi bersama; aktifkan untuk menerapkan</string>
+    <string name="s_456d29ef">Log</string>
+    <string name="s_462f7422">Edit langganan</string>
+    <string name="s_469de3c4">Optimasi DEX</string>
+    <string name="s_48ab146a">Fitur</string>
+    <string name="s_498f1d06">Tambah sumber</string>
+    <string name="s_4cc541a3">Sentuh tombol unduh; aplikasi mencegat URL APK dan mengunduh secara internal.</string>
+    <string name="s_4d96525d">Default (SignatureKiIIer)</string>
+    <string name="s_4ed52bef">Terang</string>
+    <string name="s_4f356348">Jalur kustom</string>
+    <string name="s_4f35e80d">Jalur</string>
+    <string name="s_4ff13370">Cek pembaruan</string>
+    <string name="s_50388292">Harap baca dengan cermat</string>
+    <string name="s_50ef9a92">Selalu gunakan antarmuka terang</string>
+    <string name="s_55e69200">Hapus info debug untuk mengecilkan APK</string>
+    <string name="s_56a0606b">Masukkan pola baru</string>
+    <string name="s_58125852">Pernyataan</string>
+    <string name="s_598d34f0">Sesuaikan parameter injeksi</string>
+    <string name="s_5ad1196f">Aktifkan kategori ini</string>
+    <string name="s_5ef69f62">Ikon</string>
+    <string name="s_5f535b47">Bagikan konfigurasi sebagai token</string>
+    <string name="s_5f7707b4">Temukan dan ganti</string>
+    <string name="s_60bf6001">Referensi dan sumber</string>
+    <string name="s_625fb26b">Batal</string>
+    <string name="s_62cea749">Penulis</string>
+    <string name="s_636c1a42">Hapus tanda tangan normal</string>
+    <string name="s_67113ed9">0 item</string>
+    <string name="s_6763431e">Otomatis mengikuti tema sistem</string>
+    <string name="s_68084d53">Buka di browser</string>
+    <string name="s_68fa3dbb">Lokasi ekspor</string>
+    <string name="s_6b7bcdcd">Ukuran setelah</string>
+    <string name="s_6ff3d989">Pilih mode tampilan</string>
+    <string name="s_71938084" formatted="false">Saat memproses DEX, info debug (nomor baris/variabel/parameter) dihapus, mengecilkan APK 5%~15% tanpa mempengaruhi fungsi; hanya jejak error yang kehilangan nomor baris.</string>
+    <string name="s_skip_signing_title">Tanda tangani ulang saat pengemasan</string>
+    <string name="s_skip_signing_desc" formatted="false">Jika diaktifkan, APK akan ditandatangani ulang secara otomatis setelah pengemasan; jika dinonaktifkan, APK tanpa tanda tangan dihasilkan, cocok untuk penandatanganan ulang / proteksi / sertifikat sendiri.</string>
+    <string name="s_skip_signing_cd">Tanda tangani ulang atau tidak setelah pengemasan</string>
+    <string name="s_71bbc726">Ikuti sistem</string>
+    <string name="s_728ee208">Pola iklan Flutter</string>
+    <string name="s_7295f03c">Nama</string>
+    <string name="s_73d906b6">Jenis berbagi</string>
+    <string name="s_74fda23d">Optimasi ukuran DEX</string>
+    <string name="s_767f6a2d">Pola Flutter</string>
+    <string name="s_769d88e4">Selesai</string>
+    <string name="s_78f2095f">Versi baru ditemukan</string>
+    <string name="s_7a5db88b">Hapus verifikasi tanda tangan setelah repaket</string>
+    <string name="s_7be39baf">Pemrosesan selesai</string>
+    <string name="s_7bf54e28">Dipilih</string>
+    <string name="s_7e56035a">QQ</string>
+    <string name="s_7f68b9ad">Langganan URL</string>
+    <string name="s_8347a927">Ubah</string>
+    <string name="s_84fad3a4">Cara menambah · Ruang lingkup · Perubahan</string>
+    <string name="s_86a6d929">Parameter injeksi</string>
+    <string name="s_87e4d9ef">Nanti</string>
+    <string name="s_8a2aa3c6">Yang baru</string>
+    <string name="s_8a2cba4b">Masukkan jalur lengkap dan pastikan dapat ditulis</string>
+    <string name="s_8ba7c3a7">Output</string>
+    <string name="s_8c8b1d0c">Ruang hemat</string>
+    <string name="s_8c993f30">Kosong</string>
+    <string name="s_8d89dabd">Hapus iklan sekali sentuh</string>
+    <string name="s_9078dfc1">Tiga nilai pertama ditulis ke &lt;clinit&gt; dalam string kontest hook (v0 jalur asli / v2 jalur unzip / v3 .so name); kelas hook mengganti nama kelas KillerApplication yang disuntikkan.</string>
+    <string name="s_928e0c3e">Folder output APK</string>
+    <string name="s_929660ae">Berlaku di mode Paket asli, setara dengan \'jalur asli / jalur ekstrak / nama .so / kelas hook / tanda tangan / entri\' MT</string>
+    <string name="s_93964033">0 langganan</string>
+    <string name="s_95b351c8">Edit</string>
+    <string name="s_9819b267">Tempat menyimpan APK setelah hapus iklan</string>
+    <string name="s_98ea2a77">Log pemrosesan</string>
+    <string name="s_9b601b8e">Versi saat ini</string>
+    <string name="s_9e23cf09">/storage/emulated/0/APKEditor</string>
+    <string name="s_9ee20a30">Versi terbaru</string>
+    <string name="s_9f1ef078" formatted="false">0%</string>
+    <string name="s_a05128ed">Total waktu</string>
+    <string name="s_a15a9ef1">Bersihkan log</string>
+    <string name="s_a18f884e">Mulai</string>
+    <string name="s_a1b863fa">Pengumuman resmi</string>
+    <string name="s_a51ef595">Mode gelap</string>
+    <string name="s_a56d1fbd">Pernyataan: penghapusan tanda tangan hanya untuk pembelajaran, penelitian, dan penggunaan pribadi yang sah. Jangan memodifikasi atau mendistribusikan aplikasi tanpa hak atau yang dilindungi hukum. Tanggung jawab sepenuhnya ada pada pengguna.</string>
+    <string name="s_a6695e34">Email kontak</string>
+    <string name="s_a6fe5ea4">Pilih mode: Sistem / Terang / Gelap. Berpengaruh langsung dan disimpan.</string>
+    <string name="s_ab1a82f0">Ukuran asli</string>
+    <string name="s_ab6eb4cc">Sumber terbuka</string>
+    <string name="s_afcde261">Tampilan</string>
+    <string name="s_b15d9127">Tutup</string>
+    <string name="s_b3d8be49">URL konfigurasi jarak jauh (hanya tipe URL)</string>
+    <string name="s_b58c7549">Tambah</string>
+    <string name="s_b6572571">Jalur paket asli (assets dalam APK)</string>
+    <string name="s_b7a331b9">Token / Tautan langsung / Konten</string>
+    <string name="s_b9d96e86">Mode terang</string>
+    <string name="s_bcea107d">Nama entri (paket; kosong = baca dari manifest)</string>
+    <string name="s_be5fbbe3">Simpan</string>
+    <string name="s_bec7e4d6">Ubah</string>
+    <string name="s_c09d811a">/storage/emulated/0/APKEditor/ad_patterns.json</string>
+    <string name="s_c10c6741">Tentang</string>
+    <string name="s_c31f48f8">Bagikan</string>
+    <string name="s_c666ad11">Pola</string>
+    <string name="s_c6828f99">Gelap</string>
+    <string name="s_c6973b8d">Aktifkan pola Flutter</string>
+    <string name="s_ce26955a">Mengerti</string>
+    <string name="s_d106afb1">Jangan tanya lagi</string>
+    <string name="s_d395eb69">Berpengaruh langsung dan disimpan</string>
+    <string name="s_d5932fe6">Aktifkan optimasi DEX</string>
+    <string name="s_d78b7b9b">Tertanam</string>
+    <string name="s_d94cc5ea">Tambah langganan</string>
+    <string name="s_dc831d4e">Penghapusan iklan berhasil</string>
+    <string name="s_dc91b561">Lihat info</string>
+    <string name="s_dd8d0881">Saat aktif, verifikasi tanda tangan dihapus agar aplikasi menerima tanda tangan baru. Mode normal mencakup sebagian besar aplikasi; mode Paket asli membandingkan tanda tangan asli untuk jangkauan lebih luas.</string>
+    <string name="s_de12e68b">Laporan pemrosesan</string>
+    <string name="s_de763e1a">Privasi</string>
+    <string name="s_e01c6b70">Pilih APK dan semuanya otomatis: bongkar → hapus iklan DEX → bersihkan sumber daya → repaket → tanda tangan → ekspor. Semua lokal.</string>
+    <string name="s_e27bfdd7">Ikon aplikasi</string>
+    <string name="s_e35b0fb4">Token berisi URL jarak jauh; perlu server</string>
+    <string name="s_e5a091b7">Tingkatkan ke</string>
+    <string name="s_e5f05079">Nama kelas hook (dapat disesuaikan)</string>
+    <string name="s_e616aaeb">0 B / 0 B</string>
+    <string name="s_e9c9b9a0">Selalu gunakan antarmuka gelap</string>
+    <string name="s_efc6ceba">Sesuaikan pola di libapp.so Flutter. Lebih diutamakan daripada pola DEX; kosong = kategori di bawah.</string>
+    <string name="s_f1d4ff50">Kustom</string>
+    <string name="s_f23e5d34">Jalur ekstrak (relatif folder privat)</string>
+    <string name="s_f26ef914">Unduh</string>
+    <string name="s_f411d0f1">Info</string>
+    <string name="s_f5f3fb1a">Bagikan konfigurasi</string>
+    <string name="s_f801c69d">Masukkan token, tautan langsung, atau tempel konfigurasi</string>
+    <string name="s_fa86f1a5">Pengumuman</string>
+    <string name="s_fe5cc438">Versi 1.7</string>
+    <string name="s_fe60ed78">Langganan tertanam tidak bisa mengubah konfigurasi, hanya nama</string>
+    <string name="s_ff3e568a">v1.0</string>
+    <string name="perm_all_files_access" formatted="false">Izinkan akses \"Semua File\"</string>
+    <string name="log_apkinfo" formatted="false">  ✓ %1$s | %2$s | DEX=%3$s res=%4$s lib=%5$s | %6$s</string>
+    <string name="log_dexmultiplex_done" formatted="false">  i Optimasi multiplexing data selesai: %1$s -&gt; %2$s</string>
+    <string name="log_dexmultiplex_reuse" formatted="false">  · Segmen data asli (%1$s) yang digunakan ulang, disimpan %2$s (%3$s%%)</string>
+    <string name="log_dexmultiplex_fail" formatted="false">  ✗ Optimasi multiplexing data gagal: %1$s</string>
+    <string name="dexinfo_file" formatted="false">File: %1$s</string>
+    <string name="dexinfo_size" formatted="false">Size: %1$d bytes</string>
+    <string name="dexinfo_classes" formatted="false">Classes: %1$d</string>
+    <string name="dexinfo_methods" formatted="false">Methods: %1$d</string>
+    <string name="dexinfo_fields" formatted="false">Fields: %1$d</string>
+    <string name="dexinfo_packages" formatted="false">
+Package distribution:</string>
+    <string name="dexinfo_pkg_line" formatted="false">  %1$s: %2$d classes</string>
+    <string name="sigrem_inject_hook" formatted="false">  ▶ Menyuntikkan hook tanda tangan gaya MT (%1$s)...</string>
+    <string name="sigrem_class_renamed" formatted="false">  ✓ Kelas Hook berganti nama menjadi %1$s (termasuk 12 kelas dalam)</string>
+    <string name="dexpatcher_link_neutral" formatted="false">, URL %1$d dikosongkan</string>
+    <string name="dexpatcher_neutral" formatted="false">    -&gt; %1$s: Metode iklan %2$d dikosongkan, melewati %3$d metode non-iklan%4$s%5$s</string>
+</resources>

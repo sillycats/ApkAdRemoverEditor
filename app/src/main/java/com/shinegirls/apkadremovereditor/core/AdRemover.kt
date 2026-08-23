@@ -1,5 +1,6 @@
 package com.shinegirls.apkadremovereditor.core
 
+import com.shinegirls.apkadremovereditor.R
 import android.content.Context
 import com.shinegirls.apkadremovereditor.utils.Format
 import com.shinegirls.apkadremovereditor.utils.PathPreferences
@@ -60,17 +61,17 @@ object AdRemover {
             for (category in disabledCategories) {
                 AdPatternConfig.getCategoryList(config, category).clear()
             }
-            log("  · 已关闭 ${disabledCategories.size} 个分类: " +
-                disabledCategories.joinToString("、") { it.displayName })
+            log(context.getString(R.string.h_bc1b6e2e, disabledCategories.size) +
+                disabledCategories.joinToString("、") { context.getString(it.titleRes) })
         }
 
         report.config = config
         report.configFile = configFile.absolutePath
 
-        log("  · 特征配置: SDK=${config.sdkPackages.size} 类=${config.classKeywords.size} 方法=${config.methodPatterns.size} 总计=${config.totalCount()} 条")
+        log(context.getString(R.string.h_f42a751f, config.sdkPackages.size, config.classKeywords.size, config.methodPatterns.size, config.totalCount()))
 
         if (config.totalCount() == 0) {
-            log("  ⚠ 广告特征配置为空，跳过去广告处理")
+            log(context.getString(R.string.h_f73090dc))
             report.totalTimeMs = System.currentTimeMillis() - totalStartTime
             return report
         }
@@ -87,11 +88,11 @@ object AdRemover {
 
         // ---------- 阶段1: 直接修补DEX文件 ----------
         val phase1Start = System.currentTimeMillis()
-        log("▶ 阶段 1 DEX 修补")
+        log(context.getString(R.string.h_6b9a5016))
 
         val dexOptimizeEnabled = PathPreferences.isDexOptimizeEnabled(context)
         if (dexOptimizeEnabled) {
-            log("  ℹ DEX 体积优化已开启：移除调试信息，进一步减小 APK 体积")
+            log(context.getString(R.string.h_413880fa))
         }
 
         val dexFiles = extractDir.listFiles { f ->
@@ -99,7 +100,7 @@ object AdRemover {
         } ?: emptyArray()
 
         if (dexFiles.isNotEmpty()) {
-            log("  · 找到 ${dexFiles.size} 个 DEX 文件")
+            log(context.getString(R.string.h_94b16984, dexFiles.size))
             // 自然顺序排序：classes → classes2 → ... → classes10（修复 classes10 排在 classes2 前的问题）
             val sortedDex = dexFiles.sortedWith(dexNaturalComparator)
 
@@ -123,14 +124,14 @@ object AdRemover {
                 report.checkpoints.add(CheckpointRecord("DEX", dexFile.name, stat.elapsedMs))
             }
         } else {
-            log("  · 未找到 DEX 文件")
+            log(context.getString(R.string.h_0046342a))
         }
 
-        logPhaseTime("DEX修补", phase1Start, log)
+        logPhaseTime(context, context.getString(R.string.h_3dd3492b), phase1Start, log)
 
         // ---------- 阶段2: AXML 广告清单移除 ----------
         val axmlStart = System.currentTimeMillis()
-        log("▶ 阶段 2 AXML 清单移除")
+        log(context.getString(R.string.h_7bfda754))
 
         val manifestFile = File(extractDir, "AndroidManifest.xml")
         val axmlResult = try {
@@ -148,43 +149,43 @@ object AdRemover {
                 axmlKeywords
             )
         } catch (e: Exception) {
-            log("  ✗ AXML 解析失败: ${e.message}")
+            log(context.getString(R.string.h_490a3d52, e.message))
             AxmlAdRemover.AxmlResult(false, 0, emptyList())
         }
         report.axmlRemovedComponents = axmlResult.removedCount
 
         if (axmlResult.modified) {
-            log("  ✓ 已移除 ${axmlResult.removedCount} 个广告组件")
+            log(context.getString(R.string.h_5af3990c, axmlResult.removedCount))
         } else {
-            log("  · 未发现需移除的广告组件")
+            log(context.getString(R.string.h_568e50df))
         }
-        report.checkpoints.add(CheckpointRecord("AXML组件", "移除 ${axmlResult.removedCount} 个", System.currentTimeMillis() - axmlStart))
-        logPhaseTime("AXML清单移除", axmlStart, log)
+        report.checkpoints.add(CheckpointRecord(context.getString(R.string.h_a674a27a), context.getString(R.string.h_66b00047, axmlResult.removedCount), System.currentTimeMillis() - axmlStart))
+        logPhaseTime(context, context.getString(R.string.h_e5bea172), axmlStart, log)
 
         // ---------- AXML 广告权限移除 ----------
         val permStart = System.currentTimeMillis()
-        log("▶ 阶段 2.5 AXML 权限移除")
+        log(context.getString(R.string.h_19071f26))
 
         val permResult = try {
             AxmlAdRemover.removeAdPermissions(manifestFile, config.adPermissions)
         } catch (e: Exception) {
-            log("  ✗ AXML 权限解析失败: ${e.message}")
+            log(context.getString(R.string.h_7fcc9f20, e.message))
             AxmlAdRemover.AxmlResult(false, 0, emptyList())
         }
         report.axmlRemovedPermissions = permResult.removedCount
 
         if (permResult.modified) {
-            log("  ✓ 已移除 ${permResult.removedCount} 个广告权限声明")
+            log(context.getString(R.string.h_2dee860f, permResult.removedCount))
         } else {
-            log("  · 未发现需移除的广告权限")
+            log(context.getString(R.string.h_92c7d2cc))
         }
-        report.checkpoints.add(CheckpointRecord("AXML权限", "移除 ${permResult.removedCount} 个", System.currentTimeMillis() - permStart))
-        logPhaseTime("AXML权限移除", permStart, log)
+        report.checkpoints.add(CheckpointRecord(context.getString(R.string.h_8959b0a7), context.getString(R.string.h_66b000471, permResult.removedCount), System.currentTimeMillis() - permStart))
+        logPhaseTime(context, context.getString(R.string.h_669acb71), permStart, log)
 
         // ---------- 阶段3~6: 资源/库/文件清理（返回计数） ----------
-        report.cleanedSdkLibs = cleanAdSdkLibs(extractDir, config.sdkPackages, config.libFileKeywords, log)
-        report.cleanedSdkAssets = cleanAdSdkAssets(extractDir, config.adAssetPaths, config.assetKeywords, log)
-        report.cleanedRootFiles = cleanRootFiles(extractDir, config.rootFileKeywords, log)
+        report.cleanedSdkLibs = cleanAdSdkLibs(extractDir, config.sdkPackages, config.libFileKeywords, context, log)
+        report.cleanedSdkAssets = cleanAdSdkAssets(extractDir, config.adAssetPaths, config.assetKeywords, context, log)
+        report.cleanedRootFiles = cleanRootFiles(extractDir, config.rootFileKeywords, context, log)
 
         // 隐藏 Res 布局中的广告 View。
         // 该步骤与 RES_LAYOUT_KEYWORDS 分类开关绑定：关闭该分类后整个布局隐藏步骤不再执行，
@@ -201,9 +202,9 @@ object AdRemover {
                 addAll(config.adServices)
                 addAll(config.adReceivers)
             }
-            report.hiddenLayoutViews = hideAdLayoutViews(extractDir, layoutKeywords, log)
+            report.hiddenLayoutViews = hideAdLayoutViews(extractDir, layoutKeywords, context, log)
         } else {
-            log("  · 已关闭 Res 布局广告 View 分类，跳过布局隐藏")
+            log(context.getString(R.string.h_d236f750))
             report.hiddenLayoutViews = 0
         }
 
@@ -211,21 +212,21 @@ object AdRemover {
         report.totalTimeMs = System.currentTimeMillis() - totalStartTime
 
         val parts = buildList {
-            if (report.totalPatchedClasses > 0) add("类置空 ${report.totalPatchedClasses}")
-            if (report.totalNeutralizedMethods > 0) add("方法置空 ${report.totalNeutralizedMethods}")
-            if (report.totalNeutralizedUrls > 0) add("链接置空 ${report.totalNeutralizedUrls}")
-            if (report.totalNeutralizedStrings > 0) add("字符串置空 ${report.totalNeutralizedStrings}")
-            if (report.totalForcedTrueMethods > 0) add("强制true ${report.totalForcedTrueMethods}")
-            if (report.totalForcedFalseMethods > 0) add("强制false ${report.totalForcedFalseMethods}")
-            if (report.axmlRemovedComponents > 0) add("AXML组件 ${report.axmlRemovedComponents}")
-            if (report.axmlRemovedPermissions > 0) add("AXML权限 ${report.axmlRemovedPermissions}")
-            if (report.cleanedSdkLibs > 0) add("SDK库 ${report.cleanedSdkLibs}")
+            if (report.totalPatchedClasses > 0) add(context.getString(R.string.h_de0bbf00, report.totalPatchedClasses))
+            if (report.totalNeutralizedMethods > 0) add(context.getString(R.string.h_72ab6230, report.totalNeutralizedMethods))
+            if (report.totalNeutralizedUrls > 0) add(context.getString(R.string.h_ad9c82ac, report.totalNeutralizedUrls))
+            if (report.totalNeutralizedStrings > 0) add(context.getString(R.string.h_b6d8f56d, report.totalNeutralizedStrings))
+            if (report.totalForcedTrueMethods > 0) add(context.getString(R.string.h_b7089816, report.totalForcedTrueMethods))
+            if (report.totalForcedFalseMethods > 0) add(context.getString(R.string.h_1d0592d0, report.totalForcedFalseMethods))
+            if (report.axmlRemovedComponents > 0) add(context.getString(R.string.h_645b8198, report.axmlRemovedComponents))
+            if (report.axmlRemovedPermissions > 0) add(context.getString(R.string.h_166a8328, report.axmlRemovedPermissions))
+            if (report.cleanedSdkLibs > 0) add(context.getString(R.string.h_a36b1457, report.cleanedSdkLibs))
             if (report.cleanedSdkAssets > 0) add("assets ${report.cleanedSdkAssets}")
-            if (report.cleanedRootFiles > 0) add("根文件 ${report.cleanedRootFiles}")
-            if (report.hiddenLayoutViews > 0) add("布局隐藏 ${report.hiddenLayoutViews}")
+            if (report.cleanedRootFiles > 0) add(context.getString(R.string.h_ad125423, report.cleanedRootFiles))
+            if (report.hiddenLayoutViews > 0) add(context.getString(R.string.h_8623ecbf, report.hiddenLayoutViews))
         }
         if (parts.isEmpty()) {
-            log("  · 未命中广告特征，无需修改")
+            log(context.getString(R.string.h_b76ce9e7))
         } else {
             log("  ✓ ${parts.joinToString(" | ")} | ${report.totalTimeMs}ms")
         }
@@ -250,11 +251,11 @@ object AdRemover {
         log: Logger
     ): DexProcessingStats {
         val dexStart = System.currentTimeMillis()
-        log("  ▶ 正在处理: ${dexFile.name} (${formatSize(dexFile.length())})")
+        log(context.getString(R.string.h_7bee061a, dexFile.name, formatSize(dexFile.length())))
 
         // 大 DEX 预检：体积超过阈值时提示，避免用户误以为卡死
         if (dexFile.length() > LARGE_DEX_THRESHOLD) {
-            log("  ℹ 该 DEX 较大，已启用低内存安全扫描，请耐心等待...")
+            log(context.getString(R.string.h_32ae4cdd))
         }
 
         return try {
@@ -268,6 +269,7 @@ object AdRemover {
                 neutralizeMethodKeywords = methodNeutralizeKeywords,
                 stringPatterns = adStringPatterns,
                 stripDebugInfo = PathPreferences.isDexOptimizeEnabled(context),
+                context = context,
                 logger = { msg -> log(msg) }
             )
             DexProcessingStats(
@@ -287,13 +289,13 @@ object AdRemover {
                 elapsedMs = result.elapsedMs
             )
         } catch (e: OutOfMemoryError) {
-            log("  ✗ ${dexFile.name} 内存不足: ${e.message}")
+            log(context.getString(R.string.h_1901ab4f, dexFile.name, e.message))
             DexProcessingStats(
                 name = dexFile.name, failed = true, error = e.message,
                 elapsedMs = System.currentTimeMillis() - dexStart
             )
         } catch (e: Exception) {
-            log("  ✗ ${dexFile.name} 修补失败: ${e.message}")
+            log(context.getString(R.string.h_d44f69ea, dexFile.name, e.message))
             DexProcessingStats(
                 name = dexFile.name, failed = true, error = e.message,
                 elapsedMs = System.currentTimeMillis() - dexStart
@@ -324,9 +326,9 @@ object AdRemover {
     }
 
     // ========== 阶段耗时日志 ==========
-    private fun logPhaseTime(phaseName: String, startTime: Long, log: Logger) {
+    private fun logPhaseTime(context: Context, phaseName: String, startTime: Long, log: Logger) {
         val elapsed = System.currentTimeMillis() - startTime
-        log("  ⏱ $phaseName 耗时: ${elapsed}ms")
+        log(context.getString(R.string.h_606a0ed7, phaseName, elapsed))
     }
 
     private fun formatSize(bytes: Long): String = Format.formatSize(bytes)
@@ -343,13 +345,14 @@ object AdRemover {
         extractDir: File,
         sdkPackages: List<String>,
         libFileKeywords: List<String>,
+        context: Context,
         log: Logger
     ): Int {
-        log("▶ 阶段 3 SDK 库清理")
+        log(context.getString(R.string.h_eb057b11))
 
         val libDir = File(extractDir, "lib")
         if (!libDir.exists() || !libDir.isDirectory) {
-            log("  · 未找到 lib 目录，跳过原生库清理")
+            log(context.getString(R.string.h_9a7e99e6))
             return 0
         }
 
@@ -359,10 +362,10 @@ object AdRemover {
             addAll(buildSdkLibKeywords(sdkPackages))
         }
         if (libKeywords.isEmpty()) {
-            log("  · 无广告SDK库名关键词，跳过")
+            log(context.getString(R.string.h_e7425f76))
             return 0
         }
-        log("  · 关键词 ${libKeywords.size} 个")
+        log(context.getString(R.string.h_ffe745b5d, libKeywords.size))
 
         val startTime = System.currentTimeMillis()
         var cleaned = 0
@@ -375,14 +378,14 @@ object AdRemover {
                     if (soFile.delete()) {
                         cleaned++
                     } else {
-                        log("  ⚠ 删除失败: ${abiDir.name}/${soFile.name}")
+                        log(context.getString(R.string.h_042f6c6a, abiDir.name, soFile.name))
                     }
                 }
             }
         }
         val elapsed = System.currentTimeMillis() - startTime
 
-        log("  ✓ 清理 $cleaned 个 SDK 库 | ${elapsed}ms")
+        log(context.getString(R.string.h_863f7b7a, cleaned, elapsed))
         return cleaned
     }
 
@@ -466,13 +469,14 @@ object AdRemover {
         extractDir: File,
         adAssetPaths: List<String>,
         assetKeywords: List<String>,
+        context: Context,
         log: Logger
     ): Int {
-        log("▶ 阶段 4 assets 清理")
+        log(context.getString(R.string.h_575bd6a0))
 
         val assetsDir = File(extractDir, "assets")
         if (!assetsDir.exists() || !assetsDir.isDirectory) {
-            log("  · 未找到 assets 目录，跳过广告文件清理")
+            log(context.getString(R.string.h_f389c2d9))
             return 0
         }
 
@@ -482,10 +486,10 @@ object AdRemover {
             .filter { it.isNotEmpty() }
 
         if (knownAdAssetPaths.isEmpty()) {
-            log("  · 未配置 assets 广告文件路径，跳过")
+            log(context.getString(R.string.h_ac0e6cda))
             return 0
         }
-        log("  · 路径 ${knownAdAssetPaths.size} 个")
+        log(context.getString(R.string.h_9a618818, knownAdAssetPaths.size))
 
         // 广告关键词：覆盖自定义列表之外的同类广告资产（可在设置中自定义）
         val adKeywords = assetKeywords
@@ -526,9 +530,9 @@ object AdRemover {
         val elapsed = System.currentTimeMillis() - startTime
 
         if (protectedCount > 0) {
-            log("  ℹ 已跳过 $protectedCount 个 assets 内置 APK 文件（如 base.apk），如需删除请在\"assets 广告文件路径\"中精确指定")
+            log(context.getString(R.string.h_faecff27, protectedCount) + "\"" + context.getString(R.string.h_6b3b93c7))
         }
-        log("  ✓ 清理 $cleaned 个 assets 条目 | ${elapsed}ms")
+        log(context.getString(R.string.h_31186ba1, cleaned, elapsed))
         return cleaned
     }
 
@@ -550,19 +554,20 @@ object AdRemover {
     private fun cleanRootFiles(
         extractDir: File,
         rootFileKeywords: List<String>,
+        context: Context,
         log: Logger
     ): Int {
-        log("▶ 阶段 5 根目录清理")
+        log(context.getString(R.string.h_bed1b443))
 
         val keywords = rootFileKeywords
             .map { it.trim().lowercase() }
             .filter { it.isNotEmpty() }
             .toSet()
         if (keywords.isEmpty()) {
-            log("  · 未配置根目录文件关键词，跳过")
+            log(context.getString(R.string.h_bece4178))
             return 0
         }
-        log("  · 关键词 ${keywords.size} 个")
+        log(context.getString(R.string.h_ffe745b5, keywords.size))
 
         // 仅遍历 APK 根目录一层（与 classes.dex 同目录），不递归
         val rootFiles = extractDir.listFiles { f ->
@@ -577,13 +582,13 @@ object AdRemover {
                 if (file.delete()) {
                     cleaned++
                 } else {
-                    log("  ⚠ 删除失败: ${file.name}")
+                    log(context.getString(R.string.h_a445d6b9, file.name))
                 }
             }
         }
         val elapsed = System.currentTimeMillis() - startTime
 
-        log("  ✓ 清理 $cleaned 个根目录文件 | ${elapsed}ms")
+        log(context.getString(R.string.h_7a291fbf, cleaned, elapsed))
         return cleaned
     }
 
@@ -604,23 +609,24 @@ object AdRemover {
     private fun hideAdLayoutViews(
         extractDir: File,
         layoutKeywords: List<String>,
+        context: Context,
         log: Logger
     ): Int {
-        log("▶ 阶段 6 布局隐藏")
+        log(context.getString(R.string.h_f5d25035))
 
         val keywords = layoutKeywords
             .map { it.trim().lowercase() }
             .filter { it.isNotEmpty() }
             .distinct()
         if (keywords.isEmpty()) {
-            log("  · 未配置 Res 布局关键词，跳过")
+            log(context.getString(R.string.h_5df66715))
             return 0
         }
-        log("  · 关键词 ${keywords.size} 个")
+        log(context.getString(R.string.h_ffe745b5, keywords.size))
 
         val resDir = File(extractDir, "res")
         if (!resDir.exists() || !resDir.isDirectory) {
-            log("  · 未找到 res 目录，跳过")
+            log(context.getString(R.string.h_f6c7ffc7))
             return 0
         }
 
@@ -649,10 +655,10 @@ object AdRemover {
         }
 
         if (xmlFiles.isEmpty()) {
-            log("  · 未找到任何 res 布局 xml 文件，跳过")
+            log(context.getString(R.string.h_5c286b32))
             return 0
         }
-        log("  · 共发现 ${xmlFiles.size} 个 res 布局 xml 文件（含 ${resRootXml.size} 个 res 根目录混淆 xml）")
+        log(context.getString(R.string.h_6a2eb85f, xmlFiles.size, resRootXml.size))
 
         val startTime = System.currentTimeMillis()
         var totalHidden = 0
@@ -665,12 +671,12 @@ object AdRemover {
                     totalFiles++
                 }
             } catch (e: Exception) {
-                log("  ⚠ $dirName/${xmlFile.name} 处理失败: ${e.message}")
+                log(context.getString(R.string.h_7dcda328, dirName, xmlFile.name, e.message))
             }
         }
         val elapsed = System.currentTimeMillis() - startTime
 
-        log("  ✓ Res 广告布局隐藏完成: $totalFiles 个布局文件, $totalHidden 个元素, 耗时 ${elapsed}ms")
+        log(context.getString(R.string.h_5a9cf305, totalFiles, totalHidden, elapsed))
         return totalHidden
     }
 }
