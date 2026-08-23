@@ -529,7 +529,7 @@ class MainActivity : AppCompatActivity() {
                         finalSize = exportFile.length()
                         exportDesc = exportFile.absolutePath
                         exportedToSourceDir = true
-                        log(getString(R.string.h_4267eb34))
+                        log(getString(R.string.h_4267eb34, exportDesc))
                     }
                 }
 
@@ -554,7 +554,7 @@ class MainActivity : AppCompatActivity() {
                         finalSize = tempSigned.length()
                         exportDesc = docUriToReadablePath(uri, fileName)
                         exportedToSourceDir = true
-                        log(getString(R.string.h_4267eb34))
+                        log(getString(R.string.h_4267eb34, exportDesc))
                     }
                 }
 
@@ -566,7 +566,7 @@ class MainActivity : AppCompatActivity() {
                     tempSigned.copyTo(exportFile, overwrite = true)
                     finalSize = exportFile.length()
                     exportDesc = exportFile.absolutePath
-                    log(getString(R.string.h_4267eb34))
+                    log(getString(R.string.h_4267eb34, exportDesc))
                 }
 
                 // 生成 Markdown 处理报告（与处理后 APK 同目录保存）
