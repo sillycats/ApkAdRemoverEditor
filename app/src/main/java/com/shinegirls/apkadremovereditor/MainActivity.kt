@@ -373,7 +373,7 @@ class MainActivity : AppCompatActivity() {
 
                 val dexCount = extractDir.listFiles { f -> f.name.endsWith(".dex") }?.size ?: 0
                 val totalFiles = extractDir.walkTopDown().filter { it.isFile }.count()
-                log(getString(R.string.h_fbfccfde, elapsedMs(step2Start)))
+                log(getString(R.string.h_fbfccfde, totalFiles, dexCount, elapsedMs(step2Start)))
 
                 // 3. 直接修补DEX去广告
                 log(getString(R.string.h_d086cb5b))
@@ -443,7 +443,7 @@ class MainActivity : AppCompatActivity() {
                     processingReport?.flutterStats = flutterResult.stats
                     if (flutterResult.detected) {
                         val totalRep = flutterResult.stats.sumOf { it.replacedCount }
-                        log(getString(R.string.h_8d698916, flutterResult.stats.size, elapsedMs(flutterStart)))
+                        log(getString(R.string.h_8d698916, flutterResult.stats.size, totalRep, elapsedMs(flutterStart)))
                     }
                 } else {
                     log(getString(R.string.h_7f604c7a))
