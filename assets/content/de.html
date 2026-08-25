@@ -1,0 +1,244 @@
+<h2 id="download-installation">📥 Download &amp; Installation</h2>
+<p>Laden Sie die neueste APK von <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> herunter oder über einen dieser Kanäle:</p>
+<ul>
+<li><strong>Projektseite</strong> : https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong> : https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>Automatischer Build</strong> : Jeder Commit wird von GitHub Actions kompiliert, Artefakte in den CI-Logs</li>
+<li><strong>Community</strong> : https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>Sollte "Unbekannte Quelle" erscheinen, erlauben Sie in den Systemeinstellungen die Installation von Apps aus dieser Quelle.</p>
+</blockquote>
+<hr />
+<h2 id="uber-das-projekt">📖 Über das Projekt</h2>
+<p>Ein-Klick-Pipeline : <strong>Entpacken → Werbung entfernen → Signatur umgehen → Größe optimieren → neu packen → signieren</strong>, alles lokal und offline, ohne Netzwerk.</p>
+<p>Statt des traditionellen smali-Disassemble-Reassemble nutzt es <strong>direktes Bytecode-Patching</strong>, was die Verarbeitung bei gleicher Präzision mehrfach beschleunigt.</p>
+<h2 id="funktionen">✨ Funktionen</h2>
+<h3 id="signatur-umgehung-neu-in-v30">🛡 Signatur-Umgehung (neu in v3.0)</h3>
+<ul>
+<li><strong>KillerApplication-Injektion nach MT-Manager-Art</strong> : injiziert eine Hook-Klasse mit 12 inneren Klassen als eigenes DEX, überschreibt die Application-Parentklasse und füllt zur Laufzeit per Reflexion <code>PackageInfo.CREATOR</code> mit der Originalsignatur, deckt die meisten Java-Signaturprüfungen ab</li>
+<li><strong>Doppel-Modus</strong> : Normal (Hooks für Java-Ebene) / Original (verstärkt, mit <code>origin.apk</code> + nativer Lib für die native Ebene)</li>
+<li><strong>Intelligente SO-Injektion</strong> : erkennt die ABI, schreibt nur in vorhandene Verzeichnisse (arm64-v8a / armeabi-v7a...) ; ohne lib alle Architekturen (inkl. x86 / x86_64)</li>
+<li><strong>Hook-Klassenname frei wählbar</strong> : KillerApplication frei umbenennbar, 12 innere Klassen via dexlib2 automatisch umbenannt</li>
+<li><strong>Injektionsparameter frei konfigurierbar</strong> : Originalpfad / Extraktionspfad / so-Name / Hook-Klasse / Signatur / Eintrag ; leer = echte Werte</li>
+<li><strong>Fasst Business-Methoden nicht an</strong> : keine fragilen Keyword-Fingerprints, kein Start-Freeze, gleiche Stärke wie MT Manager</li>
+<li><strong>Crash-Schutz</strong> : Backup + atomares Schreiben + automatische Wiederherstellung</li>
+</ul>
+<h3 id="werbeentfernung">🛡 Werbeentfernung</h3>
+<ul>
+<li><strong>18 Kategorien von Werbemerkmalen</strong> : SDK-Libs / Permissions / Klassen / Methoden / Ressourcen / URLs / Views / Activities / Services / Receivers, frei konfigurierbar mit Reset</li>
+<li><strong>Tiefes AXML-Handling</strong> : entfernt Werbekomponenten, -permissions, blendet Werbe-Views aus</li>
+<li><strong>Methodenpräzision</strong> : Methode der Werbeklasse nullen, Links leeren, Geometrie leeren</li>
+<li><strong>Premium-Funktionen</strong> : erzwingt true/false zum Entsperren</li>
+<li><strong>Werbungsressourcen-Reinigung</strong> : native SDK-Libs (.so), assets, root-Dateien</li>
+<li><strong>Flutter-Support</strong> : analysiert Dart-AOT-Snapshot, löscht Zeichenketten-Signaturen in libapp.so</li>
+</ul>
+<h3 id="groenoptimierung">📦 Größenoptimierung</h3>
+<ul>
+<li><strong>Daten-Wiederverwendung</strong> : umgangene Pakete (z. B. LSPatch-Artefakte) nutzen den Original-Datenbereich, bis zu ~50 % kleiner</li>
+<li><strong>Umbenannte APKs erkennen</strong> : erkennt APKs ohne oder mit beliebiger Endung</li>
+<li><strong>DEX-Optimierung</strong> : Debug-Infos entfernen, weitere 5 %~15 %</li>
+<li><strong>Smart-Kompression + ZIP-Alignment</strong> : garantiert korrekte Installation</li>
+</ul>
+<h3 id="stabilitat-sicherheit">🔒 Stabilität &amp; Sicherheit</h3>
+<ul>
+<li><strong>Doppel-Signatur v1 + v2</strong>, kompatibel mit alten Geräten</li>
+<li><strong>DEX-Crash-Schutz</strong> : Backup + atomares Schreiben + Wiederherstellung</li>
+<li><strong>Path-Traversal-Schutz</strong> : behebt Zip Slip, blockt missbräuchliche Schreibvorgänge</li>
+<li><strong>Low-Memory-Scan</strong> : verarbeitet riesige DEX ohne Einfrieren</li>
+</ul>
+<h3 id="erfahrung">🎨 Erfahrung</h3>
+<ul>
+<li><strong>17 Sprachen eingebaut</strong> (neu in v3.4) : 简体中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe ; "System folgen" oder Tipp in der App, sofortiger Effekt</li>
+<li>Echtzeit-Farblog, Kopieren / Leeren mit einem Tipp</li>
+<li>Markdown-Report automatisch erzeugt</li>
+<li>Import &amp; Teilen von Werbemuster-Subscriptionen</li>
+<li>Hell/Dunkel-Design (System / hell / Nacht)</li>
+<li>Lange Texte werden automatisch umgebrochen, keine Ellipse (inkl. Russisch)</li>
+</ul>
+<h2 id="vorschau">📸 Vorschau</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>Haupt · Ein-Klick-Verarbeitung</b><br>
+      <img src="screenshots/main.jpg" alt="Haupt" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>Über · Version</b><br>
+      <img src="screenshots/features.jpg" alt="Über" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="schnellstart">🚀 Schnellstart</h2>
+<h3 id="build">Build</h3>
+<pre><code class="language-bash"># Voraussetzung : Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>Artefakte in <code>app/build/outputs/apk/release/</code>, direkt installierbar.</p>
+<blockquote>
+<p>Dieses Projekt hat <a href=".github/workflows/build.yml">GitHub Actions</a> Auto-Build : jeder Push/PR kompiliert Debug &amp; Release ; <code>v*</code>-Tag veröffentlicht Release mit APKs.</p>
+<p>Release-Notes via <a href=".github/release-drafter.yml">release-drafter</a> : taggt PRs nach Titel/Branch/Dateien und aggregiert strukturierten Changelog.</p>
+</blockquote>
+<h3 id="verwendung">Verwendung</h3>
+<ol>
+<li>APK auswählen (umbenannte unterstützt)</li>
+<li>"Start" antippen : Entpacken, Entfernen, Optimieren, Packen, Signieren</li>
+<li>Export in Originalverzeichnis + Markdown-Report</li>
+</ol>
+<h2 id="neuerungen-v34">🆕 Neuerungen (v3.4)</h2>
+<ul>
+<li><strong>Mehrsprachiger Schalter</strong> : 17 Sprachen, "System folgen" oder in der App, sofort</li>
+<li><strong>UI vollständig externalisiert</strong> : alle Layouts, Menüs, Dialoge, Logs als Ressourcen</li>
+<li><strong>Exportpfad korrigiert</strong> : kein <code>%1$s</code>-Marker mehr, echter Pfad</li>
+<li><strong>Mehrsprachige Werbeentfernung korrigiert</strong> : Argumente ergänzt, <code>MissingFormatArgumentException</code> behoben</li>
+</ul>
+<p>Gesamte Historie in <a href="CHANGELOG.md">CHANGELOG</a>.</p>
+<h2 id="architektur">🏗 Architektur</h2>
+<table>
+<thead>
+<tr>
+<th>Modul</th>
+<th>Technik</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEX-Patch-Engine</td>
+<td>dexlib2 2.5.2</td>
+<td>direkte Bytecode-Modifikation</td>
+</tr>
+<tr>
+<td>Signatur-Umgehung</td>
+<td>KillerApplication-Injektion</td>
+<td>MT-Hook + Application-Override + Reflexion</td>
+</tr>
+<tr>
+<td>AXML-Prozessor</td>
+<td>eigener Parser</td>
+<td>Chunks analysieren, Komponenten entfernen</td>
+</tr>
+<tr>
+<td>Wiederverwendung</td>
+<td>ApkDataMultiplexing</td>
+<td>Original-Datenbereich nutzen</td>
+</tr>
+<tr>
+<td>Signatur</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>doppelte v1/v2</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>Dart-AOT-Snapshot</td>
+<td>Strings in libapp.so löschen</td>
+</tr>
+<tr>
+<td>Packen</td>
+<td>eigener ZIP-Engine</td>
+<td>Kompression + Alignment + Schutz</td>
+</tr>
+</tbody>
+</table>
+<h2 id="open-source-credits">⚖️ Open-Source-Credits</h2>
+<p>Basierend auf diesen Open-Source-Projekten, Dank an die Autoren :</p>
+<table>
+<thead>
+<tr>
+<th>Projekt</th>
+<th>Autor/Org</th>
+<th>Verwendung</th>
+<th>Lizenz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>Wiederverwendungs-Kern</td>
+<td>Nicht markiert</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>DEX-I/O und smali</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>APK-Signierung</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>Krypto &amp; Zertifikate</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>Utilities</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>Jetpack-Libs</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>Material-Komponenten</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>Werbemuster-Referenz</td>
+<td>Nur Studie</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>Umgehung-Referenz</td>
+<td>Nur Studie</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>Paket-Konzept</td>
+<td>Nur Studie</td>
+</tr>
+</tbody>
+</table>
+<p>Siehe <a href="开源声明.md"><code>开源声明.md</code></a> für Credits und <a href="THIRD_PARTY_NOTICES.md"><code>THIRD_PARTY_NOTICES.md</code></a> für Lizenzen.</p>
+<h2 id="mitwirken">🤝 Mitwirken</h2>
+<p>Jeder Beitrag ist willkommen — melden, vorschlagen oder programmieren :</p>
+<ul>
+<li><strong>Melden / Vorschlagen</strong> : <a href=".github/ISSUE_TEMPLATE/bug_report.md">Issue-Vorlage</a></li>
+<li><strong>Programmieren</strong> : Fork + <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a>, zuerst <a href="CONTRIBUTING.md">CONTRIBUTING</a></li>
+<li><strong>Community</strong> : <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a></li>
+<li><strong>Sicherheit</strong> : privat via <a href="SECURITY.md">SECURITY</a></li>
+</ul>
+<p>Mitwirken bedeutet Zustimmung zum <a href="CODE_OF_CONDUCT.md">Verhaltenskodex</a>.</p>
+<h2 id="copyright-lizenz">📄 Copyright &amp; Lizenz</h2>
+<ul>
+<li><strong>Copyright</strong> : © 2026 sillycats, alle Rechte vorbehalten</li>
+<li><strong>Lizenz</strong> : <a href="LICENSE">MIT License</a>, frei nutzbar/modifizierbar/verbreitbar</li>
+<li><strong>Einschränkung</strong> : keine Werbung im Autorennamen ; nicht verzerren</li>
+<li><strong>Keine Garantie</strong> : "WIE BESEHEN", ohne ausdrückliche oder stillschweigende Garantie</li>
+</ul>
+<blockquote>
+<p>⚠️ Nur für legale persönliche Lern- und Forschungszwecke. Modifizieren/verbreiten Sie keine Apps, die Ihnen nicht gehören. Die Verantwortung liegt beim Nutzer.</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT License](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

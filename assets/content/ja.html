@@ -1,0 +1,244 @@
+<h2 id="_1">📥 ダウンロードとインストール</h2>
+<p><a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> ページから最新の APK をダウンロードするか、以下のいずれかのチャネルから入手してください：</p>
+<ul>
+<li><strong>プロジェクトホーム</strong>：https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong>：https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>自動ビルド</strong>：コミットのたびに GitHub Actions が自動でコンパイルし、成果物は CI のビルドログから取得可能</li>
+<li><strong>コミュニティ</strong>：https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>インストール時に「提供元不明」と表示された場合は、システム設定でこの提供元からのインストールを許可してください。</p>
+</blockquote>
+<hr />
+<h2 id="_2">📖 プロジェクト概要</h2>
+<p><strong>解包 → 広告除去 → 署名回避 → サイズ最適化 → 再パッケージ → 署名</strong> の全工程をワンクリックで実行。すべて端末内でオフライン処理し、ネットワークは不要です。</p>
+<p>従来の smali 逆アセンブル・再アセンブル方式ではなく、<strong>バイトコードの直接パッチ方式</strong>を採用。処理精度を維持しつつ、処理速度を数倍に向上させます。</p>
+<h2 id="_3">✨ 機能</h2>
+<h3 id="v30">🛡 署名回避（v3.0 で追加）</h3>
+<ul>
+<li><strong>MT Manager 式 KillerApplication 注入</strong>：12 個の内部クラスを含むフッククラスを独立 DEX として注入し、対象アプリの Application 親クラスを書き換え、実行時に <code>PackageInfo.CREATOR</code> を反射で書き戻して元の署名を復元。Java 層の署名チェックの大半をカバー</li>
+<li><strong>2 モードの署名回避</strong>：通常（フック注入で Java 層チェックをカバー）/ 原包（強化、<code>origin.apk</code> + ネイティブライブラリを追加で組み込み、APK 再読み込み時のネイティブ層チェックもカバー）</li>
+<li><strong>SO スマート注入</strong>：対象 APK の ABI を自動判別し、既存ディレクトリ（arm64-v8a / armeabi-v7a 等）のみに書き込み。lib ディレクトリがなければ全アーキテクチャ（x86 / x86_64 含む）に書き込み</li>
+<li><strong>フッククラス名をカスタマイズ可能</strong>：KillerApplication の名前を自由に変更でき、12 個の内部クラスは dexlib2 で自動的に同期リネームされ、特徴検出を回避</li>
+<li><strong>注入パラメータを全面カスタマイズ</strong>：原包パス / 解凍パス / SO ライブラリ名 / フッククラス名 / 署名情報 / エントリ名。未入力時は実際の値を自動取得</li>
+<li><strong>業務メソッドに触れない</strong>：「チェックメソッドを空にする」方式と異なり、脆弱なキーワード/フィンガープリント推測に依存せず、バイトコード空化による起動フリーズも発生せず、MT Manager と同等の強度</li>
+<li><strong>クラッシュ保護</strong>：フック DEX 注入と Application 親クラス書き換えはどちらもバックアップ + 原子書き戻し + 異常時自動復旧</li>
+</ul>
+<h3 id="_4">🛡 広告除去コア</h3>
+<ul>
+<li><strong>18 カテゴリの広告特徴をカバー</strong>：SDK ライブラリ / パーミッション / クラス / メソッド / リソース / URL / View / Activity / Service / Receiver。カスタマイズとワンタッチリセットに対応</li>
+<li><strong>AXML 深度処理</strong>：広告コンポーネント、広告パーミッション宣言を削除し、Res レイアウトの広告 View を非表示</li>
+<li><strong>メソッドレベルで精密処理</strong>：広告クラスのメソッド空化、広告リンクの空化、View ジオメトリの空化</li>
+<li><strong>会員機能のアンロック</strong>：true/false を強制返却し、会員機能を解除して広告判定を無効化</li>
+<li><strong>広告リソースのクリーンアップ</strong>：広告 SDK のネイティブライブラリ (.so)、assets 広告リソース、ルート広告ファイルを自動削除</li>
+<li><strong>Flutter 対応</strong>：Dart AOT スナップショットを解析し、libapp.so 内の広告文字列特徴を消去</li>
+</ul>
+<h3 id="_5">📦 サイズ最適化</h3>
+<ul>
+<li><strong>データ再利用最適化</strong>：署名回避パッケージ（LSPatch 成果物など）が原包のデータセクションを再利用し、サイズを最大約 50% 削減</li>
+<li><strong>リネームされた APK も識別</strong>：拡張子なしや任意の拡張子にリネームされた原包も正確に識別して最適化</li>
+<li><strong>DEX サイズ最適化</strong>：デバッグ情報（行番号/ローカル変数テーブル）を削除し、さらに 5%〜15% 削減</li>
+<li><strong>スマート圧縮 + ZIP アライメント</strong>：再パッケージ後の APK が正常にインストール・起動できることを保証</li>
+</ul>
+<h3 id="_6">🔒 安定性とセキュリティ</h3>
+<ul>
+<li><strong>v1 + v2 二重署名</strong>、旧バージョンのデバイスとも互換、処理結果をそのままインストール可能</li>
+<li><strong>DEX クラッシュ保護</strong>：バックアップ保護 + 原子書き込み + 異常時自動復旧</li>
+<li><strong>パストラバーサル保護</strong>：Zip Slip を修正し、悪意のある APK による境界外書き込みを防止</li>
+<li><strong>低メモリスキャン</strong>：巨大な DEX でも安定して処理、フリーズしない</li>
+</ul>
+<h3 id="_7">🎨 使いやすさ</h3>
+<ul>
+<li><strong>17 言語の切り替えを内蔵</strong>（v3.4 で追加）：简体中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe。「システムに従う」またはアプリ内でワンタップ切り替え、即時反映</li>
+<li>リアルタイムのカラー処理ログ、ワンタップコピー / クリア</li>
+<li>Markdown 処理レポートを自動生成</li>
+<li>広告特徴サブスクリプションのインポートと共有</li>
+<li>ライト/ダーク双方向テーマ（システム連動 / ライト / ナイト）</li>
+<li>長文を自動で折り返して完全表示、省略記号で切らない（ロシア語などの長単語言語も対応）</li>
+</ul>
+<h2 id="_8">📸 画面プレビュー</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>メイン · ワンクリック処理</b><br>
+      <img src="screenshots/main.jpg" alt="メイン" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>バージョン情報</b><br>
+      <img src="screenshots/features.jpg" alt="バージョン" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="_9">🚀 クイックスタート</h2>
+<h3 id="_10">ビルド</h3>
+<pre><code class="language-bash"># 要件：Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>成果物は <code>app/build/outputs/apk/release/</code> にあり、そのままインストールできます。</p>
+<blockquote>
+<p>本プロジェクトは <a href=".github/workflows/build.yml">GitHub Actions</a> の自動ビルドを設定済み：push / PR のたびに Debug と Release を自動でコンパイル。<code>v*</code> タグを打つと Release を自動公開し APK 成果物を添付。</p>
+<p>リリースノートは <a href=".github/release-drafter.yml">release-drafter</a> が PR タイトル / ブランチ / 変更ファイルに応じて<strong>自動でタグ付け</strong>（<code>feature</code> / <code>bug</code> / <code>docs</code> / <code>ci</code> 等）し、公開時にカテゴリ別に構造化された更新ログとして自動集約。</p>
+</blockquote>
+<h3 id="_11">使い方</h3>
+<ol>
+<li>処理する APK ファイルを選択（リネーム済み APK にも対応）</li>
+<li>「処理開始」をタップすると、解包・広告除去・サイズ最適化・再パッケージ・署名を自動実行</li>
+<li>処理完了後、元ディレクトリに自動エクスポートし、Markdown 処理レポートを生成</li>
+</ol>
+<h2 id="v34">🆕 バージョン更新（v3.4）</h2>
+<ul>
+<li><strong>多言語切り替え</strong>：17 言語をサポート。「システムに従う」かアプリ内ワンタップ切り替えで即時反映</li>
+<li><strong>UI を完全にリソース化</strong>：全レイアウト、メニュー、ダイアログ、ログ文言を文字列リソースに統一し、各言語リソースを厳密に揃え、長文を自動折り返しで完全表示</li>
+<li><strong>エクスポートパス表示を修正</strong>：完了ログが <code>%1$s</code> プレースホルダーではなく実際のパスを表示</li>
+<li><strong>多言語の広告除去を修正</strong>：文字列プレースホルダーの実引数を補完し、言語切り替え後に <code>MissingFormatArgumentException</code> で APK 処理が失敗する問題を解消</li>
+</ul>
+<p>完全なバージョン履歴は <a href="CHANGELOG.md">CHANGELOG</a> をご覧ください。</p>
+<h2 id="_12">🏗 技術アーキテクチャ</h2>
+<table>
+<thead>
+<tr>
+<th>モジュール</th>
+<th>技術</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEX パッチエンジン</td>
+<td>dexlib2 2.5.2</td>
+<td>バイトコードを直接変更、逆アセンブル/再アセンブル不要</td>
+</tr>
+<tr>
+<td>署名検証除去</td>
+<td>KillerApplication 注入</td>
+<td>MT 式フック注入 + Application 親クラス書き換え + 反射による元署名の復元</td>
+</tr>
+<tr>
+<td>AXML プロセッサ</td>
+<td>自社パーサ</td>
+<td>AXML chunk 構造を解析し、広告コンポーネントとパーミッションを削除</td>
+</tr>
+<tr>
+<td>データ再利用最適化</td>
+<td>ApkDataMultiplexing</td>
+<td>中央ディレクトリオフセットで原包データセクションを再利用</td>
+</tr>
+<tr>
+<td>署名モジュール</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>v1/v2 二重署名、最適化後に専用署名</td>
+</tr>
+<tr>
+<td>Flutter 対応</td>
+<td>Dart AOT スナップショット解析</td>
+<td>libapp.so の広告文字列特徴を消去</td>
+</tr>
+<tr>
+<td>パッケージング</td>
+<td>自社 ZIP エンジン</td>
+<td>スマート圧縮 + アライメント + クラッシュ保護</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_13">⚖️ オープンソース謝辞</h2>
+<p>本アプリは以下のオープンソースプロジェクトに基づいて構築されています：</p>
+<table>
+<thead>
+<tr>
+<th>プロジェクト</th>
+<th>作者/組織</th>
+<th>用途</th>
+<th>ライセンス</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>データ再利用最適化コア</td>
+<td>未記載</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>DEX 読み書きと smali ツールチェーン</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>APK 署名実装</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>暗号化と証明書生成</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>コレクションとユーティリティ</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>Jetpack ライブラリ</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>Material コンポーネント</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>広告特徴ルールの参考</td>
+<td>学習用</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>署名回避コアの参考</td>
+<td>学習用</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>署名回避パッケージ構造の参考</td>
+<td>学習用</td>
+</tr>
+</tbody>
+</table>
+<p>詳細なオープンソース情報は <a href="开源声明.md"><code>开源声明.md</code></a> を、第三者のライセンス情報は <a href="THIRD_PARTY_NOTICES.md"><code>THIRD_PARTY_NOTICES.md</code></a> をご覧ください。</p>
+<h2 id="_14">🤝 コントリビューション</h2>
+<p>バグ報告、提案、コード投稿など、あらゆる形式の貢献を歓迎します：</p>
+<ul>
+<li><strong>問題報告 / 提案</strong>：<a href=".github/ISSUE_TEMPLATE/bug_report.md">Issue テンプレート</a> で報告</li>
+<li><strong>コード投稿</strong>：Fork して <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a> を送信。まず <a href="CONTRIBUTING.md">コントリビューションガイド</a> をお読みください</li>
+<li><strong>コミュニティ</strong>：<a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a> で交流</li>
+<li><strong>セキュリティ脆弱性</strong>：<a href="SECURITY.md">セキュリティポリシー</a> で説明されているプライベートチャネルで報告</li>
+</ul>
+<p>参加することで <a href="CODE_OF_CONDUCT.md">行動規範</a> に同意したものとみなされます。</p>
+<h2 id="_15">📄 著作権とライセンス</h2>
+<ul>
+<li><strong>著作権</strong>：本ソフトウェアおよび関連文書は <strong>© 2026 sillycats</strong> が著作権を保持</li>
+<li><strong>オープンソース</strong>：本プロジェクトは <a href="LICENSE">MIT License</a> で公開。自由に使用・修正・再配布可能ですが、元の著作権表示とライセンス条文を保持する必要があります</li>
+<li><strong>利用制限</strong>：本プロジェクトの作者名義での宣伝、歪曲・誤解を招く記述は禁止</li>
+<li><strong>無保証</strong>：本プロジェクトは「現状のまま」提供され、明示的・黙示的な保証は一切ありません</li>
+</ul>
+<blockquote>
+<p>⚠️ 本ツールは学習・研究・合法的な個人用途を目的としています。著作権を所有しない、または許可・法的保護のないアプリを改変・再配布しないでください。法的責任は利用者が負います。</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT License](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

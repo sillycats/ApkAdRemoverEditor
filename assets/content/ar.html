@@ -1,0 +1,244 @@
+<h2 id="_1">📥 التحميل والتثبيت</h2>
+<p>حمّل أحدث APK من صفحة <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> أو عبر أحد هذه القنوات:</p>
+<ul>
+<li><strong>الصفحة الرئيسية</strong> : https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>إصدارات GitHub</strong> : https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>البناء التلقائي</strong> : كل ما يتم إرساله يُجمَّع عبر GitHub Actions، والمخرجات في سجلات CI</li>
+<li><strong>المجتمع</strong> : https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>إذا ظهرت رسالة «مصدر غير معروف» عند التثبيت، اسمح بتثبيت التطبيقات من هذا المصدر في إعدادات النظام.</p>
+</blockquote>
+<hr />
+<h2 id="_2">📖 حول المشروع</h2>
+<p>مسار كامل بنقرة واحدة : <strong>فك الضغط → إزالة الإعلانات → تجاوز التوقيع → تحسين الحجم → إعادة التعبئة → التوقيع</strong>، وكل ذلك محليًا دون اتصال ولا يحتاج إلى شبكة.</p>
+<p>بدلاً من أسلوب smali التقليدي (التفكيك ثم إعادة التركيب)، يستخدم <strong>التصحيح المباشر للبايت كود</strong>، مما يسرّع المعالجة عدة مرات مع الحفاظ على الدقة.</p>
+<h2 id="_3">✨ المزايا</h2>
+<h3 id="v30">🛡 تجاوز التوقيع (جديد في v3.0)</h3>
+<ul>
+<li><strong>حقن KillerApplication بأسلوب MT Manager</strong> : يحقن فئة خطاف تضم 12 فئة داخلية كـ DEX مستقل، ويعيد كتابة الفئة الأصلية للـ Application، ويملأ وقت التشغيل عبر الانعكاس <code>PackageInfo.CREATOR</code> بالتوقيع الأصلي، ويغطي معظم تحققات Java</li>
+<li><strong>نمط مزدوج</strong> : عادي (خطافات لطبقة Java) / أصلي (معزّز، يتضمن <code>origin.apk</code> + مكتبة أصلية لطبقة التوقيع الأصلية)</li>
+<li><strong>حقن SO ذكي</strong> : يكتشف ABI ويكتب فقط في المجلدات الموجودة (arm64-v8a / armeabi-v7a...) ; إن لم يوجد lib يكتب لكل البنى (بما فيها x86 / x86_64)</li>
+<li><strong>اسم فئة الخطاف قابل للتخصيص</strong> : يمكن إعادة تسمية KillerApplication، وتُعاد تسمية الفئات الـ 12 تلقائيًا عبر dexlib2</li>
+<li><strong>معاملات الحقن قابلة للتخصيص</strong> : مسار الأصلي / فك الضغط / اسم so / فئة الخطاف / التوقيع / نقطة الدخول؛ فارغ = قراءة القيم الحقيقية</li>
+<li><strong>لا يلمس أساليب العمل</strong> : لا فرضيات هشة، لا تجمّد عند الإقلاع، بنفس قوة MT Manager</li>
+<li><strong>حماية من الأعطال</strong> : نسخة احتياطية + كتابة ذرّية + استعادة تلقائية</li>
+</ul>
+<h3 id="_4">🛡 إزالة الإعلانات</h3>
+<ul>
+<li><strong>18 فئة من سمات الإعلانات</strong> : مكتبات SDK / الأذونات / الفئات / الأساليب / الموارد / الروابط / Views / Activities / Services / Receivers، قابلة للتخصيص مع إعادة تعيين</li>
+<li><strong>معالجة AXML عميقة</strong> : إزالة عناصر الإعلان والأذونات وإخفاء Views الإعلان</li>
+<li><strong>دقة على مستوى الأسلوب</strong> : إفراغ أساليب الفئات الإعلانية والروابط والهندسة</li>
+<li><strong>فتح الميزات المدفوعة</strong> : إجبار true/false لتجاوز إعلانات</li>
+<li><strong>تنظيف موارد الإعلانات</strong> : مكتبات SDK الأصلية (.so)، موارد assets، ملفات الجذر</li>
+<li><strong>دعم Flutter</strong> : تحليل لقطة Dart AOT، ومسح توقيعات السلاسل في libapp.so</li>
+</ul>
+<h3 id="_5">📦 تحسين الحجم</h3>
+<ul>
+<li><strong>إعادة استخدام البيانات</strong> : الحزم المتجاوزة (مثل نواتج LSPatch) تعيد استخدام مقطع البيانات الأصلي حتى ~50 %</li>
+<li><strong>اكتشاف APK أُعيدت تسميته</strong> : بدون امتداد أو بأي امتداد</li>
+<li><strong>تحسين DEX</strong> : إزالة معلومات التصحيح، 5 %–15 % إضافية</li>
+<li><strong>ضغط ذكي + محاذاة ZIP</strong> : ضمان تثبيت صحيح</li>
+</ul>
+<h3 id="_6">🔒 الاستقرار والأمان</h3>
+<ul>
+<li><strong>توقيع مزدوج v1 + v2</strong>، متوافق مع الأجهزة القديمة</li>
+<li><strong>حماية أعطال DEX</strong> : نسخة احتياطية + كتابة ذرّية + استعادة</li>
+<li><strong>حماية من اجتياز المسار</strong> : إصلاح Zip Slip، منع الكتابة خارج النطاق</li>
+<li><strong>مسح منخفض الذاكرة</strong> : معالجة DEX الكبيرة دون تجمّد</li>
+</ul>
+<h3 id="_7">🎨 التجربة</h3>
+<ul>
+<li><strong>17 لغة مدمجة</strong> (جديد في v3.4) : 简体中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe ; «تبع النظام» أو التبديل في التطبيق فورًا</li>
+<li>سجل معالجة ملون لحظي، نسخ / مسح</li>
+<li>تقرير Markdown تلقائي</li>
+<li>استيراد ومشاركة اشتراكات أنماط الإعلانات</li>
+<li>تصميم فاتح/داكن (النظام / فاتح / ليلي)</li>
+<li>النص الطويل يلتف تلقائيًا ويعرض كاملًا بلا اقتطاع (بما في ذلك الروسية)</li>
+</ul>
+<h2 id="_8">📸 معاينة</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>الرئيسية · معالجة بنقرة</b><br>
+      <img src="screenshots/main.jpg" alt="الرئيسية" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>حول · الإصدار</b><br>
+      <img src="screenshots/features.jpg" alt="حول" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="_9">🚀 البدء السريع</h2>
+<h3 id="_10">البناء</h3>
+<pre><code class="language-bash"># المتطلبات : Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>المخرجات في <code>app/build/outputs/apk/release/</code>، قابلة للتثبيت مباشرة.</p>
+<blockquote>
+<p>المشروع مزود بـ <a href=".github/workflows/build.yml">GitHub Actions</a> للبناء التلقائي : كل push/PR يبني Debug &amp; Release ; نشر وسم <code>v*</code> ينشر Release مع APK.</p>
+<p>ملاحظات الإصدار عبر <a href=".github/release-drafter.yml">release-drafter</a> : وسوم تلقائية حسب العنوان/الفرع/الملفات وتجميع سجل منظم.</p>
+</blockquote>
+<h3 id="_11">الاستخدام</h3>
+<ol>
+<li>اختر APK (يدعم المُعاد تسميته)</li>
+<li>اضغط «ابدأ» : فك الضغط، إزالة، تحسين، تعبئة، توقيع</li>
+<li>تصدير إلى المجلد الأصلي + تقرير Markdown</li>
+</ol>
+<h2 id="v34">🆕 ما الجديد (v3.4)</h2>
+<ul>
+<li><strong>مفتاح متعدد اللغات</strong> : 17 لغة، «تبع النظام» أو في التطبيق فورًا</li>
+<li><strong>الواجهة كاملة في الموارد</strong> : كل التخطيطات والقوائم والحوارات والسجلات</li>
+<li><strong>إصلاح مسار التصدير</strong> : لا ماركر <code>%1$s</code> بل مسار حقيقي</li>
+<li><strong>إصلاح إزالة الإعلانات متعددة اللغات</strong> : استكمال الوسائط، إزالة <code>MissingFormatArgumentException</code></li>
+</ul>
+<p>التاريخ الكامل في <a href="CHANGELOG.md">CHANGELOG</a>.</p>
+<h2 id="_12">🏗 البنية</h2>
+<table>
+<thead>
+<tr>
+<th>الوحدة</th>
+<th>التقنية</th>
+<th>الوصف</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>محرك تصحيح DEX</td>
+<td>dexlib2 2.5.2</td>
+<td>تعديل مباشر للبايت كود</td>
+</tr>
+<tr>
+<td>تجاوز التوقيع</td>
+<td>حقن KillerApplication</td>
+<td>خطاف MT + إعادة كتابة Application + انعكاس</td>
+</tr>
+<tr>
+<td>معالج AXML</td>
+<td>محلل خاص</td>
+<td>تحليل القطع وإزالة المكونات</td>
+</tr>
+<tr>
+<td>إعادة الاستخدام</td>
+<td>ApkDataMultiplexing</td>
+<td>استخدام المقطع الأصلي</td>
+</tr>
+<tr>
+<td>التوقيع</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>مزدوج v1/v2</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>لقطة Dart AOT</td>
+<td>مسح السلاسل في libapp.so</td>
+</tr>
+<tr>
+<td>التعبئة</td>
+<td>محرك ZIP خاص</td>
+<td>ضغط + محاذاة + حماية</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_13">⚖️ شكر المصادر المفتوحة</h2>
+<p>بُني على أساس هذه المشاريع مفتوحة المصدر، شكرًا لمؤلفيها :</p>
+<table>
+<thead>
+<tr>
+<th>المشروع</th>
+<th>المؤلف/المنظمة</th>
+<th>الاستخدام</th>
+<th>الترخيص</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>نواة إعادة الاستخدام</td>
+<td>غير محدد</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>إدخال/إخراج DEX و smali</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>توقيع APK</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>تشفير وشهادات</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>أدوات</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>مكتبات Jetpack</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>مكونات Material</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>مرجع أنماط الإعلانات</td>
+<td>للدراسة</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>مرجع تجاوز التوقيع</td>
+<td>للدراسة</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>مفهوم الحزمة المتجاوزة</td>
+<td>للدراسة</td>
+</tr>
+</tbody>
+</table>
+<p>انظر <a href="开源声明.md"><code>开源声明.md</code></a> و <a href="THIRD_PARTY_NOTICES.md"><code>THIRD_PARTY_NOTICES.md</code></a> للتراخيص.</p>
+<h2 id="_14">🤝 المساهمة</h2>
+<p>نرحب بأي مساهمة — أبلغ، واقترح، واكتب كودًا :</p>
+<ul>
+<li><strong>الإبلاغ / الاقتراح</strong> : <a href=".github/ISSUE_TEMPLATE/bug_report.md">قالب Issue</a></li>
+<li><strong>الكود</strong> : fork + <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a>، اقرأ أولاً <a href="CONTRIBUTING.md">CONTRIBUTING</a></li>
+<li><strong>المجتمع</strong> : <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a></li>
+<li><strong>الأمان</strong> : عبر القناة الخاصة في <a href="SECURITY.md">SECURITY</a></li>
+</ul>
+<p>المساهمة تعني الموافقة على <a href="CODE_OF_CONDUCT.md">مدونة السلوك</a>.</p>
+<h2 id="_15">📄 حقوق النشر والترخيص</h2>
+<ul>
+<li><strong>حقوق النشر</strong> : © 2026 sillycats، جميع الحقوق محفوظة</li>
+<li><strong>الترخيص</strong> : <a href="LICENSE">MIT License</a>، استخدام/تعديل/توزيع حر مع الاحتفاظ بالبيان</li>
+<li><strong>القيود</strong> : عدم الترويج باسم المؤلف ; عدم تحريف وصف المشروع</li>
+<li><strong>بدون ضمان</strong> : يُوفَّر «كما هو»، دون أي ضمان صريح أو ضمني</li>
+</ul>
+<blockquote>
+<p>⚠️ للاستخدام الشخصي القانوني في التعلم والبحث فقط. لا تعدّل أو توزّع تطبيقات لا تملكها. المسؤولية القانونية تقع على المستخدم.</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT License](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

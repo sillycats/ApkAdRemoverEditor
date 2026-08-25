@@ -1,0 +1,244 @@
+<h2 id="download-install">📥 Download &amp; Install</h2>
+<p>Get the latest APK from <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a>, or through either channel:</p>
+<ul>
+<li><strong>Project Homepage</strong>: https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong>: https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>Auto Build</strong>: every commit is compiled by GitHub Actions, artifacts available in CI run logs</li>
+<li><strong>Community</strong>: https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>If prompted "Unknown sources", allow installing apps from this source in system settings.</p>
+</blockquote>
+<hr />
+<h2 id="about">📖 About</h2>
+<p>One-click full pipeline: <strong>unpack → remove ads → bypass signature → size optimization → repack → sign</strong>, all processed locally &amp; offline, no network needed.</p>
+<p>Instead of the traditional smali disassemble-reassemble flow, it uses <strong>direct bytecode patching</strong>, which boosts processing speed several times while keeping precision.</p>
+<h2 id="features">✨ Features</h2>
+<h3 id="signature-bypass-new-in-v30">🛡 Signature Bypass (new in v3.0)</h3>
+<ul>
+<li><strong>MT Manager-style KillerApplication injection</strong>: injects a hook class with 12 inner classes as a standalone DEX, rewrites the target Application's parent class, and at runtime reflection-fills <code>PackageInfo.CREATOR</code> with the original signature, covering most Java-layer signature checks</li>
+<li><strong>Dual-mode bypass</strong>: Normal (inject hooks to cover Java checks) / Original-mode (extra embed <code>origin.apk</code> + native lib to cover native-layer disk re-read signature checks)</li>
+<li><strong>Smart SO injection</strong>: auto-detects target APK ABI, only writes into existing dirs (arm64-v8a / armeabi-v7a etc.); writes all architectures (incl. x86 / x86_64) if no lib dir</li>
+<li><strong>Custom hook class name</strong>: KillerApplication freely renamable, 12 inner classes auto-renamed via dexlib2 to avoid signature detection</li>
+<li><strong>Fully customizable injection params</strong>: original path / extract path / so name / hook class / signature info / entry name, auto-reads real values when blank</li>
+<li><strong>Never touches business methods</strong>: unlike "null-out check methods", no fragile keyword/fingerprint guessing, no startup-freeze from bytecode nulling, same strength as MT Manager</li>
+<li><strong>Crash guard</strong>: hook DEX injection and Application parent rewrite both use backup + atomic write-back + auto recovery</li>
+</ul>
+<h3 id="ad-removal-core">🛡 Ad Removal Core</h3>
+<ul>
+<li><strong>18 categories of ad features</strong>: SDK libs / permissions / classes / methods / resources / URLs / Views / Activities / Services / Receivers, fully customizable with reset</li>
+<li><strong>Deep AXML processing</strong>: removes ad components, ad permission declarations, hides Res-layout ad Views</li>
+<li><strong>Method-level precision</strong>: null-out ad-class methods, blank ad links, blank View geometry</li>
+<li><strong>VIP unlock</strong>: force return true/false to bypass ad judgments and unlock membership</li>
+<li><strong>Ad resource cleaning</strong>: auto-cleans ad SDK native libs (.so), assets ad resources and root ad files</li>
+<li><strong>Flutter support</strong>: parses Dart AOT snapshot, erases ad string signatures in libapp.so</li>
+</ul>
+<h3 id="size-optimization">📦 Size Optimization</h3>
+<ul>
+<li><strong>Data reuse optimization</strong>: bypass packs (e.g. LSPatch artifacts) reuse original data section, reducing size by up to ~50%</li>
+<li><strong>Renamed APK detection</strong>: accurately recognizes original packs renamed to no-extension or arbitrary extensions</li>
+<li><strong>DEX size optimization</strong>: removes debug info (line numbers / local var tables), further 5%~15% smaller</li>
+<li><strong>Smart compression + ZIP alignment</strong>: ensures repacked APK installs and runs normally</li>
+</ul>
+<h3 id="stability-security">🔒 Stability &amp; Security</h3>
+<ul>
+<li><strong>v1 + v2 dual signing</strong>, compatible with low-version devices, results install directly</li>
+<li><strong>DEX crash guard</strong>: backup protection + atomic write + auto recovery</li>
+<li><strong>Path traversal protection</strong>: fixes Zip Slip, blocks malicious APK from writing outside bounds</li>
+<li><strong>Low-memory scanning</strong>: handles huge DEX stably without freezing</li>
+</ul>
+<h3 id="experience">🎨 Experience</h3>
+<ul>
+<li><strong>Built-in 17-language switch</strong> (new in v3.4): Simplified/Traditional Chinese, English, 日本語, 한국어, Español, Français, Deutsch, Italiano, Português, Русский, हिन्दी, Tiếng Việt, ไทย, Bahasa Indonesia, العربية, Türkçe; follow-system or in-app one-tap switch, instant effect</li>
+<li>Real-time colored processing log, one-tap copy / clear</li>
+<li>Auto-generates Markdown processing report</li>
+<li>Ad-pattern subscription import &amp; share</li>
+<li>Light/dark dual theme (follow system / light / night)</li>
+<li>Long text auto-wraps fully, no ellipsis truncation (covers long-word languages like Russian)</li>
+</ul>
+<h2 id="preview">📸 Preview</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>Main · One-click processing</b><br>
+      <img src="screenshots/main.jpg" alt="Main" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>About · Version</b><br>
+      <img src="screenshots/features.jpg" alt="About" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="quick-start">🚀 Quick Start</h2>
+<h3 id="build">Build</h3>
+<pre><code class="language-bash"># Requirements: Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>Output at <code>app/build/outputs/apk/release/</code>, directly installable.</p>
+<blockquote>
+<p>This project has <a href=".github/workflows/build.yml">GitHub Actions</a> auto-build: each push/PR compiles Debug &amp; Release; publishing <code>v*</code> tag auto-releases Release with APK artifacts.</p>
+<p>Release notes auto-generated by <a href=".github/release-drafter.yml">release-drafter</a>: auto-tags PRs by title/branch/changed files (<code>feature</code>/<code>bug</code>/<code>docs</code>/<code>ci</code> etc.), summarizes structured changelog on release.</p>
+</blockquote>
+<h3 id="usage">Usage</h3>
+<ol>
+<li>Select the APK to process (renamed APKs supported)</li>
+<li>Tap "Start Processing": auto unpack, remove ads, optimize size, repack, sign</li>
+<li>Auto-export to original directory, generates Markdown processing report</li>
+</ol>
+<h2 id="whats-new-v34">🆕 What's New (v3.4)</h2>
+<ul>
+<li><strong>Multi-language switch</strong>: 17 languages, follow-system or one-tap in-app switch, instant effect</li>
+<li><strong>Fully externalized UI</strong>: all layouts, menus, dialogs, log copy unified as string resources, languages strictly aligned, long text auto-wraps</li>
+<li><strong>Fix exported path display</strong>: export log no longer shows <code>Exported: %1$s</code> placeholder, shows real path</li>
+<li><strong>Fix multilang ad removal</strong>: completes string placeholder args, eliminates <code>MissingFormatArgumentException</code> that broke APK processing after language switch</li>
+</ul>
+<p>Full version history in <a href="CHANGELOG.md">CHANGELOG</a>.</p>
+<h2 id="architecture">🏗 Architecture</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Tech</th>
+<th>Core</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEX patching</td>
+<td>dexlib2 2.5.2</td>
+<td>direct bytecode modification, no disassemble/reassemble</td>
+</tr>
+<tr>
+<td>Signature bypass</td>
+<td>KillerApplication injection</td>
+<td>MT-style hook injection + Application parent rewrite + reflection re-fill</td>
+</tr>
+<tr>
+<td>AXML handler</td>
+<td>in-house parser</td>
+<td>parses AXML chunks, removes ad components &amp; permissions</td>
+</tr>
+<tr>
+<td>Data reuse</td>
+<td>ApkDataMultiplexing</td>
+<td>central-dir offset reuse of original data section</td>
+</tr>
+<tr>
+<td>Signing</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>v1/v2 dual signing, dedicated sign after optimization</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>Dart AOT snapshot</td>
+<td>erases ad string signatures in libapp.so</td>
+</tr>
+<tr>
+<td>Packing</td>
+<td>in-house ZIP engine</td>
+<td>smart compress + align + crash guard</td>
+</tr>
+</tbody>
+</table>
+<h2 id="open-source-credits">⚖️ Open-source Credits</h2>
+<p>Built on the following open-source projects, sincere thanks to their authors:</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Author/Org</th>
+<th>Use</th>
+<th>License</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>data reuse core</td>
+<td>Not marked</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>DEX I/O &amp; smali toolchain</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>APK signing</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>crypto &amp; cert gen</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>collections &amp; utils</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>Jetpack libs</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>Material components</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>ad pattern reference</td>
+<td>For study only</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>bypass core reference</td>
+<td>For study only</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>bypass pack concept reference</td>
+<td>For study only</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="开源声明.md">开源声明.md</a> for open-source credits; see <a href="THIRD_PARTY_NOTICES.md">THIRD_PARTY_NOTICES.md</a> for full third-party license info.</p>
+<h2 id="contributing">🤝 Contributing</h2>
+<p>Any contribution is welcome — report bugs, suggestions or code:</p>
+<ul>
+<li><strong>Report issues / suggestions</strong>: use <a href=".github/ISSUE_TEMPLATE/bug_report.md">Issue template</a></li>
+<li><strong>Submit code</strong>: fork then submit <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a>, please read <a href="CONTRIBUTING.md">CONTRIBUTING</a> first</li>
+<li><strong>Community</strong>: join <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a></li>
+<li><strong>Security</strong>: report through the private channel described in <a href="SECURITY.md">SECURITY</a></li>
+</ul>
+<p>Contributing implies agreement with <a href="CODE_OF_CONDUCT.md">Code of Conduct</a>.</p>
+<h2 id="copyright-license">📄 Copyright &amp; License</h2>
+<ul>
+<li><strong>Copyright</strong>: © 2026 sillycats, all rights reserved</li>
+<li><strong>License</strong>: <a href="LICENSE">MIT License</a>, free to use, modify, distribute, with original copyright notice retained</li>
+<li><strong>Restriction</strong>: may not promote using author's name; may not distort or misdescribe the project</li>
+<li><strong>No warranty</strong>: provided "AS IS", no express or implied warranty</li>
+</ul>
+<blockquote>
+<p>⚠️ For learning, research and personal lawful use only. Do not modify or distribute apps you do not own, are not authorized for, or are legally protected. Legal responsibility rests with the user.</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT License](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

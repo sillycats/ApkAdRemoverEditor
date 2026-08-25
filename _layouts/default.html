@@ -133,8 +133,29 @@
       th: { display: "ไทย", hero_badge: "ห้องปฏิบัติการวิศวกรรมย้อนกลับ APK · ทำงานในเครื่องแบบออฟไลน์", hero_tagline: "เครื่องมือลบโฆษณาและเลี่ยงลายเซ็น APK แบบโลคอลบนพื้นฐาน dexlib2 แก้ไขไบต์โค้ดโดยตรง รองรับการเพิ่มประสิทธิภาพการใช้ข้อมูลซ้ำ และภาษาที่ติดตั้งในตัว 17 ภาษา", btn_repo: "ที่เก็บ GitHub", btn_apk: "ดาวน์โหลด APK", btn_chat: "ชุมชน", menu_repo: "ที่เก็บ GitHub", menu_releases: "รุ่นที่เผยแพร่", menu_discussions: "การสนทนา", chip_17lang: "17 ภาษา", chip_bytek: "แก้ไขไบต์โค้ดโดยตรง", footer_maintained: "ดูแลโดย <a href=\"https://github.com/sillycats\">sillycats</a> · โอเพนซอร์สภายใต้ <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" }
     };
     var STORAGE_KEY = "lang";
+    var CONTENT_DIR = "assets/content";
+    // 保留初始中文正文，供切换回 zh 时恢复
+    var defaultContent = null;
     function getSavedLang() {
       try { var v = localStorage.getItem(STORAGE_KEY); return v || "zh"; } catch (e) { return "zh"; }
+    }
+    // 切换正文：zh 恢复 Jekyll 默认内容；其他语言从 assets/content/<lang>.html 拉取
+    function loadContent(lang, cb) {
+      var main = document.getElementById('content');
+      if (lang === 'zh') {
+        if (defaultContent !== null) main.innerHTML = defaultContent;
+        if (cb) cb();
+        return;
+      }
+      if (typeof fetch === 'undefined') { if (cb) cb(); return; }
+      fetch(CONTENT_DIR + '/' + lang + '.html', { cache: 'force-cache' })
+        .then(function(r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(function(html) {
+          if (!defaultContent) defaultContent = document.getElementById('content').innerHTML;
+          document.getElementById('content').innerHTML = html;
+          if (cb) cb();
+        })
+        .catch(function() { if (cb) cb(); });
     }
     function applyLang(lang) {
       var d = I18N[lang];
@@ -156,6 +177,7 @@
       if (active) for (var a = 0; a < document.querySelectorAll('.lang-menu a').length; a++) {
         document.querySelectorAll('.lang-menu a')[a].classList.toggle('active', document.querySelectorAll('.lang-menu a')[a] === active);
       }
+      loadContent(lang);
     }
     function saveLang(lang) {
       try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}

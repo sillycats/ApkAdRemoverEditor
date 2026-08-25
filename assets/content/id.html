@@ -1,0 +1,244 @@
+<h2 id="unduh-instalasi">📥 Unduh &amp; Instalasi</h2>
+<p>Unduh APK terbaru dari <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> atau melalui salah satu kanal ini:</p>
+<ul>
+<li><strong>Halaman proyek</strong> : https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong> : https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>Build otomatis</strong> : setiap commit dikompilasi oleh GitHub Actions, artefak di log CI</li>
+<li><strong>Komunitas</strong> : https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>Jika muncul "Sumber tidak dikenal", izinkan instalasi aplikasi dari sumber ini di pengaturan sistem.</p>
+</blockquote>
+<hr />
+<h2 id="tentang-proyek">📖 Tentang proyek</h2>
+<p>Alur lengkap sekali klik : <strong>ekstrak → hapus iklan → bypass tanda tangan → optimasi ukuran → kemas ulang → tandatangani</strong>, semuanya diproses lokal dan offline, tanpa jaringan.</p>
+<p>Berbeda dari alur smali tradisional, alat ini menggunakan <strong>patch bytecode langsung</strong>, yang mempercepat pemrosesan beberapa kali lipat dengan tetap presisi.</p>
+<h2 id="fitur">✨ Fitur</h2>
+<h3 id="bypass-tanda-tangan-baru-di-v30">🛡 Bypass tanda tangan (baru di v3.0)</h3>
+<ul>
+<li><strong>Injeksi KillerApplication gaya MT Manager</strong> : menyuntikkan kelas hook dengan 12 kelas dalam sebagai DEX mandiri, menulis ulang kelas induk Application dan saat runtime mengisi <code>PackageInfo.CREATOR</code> dengan tanda tangan asli via refleksi, mencakup mayoritas cek Java</li>
+<li><strong>Mode ganda</strong> : Normal (hook untuk lapisan Java) / Original (diperkuat, dengan <code>origin.apk</code> + lib native untuk lapisan native)</li>
+<li><strong>Injeksi SO pintar</strong> : mendeteksi ABI, hanya menulis ke direktori yang ada (arm64-v8a / armeabi-v7a...) ; tanpa lib tulis semua arsitektur (termasuk x86 / x86_64)</li>
+<li><strong>Nama kelas hook dapat disesuaikan</strong> : KillerApplication bebas diganti nama, 12 kelas dalam otomatis berganti nama via dexlib2</li>
+<li><strong>Parameter injeksi sepenuhnya dapat disesuaikan</strong> : jalur asli / ekstrak / nama so / kelas hook / tanda tangan / entri ; kosong = baca nilai asli</li>
+<li><strong>Tidak menyentuh metode bisnis</strong> : tanpa asumsi rapuh, tanpa macet saat start, kekuatan sama seperti MT Manager</li>
+<li><strong>Perlindungan crash</strong> : cadangan + penulisan atomik + pemulihan otomatis</li>
+</ul>
+<h3 id="inti-penghapusan-iklan">🛡 Inti penghapusan iklan</h3>
+<ul>
+<li><strong>18 kategori fitur iklan</strong> : lib SDK / izin / kelas / metode / sumber / URL / Views / Activities / Services / Receivers, dapat disesuaikan dengan reset</li>
+<li><strong>Pemrosesan AXML mendalam</strong> : menghapus komponen iklan, izin iklan, menyembunyikan View iklan</li>
+<li><strong>Presisi tingkat metode</strong> : mengosongkan metode kelas iklan, tautan, geometri View</li>
+<li><strong>Buka fitur premium</strong> : paksa true/false untuk melewati deteksi iklan</li>
+<li><strong>Pembersihan sumber daya iklan</strong> : lib native SDK iklan (.so), sumber assets iklan, file root iklan</li>
+<li><strong>Dukungan Flutter</strong> : menganalisis snapshot AOT Dart, menghapus tanda tangan string di libapp.so</li>
+</ul>
+<h3 id="optimasi-ukuran">📦 Optimasi ukuran</h3>
+<ul>
+<li><strong>Reuse data</strong> : paket bypass (misal artefak LSPatch) menggunakan kembali segmen data asli, mengurangi hingga ~50 %</li>
+<li><strong>Deteksi APK yang diganti nama</strong> : tanpa ekstensi atau ekstensi apa pun</li>
+<li><strong>Optimasi DEX</strong> : hapus info debug, 5 %–15 % lebih kecil</li>
+<li><strong>Kompresi pintar + penyelarasan ZIP</strong> : memastikan instalasi normal</li>
+</ul>
+<h3 id="stabilitas-keamanan">🔒 Stabilitas &amp; keamanan</h3>
+<ul>
+<li><strong>Tanda tangan ganda v1 + v2</strong>, kompatibel dengan perangkat lama</li>
+<li><strong>Perlindungan crash DEX</strong> : cadangan + penulisan atomik + pemulihan</li>
+<li><strong>Perlindungan path traversal</strong> : perbaiki Zip Slip, blokir penulisan di luar batas</li>
+<li><strong>Pemindaian berdaya rendah</strong> : DEX besar tetap stabil tanpa macet</li>
+</ul>
+<h3 id="pengalaman">🎨 Pengalaman</h3>
+<ul>
+<li><strong>17 bahasa terintegrasi</strong> (baru di v3.4) : 简体中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe ; "ikuti sistem" atau ganti dalam aplikasi, langsung</li>
+<li>Log pemrosesan berwarna real-time, salin / hapus sekali ketuk</li>
+<li>Laporan Markdown otomatis</li>
+<li>Impor dan bagikan langganan pola iklan</li>
+<li>Tema terang/gelap (sistem / terang / malam)</li>
+<li>Teks panjang otomatis membungkus dan tampil penuh, tanpa elipsis (termasuk bahasa berhuruf panjang seperti Rusia)</li>
+</ul>
+<h2 id="pratinjau">📸 Pratinjau</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>Utama · Proses sekali klik</b><br>
+      <img src="screenshots/main.jpg" alt="Utama" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>Tentang · Versi</b><br>
+      <img src="screenshots/features.jpg" alt="Tentang" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="mulai-cepat">🚀 Mulai cepat</h2>
+<h3 id="build">Build</h3>
+<pre><code class="language-bash"># Persyaratan : Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>Artefak di <code>app/build/outputs/apk/release/</code>, siap diinstal.</p>
+<blockquote>
+<p>Proyek ini punya <a href=".github/workflows/build.yml">GitHub Actions</a> build otomatis : setiap push/PR mengompilasi Debug &amp; Release ; tag <code>v*</code> mempublikasikan Release dengan APK.</p>
+<p>Catatan rilis via <a href=".github/release-drafter.yml">release-drafter</a> : otomatis menandai PR berdasarkan judul/cabang/file dan mengagregasi changelog terstruktur.</p>
+</blockquote>
+<h3 id="penggunaan">Penggunaan</h3>
+<ol>
+<li>Pilih APK (mendukung APK yang diganti nama)</li>
+<li>Ketuk "Mulai" : ekstrak, hapus, optimasi, kemas, tanda tangan</li>
+<li>Ekspor ke direktori asli + laporan Markdown</li>
+</ol>
+<h2 id="yang-baru-v34">🆕 Yang baru (v3.4)</h2>
+<ul>
+<li><strong>Sakelar multibahasa</strong> : 17 bahasa, "ikuti sistem" atau di aplikasi, langsung</li>
+<li><strong>UI sepenuhnya di-resource</strong> : semua tata letak, menu, dialog, log</li>
+<li><strong>Perbaikan jalur ekspor</strong> : bukan marker <code>%1$s</code>, tapi jalur nyata</li>
+<li><strong>Perbaikan penghapusan multibahasa</strong> : melengkapi argumen, menghilangkan <code>MissingFormatArgumentException</code></li>
+</ul>
+<p>Riwayat lengkap di <a href="CHANGELOG.md">CHANGELOG</a>.</p>
+<h2 id="arsitektur">🏗 Arsitektur</h2>
+<table>
+<thead>
+<tr>
+<th>Modul</th>
+<th>Teknologi</th>
+<th>Deskripsi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mesin patch DEX</td>
+<td>dexlib2 2.5.2</td>
+<td>modifikasi bytecode langsung</td>
+</tr>
+<tr>
+<td>Bypass tanda tangan</td>
+<td>Injeksi KillerApplication</td>
+<td>hook MT + tulis ulang Application + refleksi</td>
+</tr>
+<tr>
+<td>Prosesor AXML</td>
+<td>parser sendiri</td>
+<td>analisis chunk, hapus komponen</td>
+</tr>
+<tr>
+<td>Reuse data</td>
+<td>ApkDataMultiplexing</td>
+<td>gunakan segmen asli</td>
+</tr>
+<tr>
+<td>Tanda tangan</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>ganda v1/v2</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>Snapshot AOT Dart</td>
+<td>hapus string di libapp.so</td>
+</tr>
+<tr>
+<td>Pengemasan</td>
+<td>mesin ZIP sendiri</td>
+<td>kompresi + penyelarasan + perlindungan</td>
+</tr>
+</tbody>
+</table>
+<h2 id="kredit-open-source">⚖️ Kredit open source</h2>
+<p>Dibangun di atas proyek open source ini, terima kasih kepada penulisnya :</p>
+<table>
+<thead>
+<tr>
+<th>Proyek</th>
+<th>Penulis/Org</th>
+<th>Penggunaan</th>
+<th>Lisensi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>inti reuse data</td>
+<td>Tidak ada</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>I/O DEX dan smali</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>tanda tangan APK</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>kripto &amp; sertifikat</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>utilitas</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>lib Jetpack</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>komponen Material</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>referensi pola iklan</td>
+<td>Studi</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>referensi bypass</td>
+<td>Studi</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>konsep paket bypass</td>
+<td>Studi</td>
+</tr>
+</tbody>
+</table>
+<p>Lihat <a href="开源声明.md"><code>开源声明.md</code></a> untuk kredit dan <a href="THIRD_PARTY_NOTICES.md"><code>THIRD_PARTY_NOTICES.md</code></a> untuk lisensi.</p>
+<h2 id="kontribusi">🤝 Kontribusi</h2>
+<p>Semua kontribusi diterima — lapor, sarankan, atau kirim kode :</p>
+<ul>
+<li><strong>Lapor / sarankan</strong> : pakai <a href=".github/ISSUE_TEMPLATE/bug_report.md">template Issue</a></li>
+<li><strong>Kode</strong> : fork lalu <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a>, baca dulu <a href="CONTRIBUTING.md">CONTRIBUTING</a></li>
+<li><strong>Komunitas</strong> : <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a></li>
+<li><strong>Keamanan</strong> : lewat <a href="SECURITY.md">SECURITY</a></li>
+</ul>
+<p>Berkontribusi berarti setuju dengan <a href="CODE_OF_CONDUCT.md">Kode Etik</a>.</p>
+<h2 id="hak-cipta-lisensi">📄 Hak cipta &amp; lisensi</h2>
+<ul>
+<li><strong>Hak cipta</strong> : © 2026 sillycats, semua hak dilindungi</li>
+<li><strong>Lisensi</strong> : <a href="LICENSE">MIT License</a>, bebas dipakai/diubah/disebarkan</li>
+<li><strong>Pembatasan</strong> : dilarang promosi atas nama penulis ; jangan memutarbalikkan deskripsi</li>
+<li><strong>Tanpa jaminan</strong> : disediakan "SEBAGAIMANA ADANYA", tanpa jaminan tersurat atau tersirat</li>
+</ul>
+<blockquote>
+<p>⚠️ Hanya untuk penggunaan pribadi yang sah untuk belajar dan riset. Jangan mengubah/menyebarkan aplikasi yang bukan milik Anda. Tanggung jawab hukum ada pada pengguna.</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT License](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

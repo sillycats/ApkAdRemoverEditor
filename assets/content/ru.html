@@ -1,0 +1,244 @@
+<h2 id="_1">📥 Скачивание и установка</h2>
+<p>Скачайте последний APK на странице <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> или через один из каналов:</p>
+<ul>
+<li><strong>Домашняя страница</strong> : https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong> : https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>Автосборка</strong> : каждый коммит компилируется через GitHub Actions, артефакты в журналах CI</li>
+<li><strong>Сообщество</strong> : https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>Если при установке появится «Неизвестный источник», разрешите установку приложений из этого источника в настройках системы.</p>
+</blockquote>
+<hr />
+<h2 id="_2">📖 О проекте</h2>
+<p>Полный конвейер в один клик : <strong>распаковка → удаление рекламы → обход подписи → оптимизация размера → переупаковка → подпись</strong>, всё обрабатывается локально и офлайн, без сети.</p>
+<p>Вместо традиционного smali-дизассемблирования/пересборки используется <strong>прямое исправление байт-кода</strong>, что в несколько раз ускоряет обработку с сохранением точности.</p>
+<h2 id="_3">✨ Возможности</h2>
+<h3 id="v30">🛡 Обход подписи (новое в v3.0)</h3>
+<ul>
+<li><strong>Инъекция KillerApplication в стиле MT Manager</strong> : инжектирует класс-хук с 12 внутренними классами как отдельный DEX, переписывает родительский класс Application и во время выполнения через рефлексию заполняет <code>PackageInfo.CREATOR</code> исходной подписью, покрывая большинство проверок Java</li>
+<li><strong>Двойной режим</strong> : Обычный (хуки для Java-слоя) / Исходный (усиленный, со встроенными <code>origin.apk</code> + нативной библиотекой для нативного слоя)</li>
+<li><strong>Умная инъекция SO</strong> : определяет ABI, пишет только в существующие каталоги (arm64-v8a / armeabi-v7a и т. д.) ; если нет lib — во все архитектуры (вкл. x86 / x86_64)</li>
+<li><strong>Имя класса-хука настраивается</strong> : KillerApplication свободно переименовывается, 12 внутренних классов переименовываются автоматически через dexlib2</li>
+<li><strong>Параметры инъекции настраиваются</strong> : путь оригинала / распаковки / имя so / класс-хук / подпись / точка входа ; пусто = реальные значения</li>
+<li><strong>Не трогает бизнес-методы</strong> : нет хрупких предположений, нет зависаний при запуске, та же надёжность, что у MT Manager</li>
+<li><strong>Защита от сбоев</strong> : резервная копия + атомарная запись + автовосстановление</li>
+</ul>
+<h3 id="_4">🛡 Удаление рекламы</h3>
+<ul>
+<li><strong>18 категорий рекламных признаков</strong> : SDK-библиотеки / разрешения / классы / методы / ресурсы / URL / Views / Activities / Services / Receivers, настраиваемо со сбросом</li>
+<li><strong>Глубокая обработка AXML</strong> : удаляет рекламные компоненты, разрешения, скрывает рекламные Views</li>
+<li><strong>Точность на уровне методов</strong> : обнуляет методы, ссылки, геометрию</li>
+<li><strong>Разблокировка Premium</strong> : принудительный true/false для обхода рекламы</li>
+<li><strong>Очистка рекламных ресурсов</strong> : нативные SDK-библиотеки (.so), assets, корневые файлы</li>
+<li><strong>Поддержка Flutter</strong> : анализирует AOT-снимок Dart, стирает сигнатуры строк в libapp.so</li>
+</ul>
+<h3 id="_5">📦 Оптимизация размера</h3>
+<ul>
+<li><strong>Переиспользование данных</strong> : обойденные пакеты (например LSPatch) используют исходный сегмент, сокращая до ~50 %</li>
+<li><strong>Распознавание переименованных APK</strong> : без расширения или с любым расширением</li>
+<li><strong>Оптимизация DEX</strong> : удаление отладочной информации, ещё 5 %–15 %</li>
+<li><strong>Умное сжатие + выравнивание ZIP</strong> : гарантирует корректную установку</li>
+</ul>
+<h3 id="_6">🔒 Стабильность и безопасность</h3>
+<ul>
+<li><strong>Двойная подпись v1 + v2</strong>, совместимо со старыми устройствами</li>
+<li><strong>Защита от сбоев DEX</strong> : резервная копия + атомарная запись + восстановление</li>
+<li><strong>Защита path traversal</strong> : исправляет Zip Slip, блокирует запись за границы</li>
+<li><strong>Сканирование с низким потреблением памяти</strong> : большие DEX без зависаний</li>
+</ul>
+<h3 id="_7">🎨 Опыт</h3>
+<ul>
+<li><strong>17 языков встроено</strong> (новое в v3.4) : 简体中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe ; «по системе» или переключение в приложении, мгновенно</li>
+<li>Цветной журнал обработки в реальном времени, копирование/очистка</li>
+<li>Авто-отчёт Markdown</li>
+<li>Импорт и обмен рекламными подписками</li>
+<li>Светлая/тёмная тема (система / свет / ночь)</li>
+<li>Длинный текст переносится и отображается полностью, без многоточия (включая русский)</li>
+</ul>
+<h2 id="_8">📸 Предпросмотр</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>Главная · Обработка в один клик</b><br>
+      <img src="screenshots/main.jpg" alt="Главная" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>О программе · Версия</b><br>
+      <img src="screenshots/features.jpg" alt="О программе" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="_9">🚀 Быстрый старт</h2>
+<h3 id="_10">Сборка</h3>
+<pre><code class="language-bash"># Требования : Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>Артефакты в <code>app/build/outputs/apk/release/</code>, устанавливаются напрямую.</p>
+<blockquote>
+<p>У проекта есть <a href=".github/workflows/build.yml">GitHub Actions</a> автосборка : каждый push/PR компилирует Debug &amp; Release ; тег <code>v*</code> публикует Release с APK.</p>
+<p>Описания версий через <a href=".github/release-drafter.yml">release-drafter</a> : теги по заголовку/ветке/файлам и структурированный changelog.</p>
+</blockquote>
+<h3 id="_11">Использование</h3>
+<ol>
+<li>Выберите APK (включая переименованные)</li>
+<li>Нажмите «Начать» : распаковка, удаление, оптимизация, упаковка, подпись</li>
+<li>Экспорт в исходный каталог + отчёт Markdown</li>
+</ol>
+<h2 id="v34">🆕 Что нового (v3.4)</h2>
+<ul>
+<li><strong>Мультиязычный переключатель</strong> : 17 языков, «по системе» или в приложении, мгновенно</li>
+<li><strong>UI полностью вынесено в ресурсы</strong> : все макеты, меню, диалоги, журналы</li>
+<li><strong>Исправлен путь экспорта</strong> : вместо маркера <code>%1$s</code> — реальный путь</li>
+<li><strong>Исправлено мультиязычное удаление</strong> : дополнены аргументы, устранён <code>MissingFormatArgumentException</code></li>
+</ul>
+<p>Полная история в <a href="CHANGELOG.md">CHANGELOG</a>.</p>
+<h2 id="_12">🏗 Архитектура</h2>
+<table>
+<thead>
+<tr>
+<th>Модуль</th>
+<th>Технология</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Движок патча DEX</td>
+<td>dexlib2 2.5.2</td>
+<td>прямое изменение байт-кода</td>
+</tr>
+<tr>
+<td>Обход подписи</td>
+<td>Инъекция KillerApplication</td>
+<td>хук MT + перезапись Application + рефлексия</td>
+</tr>
+<tr>
+<td>Процессор AXML</td>
+<td>собственный парсер</td>
+<td>анализ чанков и удаление компонентов</td>
+</tr>
+<tr>
+<td>Переиспользование</td>
+<td>ApkDataMultiplexing</td>
+<td>использование исходного сегмента</td>
+</tr>
+<tr>
+<td>Подпись</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>двойная v1/v2</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>AOT-снимок Dart</td>
+<td>стирание строк в libapp.so</td>
+</tr>
+<tr>
+<td>Упаковка</td>
+<td>свой ZIP-движок</td>
+<td>сжатие + выравнивание + защита</td>
+</tr>
+</tbody>
+</table>
+<h2 id="open-source">⚖️ Благодарности open source</h2>
+<p>Построено на основе этих проектов, спасибо авторам :</p>
+<table>
+<thead>
+<tr>
+<th>Проект</th>
+<th>Автор/Орг</th>
+<th>Использование</th>
+<th>Лицензия</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>ядро переиспользования</td>
+<td>Нет</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>ввод-вывод DEX и smali</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>подпись APK</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>крипто и сертификаты</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>утилиты</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>библиотеки Jetpack</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>Material-компоненты</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>рекламные признаки</td>
+<td>Только изучение</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>обход подписи</td>
+<td>Только изучение</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>концепция пакета</td>
+<td>Только изучение</td>
+</tr>
+</tbody>
+</table>
+<p>См. <a href="开源声明.md"><code>开源声明.md</code></a> и <a href="THIRD_PARTY_NOTICES.md"><code>THIRD_PARTY_NOTICES.md</code></a> для лицензий.</p>
+<h2 id="_13">🤝 Участие</h2>
+<p>Любой вклад приветствуется — сообщайте, предлагайте, пишите код :</p>
+<ul>
+<li><strong>Сообщить / предложить</strong> : <a href=".github/ISSUE_TEMPLATE/bug_report.md">шаблон Issue</a></li>
+<li><strong>Код</strong> : fork + <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a>, сначала <a href="CONTRIBUTING.md">CONTRIBUTING</a></li>
+<li><strong>Сообщество</strong> : <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a></li>
+<li><strong>Безопасность</strong> : через <a href="SECURITY.md">SECURITY</a></li>
+</ul>
+<p>Участие означает согласие с <a href="CODE_OF_CONDUCT.md">Кодексом поведения</a>.</p>
+<h2 id="_14">📄 Авторские права и лицензия</h2>
+<ul>
+<li><strong>Copyright</strong> : © 2026 sillycats, все права защищены</li>
+<li><strong>Лицензия</strong> : <a href="LICENSE">MIT License</a>, свободное использование/модификация/распространение</li>
+<li><strong>Ограничение</strong> : не использовать имя автора в продвижении ; не искажать описание</li>
+<li><strong>Без гарантии</strong> : «КАК ЕСТЬ», без явных или подразумеваемых гарантий</li>
+</ul>
+<blockquote>
+<p>⚠️ Только для законного личного использования в обучении и исследованиях. Не изменяйте и не распространяйте приложения, которые вам не принадлежат. Ответственность на пользователе.</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT License](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

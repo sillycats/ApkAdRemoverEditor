@@ -1,0 +1,244 @@
+<h2 id="tai-ve-cai-at">📥 Tải về &amp; cài đặt</h2>
+<p>Tải APK mới nhất từ <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> hoặc qua một trong các kênh:</p>
+<ul>
+<li><strong>Trang chủ dự án</strong> : https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong> : https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>Build tự động</strong> : mỗi commit được GitHub Actions biên dịch, sản phẩm trong log CI</li>
+<li><strong>Cộng đồng</strong> : https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>Nếu hiển thị "Nguồn không xác định", hãy cho phép cài ứng dụng từ nguồn này trong cài đặt hệ thống.</p>
+</blockquote>
+<hr />
+<h2 id="gioi-thieu">📖 Giới thiệu</h2>
+<p>Quy trình trọn gói một chạm : <strong>giải nén → gỡ quảng cáo → bypass chữ ký → tối ưu kích thước → đóng gói lại → ký</strong>, tất cả xử lý cục bộ và ngoại tuyến, không cần mạng.</p>
+<p>Thay vì quy trình smali truyền thống, công cụ dùng <strong>patch bytecode trực tiếp</strong>, tăng tốc xử lý nhiều lần trong khi vẫn chính xác.</p>
+<h2 id="tinh-nang">✨ Tính năng</h2>
+<h3 id="bypass-chu-ky-moi-o-v30">🛡 Bypass chữ ký (mới ở v3.0)</h3>
+<ul>
+<li><strong>Chèn KillerApplication kiểu MT Manager</strong> : chèn lớp hook với 12 lớp bên trong thành DEX độc lập, viết lại lớp cha của Application và lúc chạy điền <code>PackageInfo.CREATOR</code> bằng chữ ký gốc qua phản chiếu, bao phủ hầu hết kiểm tra Java</li>
+<li><strong>Hai chế độ</strong> : Thường (hook cho tầng Java) / Gốc (nâng cấp, kèm <code>origin.apk</code> + thư viện native cho tầng native)</li>
+<li><strong>Chèn SO thông minh</strong> : tự nhận ABI, chỉ ghi vào thư mục tồn tại (arm64-v8a / armeabi-v7a...) ; không có lib thì ghi mọi kiến trúc (gồm x86 / x86_64)</li>
+<li><strong>Tên lớp hook tùy chỉnh</strong> : KillerApplication tự đổi tên, 12 lớp bên trong tự đổi theo qua dexlib2</li>
+<li><strong>Tham số chèn tùy chỉnh hoàn toàn</strong> : đường dẫn gốc / giải nén / tên so / lớp hook / chữ ký / điểm vào ; để trống = đọc giá trị thực</li>
+<li><strong>Không đụng phương thức nghiệp vụ</strong> : không phỏng đoán mong manh, không đứng máy lúc khởi động, mạnh như MT Manager</li>
+<li><strong>Bảo vệ crash</strong> : sao lưu + ghi nguyên tử + tự phục hồi</li>
+</ul>
+<h3 id="loi-go-quang-cao">🛡 Lõi gỡ quảng cáo</h3>
+<ul>
+<li><strong>18 loại đặc trưng quảng cáo</strong> : thư viện SDK / quyền / lớp / phương thức / tài nguyên / URL / Views / Activities / Services / Receivers, tùy chỉnh được kèm reset</li>
+<li><strong>Xử lý AXML sâu</strong> : gỡ thành phần, quyền, ẩn View quảng cáo</li>
+<li><strong>Chính xác cấp phương thức</strong> : xóa trắng phương thức lớp quảng cáo, liên kết, hình học</li>
+<li><strong>Mở khóa premium</strong> : ép true/false để bỏ qua quảng cáo</li>
+<li><strong>Dọn tài nguyên quảng cáo</strong> : thư viện native SDK (.so), tài nguyên assets, file gốc</li>
+<li><strong>Hỗ trợ Flutter</strong> : phân tích snapshot AOT Dart, xóa dấu chuỗi trong libapp.so</li>
+</ul>
+<h3 id="toi-uu-kich-thuoc">📦 Tối ưu kích thước</h3>
+<ul>
+<li><strong>Tái dùng dữ liệu</strong> : gói bypass (ví dụ thành phẩm LSPatch) tái dùng đoạn dữ liệu gốc, giảm tới ~50 %</li>
+<li><strong>Nhận APK bị đổi tên</strong> : không đuôi hay đuôi bất kỳ</li>
+<li><strong>Tối ưu DEX</strong> : xóa thông tin debug, thêm 5 %–15 %</li>
+<li><strong>Nén thông minh + căn chỉnh ZIP</strong> : đảm bảo cài đặt đúng</li>
+</ul>
+<h3 id="on-inh-bao-mat">🔒 Ổn định &amp; bảo mật</h3>
+<ul>
+<li><strong>Ký đôi v1 + v2</strong>, tương thích máy cũ</li>
+<li><strong>Bảo vệ crash DEX</strong> : sao lưu + ghi nguyên tử + phục hồi</li>
+<li><strong>Chống path traversal</strong> : sửa Zip Slip, chặn ghi vượt biên</li>
+<li><strong>Quét ít RAM</strong> : DEX lớn vẫn ổn định không treo</li>
+</ul>
+<h3 id="trai-nghiem">🎨 Trải nghiệm</h3>
+<ul>
+<li><strong>17 ngôn ngữ tích hợp</strong> (mới ở v3.4) : 简体中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe ; "theo hệ thống" hoặc đổi trong app, tức thì</li>
+<li>Log xử lý màu thời gian thực, sao chép / xóa một chạm</li>
+<li>Tự tạo báo cáo Markdown</li>
+<li>Nhập và chia sẻ đăng ký mẫu quảng cáo</li>
+<li>Giao diện sáng/tối (hệ thống / sáng / đêm)</li>
+<li>Văn bản dài tự xuống dòng đầy đủ, không cắt dấu ba chấm (gồm tiếng dài như Nga)</li>
+</ul>
+<h2 id="xem-truoc">📸 Xem trước</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>Chính · Xử lý một chạm</b><br>
+      <img src="screenshots/main.jpg" alt="Chính" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>Giới thiệu · Phiên bản</b><br>
+      <img src="screenshots/features.jpg" alt="Giới thiệu" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="bat-au-nhanh">🚀 Bắt đầu nhanh</h2>
+<h3 id="build">Build</h3>
+<pre><code class="language-bash"># Yêu cầu : Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>Sản phẩm trong <code>app/build/outputs/apk/release/</code>, cài trực tiếp được.</p>
+<blockquote>
+<p>Dự án có <a href=".github/workflows/build.yml">GitHub Actions</a> build tự động : mỗi push/PR biên dịch Debug &amp; Release ; gắn tag <code>v*</code> tự phát hành Release kèm APK.</p>
+<p>Ghi chú phát hành qua <a href=".github/release-drafter.yml">release-drafter</a> : tự gắn nhãn PR theo tiêu đề/nhánh/file và tổng hợp changelog.</p>
+</blockquote>
+<h3 id="su-dung">Sử dụng</h3>
+<ol>
+<li>Chọn APK (hỗ trợ APK bị đổi tên)</li>
+<li>Nhấn "Bắt đầu" : giải nén, gỡ, tối ưu, đóng gói, ký</li>
+<li>Xuất ra thư mục gốc + báo cáo Markdown</li>
+</ol>
+<h2 id="moi-o-v34">🆕 Mới ở v3.4</h2>
+<ul>
+<li><strong>Công tắc đa ngôn ngữ</strong> : 17 ngôn ngữ, "theo hệ thống" hoặc trong app, tức thì</li>
+<li><strong>UI hoàn toàn thành tài nguyên</strong> : mọi layout, menu, dialog, log</li>
+<li><strong>Sửa đường dẫn xuất</strong> : không marker <code>%1$s</code>, đường dẫn thật</li>
+<li><strong>Sửa gỡ quảng cáo đa ngôn ngữ</strong> : bổ sung tham số, loại bỏ <code>MissingFormatArgumentException</code></li>
+</ul>
+<p>Lịch sử đầy đủ trong <a href="CHANGELOG.md">CHANGELOG</a>.</p>
+<h2 id="kien-truc">🏗 Kiến trúc</h2>
+<table>
+<thead>
+<tr>
+<th>Mô-đun</th>
+<th>Công nghệ</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Engine patch DEX</td>
+<td>dexlib2 2.5.2</td>
+<td>sửa bytecode trực tiếp</td>
+</tr>
+<tr>
+<td>Bypass chữ ký</td>
+<td>Chèn KillerApplication</td>
+<td>hook MT + viết lại Application + phản chiếu</td>
+</tr>
+<tr>
+<td>Bộ xử lý AXML</td>
+<td>trình phân tích riêng</td>
+<td>phân tích chunk, xóa thành phần</td>
+</tr>
+<tr>
+<td>Tái dùng dữ liệu</td>
+<td>ApkDataMultiplexing</td>
+<td>dùng đoạn dữ liệu gốc</td>
+</tr>
+<tr>
+<td>Ký</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>đôi v1/v2</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>Snapshot AOT Dart</td>
+<td>xóa chuỗi trong libapp.so</td>
+</tr>
+<tr>
+<td>Đóng gói</td>
+<td>engine ZIP riêng</td>
+<td>nén + căn chỉnh + bảo vệ</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ghi-on-ma-nguon-mo">⚖️ Ghi ơn mã nguồn mở</h2>
+<p>Xây dựng trên các dự án mã nguồn mở sau, cảm ơn tác giả :</p>
+<table>
+<thead>
+<tr>
+<th>Dự án</th>
+<th>Tác giả/TC</th>
+<th>Sử dụng</th>
+<th>Giấy phép</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>lõi tái dùng dữ liệu</td>
+<td>Không có</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>I/O DEX và smali</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>ký APK</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>mã hóa &amp; chứng chỉ</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>tiện ích</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>thư viện Jetpack</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>thành phần Material</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>tham chiếu mẫu quảng cáo</td>
+<td>Nghiên cứu</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>tham chiếu bypass</td>
+<td>Nghiên cứu</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>khái niệm gói bypass</td>
+<td>Nghiên cứu</td>
+</tr>
+</tbody>
+</table>
+<p>Xem <a href="开源声明.md"><code>开源声明.md</code></a> để ghi ơn và <a href="THIRD_PARTY_NOTICES.md"><code>THIRD_PARTY_NOTICES.md</code></a> để biết giấy phép.</p>
+<h2 id="ong-gop">🤝 Đóng góp</h2>
+<p>Mọi đóng góp đều được chào đón — báo lỗi, đề xuất hoặc gửi code :</p>
+<ul>
+<li><strong>Báo / đề xuất</strong> : dùng <a href=".github/ISSUE_TEMPLATE/bug_report.md">template Issue</a></li>
+<li><strong>Code</strong> : fork rồi <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a>, đọc trước <a href="CONTRIBUTING.md">CONTRIBUTING</a></li>
+<li><strong>Cộng đồng</strong> : <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a></li>
+<li><strong>Bảo mật</strong> : qua <a href="SECURITY.md">SECURITY</a></li>
+</ul>
+<p>Đóng góp nghĩa là đồng ý với <a href="CODE_OF_CONDUCT.md">Quy tắc ứng xử</a>.</p>
+<h2 id="ban-quyen-giay-phep">📄 Bản quyền &amp; giấy phép</h2>
+<ul>
+<li><strong>Bản quyền</strong> : © 2026 sillycats, bảo lưu mọi quyền</li>
+<li><strong>Giấy phép</strong> : <a href="LICENSE">MIT License</a>, tự do dùng/sửa/phát hành kèm ghi chú</li>
+<li><strong>Hạn chế</strong> : không quảng bá nhân danh tác giả ; không bóp méo mô tả</li>
+<li><strong>Không bảo hành</strong> : cung cấp "NGUYÊN TRẠNG", không bảo hành rõ hay ngầm</li>
+</ul>
+<blockquote>
+<p>⚠️ Chỉ dùng cho mục đích cá nhân hợp pháp về học tập và nghiên cứu. Đừng sửa/phát tán ứng dụng không thuộc về bạn. Trách nhiệm pháp lý thuộc về người dùng.</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT License](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

@@ -1,0 +1,244 @@
+<h2 id="_1">📥 ดาวน์โหลดและติดตั้ง</h2>
+<p>ดาวน์โหลด APK ล่าสุดจาก <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> หรือผ่านช่องทางใดช่องทางหนึ่งเหล่านี้:</p>
+<ul>
+<li><strong>หน้าหลักโครงการ</strong> : https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong> : https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>Build อัตโนมัติ</strong> : ทุก commit ถูกคอมไพล์ด้วย GitHub Actions ไฟล์อยู่ใน log ของ CI</li>
+<li><strong>ชุมชน</strong> : https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>หากขึ้นข้อความ "แหล่งที่ไม่รู้จัก" ให้อนุญาตติดตั้งแอปจากแหล่งนี้ในการตั้งค่าระบบ</p>
+</blockquote>
+<hr />
+<h2 id="_2">📖 เกี่ยวกับโครงการ</h2>
+<p>ขั้นตอนครบวงจรในคลิกเดียว : <strong>แกะ → เอาโฆษณาออก → bypass ลายเซ็น → ปรับขนาด → แพ็กใหม่ → เซ็น</strong>, ทั้งหมดประมวลผลในเครื่องและออฟไลน์ ไม่ต้องใช้เน็ต</p>
+<p>ต่างจากวิธี smali แบบดั้งเดิม เครื่องมือนี้ใช้ <strong>การแก้ไบต์โค้ดโดยตรง</strong> ซึ่งทำให้ประมวลผลเร็วขึ้นหลายเท่าในขณะที่แม่นยำ</p>
+<h2 id="_3">✨ คุณสมบัติ</h2>
+<h3 id="bypass-v30">🛡 Bypass ลายเซ็น (ใหม่ใน v3.0)</h3>
+<ul>
+<li><strong>ฉีด KillerApplication แบบ MT Manager</strong> : ฉีดคลาส hook ที่มี 12 คลาสภายในเป็น DEX อิสระ เขียนคลาสพ่อของ Application ใหม่ และตอนรันไทม์เติม <code>PackageInfo.CREATOR</code> ด้วยลายเซ็นเดิมผ่าน reflection ครอบคลุมการตรวจ Java ส่วนใหญ่</li>
+<li><strong>โหมดคู่</strong> : ปกติ (hook สำหรับชั้น Java) / ต้นฉบับ (เสริมด้วย <code>origin.apk</code> + ไลบรารี native สำหรับชั้น native)</li>
+<li><strong>ฉีด SO อัจฉริยะ</strong> : ตรวจจับ ABI เขียนเฉพาะไดเรกทอรีที่มีอยู่ (arm64-v8a / armeabi-v7a...) ; ไม่มี lib เขียนทุกสถาปัตยกรรม (รวม x86 / x86_64)</li>
+<li><strong>เปลี่ยนชื่อคลาส hook ได้</strong> : KillerApplication เปลี่ยนชื่อได้อิสระ 12 คลาสในเปลี่ยนตามอัตโนมัติผ่าน dexlib2</li>
+<li><strong>พารามิเตอร์ฉีดปรับได้ทั้งหมด</strong> : พาธต้นฉบับ / แกะ / ชื่อ so / คลาส hook / ลายเซ็น / จุดเข้า ; เว้นว่าง = อ่านค่าจริง</li>
+<li><strong>ไม่แตะเมธอดธุรกิจ</strong> : ไม่มีสมมติฐานเปราะ ไม่ค้างตอนเปิด หนักแน่นเท่า MT Manager</li>
+<li><strong>กัน crash</strong> : สำรอง + เขียนอะตอมมิก + กู้คืนอัตโนมัติ</li>
+</ul>
+<h3 id="_4">🛡 แกนเอาโฆษณาออก</h3>
+<ul>
+<li><strong>18 หมวดคุณสมบัติโฆษณา</strong> : ไลบรารี SDK / สิทธิ์ / คลาส / เมธอด / ทรัพยากร / URL / Views / Activities / Services / Receivers ปรับได้พร้อมรีเซ็ต</li>
+<li><strong>ประมวลผล AXML ลึก</strong> : ลบคอมโพเนนต์โฆษณา สิทธิ์ ซ่อน View โฆษณา</li>
+<li><strong>แม่นระดับเมธอด</strong> : ล้างเมธอดคลาสโฆษณา ลิงก์ รูปทรง</li>
+<li><strong>ปลดล็อกพรีเมียม</strong> : บังคับ true/false เพื่อเลี่ยงโฆษณา</li>
+<li><strong>ทำความสะอาดทรัพยากรโฆษณา</strong> : ไลบรารี native (.so) ทรัพยากร assets ไฟล์ราก</li>
+<li><strong>รองรับ Flutter</strong> : วิเคราะห์ snapshot AOT ของ Dart ลบลายเซ็นสตริงใน libapp.so</li>
+</ul>
+<h3 id="_5">📦 ปรับขนาด</h3>
+<ul>
+<li><strong>ใช้ข้อมูลซ้ำ</strong> : แพ็กที่ bypass (เช่น ผลงาน LSPatch) ใช้ส่วนข้อมูลเดิม ลดได้ถึง ~50 %</li>
+<li><strong>ตรวจจับ APK ที่เปลี่ยนชื่อ</strong> : ไม่มีนามสกุลหรือนามสกุลใดก็ได้</li>
+<li><strong>ปรับ DEX</strong> : ลบข้อมูล debug อีก 5 %–15 %</li>
+<li><strong>บีบอัดอัจฉริยะ + จัดแนว ZIP</strong> : รับประกันติดตั้งถูกต้อง</li>
+</ul>
+<h3 id="_6">🔒 เสถียรภาพและความปลอดภัย</h3>
+<ul>
+<li><strong>เซ็นคู่ v1 + v2</strong> เข้ากับเครื่องเก่า</li>
+<li><strong>กัน crash DEX</strong> : สำรอง + เขียนอะตอมมิก + กู้คืน</li>
+<li><strong>กัน path traversal</strong> : แก้ Zip Slip ปิดกั้นการเขียนเกินขอบเขต</li>
+<li><strong>สแกนใช้หน่วยความจำต่ำ</strong> : DEX ใหญ่ยังเสถียรไม่ค้าง</li>
+</ul>
+<h3 id="_7">🎨 ประสบการณ์</h3>
+<ul>
+<li><strong>17 ภาษารวมในตัว</strong> (ใหม่ใน v3.4) : 简体中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe ; "ตามระบบ" หรือเปลี่ยนในแอป ทันที</li>
+<li>ล็อกสีแบบเรียลไทม์ คัดลอก / ล้างหนึ่งแตะ</li>
+<li>สร้างรายงาน Markdown อัตโนมัติ</li>
+<li>นำเข้าและแชร์การสมัครรับรูปแบบโฆษณา</li>
+<li>ธีมสว่าง/มืด (ตามระบบ / สว่าง / กลางคืน)</li>
+<li>ข้อความยาวขึ้นบรรทัดอัตโนมัติและแสดงเต็ม ไม่ตัดด้วยจุดไข่ปลา (รวมภาษาคำยาว เช่น รัสเซีย)</li>
+</ul>
+<h2 id="_8">📸 ดูตัวอย่าง</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>หลัก · ประมวลผลคลิกเดียว</b><br>
+      <img src="screenshots/main.jpg" alt="หลัก" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>เกี่ยวกับ · เวอร์ชัน</b><br>
+      <img src="screenshots/features.jpg" alt="เกี่ยวกับ" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="_9">🚀 เริ่มต้นเร็ว</h2>
+<h3 id="build">Build</h3>
+<pre><code class="language-bash"># ความต้องการ : Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>ไฟล์ใน <code>app/build/outputs/apk/release/</code> ติดตั้งได้ทันที</p>
+<blockquote>
+<p>โครงการมี <a href=".github/workflows/build.yml">GitHub Actions</a> build อัตโนมัติ : ทุก push/PR คอมไพล์ Debug &amp; Release ; ตั้ง tag <code>v*</code> เผยแพร่ Release พร้อม APK</p>
+<p>บันทึกเวอร์ชันผ่าน <a href=".github/release-drafter.yml">release-drafter</a> : ติดแท็ก PR อัตโนมัติตามชื่อ/สาขา/ไฟล์ และรวม changelog</p>
+</blockquote>
+<h3 id="_10">การใช้งาน</h3>
+<ol>
+<li>เลือก APK (รองรับที่เปลี่ยนชื่อแล้ว)</li>
+<li>กด "เริ่ม" : แกะ เอาโฆษณา ปรับ แพ็ก เซ็น</li>
+<li>ส่งออกไปโฟลเดอร์เดิม + รายงาน Markdown</li>
+</ol>
+<h2 id="v34">🆕 ใหม่ใน v3.4</h2>
+<ul>
+<li><strong>สวิตช์หลายภาษา</strong> : 17 ภาษา "ตามระบบ" หรือในแอป ทันที</li>
+<li><strong>UI เป็นทรัพยากรทั้งหมด</strong> : ทุกเลย์เอาต์ เมนู ไดอะล็อก ล็อก</li>
+<li><strong>แก้เส้นทางส่งออก</strong> : ไม่ใช่ตัวชี้นำ <code>%1$s</code> แต่เป็นพาธจริง</li>
+<li><strong>แก้เอาประกาศิกษาโฆษณาหลายภาษา</strong> : เติมอาร์กิวเมนต์ กำจัด <code>MissingFormatArgumentException</code></li>
+</ul>
+<p>ประวัติทั้งหมดใน <a href="CHANGELOG.md">CHANGELOG</a></p>
+<h2 id="_11">🏗 สถาปัตยกรรม</h2>
+<table>
+<thead>
+<tr>
+<th>โมดูล</th>
+<th>เทคโนโลยี</th>
+<th>คำอธิบาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>เอนจินแก้ DEX</td>
+<td>dexlib2 2.5.2</td>
+<td>แก้ไบต์โค้ดโดยตรง</td>
+</tr>
+<tr>
+<td>Bypass ลายเซ็น</td>
+<td>ฉีด KillerApplication</td>
+<td>hook MT + เขียน Application + reflection</td>
+</tr>
+<tr>
+<td>โปรเซสเซอร์ AXML</td>
+<td>พาร์เซอร์ของตัวเอง</td>
+<td>วิเคราะห์ chunk ลบคอมโพเนนต์</td>
+</tr>
+<tr>
+<td>ใช้ข้อมูลซ้ำ</td>
+<td>ApkDataMultiplexing</td>
+<td>ใช้ส่วนข้อมูลเดิม</td>
+</tr>
+<tr>
+<td>เซ็น</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>คู่ v1/v2</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>Snapshot AOT Dart</td>
+<td>ลบสตริงใน libapp.so</td>
+</tr>
+<tr>
+<td>แพ็ก</td>
+<td>เอนจิน ZIP เอง</td>
+<td>บีบอัด + จัดแนว + กันป้องกัน</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_12">⚖️ ขอบคุณโอเพนซอร์ส</h2>
+<p>สร้างบนโครงการโอเพนซอร์สเหล่านี้ ขอบคุณผู้เขียน :</p>
+<table>
+<thead>
+<tr>
+<th>โครงการ</th>
+<th>ผู้เขียน/องค์กร</th>
+<th>การใช้งาน</th>
+<th>ใบอนุญาต</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>แกนใช้ข้อมูลซ้ำ</td>
+<td>ไม่มี</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>I/O DEX และ smali</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>เซ็น APK</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>การเข้ารหัสและใบรับรอง</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>ยูทิลิตี้</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>ไลบรารี Jetpack</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>คอมโพเนนต์ Material</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>อ้างอิงรูปแบบโฆษณา</td>
+<td>เพื่อการศึกษา</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>อ้างอิง bypass</td>
+<td>เพื่อการศึกษา</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>แนวคิดแพ็ก bypass</td>
+<td>เพื่อการศึกษา</td>
+</tr>
+</tbody>
+</table>
+<p>ดู <a href="开源声明.md"><code>开源声明.md</code></a> สำหรับขอบคุณและ <a href="THIRD_PARTY_NOTICES.md"><code>THIRD_PARTY_NOTICES.md</code></a> สำหรับใบอนุญาต</p>
+<h2 id="_13">🤝 ร่วมพัฒนา</h2>
+<p>ยินดีรับทุกการมีส่วนร่วม — รายงาน เสนอแนะ หรือส่งโค้ด :</p>
+<ul>
+<li><strong>รายงาน / เสนอแนะ</strong> : ใช้ <a href=".github/ISSUE_TEMPLATE/bug_report.md">template Issue</a></li>
+<li><strong>โค้ด</strong> : fork แล้ว <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a> อ่านก่อน <a href="CONTRIBUTING.md">CONTRIBUTING</a></li>
+<li><strong>ชุมชน</strong> : <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a></li>
+<li><strong>ความปลอดภัย</strong> : ผ่าน <a href="SECURITY.md">SECURITY</a></li>
+</ul>
+<p>การร่วมหมายถึงยอมรับ <a href="CODE_OF_CONDUCT.md">ประมวลจริยธรรม</a></p>
+<h2 id="_14">📄 ลิขสิทธิ์และใบอนุญาต</h2>
+<ul>
+<li><strong>ลิขสิทธิ์</strong> : © 2026 sillycats สงวนสิทธิ์ทั้งหมด</li>
+<li><strong>ใบอนุญาต</strong> : <a href="LICENSE">MIT License</a> ใช้/แก้/เผยแพร่ได้อิสระพร้อมหมายเหตุ</li>
+<li><strong>ข้อจำกัด</strong> : ห้ามโปรโมทในนามผู้เขียน ; ห้ามบิดเบือนคำอธิบาย</li>
+<li><strong>ไม่มีการรับประกัน</strong> : ให้ "ตามสภาพ" ไม่มีการรับประกันชัดเจนหรือโดยนัย</li>
+</ul>
+<blockquote>
+<p>⚠️ เพื่อการใช้ส่วนตัวที่ชอบด้วยกฎหมายเพื่อการเรียนรู้และวิจัยเท่านั้น อย่าแก้/เผยแพร่แอปที่ไม่ใช่ของคุณ ความรับผิดชอบทางกฎหมายเป็นของผู้ใช้</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT License](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

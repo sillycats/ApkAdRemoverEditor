@@ -1,0 +1,244 @@
+<h2 id="_1">📥 下載安裝</h2>
+<p>前往 <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> 頁面下載最新 APK，或從以下任一渠道取得：</p>
+<ul>
+<li><strong>專案首頁</strong>：https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong>：https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>自動建置</strong>：每次程式碼提交由 GitHub Actions 自動編譯，產物可在 CI 建置紀錄中下載</li>
+<li><strong>社群討論</strong>：https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>安裝時如提示"未知來源"，請在系統設定中允許安裝來自此來源的應用。</p>
+</blockquote>
+<hr />
+<h2 id="_2">📖 專案簡介</h2>
+<p>一鍵完成 <strong>解包 → 去廣告 → 過簽 → 體積最佳化 → 打包 → 簽名</strong> 全流程，全程本地離線處理，無需網路。</p>
+<p>有別於傳統 smali 反組譯-回組譯流程，採用<strong>位元組碼直接修補</strong>方案，在保證處理精度的同時將處理速度提升數倍。</p>
+<h2 id="_3">✨ 功能特色</h2>
+<h3 id="v30">🛡 過簽能力（v3.0 新增）</h3>
+<ul>
+<li><strong>MT 管理器式 KillerApplication 注入過簽</strong>：注入含 12 個內部類別的鉤子類別為獨立 DEX，改寫目標應用 Application 父類別，執行時期反射替換 <code>PackageInfo.CREATOR</code> 回填原包簽名，涵蓋大多數 Java 層簽名校驗</li>
+<li><strong>雙模式過簽</strong>：普通去除（僅注入鉤子涵蓋 Java 層校驗）/ 原包去除（增強，額外嵌入 <code>origin.apk</code> + 原生庫，涵蓋磁碟 APK 重新讀取簽名的原生層校驗）</li>
+<li><strong>SO 智慧注入</strong>：自動辨識目標 APK 的 ABI 架構，僅寫入已存在的目錄（arm64-v8a / armeabi-v7a 等）；無 lib 目錄則全架構寫入（含 x86 / x86_64）</li>
+<li><strong>鉤子類別名可自訂</strong>：KillerApplication 名稱自由修改，內建 12 個內部類別基於 dexlib2 自動同步重新命名，避免特徵被偵測</li>
+<li><strong>注入參數全面可自訂</strong>：原包路徑 / 解壓路徑 / So庫名 / 鉤子類別名 / 簽名資訊 / 入口名稱，留空自動讀取真實值</li>
+<li><strong>不碰觸業務方法</strong>：相較"置空校驗方法"方案，不依賴脆弱的關鍵字/指紋臆測，不產生位元組碼置空導致的啟動卡死，過簽強度與 MT 管理器一致</li>
+<li><strong>當機防護</strong>：鉤子 DEX 注入與 Application 父類別改寫均採用備份 + 原子寫回 + 例外自動復原</li>
+</ul>
+<h3 id="_4">🛡 去廣告核心</h3>
+<ul>
+<li><strong>18 類廣告特徵全覆蓋</strong>：SDK 庫 / 權限 / 類別 / 方法 / 資源 / URL / View / Activity / Service / Receiver，可自訂增刪改查與一鍵重設</li>
+<li><strong>AXML 深度處理</strong>：移除廣告元件、廣告權限宣告、隱藏 Res 佈局廣告 View</li>
+<li><strong>方法級精準處理</strong>：廣告類別方法置空、廣告連結置空、View 幾何置空</li>
+<li><strong>會員功能解鎖</strong>：強制回傳 true/false，解密會員功能並屏蔽廣告判定</li>
+<li><strong>廣告資源清理</strong>：自動清理廣告 SDK 原生庫 (.so)、assets 廣告資源與根目錄廣告檔案</li>
+<li><strong>Flutter 應用適配</strong>：解析 Dart AOT 快照，抹除 libapp.so 中的廣告字串特徵</li>
+</ul>
+<h3 id="_5">📦 體積最佳化</h3>
+<ul>
+<li><strong>資料重用最佳化</strong>：過簽包（如 LSPatch 產物）重用原包資料段，最多縮小約 50% 體積</li>
+<li><strong>重新命名辨識</strong>：原包被重新命名為無後綴或任意後綴也能精確辨識並最佳化</li>
+<li><strong>DEX 體積最佳化</strong>：移除除錯資訊（行號/區域變數表），再縮小 5%~15% 體積</li>
+<li><strong>智慧壓縮策略 + ZIP 對齊</strong>：保證打包後 APK 正常安裝啟動</li>
+</ul>
+<h3 id="_6">🔒 穩定性與安全</h3>
+<ul>
+<li><strong>v1 + v2 雙簽名</strong>，相容低版本裝置，處理結果可直接安裝</li>
+<li><strong>DEX 當機防護</strong>：備份保護 + 原子寫入 + 例外自動復原</li>
+<li><strong>路徑穿越防護</strong>：修復 Zip Slip 漏洞，杜絕惡意 APK 越界寫檔案</li>
+<li><strong>低記憶體掃描</strong>：超大 DEX 也能穩定處理不卡死</li>
+</ul>
+<h3 id="_7">🎨 使用體驗</h3>
+<ul>
+<li><strong>內建 17 種語言切換</strong>（v3.4 新增）：支援簡體中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe，可"跟隨系統"或在應用內一鍵切換並即時生效</li>
+<li>即時彩色處理日誌，支援一鍵複製 / 清空</li>
+<li>自動產生 Markdown 處理報告</li>
+<li>廣告特徵訂閱匯入與分享</li>
+<li>明暗雙主題（跟隨系統 / 白天 / 夜間）</li>
+<li>長文字自動換行完整顯示，杜絕省略號截斷（涵蓋俄語等長單詞語言）</li>
+</ul>
+<h2 id="_8">📸 介面預覽</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>主介面 · 一鍵處理</b><br>
+      <img src="screenshots/main.jpg" alt="主介面" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>關於 · 版本資訊</b><br>
+      <img src="screenshots/features.jpg" alt="關於頁面" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="_9">🚀 快速上手</h2>
+<h3 id="_10">編譯</h3>
+<pre><code class="language-bash"># 環境需求：Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>產物位於 <code>app/build/outputs/apk/release/</code>，可直接安裝使用。</p>
+<blockquote>
+<p>本專案已設定 <a href=".github/workflows/build.yml">GitHub Actions</a> 自動建置：每次 push / PR 自動編譯 Debug 與 Release 包；打 <code>v*</code> 標籤時自動發布 Release 並附帶 APK 產物。</p>
+<p>發布說明由 <a href=".github/release-drafter.yml">release-drafter</a> 自動產生：會根據 PR 標題 / 分支 / 改動檔案<strong>自動打標籤</strong>（<code>feature</code> / <code>bug</code> / <code>docs</code> / <code>ci</code> 等），發布時自動按分類彙總為結構化更新日誌。</p>
+</blockquote>
+<h3 id="_11">使用</h3>
+<ol>
+<li>選擇需要處理的 APK 檔案（支援重新命名後的 APK）</li>
+<li>點擊"開始處理"，自動完成解包、去廣告、體積最佳化、打包、簽名</li>
+<li>處理完成自動匯出到原包目錄，並產生 Markdown 處理報告</li>
+</ol>
+<h2 id="v34">🆕 版本更新（v3.4）</h2>
+<ul>
+<li><strong>多國語言切換</strong>：支援 17 種語言，可"跟隨系統"或應用內一鍵切換即時生效</li>
+<li><strong>介面全量外置化</strong>：所有佈局、選單、彈窗、日誌文案統一為字串資源，各語言資源嚴格對齊，長文字自動換行完整顯示</li>
+<li><strong>修復匯出路徑顯示</strong>：匯出完成日誌不再顯示 <code>已匯出: %1$s</code> 佔位符，改為真實路徑</li>
+<li><strong>修復多語言去廣告</strong>：補齊字串佔位符實參，杜絕切換語言後無法去廣告處理 APK 的 <code>MissingFormatArgumentException</code></li>
+</ul>
+<p>完整的版本記錄請參見 <a href="CHANGELOG.md">CHANGELOG</a>。</p>
+<h2 id="_12">🏗 技術架構</h2>
+<table>
+<thead>
+<tr>
+<th>模組</th>
+<th>技術方案</th>
+<th>核心說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEX 修補引擎</td>
+<td>dexlib2 2.5.2</td>
+<td>直接修改位元組碼，無需反組譯/回組譯</td>
+</tr>
+<tr>
+<td>簽名效驗去除</td>
+<td>KillerApplication 注入</td>
+<td>MT 式鉤子注入 + Application 父類別改寫 + 反射回填原包簽名</td>
+</tr>
+<tr>
+<td>AXML 處理器</td>
+<td>自研解析器</td>
+<td>解析 AXML chunk 結構，移除廣告元件與權限</td>
+</tr>
+<tr>
+<td>資料重用最佳化</td>
+<td>ApkDataMultiplexing</td>
+<td>中央目錄位移重用原包資料段</td>
+</tr>
+<tr>
+<td>簽名模組</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>v1/v2 雙簽名，最佳化後專用簽名</td>
+</tr>
+<tr>
+<td>Flutter 適配</td>
+<td>Dart AOT 快照解析</td>
+<td>抹除 libapp.so 廣告字串特徵</td>
+</tr>
+<tr>
+<td>打包模組</td>
+<td>自研 ZIP 引擎</td>
+<td>智慧壓縮 + 對齊 + 當機防護</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_13">⚖️ 開源致謝</h2>
+<p>本應用基於以下開源專案建置，在此向作者表示誠摯感謝：</p>
+<table>
+<thead>
+<tr>
+<th>專案</th>
+<th>作者/組織</th>
+<th>用途</th>
+<th>協議</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>資料重用最佳化核心演算法</td>
+<td>未標註</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>DEX 檔案讀寫與 smali 工具鏈</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>APK 簽名實作</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>加解密與憑證產生</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>集合與工具庫</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>Jetpack 支援庫</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>Material 元件</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>廣告特徵規則參考</td>
+<td>僅供學習</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>過簽核心參考</td>
+<td>僅供學習</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>過簽包結構思路參考</td>
+<td>僅供學習</td>
+</tr>
+</tbody>
+</table>
+<p>詳細的開源專案與參考程式碼出處，請參閱 <a href="開源聲明.md"><code>開源聲明.md</code></a>；完整的第三方授權資訊，請參閱 <a href="THIRD_PARTY_NOTICES.md"><code>THIRD_PARTY_NOTICES.md</code></a>。</p>
+<h2 id="_14">🤝 參與貢獻</h2>
+<p>歡迎任何形式的貢獻！無論是回報 Bug、提出建議還是提交程式碼：</p>
+<ul>
+<li><strong>回報問題 / 提建議</strong>：使用 <a href=".github/ISSUE_TEMPLATE/bug_report.md">Issue 範本</a> 提交</li>
+<li><strong>提交程式碼</strong>：Fork 後提交 <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a>，請先閱讀 <a href="CONTRIBUTING.md">貢獻指南</a></li>
+<li><strong>社群交流</strong>：前往 <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a> 討論</li>
+<li><strong>安全漏洞</strong>：請透過 <a href="SECURITY.md">安全政策</a> 描述的私有管道回報</li>
+</ul>
+<p>參與本專案即表示你同意遵守 <a href="CODE_OF_CONDUCT.md">行為準則</a>。</p>
+<h2 id="_15">📄 版權與授權</h2>
+<ul>
+<li><strong>版權聲明</strong>：本軟體及相關文件版權歸 <strong>© 2026 sillycats</strong> 所有，保留所有權利</li>
+<li><strong>開源協議</strong>：本專案基於 <a href="LICENSE">MIT License</a> 開源，您可自由使用、修改、散布本專案，但需保留原始版權聲明與授權條文</li>
+<li><strong>使用限制</strong>：不得使用本專案作者名義進行推廣；不得對專案進行歪曲、誤導性描述</li>
+<li><strong>無擔保</strong>：本專案按"現狀"提供，不附帶任何形式的明示或默示擔保</li>
+</ul>
+<blockquote>
+<p>⚠️ 本工具僅供學習、研究與個人合法用途使用。請勿對您不擁有版權、未獲授權或受法律保護的應用進行修改與散布，由此產生的法律責任由使用者自擔。</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · 本專案基於 [MIT License](LICENSE) 開源**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>
