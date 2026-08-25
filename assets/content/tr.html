@@ -1,0 +1,244 @@
+<h2 id="download-install">📥 İndirme ve Kurulum</h2>
+<p>En son APK'yi <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> sayfasından veya aşağıdaki kanallardan herhangi biri üzerinden edinebilirsiniz:</p>
+<ul>
+<li><strong>Proje Ana Sayfası</strong>: https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong>: https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>Otomatik Derleme</strong>: her commit GitHub Actions tarafından derlenir, yapıtlar CI çalıştırma günlüklerinde bulunur</li>
+<li><strong>Topluluk</strong>: https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>"Bilinmeyen kaynaklar" uyarısı çıkarsa, sistem ayarlarından bu kaynaktan uygulama yüklenmesine izin verin.</p>
+</blockquote>
+<hr />
+<h2 id="about">📖 Hakkında</h2>
+<p>Tek tıkla tam işlem hattı: <strong>aç → reklamları kaldır → imza atla → boyut optimizasyonu → tekrar paketle → imzala</strong>; tümü yerelde ve çevrimdışı işlenir, internet bağlantısı gerekmez.</p>
+<p>Geleneksel smali sökme-yeniden birleştirme akışı yerine <strong>doğrudan bayt kodu yamalama</strong> (direct bytecode patching) kullanır; bu, hassasiyeti korurken işlem hızını birkaç kat artırır.</p>
+<h2 id="features">✨ Özellikler</h2>
+<h3 id="signature-bypass-new-in-v30">🛡 İmza Atlama (v3.0'da yeni)</h3>
+<ul>
+<li><strong>MT Manager tarzı KillerApplication enjeksiyonu</strong>: 12 iç sınıflı bir hook sınıfını bağımsız bir DEX olarak enjekte eder, hedef uygulamanın üst sınıfını (parent class) yeniden yazar ve çalışma zamanında yansıma (reflection) yoluyla <code>PackageInfo.CREATOR</code> alanını orijinal imzayla doldurur; çoğu Java katmanı imza kontrolünü kapsar</li>
+<li><strong>Çift modlu atlama</strong>: Normal (Java kontrollerini kapsamak için hook enjekte eder) / Orijinal mod (yerel katmandaki disk yeniden okuma imza kontrollerini kapsamak için ekstra <code>origin.apk</code> + yerel kütüphaneyi gömer)</li>
+<li><strong>Akıllı SO enjeksiyonu</strong>: hedef APK'nın ABI'sini otomatik algılar, yalnızca mevcut dizinlere yazar (arm64-v8a / armeabi-v7a vb.); lib dizini yoksa tüm mimarilere (x86 / x86_64 dahil) yazar</li>
+<li><strong>Özel hook sınıf adı</strong>: KillerApplication serbestçe yeniden adlandırılabilir, imza algılamayı önlemek için 12 iç sınıf dexlib2 ile otomatik yeniden adlandırılır</li>
+<li><strong>Tamamen özelleştirilebilir enjeksiyon parametreleri</strong>: orijinal yol / çıkarma yolu / so adı / hook sınıfı / imza bilgisi / giriş adı; boş bırakıldığında gerçek değerleri otomatik okur</li>
+<li><strong>İş yöntemlerine asla dokunmaz</strong>: "kontrol yöntemlerini boşaltma" yaklaşımının aksine kırılgan anahtar sözcük/parmak izi tahmini yoktur, bayt kodu boşaltmasının neden olduğu başlangıç donması yoktur, MT Manager ile aynı güçtedir</li>
+<li><strong>Çökme koruması (crash guard)</strong>: hook DEX enjeksiyonu ve Application üst sınıfı yeniden yazma işlemleri, yedekleme + atomik geri yazma + otomatik kurtarma kullanır</li>
+</ul>
+<h3 id="ad-removal-core">🛡 Reklam Kaldırma Çekirdeği</h3>
+<ul>
+<li><strong>18 kategoride reklam özelliği</strong>: SDK kütüphaneleri / izinler / sınıflar / yöntemler / kaynaklar / URL'ler / Görünümler (Views) / Etkinlikler (Activities) / Hizmetler (Services) / Alıcılar (Receivers); sıfırlamayla birlikte tamamen özelleştirilebilir</li>
+<li><strong>Derin AXML işleme</strong>: reklam bileşenlerini ve reklam izin bildirimlerini kaldırır, Res-layout reklam Görünümlerini gizler</li>
+<li><strong>Yöntem düzeyinde hassasiyet</strong>: reklam sınıfı yöntemlerini boşaltır, reklam bağlantılarını ve View geometrilerini boşaltır</li>
+<li><strong>VIP açma</strong>: reklam yargılarını atlamak ve üyeliğin kilidini açmak için true/false döndürmeyi zorlar</li>
+<li><strong>Reklam kaynağı temizliği</strong>: reklam SDK yerel kütüphanelerini (.so), assets reklam kaynaklarını ve kök reklam dosyalarını otomatik temizler</li>
+<li><strong>Flutter desteği</strong>: Dart AOT snapshot'ını ayrıştırır, libapp.so içindeki reklam dizesi imzalarını siler</li>
+</ul>
+<h3 id="size-optimization">📦 Boyut Optimizasyonu</h3>
+<ul>
+<li><strong>Veri yeniden kullanım optimizasyonu</strong>: bypass paketleri (örn. LSPatch yapıtları) orijinal veri bölümünü yeniden kullanır, boyutu %50'ye kadar küçültür</li>
+<li><strong>Yeniden adlandırılmış APK algılama</strong>: uzantısız veya rastgele uzantılı olarak yeniden adlandırılan orijinal paketleri doğru şekilde tanır</li>
+<li><strong>DEX boyut optimizasyonu</strong>: hata ayıklama bilgilerini (satır numaraları / yerel değişken tabloları) kaldırır, ek %5~15 daha küçük boyut elde eder</li>
+<li><strong>Akıllı sıkıştırma + ZIP hizalama</strong>: yeniden paketlenen APK'nın normal şekilde kurulup çalışmasını sağlar</li>
+</ul>
+<h3 id="stability-security">🔒 Kararlılık ve Güvenlik</h3>
+<ul>
+<li><strong>v1 + v2 çift imzalama</strong>, düşük sürümlü cihazlarla uyumludur, sonuçlar doğrudan kurulabilir</li>
+<li><strong>DEX çökme koruması</strong>: yedekleme koruması + atomik yazma + otomatik kurtarma</li>
+<li><strong>Yol geçişi koruması (path traversal)</strong>: Zip Slip'i düzeltir, kötü amaçlı APK'nın sınırların dışına yazmasını engeller</li>
+<li><strong>Düşük bellek taraması</strong>: donmadan büyük DEX dosyalarını kararlı şekilde işler</li>
+</ul>
+<h3 id="experience">🎨 Deneyim</h3>
+<ul>
+<li><strong>Yerleşik 17 dil anahtarı</strong> (v3.4'te yeni): Basitleştirilmiş/Geleneksel Çince, İngilizce, 日本語, 한국어, Español, Français, Deutsch, Italiano, Português, Русский, हिन्दी, Tiếng Việt, ไทย, Bahasa Indonesia, العربية, Türkçe; sistemi takip et veya uygulama içinde tek dokunuşla geçiş, anında etki</li>
+<li>Gerçek zamanlı renkli işleme günlüğü, tek dokunuşla kopyala / temizle</li>
+<li>Otomatik Markdown işleme raporu üretir</li>
+<li>Reklam kalıbı aboneliği içe aktarma ve paylaşma</li>
+<li>Açık/koyu çift tema (sistemi takip et / açık / gece)</li>
+<li>Uzun metin tamamen otomatik sarılır, üç nokta ile kırpılmaz (Rusça gibi uzun sözcüklü dilleri kapsar)</li>
+</ul>
+<h2 id="preview">📸 Önizleme</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>Ana · Tek tıkla işleme</b><br>
+      <img src="screenshots/main.jpg" alt="Ana" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>Hakkında · Sürüm</b><br>
+      <img src="screenshots/features.jpg" alt="Hakkında" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="quick-start">🚀 Hızlı Başlangıç</h2>
+<h3 id="build">Derleme</h3>
+<pre><code class="language-bash"># Requirements: Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>Çıktı <code>app/build/outputs/apk/release/</code> konumundadır, doğrudan kurulabilir.</p>
+<blockquote>
+<p>Bu projede <a href=".github/workflows/build.yml">GitHub Actions</a> otomatik derleme vardır: her push/PR Debug ve Release derler; <code>v*</code> etiketi yayınlamak APK yapıtlarıyla birlikte Release'i otomatik yayınlar.</p>
+<p>Sürüm notları <a href=".github/release-drafter.yml">release-drafter</a> tarafından otomatik üretilir: PR'leri başlığa/dala/değiştirilen dosyalara göre otomatik etiketler (<code>feature</code>/<code>bug</code>/<code>docs</code>/<code>ci</code> vb.), sürümde yapılandırılmış değişiklik günlüğünü özetler.</p>
+</blockquote>
+<h3 id="usage">Kullanım</h3>
+<ol>
+<li>İşlenecek APK'yı seçin (yeniden adlandırılmış APK'lar desteklenir)</li>
+<li>"İşlemeyi Başlat"a dokunun: otomatik olarak aç, reklamları kaldır, boyutu optimize et, tekrar paketle, imzala</li>
+<li>Orijinal dizine otomatik dışa aktarılır, Markdown işleme raporu üretilir</li>
+</ol>
+<h2 id="whats-new-v34">🆕 Yeni Neler (v3.4)</h2>
+<ul>
+<li><strong>Çok dilli anahtar</strong>: 17 dil, sistemi takip et veya uygulama içinde tek dokunuşla geçiş, anında etki</li>
+<li><strong>Tamamen dışa aktarılmış arayüz</strong>: tüm düzenler, menüler, iletişim kutuları, günlük kopyalama dize kaynakları olarak birleştirildi, diller sıkı bir şekilde uyumlu, uzun metin otomatik sarılır</li>
+<li><strong>Dışa aktarılan yol görüntüleme düzeltmesi</strong>: dışa aktarma günlüğü artık <code>Exported: %1$s</code> yer tutucusunu göstermez, gerçek yolu gösterir</li>
+<li><strong>Çok dilli reklam kaldırma düzeltmesi</strong>: dize yer tutucu argümanlarını tamamlar, dil değişikliğinden sonra APK işlemeyi bozan <code>MissingFormatArgumentException</code> hatasını ortadan kaldırır</li>
+</ul>
+<p>Tam sürüm geçmişi <a href="CHANGELOG.md">CHANGELOG</a> içindedir.</p>
+<h2 id="architecture">🏗 Mimari</h2>
+<table>
+<thead>
+<tr>
+<th>Modül</th>
+<th>Teknoloji</th>
+<th>Çekirdek</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEX yamalama</td>
+<td>dexlib2 2.5.2</td>
+<td>doğrudan bayt kodu değişikliği, sökme/yeniden birleştirme yok</td>
+</tr>
+<tr>
+<td>İmza atlama</td>
+<td>KillerApplication enjeksiyonu</td>
+<td>MT tarzı hook enjeksiyonu + Application üst sınıfı yeniden yazma + yansıma ile yeniden doldurma</td>
+</tr>
+<tr>
+<td>AXML işleyici</td>
+<td>özel ayrıştırıcı</td>
+<td>AXML parçalarını ayrıştırır, reklam bileşenlerini ve izinleri kaldırır</td>
+</tr>
+<tr>
+<td>Veri yeniden kullanımı</td>
+<td>ApkDataMultiplexing</td>
+<td>orijinal veri bölümünün merkezi-dizin (central-dir) ofsetini yeniden kullanır</td>
+</tr>
+<tr>
+<td>İmzalama</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>v1/v2 çift imzalama, optimizasyondan sonra özel imzalama</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>Dart AOT snapshot</td>
+<td>libapp.so içindeki reklam dizesi imzalarını siler</td>
+</tr>
+<tr>
+<td>Paketleme</td>
+<td>özel ZIP motoru</td>
+<td>akıllı sıkıştırma + hizalama + çökme koruması</td>
+</tr>
+</tbody>
+</table>
+<h2 id="open-source-credits">⚖️ Açık Kaynak Katkıları</h2>
+<p>Aşağıdaki açık kaynak projeler üzerine inşa edilmiştir, yazarlarına içten teşekkürler:</p>
+<table>
+<thead>
+<tr>
+<th>Proje</th>
+<th>Yazar/Kurum</th>
+<th>Kullanım</th>
+<th>Lisans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>veri yeniden kullanım çekirdeği</td>
+<td>İşaretlenmemiş</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>DEX G/Ç ve smali araç zinciri</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>APK imzalama</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>kripto ve sertifika üretimi</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>koleksiyonlar ve yardımcılar</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>Jetpack kütüphaneleri</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>Material bileşenleri</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>reklam kalıbı referansı</td>
+<td>Yalnızca eğitim amaçlı</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>atlama çekirdek referansı</td>
+<td>Yalnızca eğitim amaçlı</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>bypass paketi konsept referansı</td>
+<td>Yalnızca eğitim amaçlı</td>
+</tr>
+</tbody>
+</table>
+<p>Açık kaynak katkıları için <a href="开源声明.md">开源声明.md</a>; eksiksiz üçüncü taraf lisans bilgileri için <a href="THIRD_PARTY_NOTICES.md">THIRD_PARTY_NOTICES.md</a> bölümüne bakın.</p>
+<h2 id="contributing">🤝 Katkıda Bulunma</h2>
+<p>Her türlü katkı memnuniyetle karşılanır — hata bildirin, önerilerde bulunun veya kod katkısı yapın:</p>
+<ul>
+<li><strong>Sorun / öneri bildirin</strong>: <a href=".github/ISSUE_TEMPLATE/bug_report.md">Issue şablonunu</a> kullanın</li>
+<li><strong>Kod gönderin</strong>: fork edip <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a> gönderin, önce <a href="CONTRIBUTING.md">CONTRIBUTING</a> dosyasını okuyun</li>
+<li><strong>Topluluk</strong>: <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a> topluluğuna katılın</li>
+<li><strong>Güvenlik</strong>: <a href="SECURITY.md">SECURITY</a> içinde açıklanan özel kanal üzerinden bildirin</li>
+</ul>
+<p>Katkıda bulunmak, <a href="CODE_OF_CONDUCT.md">Davranış Kuralları</a>'nı kabul ettiğiniz anlamına gelir.</p>
+<h2 id="copyright-license">📄 Telif Hakkı ve Lisans</h2>
+<ul>
+<li><strong>Telif Hakkı</strong>: © 2026 sillycats, tüm hakları saklıdır</li>
+<li><strong>Lisans</strong>: <a href="LICENSE">MIT Lisansı</a>, orijinal telif hakkı bildirimi korunmak koşuluyla ücretsiz kullanım, değiştirme ve dağıtım</li>
+<li><strong>Kısıtlama</strong>: yazarın adını tanıtım amaçlı kullanmayabilirsiniz; projeyi çarpıtamaz veya yanlış tanıtamazsınız</li>
+<li><strong>Garanti yok</strong>: "OLDUĞU GİBİ" sağlanır, açık veya zımni garanti verilmez</li>
+</ul>
+<blockquote>
+<p>⚠️ Yalnızca öğrenme, araştırma ve kişisel yasal kullanım içindir. Sahibi olmadığınız, yetkiniz bulunmayan veya yasal olarak korunan uygulamaları değiştirmeyin veya dağıtmayın. Yasal sorumluluk kullanıcıya aittir.</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT Lisansı](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

@@ -1,0 +1,244 @@
+<h2 id="download-install">📥 डाउनलोड और इंस्टॉल</h2>
+<p>नवीनतम APK <a href="https://github.com/sillycats/ApkAdRemoverEditor/releases">Releases</a> से या इनमें से किसी एक चैनल के माध्यम से प्राप्त करें:</p>
+<ul>
+<li><strong>प्रोजेक्ट होमपेज</strong>: https://sillycats.github.io/ApkAdRemoverEditor/</li>
+<li><strong>GitHub Releases</strong>: https://github.com/sillycats/ApkAdRemoverEditor/releases</li>
+<li><strong>ऑटो बिल्ड</strong>: प्रत्येक commit को GitHub Actions द्वारा कंपाइल किया जाता है, आर्टिफैक्ट CI रन लॉग्स में उपलब्ध होते हैं</li>
+<li><strong>समुदाय</strong>: https://github.com/sillycats/ApkAdRemoverEditor/discussions</li>
+</ul>
+<blockquote>
+<p>यदि "अज्ञात स्रोत" (Unknown sources) का संकेत दिखे, तो सिस्टम सेटिंग्स में इस स्रोत से ऐप्स इंस्टॉल करने की अनुमति दें।</p>
+</blockquote>
+<hr />
+<h2 id="about">📖 परिचय</h2>
+<p>एक-क्लिक पूर्ण पाइपलाइन: <strong>अनपैक → विज्ञापन हटाना → सिग्नेचर बायपास → आकार अनुकूलन → दोबारा पैक → साइन</strong>, सब कुछ स्थानीय रूप से और ऑफ़लाइन संसाधित होता है, नेटवर्क की आवश्यकता नहीं।</p>
+<p>पारंपरिक smali डिसअसेम्बल-रीअसेम्बल प्रक्रिया के बजाय, यह <strong>प्रत्यक्ष बाइटकोड पैचिंग</strong> का उपयोग करता है, जो परिशुद्धता बनाए रखते हुए प्रोसेसिंग गति को कई गुना बढ़ा देता है।</p>
+<h2 id="features">✨ विशेषताएँ</h2>
+<h3 id="signature-bypass-new-in-v30">🛡 सिग्नेचर बायपास (v3.0 में नया)</h3>
+<ul>
+<li><strong>MT Manager-शैली KillerApplication इंजेक्शन</strong>: 12 इनर क्लासों वाली एक हुक क्लास को एक स्वतंत्र DEX के रूप में इंजेक्ट करता है, लक्षित Application की पैरेंट क्लास को फिर से लिखता है, और रनटाइम पर रिफ्लेक्शन के माध्यम से <code>PackageInfo.CREATOR</code> को मूल सिग्नेचर से भर देता है, अधिकांश Java-स्तरीय सिग्नेचर जाँचों को कवर करता है</li>
+<li><strong>ड्युअल-मोड बायपास</strong>: नॉर्मल (Java जाँचों को कवर करने के लिए हुक इंजेक्ट करना) / ओरिजिनल-मोड (नेटिव-स्तर की डिस्क पुनः-पठन सिग्नेचर जाँचों को कवर करने के लिए अतिरिक्त रूप से <code>origin.apk</code> + नेटिव लाइब्रेरी एम्बेड करना)</li>
+<li><strong>स्मार्ट SO इंजेक्शन</strong>: लक्षित APK के ABI का स्वतः पता लगाता है, केवल मौजूदा निर्देशिकाओं में लिखता है (arm64-v8a / armeabi-v7a आदि); यदि कोई lib निर्देशिका न हो तो सभी आर्किटेक्चर (x86 / x86_64 सहित) में लिखता है</li>
+<li><strong>अनुकूलन योग्य हुक क्लास नाम</strong>: KillerApplication का नाम स्वतंत्र रूप से बदला जा सकता है, सिग्नेचर डिटेक्शन से बचने के लिए 12 इनर क्लासों का नाम dexlib2 के माध्यम से स्वतः बदल दिया जाता है</li>
+<li><strong>पूर्णतः अनुकूलन योग्य इंजेक्शन पैरामीटर</strong>: ओरिजिनल पथ / एक्सट्रैक्ट पथ / so नाम / हुक क्लास / सिग्नेचर जानकारी / एंट्री नाम; खाली होने पर वास्तविक मान स्वतः पढ़ता है</li>
+<li><strong>व्यावसायिक (बिज़नेस) मेथड्स को कभी नहीं छूता</strong>: "चेक मेथड्स को नल-आउट करने" के विपरीत, कोई नाज़ुक कीवर्ड/फ़िंगरप्रिंट अनुमान नहीं, बाइटकोड नलिंग से स्टार्टअप-फ़्रीज़ नहीं, MT Manager जैसी ही मजबूती</li>
+<li><strong>क्रैश गार्ड</strong>: हुक DEX इंजेक्शन और Application पैरेंट रीराइट दोनों में बैकअप + परमाणु (एटॉमिक) राइट-बैक + स्वचालित पुनर्प्राप्ति का उपयोग होता है</li>
+</ul>
+<h3 id="ad-removal-core">🛡 विज्ञापन हटाने का मुख्य भाग</h3>
+<ul>
+<li><strong>विज्ञापन सुविधाओं की 18 श्रेणियाँ</strong>: SDK लाइब्रेरीज़ / परमिशन्स / क्लासेज़ / मेथड्स / रिसोर्सेज़ / URL / Views / Activities / Services / Receivers, रीसेट सहित पूर्णतः अनुकूलन योग्य</li>
+<li><strong>गहरी AXML प्रोसेसिंग</strong>: विज्ञापन कंपोनेंट्स और विज्ञापन परमिशन घोषणाओं को हटाता है, Res-लो रेआउट के विज्ञापन Views को छिपाता है</li>
+<li><strong>मेथड-स्तरीय परिशुद्धता</strong>: विज्ञापन-क्लास के मेथड्स को नल-आउट करता है, विज्ञापन लिंक को खाली करता है, View ज्योमेट्री को खाली करता है</li>
+<li><strong>VIP अनलॉक</strong>: विज्ञापन निर्णयों को बायपास करने और मेंबरशिप अनलॉक करने के लिए जबरन true/false लौटाता है</li>
+<li><strong>विज्ञापन रिसोर्स सफाई</strong>: विज्ञापन SDK नेटिव लाइब्रेरीज़ (.so), एसेट्स के विज्ञापन रिसोर्सेज़ और रूट के विज्ञापन फ़ाइलों को स्वतः साफ़ करता है</li>
+<li><strong>Flutter समर्थन</strong>: Dart AOT स्नैपशॉट को पार्स करता है, libapp.so में विज्ञापन स्ट्रिंग सिग्नेचर मिटा देता है</li>
+</ul>
+<h3 id="size-optimization">📦 आकार अनुकूलन</h3>
+<ul>
+<li><strong>डेटा पुनः-उपयोग अनुकूलन</strong>: बायपास पैक (जैसे LSPatch आर्टिफैक्ट्स) मूल डेटा सेक्शन का पुनः उपयोग करते हैं, जिससे आकार लगभग ~50% तक कम हो जाता है</li>
+<li><strong>नाम बदले गए APK की पहचान</strong>: बिना एक्सटेंशन या मनमाने एक्सटेंशन वाले नाम बदले गए मूल पैक्स को सटीक रूप से पहचानता है</li>
+<li><strong>DEX आकार अनुकूलन</strong>: डीबग जानकारी (लाइन नंबर / लोकल वेरिएबल टेबल) हटाता है, आगे 5%~15% तक छोटा</li>
+<li><strong>स्मार्ट कम्प्रेशन + ZIP अलाइनमेंट</strong>: सुनिश्चित करता है कि दोबारा पैक किया गया APK सामान्य रूप से इंस्टॉल हो और चले</li>
+</ul>
+<h3 id="stability-security">🔒 स्थिरता और सुरक्षा</h3>
+<ul>
+<li><strong>v1 + v2 ड्युअल साइनिंग</strong>, कम-वर्ज़न डिवाइसों के साथ संगत, परिणाम सीधे इंस्टॉल होते हैं</li>
+<li><strong>DEX क्रैश गार्ड</strong>: बैकअप सुरक्षा + परमाणु लेखन + स्वचालित पुनर्प्राप्ति</li>
+<li><strong>पथ ट्रैवर्सल सुरक्षा</strong>: Zip Slip को ठीक करता है, दुर्भावनापूर्ण APK को सीमा से बाहर लिखने से रोकता है</li>
+<li><strong>कम-मेमोरी स्कैनिंग</strong>: बिना फ़्रीज़ हुए विशाल DEX को स्थिर रूप से संभालता है</li>
+</ul>
+<h3 id="experience">🎨 अनुभव</h3>
+<ul>
+<li><strong>बिल्ट-इन 17-भाषा स्विच</strong> (v3.4 में नया): सरलीकृत/पारंपरिक चीनी, English, 日本語, 한국어, Español, Français, Deutsch, Italiano, Português, Русский, हिन्दी, Tiếng Việt, ไทย, Bahasa Indonesia, العربية, Türkçe; सिस्टम का अनुसरण करें या ऐप में एक-टैप स्विच, तुरंत प्रभाव</li>
+<li>रीयल-टाइम रंगीन प्रोसेसिंग लॉग, एक-टैप कॉपी / क्लियर</li>
+<li>स्वचालित रूप से Markdown प्रोसेसिंग रिपोर्ट उत्पन्न करता है</li>
+<li>विज्ञापन-पैटर्न सब्सक्रिप्शन आयात और साझा करना</li>
+<li>लाइट/डार्क ड्युअल थीम (सिस्टम का अनुसरण करें / लाइट / नाइट)</li>
+<li>लंबा टेक्स्ट पूरी तरह से ऑटो-रैप होता है, कोई एलिप्सिस ट्रंकेशन नहीं (रूसी जैसी लंबे-शब्दों वाली भाषाओं को कवर करता है)</li>
+</ul>
+<h2 id="preview">📸 पूर्वावलोकन</h2>
+<table class="preview-table">
+  <tr>
+    <td align="center" width="50%">
+      <b>मुख्य · एक-क्लिक प्रोसेसिंग</b><br>
+      <img src="screenshots/main.jpg" alt="मुख्य" width="320">
+    </td>
+    <td align="center" width="50%">
+      <b>परिचय · वर्ज़न</b><br>
+      <img src="screenshots/features.jpg" alt="परिचय" width="320">
+    </td>
+  </tr>
+</table>
+
+<h2 id="quick-start">🚀 त्वरित आरंभ</h2>
+<h3 id="build">बिल्ड</h3>
+<pre><code class="language-bash"># आवश्यकताएँ: Android Studio / JDK 17+ / SDK 34
+./gradlew assembleRelease
+</code></pre>
+<p>आउटपुट <code>app/build/outputs/apk/release/</code> पर मिलता है, सीधे इंस्टॉल योग्य।</p>
+<blockquote>
+<p>इस प्रोजेक्ट में <a href=".github/workflows/build.yml">GitHub Actions</a> ऑटो-बिल्ड है: प्रत्येक push/PR पर Debug और Release कंपाइल होते हैं; <code>v*</code> टैग प्रकाशित करने पर APK आर्टिफैक्ट्स के साथ Release स्वतः जारी होता है।</p>
+<p>रिलीज़ नोट्स <a href=".github/release-drafter.yml">release-drafter</a> द्वारा स्वचालित रूप से उत्पन्न होते हैं: शीर्षक/शाखा/परिवर्तित फ़ाइलों (<code>feature</code>/<code>bug</code>/<code>docs</code>/<code>ci</code> आदि) के आधार पर PR को स्वतः टैग करता है, और रिलीज़ पर संरचित चेंजलॉग का सारांश देता है।</p>
+</blockquote>
+<h3 id="usage">उपयोग</h3>
+<ol>
+<li>प्रोसेस करने हेतु APK चुनें (नाम बदले गए APK समर्थित हैं)</li>
+<li>"प्रोसेसिंग प्रारंभ करें" पर टैप करें: स्वतः अनपैक, विज्ञापन हटाना, आकार अनुकूलन, दोबारा पैक, साइन</li>
+<li>मूल निर्देशिका में स्वतः निर्यात होता है, Markdown प्रोसेसिंग रिपोर्ट उत्पन्न करता है</li>
+</ol>
+<h2 id="whats-new-v34">🆕 नया क्या है (v3.4)</h2>
+<ul>
+<li><strong>बहु-भाषा स्विच</strong>: 17 भाषाएँ, सिस्टम का अनुसरण करें या ऐप में एक-टैप स्विच, तुरंत प्रभाव</li>
+<li><strong>पूर्णतः एक्सटर्नलाइज़्ड UI</strong>: सभी लेआउट, मेनू, डायलॉग, लॉग कॉपी स्ट्रिंग रिसोर्सेज़ के रूप में एकीकृत, भाषाएँ सख्ती से संरेखित, लंबा टेक्स्ट ऑटो-रैप होता है</li>
+<li><strong>निर्यातित पथ प्रदर्शन सुधार</strong>: निर्यात लॉग अब <code>Exported: %1$s</code> प्लेसहोल्डर नहीं दिखाता, वास्तविक पथ दिखाता है</li>
+<li><strong>बहु-भाषा विज्ञापन हटाने में सुधार</strong>: स्ट्रिंग प्लेसहोल्डर तर्कों को पूरा करता है, <code>MissingFormatArgumentException</code> को समाप्त करता है, जो भाषा बदलने के बाद APK प्रोसेसिंग को तोड़ देता था</li>
+</ul>
+<p>पूर्ण वर्ज़न इतिहास <a href="CHANGELOG.md">CHANGELOG</a> में।</p>
+<h2 id="architecture">🏗 आर्किटेक्चर</h2>
+<table>
+<thead>
+<tr>
+<th>मॉड्यूल</th>
+<th>तकनीक</th>
+<th>मुख्य कार्य</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEX पैचिंग</td>
+<td>dexlib2 2.5.2</td>
+<td>प्रत्यक्ष बाइटकोड संशोधन, कोई डिसअसेम्बल/रीअसेम्बल नहीं</td>
+</tr>
+<tr>
+<td>सिग्नेचर बायपास</td>
+<td>KillerApplication इंजेक्शन</td>
+<td>MT-शैली हुक इंजेक्शन + Application पैरेंट रीराइट + रिफ्लेक्शन पुनः-भरण</td>
+</tr>
+<tr>
+<td>AXML हैंडलर</td>
+<td>स्वदेशी (इन-हाउस) पार्सर</td>
+<td>AXML चंक्स को पार्स करता है, विज्ञापन कंपोनेंट्स और परमिशन्स हटाता है</td>
+</tr>
+<tr>
+<td>डेटा पुनः-उपयोग</td>
+<td>ApkDataMultiplexing</td>
+<td>मूल डेटा सेक्शन की सेंट्रल-डायर ऑफ़सेट पुनः-उपयोग</td>
+</tr>
+<tr>
+<td>साइनिंग</td>
+<td>apksig + V2V3SchemeSigner</td>
+<td>v1/v2 ड्युअल साइनिंग, अनुकूलन के बाद समर्पित साइन</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>Dart AOT स्नैपशॉट</td>
+<td>libapp.so में विज्ञापन स्ट्रिंग सिग्नेचर मिटाता है</td>
+</tr>
+<tr>
+<td>पैकिंग</td>
+<td>स्वदेशी ZIP इंजन</td>
+<td>स्मार्ट कम्प्रेशन + अलाइनमेंट + क्रैश गार्ड</td>
+</tr>
+</tbody>
+</table>
+<h2 id="open-source-credits">⚖️ ओपन-सोर्स क्रेडिट्स</h2>
+<p>निम्नलिखित ओपन-सोर्स प्रोजेक्ट्स पर आधारित, उनके लेखकों के प्रति हार्दिक धन्यवाद:</p>
+<table>
+<thead>
+<tr>
+<th>प्रोजेक्ट</th>
+<th>लेखक/संगठन</th>
+<th>उपयोग</th>
+<th>लाइसेंस</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkDataMultiplexing">ApkDataMultiplexing</a></td>
+<td>L-JINBIN</td>
+<td>डेटा पुनः-उपयोग कोर</td>
+<td>चिह्नित नहीं</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JesusFreke/smali">dexlib2 / smali</a></td>
+<td>JesusFreke</td>
+<td>DEX I/O और smali टूलचेन</td>
+<td>BSD 3-Clause</td>
+</tr>
+<tr>
+<td><a href="https://android.googlesource.com/platform/tools/apksig">apksig</a></td>
+<td>AOSP</td>
+<td>APK साइनिंग</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://www.bouncycastle.org/">BouncyCastle</a></td>
+<td>bcprov/bcpkix</td>
+<td>क्रिप्टो और प्रमाणपत्र जनरेशन</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google/guava">Guava</a></td>
+<td>Google</td>
+<td>संग्रह (कलेक्शन्स) और उपकरण (यूटिलिटीज़)</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/jetpack">AndroidX</a></td>
+<td>AOSP</td>
+<td>Jetpack लाइब्रेरीज़</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/material-components/material-components-android">Material Components</a></td>
+<td>Google</td>
+<td>Material कंपोनेंट्स</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Gameye98/DTL-X">DTL-X</a></td>
+<td>Gameye98</td>
+<td>विज्ञापन पैटर्न संदर्भ</td>
+<td>केवल अध्ययन हेतु</td>
+</tr>
+<tr>
+<td><a href="https://github.com/L-JINBIN/ApkSignatureKillerEx">ApkSignatureKillerEx</a></td>
+<td>L-JINBIN</td>
+<td>बायपास कोर संदर्भ</td>
+<td>केवल अध्ययन हेतु</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LSPosed/LSPatch">LSPatch</a></td>
+<td>LSPosed</td>
+<td>बायपास पैक अवधारणा संदर्भ</td>
+<td>केवल अध्ययन हेतु</td>
+</tr>
+</tbody>
+</table>
+<p>ओपन-सोर्स क्रेडिट्स के लिए <a href="开源声明.md">开源声明.md</a> देखें; पूर्ण थर्ड-पार्टी लाइसेंस जानकारी के लिए <a href="THIRD_PARTY_NOTICES.md">THIRD_PARTY_NOTICES.md</a> देखें।</p>
+<h2 id="contributing">🤝 योगदान</h2>
+<p>कोई भी योगदान स्वागत योग्य है — बग, सुझाव या कोड की रिपोर्ट करें:</p>
+<ul>
+<li><strong>समस्याओं / सुझावों की रिपोर्ट करें</strong>: <a href=".github/ISSUE_TEMPLATE/bug_report.md">Issue टेम्पलेट</a> का उपयोग करें</li>
+<li><strong>कोड सबमिट करें</strong>: fork करें फिर <a href=".github/PULL_REQUEST_TEMPLATE.md">Pull Request</a> सबमिट करें, कृपया पहले <a href="CONTRIBUTING.md">CONTRIBUTING</a> पढ़ें</li>
+<li><strong>समुदाय</strong>: <a href="https://github.com/sillycats/ApkAdRemoverEditor/discussions">Discussions</a> से जुड़ें</li>
+<li><strong>सुरक्षा</strong>: <a href="SECURITY.md">SECURITY</a> में वर्णित निजी चैनल के माध्यम से रिपोर्ट करें</li>
+</ul>
+<p>योगदान करने का अर्थ <a href="CODE_OF_CONDUCT.md">आचार संहिता</a> (Code of Conduct) से सहमति दर्शाता है।</p>
+<h2 id="copyright-license">📄 कॉपीराइट और लाइसेंस</h2>
+<ul>
+<li><strong>कॉपीराइट</strong>: © 2026 sillycats, सर्वाधिकार सुरक्षित</li>
+<li><strong>लाइसेंस</strong>: <a href="LICENSE">MIT License</a>, मूल कॉपीराइट नोटिस बनाए रखते हुए उपयोग, संशोधन, वितरण हेतु निःशुल्क</li>
+<li><strong>प्रतिबंध</strong>: लेखक के नाम का उपयोग करके प्रचार नहीं किया जा सकता; प्रोजेक्ट को विकृत या गलत तरीके से वर्णित नहीं किया जा सकता</li>
+<li><strong>कोई वारंटी नहीं</strong>: "AS IS" (ज्यों-का-त्यों) प्रदान किया गया, कोई स्पष्ट या निहित वारंटी नहीं</li>
+</ul>
+<blockquote>
+<p>⚠️ केवल सीखने, शोध और व्यक्तिगत कानूनी उपयोग हेतु। उन ऐप्स में संशोधन या वितरण न करें जो आपकी नहीं हैं, जिनके लिए आप अधिकृत नहीं हैं, या जो कानूनी रूप से संरक्षित हैं। कानूनी जिम्मेदारी उपयोगकर्ता की है।</p>
+</blockquote>
+<hr />
+<div align="center">
+
+**© 2026 sillycats · [MIT License](LICENSE)**  
+Powered by dexlib2 · apksig · Kotlin · Material Components
+
+</div>

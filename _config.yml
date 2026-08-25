@@ -5,10 +5,8 @@
 title: ApkAdRemoverEditor
 description: 基于 dexlib2 的本地 APK 去广告 + 过签工具，字节码直接修补，支持数据复用优化，内置 17 种语言切换
 
-# 页头按钮（显示在主页顶部）
-show_downloads: true
+# GitHub 仓库链接（供主页导航与按钮使用）
 github:
-  is_project_page: true
   repository_url: https://github.com/sillycats/ApkAdRemoverEditor
   zip_url: https://github.com/sillycats/ApkAdRemoverEditor/releases
   tar_url: https://github.com/sillycats/ApkAdRemoverEditor/discussions
@@ -19,3 +17,17 @@ encoding: UTF-8
 # 语言与作者
 lang: zh-CN
 author: sillycats
+
+# 排除无关文件：仅发布站点相关内容，避免公开 Android 工程构建产物与脚本
+exclude:
+  - app
+  - gradle
+  - gradlew
+  - gradlew.bat
+  - build.gradle
+  - settings.gradle
+  - gradle.properties
+  - local.properties
+  - build_env.sh
+  - restore_env.sh
+  - _site

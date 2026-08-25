@@ -31,11 +31,6 @@ jobs:
           unzip -q /tmp/gradle-8.5-bin.zip -d /opt
           /opt/gradle-8.5/bin/gradle --version
 
-      - name: 移除本地代理配置（build_env.sh 为本地开发添加，CI 无此代理）
-        run: |
-          sed -i '/systemProp.*proxy/d' gradle.properties
-          cat gradle.properties
-
       - name: 构建 Release APK
         run: /opt/gradle-8.5/bin/gradle assembleRelease --no-daemon
 

@@ -29,6 +29,11 @@ Thumbs.db
 tmp/
 *.tmp
 
+# ===== GitHub Pages / Jekyll 缓存 =====
+.jekyll-cache/
+_site/
+.jekyll-metadata
+
 # ===== 忽略源码包与产物（避免重复提交）=====
 *.zip
 *.pk8
