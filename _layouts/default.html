@@ -32,14 +32,36 @@
       <a href="{{ site.github.zip_url }}">Releases</a>
       <a href="{{ site.github.tar_url }}">Discussions</a>
     </div>
+    <div class="lang-picker" id="langPicker">
+      <button class="lang-toggle" id="langToggle" aria-haspopup="true" aria-expanded="false" aria-label="切换语言 / Change language">
+        <span class="globe" aria-hidden="true">🌐</span>
+        <span id="langCurrent">简体中文</span>
+        <span class="caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <a role="menuitem" data-lang="zh">简体中文</a>
+        <a role="menuitem" data-lang="zh-TW">繁體中文</a>
+        <a role="menuitem" data-lang="en">English</a>
+        <a role="menuitem" data-lang="ja">日本語</a>
+        <a role="menuitem" data-lang="ko">한국어</a>
+        <a role="menuitem" data-lang="es">Español</a>
+        <a role="menuitem" data-lang="fr">Français</a>
+        <a role="menuitem" data-lang="de">Deutsch</a>
+        <a role="menuitem" data-lang="ru">Русский</a>
+        <a role="menuitem" data-lang="ar">العربية</a>
+        <a role="menuitem" data-lang="id">Bahasa Indonesia</a>
+        <a role="menuitem" data-lang="vi">Tiếng Việt</a>
+        <a role="menuitem" data-lang="th">ไทย</a>
+      </div>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="菜单" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
   <div class="nav-menu" id="navMenu">
-    <a href="{{ site.github.repository_url }}">GitHub 仓库</a>
-    <a href="{{ site.github.zip_url }}">Releases 下载</a>
-    <a href="{{ site.github.tar_url }}">Discussions 讨论</a>
+    <a href="{{ site.github.repository_url }}" data-i18n="menu_repo">GitHub 仓库</a>
+    <a href="{{ site.github.zip_url }}" data-i18n="menu_releases">Releases 下载</a>
+    <a href="{{ site.github.tar_url }}" data-i18n="menu_discussions">Discussions 讨论</a>
   </div>
 
   <!-- Hero 首屏 -->
@@ -47,31 +69,31 @@
     <div class="hero-inner">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        APK 逆向实验室 · 本地离线处理
+        <span data-i18n="hero_badge">APK 逆向实验室 · 本地离线处理</span>
       </div>
       <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
-      <p class="project-tagline">{{ site.description | default: site.github.project_tagline }}</p>
+      <p class="project-tagline" data-i18n="hero_tagline">{{ site.description | default: site.github.project_tagline }}</p>
       <div class="hero-actions">
         <a href="{{ site.github.repository_url }}" class="btn btn-primary">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          GitHub 仓库
+          <span data-i18n="btn_repo">GitHub 仓库</span>
         </a>
         <a href="{{ site.github.zip_url }}" class="btn btn-secondary">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          下载 APK
+          <span data-i18n="btn_apk">下载 APK</span>
         </a>
         <a href="{{ site.github.tar_url }}" class="btn btn-ghost">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          社区讨论
+          <span data-i18n="btn_chat">社区讨论</span>
         </a>
       </div>
       <div class="hero-chips">
         <span class="chip">Android 7.0+</span>
         <span class="chip">Kotlin + Java</span>
         <span class="chip">v3.4</span>
-        <span class="chip">17 种语言</span>
+        <span class="chip" data-i18n="chip_17lang">17 种语言</span>
         <span class="chip">MIT License</span>
-        <span class="chip">字节码直接修补</span>
+        <span class="chip" data-i18n="chip_bytek">字节码直接修补</span>
       </div>
     </div>
   </header>
@@ -84,7 +106,7 @@
   <!-- 页脚 -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <span>由 <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> 维护 · 基于 <a href="{{ site.github.repository_url }}/blob/main/LICENSE">MIT License</a> 开源</span>
+      <span data-i18n-html="footer_maintained">由 <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> 维护 · 基于 <a href="{{ site.github.repository_url }}/blob/main/LICENSE">MIT License</a> 开源</span>
       <span class="footer-links">
         <a href="{{ site.github.repository_url }}">GitHub</a> ·
         <a href="{{ site.github.zip_url }}">Releases</a> ·
@@ -94,20 +116,100 @@
   </footer>
 
   <script>
+    /* ============ 语言切换 ============ */
+    var I18N = {
+      zh: { display: "简体中文", hero_badge: "APK 逆向实验室 · 本地离线处理", hero_tagline: "基于 dexlib2 的本地 APK 去广告 + 过签工具，字节码直接修补，支持数据复用优化，内置 17 种语言切换", btn_repo: "GitHub 仓库", btn_apk: "下载 APK", btn_chat: "社区讨论", menu_repo: "GitHub 仓库", menu_releases: "Releases 下载", menu_discussions: "Discussions 讨论", chip_17lang: "17 种语言", chip_bytek: "字节码直接修补", footer_maintained: "由 <a href=\"https://github.com/sillycats\">sillycats</a> 维护 · 基于 <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a> 开源" },
+      "zh-TW": { display: "繁體中文", hero_badge: "APK 逆向實驗室 · 本機離線處理", hero_tagline: "基於 dexlib2 的本機 APK 去廣告 + 過簽工具，位元組碼直接修補，支援資料重用最佳化，內建 17 種語言切換", btn_repo: "GitHub 倉庫", btn_apk: "下載 APK", btn_chat: "社群討論", menu_repo: "GitHub 倉庫", menu_releases: "Releases 下載", menu_discussions: "Discussions 討論", chip_17lang: "17 種語言", chip_bytek: "位元組碼直接修補", footer_maintained: "由 <a href=\"https://github.com/sillycats\">sillycats</a> 維護 · 基於 <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a> 開源" },
+      en: { display: "English", hero_badge: "APK Reverse-Engineering Lab · Local & Offline", hero_tagline: "A local APK ad-removal & signature-bypass tool built on dexlib2, patch bytecode directly, with data-deduplication optimization and 17 built-in language switch", btn_repo: "GitHub Repo", btn_apk: "Download APK", btn_chat: "Community", menu_repo: "GitHub Repository", menu_releases: "Releases", menu_discussions: "Discussions", chip_17lang: "17 languages", chip_bytek: "Direct bytecode patching", footer_maintained: "Maintained by <a href=\"https://github.com/sillycats\">sillycats</a> · Open-sourced under <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" },
+      ja: { display: "日本語", hero_badge: "APK リバースエンジニアリングラボ · ローカルオフライン処理", hero_tagline: "dexlib2 ベースのローカル APK 広告除去・署名回避ツール。バイトコードを直接パッチし、データ再利用最適化をサポート、17 言語の切り替えを内蔵", btn_repo: "GitHub リポジトリ", btn_apk: "APK をダウンロード", btn_chat: "コミュニティ", menu_repo: "GitHub リポジトリ", menu_releases: "Releases", menu_discussions: "Discussions", chip_17lang: "17 言語", chip_bytek: "バイトコード直接パッチ", footer_maintained: "<a href=\"https://github.com/sillycats\">sillycats</a> が保守 · <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a> でオープンソース" },
+      ko: { display: "한국어", hero_badge: "APK 리버스 엔지니어링 랩 · 로컬 오프라인 처리", hero_tagline: "dexlib2 기반 로컬 APK 광고 제거·서명 우회 도구. 바이트 코드 직접 패치, 데이터 재사용 최적화 지원, 17개 언어 전환 내장", btn_repo: "GitHub 저장소", btn_apk: "APK 다운로드", btn_chat: "커뮤니티", menu_repo: "GitHub 저장소", menu_releases: "릴리즈", menu_discussions: "토론", chip_17lang: "17개 언어", chip_bytek: "바이트코드 직접 패치", footer_maintained: "<a href=\"https://github.com/sillycats\">sillycats</a> 유지관리 · <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a> 오픈소스" },
+      es: { display: "Español", hero_badge: "Laboratorio de Ingeniería Inversa de APK · Local y sin conexión", hero_tagline: "Herramienta local de eliminación de anuncios y bypass de firmas de APK basada en dexlib2, parchea el bytecode directamente, con optimización de reutilización de datos y 17 idiomas integrados", btn_repo: "Repositorio GitHub", btn_apk: "Descargar APK", btn_chat: "Comunidad", menu_repo: "Repositorio de GitHub", menu_releases: "Lanzamientos", menu_discussions: "Discusiones", chip_17lang: "17 idiomas", chip_bytek: "Parcheo directo de bytecode", footer_maintained: "Mantenido por <a href=\"https://github.com/sillycats\">sillycats</a> · Código abierto bajo <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" },
+      fr: { display: "Français", hero_badge: "Laboratoire de rétro-ingénierie APK · Local hors ligne", hero_tagline: "Outil local de suppression de publicités et de contournement de signature d'APK basé sur dexlib2, patch direct du bytecode, optimisation de la réutilisation des données et 17 langues intégrées", btn_repo: "Dépôt GitHub", btn_apk: "Télécharger l'APK", btn_chat: "Communauté", menu_repo: "Dépôt GitHub", menu_releases: "Versions", menu_discussions: "Discussions", chip_17lang: "17 langues", chip_bytek: "Patch direct du bytecode", footer_maintained: "Maintenu par <a href=\"https://github.com/sillycats\">sillycats</a> · Open source sous <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" },
+      de: { display: "Deutsch", hero_badge: "APK-Reverse-Engineering-Labor · Lokal & offline", hero_tagline: "Ein lokales APK-Werbeentfernungs- und Signatur-Bypass-Tool auf Basis von dexlib2, direktes Patchen von Bytecode, mit Optimierung der Datenwiederverwendung und 17 integrierten Sprachen", btn_repo: "GitHub-Repository", btn_apk: "APK herunterladen", btn_chat: "Community", menu_repo: "GitHub-Repository", menu_releases: "Versionen", menu_discussions: "Diskussionen", chip_17lang: "17 Sprachen", chip_bytek: "Direktes Bytecode-Patching", footer_maintained: "Gepflegt von <a href=\"https://github.com/sillycats\">sillycats</a> · Open Source unter <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" },
+      ru: { display: "Русский", hero_badge: "Лаборатория реверс-инжиниринга APK · Локально и офлайн", hero_tagline: "Локальный инструмент для удаления рекламы и обхода подписи APK на основе dexlib2, прямое исправление байт-кода, оптимизация повторного использования данных и 17 встроенных языков", btn_repo: "Репозиторий GitHub", btn_apk: "Скачать APK", btn_chat: "Сообщество", menu_repo: "Репозиторий GitHub", menu_releases: "Релизы", menu_discussions: "Обсуждения", chip_17lang: "17 языков", chip_bytek: "Прямое исправление байт-кода", footer_maintained: "Поддерживается <a href=\"https://github.com/sillycats\">sillycats</a> · Открытый исходный код по <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" },
+      ar: { display: "العربية", hero_badge: "مختبر هندسة عكسية لملفات APK · محلي دون اتصال", hero_tagline: "أداة محلية لإزالة الإعلانات وتجاوز التوقيع من ملفات APK مبنية على dexlib2، تصحيح مباشر للبايت كود، مع دعم تحسين إعادة استخدام البيانات و17 لغة مدمجة", btn_repo: "مستودع GitHub", btn_apk: "تحميل APK", btn_chat: "المجتمع", menu_repo: "مستودع GitHub", menu_releases: "الإصدارات", menu_discussions: "المناقشات", chip_17lang: "17 لغة", chip_bytek: "تصحيح مباشر للبايت كود", footer_maintained: "يتم الصيانة بواسطة <a href=\"https://github.com/sillycats\">sillycats</a> · مفتوح المصدر بموجب <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" },
+      id: { display: "Bahasa Indonesia", hero_badge: "Laboratorium Reverse Engineering APK · Lokal & Offline", hero_tagline: "Alat lokal penghapus iklan dan bypass tanda tangan APK berbasis dexlib2, direkt patch bytecode, dukungan optimasi penggunaan ulang data, dan 17 bahasa bawaan", btn_repo: "Repositori GitHub", btn_apk: "Unduh APK", btn_chat: "Komunitas", menu_repo: "Repositori GitHub", menu_releases: "Rilis", menu_discussions: "Diskusi", chip_17lang: "17 bahasa", chip_bytek: "Patch bytecode langsung", footer_maintained: "Dikelola oleh <a href=\"https://github.com/sillycats\">sillycats</a> · Sumber terbuka di bawah <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" },
+      vi: { display: "Tiếng Việt", hero_badge: "Phòng thí nghiệm dịch ngược APK · Xử lý cục bộ, ngoại tuyến", hero_tagline: "Công cụ loại bỏ quảng cáo APK và vượt qua chữ ký dựa trên dexlib2, vá trực tiếp bytecode, hỗ trợ tối ưu tái sử dụng dữ liệu và 17 ngôn ngữ tích hợp", btn_repo: "Kho GitHub", btn_apk: "Tải APK", btn_chat: "Cộng đồng", menu_repo: "Kho GitHub", menu_releases: "Bản phát hành", menu_discussions: "Thảo luận", chip_17lang: "17 ngôn ngữ", chip_bytek: "Vá bytecode trực tiếp", footer_maintained: "Được bảo trì bởi <a href=\"https://github.com/sillycats\">sillycats</a> · Mã nguồn mở theo <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" },
+      th: { display: "ไทย", hero_badge: "ห้องปฏิบัติการวิศวกรรมย้อนกลับ APK · ทำงานในเครื่องแบบออฟไลน์", hero_tagline: "เครื่องมือลบโฆษณาและเลี่ยงลายเซ็น APK แบบโลคอลบนพื้นฐาน dexlib2 แก้ไขไบต์โค้ดโดยตรง รองรับการเพิ่มประสิทธิภาพการใช้ข้อมูลซ้ำ และภาษาที่ติดตั้งในตัว 17 ภาษา", btn_repo: "ที่เก็บ GitHub", btn_apk: "ดาวน์โหลด APK", btn_chat: "ชุมชน", menu_repo: "ที่เก็บ GitHub", menu_releases: "รุ่นที่เผยแพร่", menu_discussions: "การสนทนา", chip_17lang: "17 ภาษา", chip_bytek: "แก้ไขไบต์โค้ดโดยตรง", footer_maintained: "ดูแลโดย <a href=\"https://github.com/sillycats\">sillycats</a> · โอเพนซอร์สภายใต้ <a href=\"https://github.com/sillycats/ApkAdRemoverEditor/blob/main/LICENSE\">MIT License</a>" }
+    };
+    var STORAGE_KEY = "lang";
+    function getSavedLang() {
+      try { var v = localStorage.getItem(STORAGE_KEY); return v || "zh"; } catch (e) { return "zh"; }
+    }
+    function applyLang(lang) {
+      var d = I18N[lang];
+      if (!d) lang = "zh", d = I18N.zh;
+      document.documentElement.setAttribute("lang", lang);
+      var cur = document.getElementById("langCurrent");
+      if (cur) cur.textContent = d.display;
+      var els = document.querySelectorAll("[data-i18n]");
+      for (var i = 0; i < els.length; i++) {
+        var k = els[i].getAttribute("data-i18n");
+        if (d[k] != null) els[i].textContent = d[k];
+      }
+      var htc = document.querySelectorAll("[data-i18n-html]");
+      for (var j = 0; j < htc.length; j++) {
+        var hk = htc[j].getAttribute("data-i18n-html");
+        if (d[hk] != null) htc[j].innerHTML = d[hk];
+      }
+      var active = document.querySelector('.lang-menu a[data-lang="' + lang + '"]');
+      if (active) for (var a = 0; a < document.querySelectorAll('.lang-menu a').length; a++) {
+        document.querySelectorAll('.lang-menu a')[a].classList.toggle('active', document.querySelectorAll('.lang-menu a')[a] === active);
+      }
+    }
+    function saveLang(lang) {
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+    }
+    applyLang(getSavedLang());
+    /* ============ 导航与语言菜单交互 ============ */
     (function() {
       var toggle = document.getElementById('navToggle');
       var menu = document.getElementById('navMenu');
-      if (!toggle || !menu) return;
-      toggle.addEventListener('click', function() {
-        var open = menu.classList.toggle('open');
-        toggle.classList.toggle('active', open);
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-      menu.addEventListener('click', function() {
-        menu.classList.remove('open');
-        toggle.classList.remove('active');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
+      if (toggle && menu) {
+        toggle.addEventListener('click', function() {
+          var open = menu.classList.toggle('open');
+          toggle.classList.toggle('active', open);
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        menu.addEventListener('click', function() {
+          menu.classList.remove('open');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      }
+      var langToggle = document.getElementById('langToggle');
+      var langMenu = document.getElementById('langMenu');
+      var picker = document.getElementById('langPicker');
+      if (langToggle && langMenu) {
+        langToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var open = langMenu.classList.toggle('open');
+          langToggle.classList.toggle('open', open);
+          langToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        langMenu.querySelectorAll('a[data-lang]').forEach(function(a) {
+          a.addEventListener('click', function(e) {
+            e.stopPropagation();
+            applyLang(a.getAttribute('data-lang'));
+            saveLang(a.getAttribute('data-lang'));
+            langMenu.classList.remove('open');
+            langToggle.classList.remove('open');
+            langToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+        document.addEventListener('click', function() {
+          langMenu.classList.remove('open');
+          langToggle.classList.remove('open');
+          langToggle.setAttribute('aria-expanded', 'false');
+        });
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            langMenu.classList.remove('open');
+            langToggle.classList.remove('open');
+            langToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
     })();
   </script>
 </body>

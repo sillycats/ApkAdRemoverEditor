@@ -442,10 +442,59 @@ a:hover { color: #7deeff; }
 .footer-inner a { color: var(--text-mid); }
 .footer-inner a:hover { color: var(--cyan); }
 
+/* ============ 语言切换器 ============ */
+.lang-picker { position: relative; margin-left: 8px; }
+
+.lang-toggle {
+  display: flex; align-items: center; gap: 7px;
+  padding: 8px 13px;
+  border: 1px solid rgba(90, 140, 255, .25);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .04);
+  color: var(--text-mid);
+  font-size: 13.5px; font-weight: 600; font-family: var(--font-body);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.lang-toggle:hover { background: rgba(77, 124, 255, .12); color: var(--cyan); border-color: rgba(77, 124, 255, .5); }
+.lang-toggle.open { background: rgba(77, 124, 255, .12); color: var(--cyan); border-color: rgba(77, 124, 255, .5); }
+.lang-toggle .globe { font-size: 15px; line-height: 1; }
+.lang-toggle .caret { font-size: 11px; opacity: .7; transition: transform .2s ease; }
+.lang-toggle.open .caret { transform: rotate(180deg); }
+
+.lang-menu {
+  display: none;
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 180px;
+  padding: 7px;
+  border-radius: 13px;
+  background: rgba(9, 16, 32, .97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(90, 140, 255, .28);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, .55);
+  z-index: 110;
+}
+.lang-menu.open { display: block; }
+.lang-menu a {
+  display: block;
+  padding: 9px 13px;
+  border-radius: 9px;
+  font-size: 14.5px; font-weight: 600;
+  color: var(--text-mid);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+.lang-menu a:hover { background: rgba(77, 124, 255, .15); color: var(--cyan); }
+.lang-menu a.active { background: rgba(34, 211, 238, .14); color: var(--cyan); }
+
 /* ============ 响应式 ============ */
 @media (max-width: 640px) {
   .topnav-links { display: none; }
   .nav-toggle { display: flex; }
+  .lang-picker { margin-left: auto; margin-right: 6px; }
+  .lang-menu { left: auto; right: 0; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .btn { justify-content: center; }
   .main-content h1 { font-size: 24px; }
