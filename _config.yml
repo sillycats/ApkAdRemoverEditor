@@ -3,7 +3,7 @@
 
 # 站点信息
 title: ApkAdRemoverEditor
-description: 基于 dexlib2 的本地 APK 去广告 + 过签工具，字节码直接修补，支持数据复用优化
+description: 基于 dexlib2 的本地 APK 去广告 + 过签工具，字节码直接修补，支持数据复用优化，内置 17 种语言切换
 
 # 页头按钮（显示在主页顶部）
 show_downloads: true
