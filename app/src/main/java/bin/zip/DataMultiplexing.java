@@ -52,6 +52,10 @@ public class DataMultiplexing {
                 }
             }
             try (ZipMaker zipMaker = new ZipMaker(output)) {
+                // 与主打包流程（ApkProcessor）保持一致：启用最高压缩等级，
+                // 使本优化中真正被重编码写入的条目（DEFLATE）获得 9 级压缩，
+                // 减小过签/数据复用流程输出 APK 的体积。
+                zipMaker.setLevel(ZipMaker.LEVEL_BEST);
                 ZipMaker.HostEntryHolder holder = zipMaker.putNextHostEntry(hostEntry.getName(), innerZipFile);
                 String format = "%0" + Math.min(Long.toHexString(hostEntry.getSize()).length(), 9) + "x";
                 if (printDetails) {

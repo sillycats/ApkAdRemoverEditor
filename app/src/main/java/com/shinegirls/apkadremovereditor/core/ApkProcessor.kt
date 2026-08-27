@@ -32,6 +32,20 @@ class ApkProcessor {
     var lastEmbeddedApkPaths: List<String> = emptyList()
         private set
 
+    /**
+     * 原 APK 中以【不压缩(STORED)】方式存储的条目路径集合。
+     *
+     * 由 [extractApk] 在解包时记录。部分原生 APK 会以 STORE 存储 .so
+     * （配合 extractNativeLibs=false + 页对齐，供 mmap 直载）；而另一些 APK
+     * 则用 DEFLATE 压缩 .so。若统一按 STORE 写回，会把原为"已压缩"的 .so
+     * 全部还原为未压缩原始体积，导致导出的 APK 明显膨胀（实测 +16MB 量级）。
+     *
+     * 因此 [buildApk] 对 .so 采取"跟随原包压缩状态"策略：
+     *  - 命中该集合（原包即 STORED）→ 继续 STORED，保持 mmap 对齐；
+     *  - 未命中（原包为 DEFLATE 压缩）→ 用最高压缩等级 DEFLATE，维持体积。
+     */
+    val originalStoredEntries: Set<String> = mutableSetOf()
+
     companion object {
         /**
          * Android ZIP Alignment Extra Field 的 Header ID（0xd935，小端写入）。
@@ -80,11 +94,19 @@ class ApkProcessor {
     fun extractApk(apkFile: File, outputDir: File) {
         if (!outputDir.exists()) outputDir.mkdirs()
 
+        // 记录原包中以 STORED（不压缩）方式存储的条目路径，供 buildApk 跟随原压缩状态。
+        // 避免把"原包即 DEFLATE 压缩"的 .so 等统一改存为 STORE 而导致的体积膨胀。
+        originalStoredEntries.clear()
+
         ZipFile(apkFile).use { zipFile ->
             val entries = zipFile.entries()
             while (entries.hasMoreElements()) {
                 val entry = entries.nextElement()
                 val entryName = entry.name
+
+                if (!entry.isDirectory && entry.method == ZipEntry.STORED) {
+                    (originalStoredEntries as MutableSet<String>).add(entryName)
+                }
 
                 // 跳过 META-INF 签名文件（.SF/.RSA/.DSA/.EC，签名时会重新生成）。
                 // 注意：保留 META-INF/MANIFEST.MF（.MF 结尾），apksig 在 v1 签名时会读取并
@@ -245,7 +267,10 @@ class ApkProcessor {
                     // 命中数据复用优化时，识别到的嵌套 APK/ZIP 子包按原字节 STORE 复用，
                     // 避免重复压缩膨胀。识别不依赖后缀名（见上方 embeddedApkPaths 集合）。
                     val isEmbeddedSubApk = relativePath in embeddedApkPaths
-                    val shouldStore = ext in STORED_EXTENSIONS || (dataReuse && isEmbeddedSubApk)
+                    // .so 采用"跟随原包压缩状态"策略：仅当原 APK 以 STORED 存储该 .so 时才 STORE
+                    //（维持 mmap 页对齐），否则用 DEFLATE 最高等级压缩，避免体积膨胀。
+                    val shouldStore = (if (isSo) relativePath in originalStoredEntries else ext in STORED_EXTENSIONS) ||
+                            (dataReuse && isEmbeddedSubApk)
 
                     val entry = ZipEntry(relativePath)
                     // 需对齐的 STORED 条目：.so 按 4096 页对齐，其余 STORED 按 4 字节对齐
