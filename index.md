@@ -56,7 +56,7 @@ title: ApkAdRemoverEditor
 </ul>
 <h3 id="experience">🎨 使用体验</h3>
 <ul>
-<li><strong>内置 17 种语言切换</strong>（v3.4 新增）：简体中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe，可"跟随系统"或在应用内一键切换并即时生效</li>
+<li><strong>内置 17 种语言切换</strong>（v3.5 新增）：简体中文 / 繁體中文 / English / 日本語 / 한국어 / Español / Français / Deutsch / Italiano / Português / Русский / हिन्दी / Tiếng Việt / ไทย / Bahasa Indonesia / العربية / Türkçe，可"跟随系统"或在应用内一键切换并即时生效</li>
 <li>实时彩色处理日志，支持一键复制 / 清空</li>
 <li>自动生成 Markdown 处理报告</li>
 <li>广告特征订阅导入与分享</li>
@@ -93,7 +93,7 @@ title: ApkAdRemoverEditor
 <li>点击"开始处理"，自动完成解包、去广告、体积优化、打包、签名</li>
 <li>处理完成自动导出到原包目录，并生成 Markdown 处理报告</li>
 </ol>
-<h2 id="whats-new-v34">🆕 版本更新（v3.4）</h2>
+<h2 id="whats-new-v35">🆕 版本更新（v3.5）</h2>
 <ul>
 <li><strong>多国语言切换</strong>：支持 17 种语言，可"跟随系统"或应用内一键切换即时生效</li>
 <li><strong>界面全量外生化</strong>：所有布局、菜单、弹窗、日志文案统一为字符串资源，各语言资源严格对齐，长文本自动换行完整显示</li>

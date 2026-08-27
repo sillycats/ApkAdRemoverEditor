@@ -44,7 +44,7 @@ class ApkProcessor {
      *  - 命中该集合（原包即 STORED）→ 继续 STORED，保持 mmap 对齐；
      *  - 未命中（原包为 DEFLATE 压缩）→ 用最高压缩等级 DEFLATE，维持体积。
      */
-    val originalStoredEntries: Set<String> = mutableSetOf()
+    val originalStoredEntries: MutableSet<String> = mutableSetOf()
 
     companion object {
         /**
